@@ -1,0 +1,82 @@
+[user]
+    name = nsfisis
+    email = nsfisis@gmail.com
+
+[core]
+    editor = vim
+    commentchar = ";"
+    excludesfile = ~/.gitignore_global
+
+[help]
+    autocorrect = 1
+
+[color]
+    ui = true
+
+[merge]
+    tool = vimdiff
+    ff = false
+
+[rebase]
+    autosquash = true
+
+[diff]
+    tool = vimdiff
+
+[mergetool]
+    keepbackup = false
+
+[credential]
+    helper = osxkeychain
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[alias]
+    a = add
+    ap = add -p
+    b = branch
+    cb = rev-parse --abbrev-ref HEAD
+    c = commit
+    fixup = commit --fixup
+    amend = commit --amend --no-edit
+    clone1 = clone --depth=1
+    co = checkout
+    cob = checkout -b
+    com = checkout master
+    cod = checkout develop
+    d = diff
+    dc = diff --cached
+    g = grep
+    gf = grep --name-only
+    s = status --short
+    tmp = commit -a -m "TMP"
+    tmps = stash save "TMP"
+    ctmp = commit -m "TMP"
+    sst = stash save "TMP"
+    ss = stash save
+    ssl = stash list
+    ssa = stash apply
+    ssd = stash drop
+    ssp = stash pop
+    last = log --pretty=fuller -1
+    l = "!git rev-parse --verify --quiet develop > /dev/null; if [ $? = 0 ]; then git log --oneline develop..; else git log --oneline master..; fi"
+    ll = log --oneline
+    llf = log --pretty=fuller
+    graph = log --oneline --graph
+    r = rebase
+    ri = rebase -i
+    rid = rebase -i develop
+    rc = rebase --continue
+    m = merge
+    mc = merge --continue
+    mm = mergetool
+    pullu = !git pull upstream $(git cb) --ff
+    pullo = !git pull origin $(git cb) --ff
+    pusho = !git push origin $(git cb)
+    cpick = cherry-pick
+    cpickc = cherry-pick --continue
+    empty = commit --allow-empty
