@@ -159,8 +159,10 @@ setopt ZLE
 
 
 # Load completion
+# Note about "-u" flag of compinit:
+# https://github.com/zsh-users/zsh/blob/24a82b9dad1cbe109d9fb5753c429fd37b1618cd/Completion/compinit#L67-L72
 autoload -U compinit
-compinit autoload -U promptinit
+compinit -u autoload -U promptinit
 zstyle ':completion::complete:*' use-cache true
 #zstyle ':completion:*:default' menu select true
 zstyle ':completion:*:default' menu select=1
