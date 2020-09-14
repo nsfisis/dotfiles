@@ -663,6 +663,25 @@ nnoremap  <C-r>  "
 xnoremap  <C-r>  "
 
 
+" Paste clipboard content with 'paste' enabled
+function! s:paste_clipboard_content_with_paste_opt() abort
+    let old_paste = &paste
+    set paste
+    set pastetoggle=<Plug>(pastetoggle)
+    if old_paste
+        return "\<C-r>+"
+    else
+        " 'paste' was off when the function was called. Then, 'paste' will be
+        " disabled via 'pastetoggle'.
+        return "\<C-r>+\<Plug>(pastetoggle)"
+    endif
+endfunction
+
+" Automatically enable 'paste' and disable it after pasting clipboard's
+" content.
+inoremap <expr>  <C-r>+  <SID>paste_clipboard_content_with_paste_opt()
+
+
 let @j = 'j.'
 let @k = 'k.'
 let @n = 'n.'
