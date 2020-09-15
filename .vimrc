@@ -1383,39 +1383,52 @@ let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
     \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
-    \     'right': [['linenum'], ['fileformat', 'fileencoding', 'filetype']]
+    \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
     \ },
     \ 'inactive': {
     \     'left': [['readonly', 'filename', 'modified']],
-    \     'right': [['linenum'], ['fileformat', 'fileencoding', 'filetype']]
+    \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
     \ },
     \ 'component_function': {
-    \   'linenum': 'LightLine_LineNum',
-    \   'fileformat': 'LightLine_FileFormat',
+    \   'linenum': s:SNR .. 'lightline_linenum',
+    \   'fileformat': s:SNR .. 'lightline_fileformat',
+    \ },
+    \ 'mode_map': {
+    \     'n' : 'N',
+    \     'i' : 'I',
+    \     'R' : 'R',
+    \     'v' : 'V',
+    \     'V' : 'V-L',
+    \     "\<C-v>": 'V-B',
+    \     'c' : 'C',
+    \     's' : 'S',
+    \     'S' : 'S-L',
+    \     "\<C-s>": 'S-B',
+    \     't': 'T',
     \ },
     \ 'tabline': {
-    \   'left': [['tabs']],
-    \   'right': [],
+    \     'left': [['tabs']],
+    \     'right': [],
     \ },
     \ 'tab': {
-    \   'active': ['tabnum', 'filename', 'modified'],
-    \   'inactive': ['tabnum', 'filename', 'modified'],
+    \     'active': ['tabnum', 'filename', 'modified'],
+    \     'inactive': ['tabnum', 'filename', 'modified'],
     \ },
     \ }
 
-function! LightLine_LineNum()
+function! s:lightline_linenum()
     return line('.') . '/' . line('$')
 endfunction
 
-function! LightLine_FileFormat()
+function! s:lightline_fileformat()
     if &fileformat ==# 'unix'
-        return 'LF'
+        return 'lf'
     elseif &fileformat ==# 'dos'
-        return 'CRLF'
+        return 'crlf'
     elseif &fileformat ==# 'mac'
-        return 'CR'
+        return 'cr'
     else
-        return 'UNKNOWN'
+        return 'unknown'
     endif
 endfunction
 
