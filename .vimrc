@@ -493,8 +493,6 @@ Plug 'thinca/vim-quickrun'
 " R {{{2
 " Extend dot-repeat.
 Plug 'tpope/vim-repeat'
-" Integration with ripgrep, fast alternative of grep command.
-Plug 'jremmen/vim-ripgrep'
 " Rust the programming language.
 Plug 'rust-lang/rust.vim'
 
@@ -567,6 +565,10 @@ Plug 'LeafCage/yankround.vim'
 
 " Mine {{{2
 Plug g:MY_ENV.my_dir
+
+" Fork version of jremmen/vim-ripgrep
+" Integration with ripgrep, fast alternative of grep command.
+Plug 'nsfisis/vim-ripgrep'
 
 call plug#end()
 
@@ -1564,10 +1566,11 @@ call repeat#setreg('', '')
 " Workaround: do not open quickfix window.
 " exe g:rg_window_location 'copen'
 let g:rg_window_location = 'silent! echo'
+let g:rg_jump_to_first = 1
 
-command! -nargs=* -complete=file -bar
+command! -bang -nargs=* -complete=file -bar
     \ RG
-    \ Rg <args>
+    \ Rg<bang> <args>
 
 
 " rust {{{2
