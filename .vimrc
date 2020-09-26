@@ -53,6 +53,7 @@ unlet s:k s:v
 
 
 
+
 " The autogroup used in .vimrc {{{2
 
 augroup Vimrc
@@ -64,6 +65,18 @@ augroup END
 command! -nargs=*
     \ Autocmd
     \ autocmd Vimrc <args>
+
+
+" Variable for re-entrancy of .vimrc {{{2
+
+" If an operation cannot be executed twice, enclose it with if block.
+"
+" if !s:is_reloading_vimrc
+"     ...
+" end
+"
+" See "SourceThisFile()" defined in this file for practical example.
+let s:is_reloading_vimrc = v:vim_did_enter
 
 
 " Language {{{2
@@ -631,24 +644,18 @@ endfunction
 
 " Mappings {{{1
 
+" Note: |:noremap| defines mappings in |Normal|, |Visual|, |Operator-Pending|
+" and |Select| mode. Because I don't use |Select| mode, |:noremap| is executed
+" as substitute of |:nnoremap|, |:xnoremap| and |:onoremap| for simplicity.
+
 
 " Fix the search direction. {{{2
 
-nnoremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
-onoremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
-xnoremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
+noremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
+noremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
 
-nnoremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
-onoremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
-xnoremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
-
-nnoremap <expr>  n  v:searchforward ? 'n' : 'N'
-onoremap <expr>  n  v:searchforward ? 'n' : 'N'
-xnoremap <expr>  n  v:searchforward ? 'n' : 'N'
-
-nnoremap <expr>  N  v:searchforward ? 'N' : 'n'
-onoremap <expr>  N  v:searchforward ? 'N' : 'n'
-xnoremap <expr>  N  v:searchforward ? 'N' : 'n'
+noremap <expr>  n  v:searchforward ? 'n' : 'N'
+noremap <expr>  N  v:searchforward ? 'N' : 'n'
 
 
 
@@ -780,24 +787,14 @@ nnoremap  C  "_C
 xnoremap  C  "_C
 
 
-nnoremap  g=  =
-onoremap  g=  =
-xnoremap  g=  =
+noremap  g=  =
 
 
-nnoremap  ml  gu
-onoremap  ml  gu
-xnoremap  ml  gu
-nnoremap  mu  gU
-onoremap  mu  gU
-xnoremap  mu  gU
+noremap  ml  gu
+noremap  mu  gU
 
-nnoremap  gu  <Nop>
-onoremap  gu  <Nop>
-xnoremap  gu  <Nop>
-nnoremap  gU  <Nop>
-onoremap  gU  <Nop>
-xnoremap  gU  <Nop>
+noremap  gu  <Nop>
+noremap  gU  <Nop>
 xnoremap  u  <Nop>
 xnoremap  U  <Nop>
 
@@ -809,6 +806,7 @@ nnoremap  Y  y$
 " In Blockwise-Visual mode, select text linewise.
 " In default, select text characterwise, neither blockwise nor linewise.
 xnoremap <expr>  Y  mode() ==# 'V' ? 'y' : 'Vy'
+
 
 
 " Swap the keys entering Replace mode and Visual-Replace mode.
@@ -825,35 +823,17 @@ nnoremap  U  <C-r>
 
 " Motions {{{2
 
-nnoremap  H  ^
-onoremap  H  ^
-xnoremap  H  ^
-nnoremap  L  $
-onoremap  L  $
-xnoremap  L  $
-nnoremap  M  %
-onoremap  M  %
-xnoremap  M  %
+noremap  H  ^
+noremap  L  $
+noremap  M  %
 
-nnoremap  gw  b
-onoremap  gw  b
-xnoremap  gw  b
-nnoremap  gW  B
-onoremap  gW  B
-xnoremap  gW  B
+noremap  gw  b
+noremap  gW  B
 
-nnoremap  k  gk
-onoremap  k  gk
-xnoremap  k  gk
-nnoremap  j  gj
-onoremap  j  gj
-xnoremap  j  gj
-nnoremap  gk  k
-onoremap  gk  k
-xnoremap  gk  k
-nnoremap  gj  j
-onoremap  gj  j
-xnoremap  gj  j
+noremap  k  gk
+noremap  j  gj
+noremap  gk  k
+noremap  gj  j
 
 nnoremap  gff  gF
 
@@ -979,7 +959,7 @@ command! -nargs=+ -complete=command
 " Avoid entering Select mode.
 nnoremap  gh  <Nop>
 nnoremap  gH  <Nop>
-" See below about `g<C-h>`.
+nnoremap  g<C-h>  <Nop>
 
 nnoremap  ZZ  <Nop>
 nnoremap  ZQ  <Nop>
@@ -995,7 +975,8 @@ nnoremap  <C-h>  :<C-u>SmartOpen help<Space>
 " For writing Vim script. {{{2
 
 
-if !v:vim_did_enter
+if !s:is_reloading_vimrc
+    " Define this function only when Vim is starting up. |v:vim_did_enter|
     function! SourceThisFile() abort
         let filename = expand('%')
         if &filetype ==# 'vim' || expand('%:e') ==# 'vim' || filename =~# '\.g\?vimrc'
