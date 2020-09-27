@@ -1067,20 +1067,13 @@ command! -bang -bar -nargs=*
     \ make<bang> <args>
 
 
-" The current search pattern will not changed by :global in a user function.
-" See :Reverse's comment below.
-function! s:reverse_lines(from, to) abort
-    execute printf("%d,%dg/^/m%d", a:from, a:to, a:from - 1)
-endfunction
-
 " Reverse a selected range in line-wise.
 " Note: directly calling `g/^/m` will overwrite the current search pattern with
 " '^' and highlight it, which is not expected.
-" :h autocmd-searchpat
-" :h :nohlsearch
+" :h :keeppatterns
 command! -bar -range=%
     \ Reverse
-    \ call <SID>reverse_lines(<line1>, <line2>)
+    \ keeppatterns <line1>,<line2>g/^/m<line1>-1
 
 
 
