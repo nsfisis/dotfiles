@@ -416,6 +416,8 @@ Plug 'rhysd/committia.vim'
 Plug 'godlygeek/csapprox'
 
 " D {{{2
+" Filer for minimalists.
+Plug 'justinmk/vim-dirvish'
 
 " E {{{2
 " Align text.
@@ -466,8 +468,6 @@ Plug 'leafo/moonscript-vim'
 " N {{{2
 " Improve behaviors of I, A and gI in Blockwise-Visual mode.
 Plug 'kana/vim-niceblock'
-" Awesome filer.
-Plug 'scrooloose/nerdtree'
 " Syntax highlighting for Nginx conf file.
 Plug 'chr4/nginx.vim'
 
