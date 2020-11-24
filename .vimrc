@@ -941,7 +941,7 @@ function! s:smart_open(command) abort
         if &l:textwidth > 0
             execute 'vertical resize' &l:textwidth
         endif
-        " Help tags are often rust-justfied, moving the cursor to BoL.
+        " Help tags are often right-justfied, moving the cursor to BoL.
         normal! 0
     endif
 endfunction

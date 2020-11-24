@@ -4,12 +4,14 @@ Language: Cpp
 Standard: Latest
 BasedOnStyle: LLVM
 
-IndentWidth: 4
-ColumnLimit: 120
 AccessModifierOffset: -4
 AlignEscapedNewlines: DontAlign
 AlignTrailingComments: false
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: Yes
 BreakStringLiterals: false
+ColumnLimit: 120
+IndentWidth: 4
 KeepEmptyLinesAtTheStartOfBlocks: false
 MaxEmptyLinesToKeep: 1
 PointerAlignment: Left
