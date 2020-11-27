@@ -46,7 +46,13 @@
     clone1 = clone --depth=1
     co = checkout
     cob = checkout -b
-    com = checkout master
+    # git rev-parse --verify --quiet main > /dev/null
+    # if [ $? = 0 ]; then
+    #   git checkout main
+    # else
+    #   git checkout master
+    # fi
+    com = "!git rev-parse --verify --quiet main > /dev/null; if [ $? = 0 ]; then git checkout main; else git checkout master; fi"
     cod = checkout develop
     d = diff
     dc = diff --cached
@@ -63,7 +69,18 @@
     ssd = stash drop
     ssp = stash pop
     last = log --pretty=fuller -1
-    l = "!git rev-parse --verify --quiet develop > /dev/null; if [ $? = 0 ]; then git log --oneline develop..; else git log --oneline master..; fi"
+    # git rev-parse --verify --quiet develop > /dev/null
+    # if [ $? = 0 ]; then
+    #   git log --oneline develop..
+    # else
+    #   git rev-parse --verify --quiet main > /dev/null
+    #   if [ $? = 0 ]; then
+    #     git log --oneline main..
+    #   else
+    #     git log --oneline master..
+    #   fi
+    # fi
+    l = "!git rev-parse --verify --quiet develop > /dev/null; if [ $? = 0 ]; then git log --oneline develop..; else git rev-parse --verify --quiet main > /dev/null; if [ $? = 0 ]; then git log --oneline main..; else git log --oneline master..; fi; fi"
     ll = log --oneline
     llf = log --pretty=fuller
     graph = log --oneline --graph
@@ -74,9 +91,9 @@
     m = merge
     mc = merge --continue
     mm = mergetool
-    pullu = !git pull upstream $(git cb) --ff
-    pullo = !git pull origin $(git cb) --ff
-    pusho = !git push origin $(git cb)
+    pullu = "!git pull upstream $(git cb) --ff"
+    pullo = "!git pull origin $(git cb) --ff"
+    pusho = "!git push origin $(git cb)"
     cpick = cherry-pick
     cpickc = cherry-pick --continue
     empty = commit --allow-empty
