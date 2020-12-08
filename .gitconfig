@@ -23,6 +23,9 @@
 [diff]
     tool = vimdiff
 
+[init]
+    defaultbranch = main
+
 [mergetool]
     keepbackup = false
 
