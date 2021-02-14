@@ -1228,6 +1228,7 @@ xmap  m/b  <Plug>(caw:box:comment)
 
 let g:clang_format#auto_format = 1
 Autocmd FileType javascript ClangFormatAutoDisable
+Autocmd FileType typescript ClangFormatAutoDisable
 
 
 
