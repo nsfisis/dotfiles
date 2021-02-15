@@ -216,6 +216,33 @@ WORDCHARS="$WORDCHARS|:"
 # C-u  To delete input from the cursor position to the beginning of the line
 bindkey "^U" backward-kill-line
 
+# C-j  To go to the parent directory.
+function __cd_parent_dir() {
+    pushd .. > /dev/null
+    zle reset-prompt
+}
+zle -N __cd_parent_dir
+bindkey "^J" __cd_parent_dir
+
+# C-o  To go to the previous directory.
+function __cd_prev_dir() {
+    popd > /dev/null
+    zle reset-prompt
+}
+zle -N __cd_prev_dir
+bindkey "^O" __cd_prev_dir
+
+# C-g  To go to the project root.
+function __cd_project_root_dir() {
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
+        pushd $(git rev-parse --show-toplevel) > /dev/null
+        zle reset-prompt
+    fi
+}
+zle -N __cd_project_root_dir
+bindkey "^G" __cd_project_root_dir
+
+
 zmodload zsh/complist
 
 
