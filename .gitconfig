@@ -29,6 +29,9 @@
 [init]
     defaultbranch = main
 
+[blame]
+    coloring = repeatedLines
+
 [mergetool]
     keepbackup = false
 
