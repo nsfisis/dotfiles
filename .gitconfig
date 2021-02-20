@@ -88,7 +88,7 @@
     # fi
     l = "!git rev-parse --verify --quiet develop > /dev/null; if [ $? = 0 ]; then git log --oneline develop..; else git rev-parse --verify --quiet main > /dev/null; if [ $? = 0 ]; then git log --oneline main..; else git log --oneline master..; fi; fi"
     ll = log --oneline
-    llf = log --pretty=fuller
+    logf = log --pretty=fuller
     graph = log --oneline --graph
     r = rebase
     ri = rebase -i
