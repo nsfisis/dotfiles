@@ -1,0 +1,136 @@
+#!/bin/zsh
+
+##################
+# License Notice #
+##################
+#
+# This githook script consists of two parts:
+#
+# * get current Git branch, and
+# * edit commit message.
+#
+# The first part is borrowed from Z shell. Follow the license described below.
+# The second part is written by me, licensed under Public Domain.
+
+
+##########################
+# Get current Git branch #
+##########################
+#
+# Original:
+# https://github.com/zsh-users/zsh/blob/5c60ec46ec087e7e58c8fc00c6821060e8caecb8/Functions/VCS_Info/Backends/VCS_INFO_get_data_git
+#
+# File copyright:
+# git support by: Frank Terbeck <ft@bewatermyfriend.org>
+# Distributed under the same BSD-ish license as zsh itself.
+#
+# Zsh License:
+# https://github.com/zsh-users/zsh/blob/5c60ec46ec087e7e58c8fc00c6821060e8caecb8/LICENCE
+#
+# ------------------------------------------------------------------------------
+# Unless otherwise noted in the header of specific files, files in this
+# distribution have the licence shown below.
+# 
+# However, note that certain shell functions are licensed under versions
+# of the GNU General Public Licence.  Anyone distributing the shell as a
+# binary including those files needs to take account of this.  Search
+# shell functions for "Copyright" for specific copyright information.
+# None of the core functions are affected by this, so those files may
+# simply be omitted.
+# 
+# --
+# 
+# The Z Shell is copyright (c) 1992-2017 Paul Falstad, Richard Coleman,
+# Zoltán Hidvégi, Andrew Main, Peter Stephenson, Sven Wischnowsky, and
+# others.  All rights reserved.  Individual authors, whether or not
+# specifically named, retain copyright in all changes; in what follows, they
+# are referred to as `the Zsh Development Group'.  This is for convenience
+# only and this body has no legal status.  The Z shell is distributed under
+# the following licence; any provisions made in individual files take
+# precedence.
+# 
+# Permission is hereby granted, without written agreement and without
+# licence or royalty fees, to use, copy, modify, and distribute this
+# software and to distribute modified versions of this software for any
+# purpose, provided that the above copyright notice and the following
+# two paragraphs appear in all copies of this software.
+# 
+# In no event shall the Zsh Development Group be liable to any party for
+# direct, indirect, special, incidental, or consequential damages arising out
+# of the use of this software and its documentation, even if the Zsh
+# Development Group have been advised of the possibility of such damage.
+# 
+# The Zsh Development Group specifically disclaim any warranties, including,
+# but not limited to, the implied warranties of merchantability and fitness
+# for a particular purpose.  The software provided hereunder is on an "as is"
+# basis, and the Zsh Development Group have no obligation to provide
+# maintenance, support, updates, enhancements, or modifications.
+# ------------------------------------------------------------------------------
+
+setopt localoptions extendedglob NO_shwordsplit
+
+local gitdir=.git
+local gitbranch
+local gitsymref="git symbolic-ref HEAD"
+
+local tmp actiondir
+actiondir=''
+for tmp in "${gitdir}/rebase-apply" \
+           "${gitdir}/rebase"; do
+    if [[ -d ${tmp} ]]; then
+        actiondir=${tmp}
+        break
+    fi
+done
+if [[ -n ${actiondir} ]] ; then
+    gitbranch="$(${(z)gitsymref} 2> /dev/null)"
+    [[ -z ${gitbranch} ]] && [[ -r ${actiondir}/head-name ]] \
+        && gitbranch="$(< ${actiondir}/head-name)"
+    [[ -z ${gitbranch} || ${gitbranch} == 'detached HEAD' ]] && [[ -r ${actiondir}/onto ]] \
+        && gitbranch="$(< ${actiondir}/onto)"
+
+elif [[ -f "${gitdir}/MERGE_HEAD" ]] ; then
+    gitbranch="$(${(z)gitsymref} 2> /dev/null)"
+    [[ -z ${gitbranch} ]] && gitbranch="$(< ${gitdir}/ORIG_HEAD)"
+
+elif [[ -d "${gitdir}/rebase-merge" ]] ; then
+    gitbranch="$(< ${gitdir}/rebase-merge/head-name)"
+    if [[ $gitbranch == 'detached HEAD' ]]; then
+        # get a sha1
+        gitbranch="$(< ${gitdir}/rebase-merge/orig-head)"
+    fi
+
+elif gitbranch="$(${(z)gitsymref} 2> /dev/null)" ; then
+elif gitbranch="refs/tags/$(git describe --all --exact-match HEAD 2>/dev/null)" ; then
+elif gitbranch="$(git describe --contains HEAD 2>/dev/null)" ; then
+## Commented out because we don't know of a case in which 'describe --contains' fails and 'name-rev --tags' succeeds.
+#elif gitbranch="$(git name-rev --name-only --no-undefined --tags HEAD 2>/dev/null)" ; then
+elif gitbranch="$(git name-rev --name-only --no-undefined --always HEAD 2>/dev/null)" ; then
+fi
+
+if [[ -z ${gitbranch} ]] ; then
+    gitbranch="${${"$(< $gitdir/HEAD)"}[1,7]}..."
+fi
+
+gitbranch="${gitbranch##refs/[^/]##/}"
+
+
+#######################
+# Edit commit message #
+#######################
+
+if [[ -z ${gitbranch} ]]; then
+    # Failed to get Git branch. Leave the commit message as it is.
+    return 0
+fi
+
+# Extract issue number from branch name.
+local issue_number="${gitbranch##feature/}"
+if [[ -z ${issue_number} ]]; then
+    # Failed to extract. Leave the commit message as it is.
+    return 0
+fi
+
+# Substitute '###' with '#NNNNN', where 'NNNNN' is the issue number.
+# '$1' is passed by Git, the file name that holds commit message.
+sed -i '' -e "s/###/#${issue_number}/g" $1
