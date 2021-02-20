@@ -142,7 +142,7 @@ set concealcursor=cnv
 " Syntax, highlighting and spelling {{{2
 
 set background=dark
-set synmaxcol=200
+set synmaxcol=500
 set hlsearch
 " Execute nohlsearch to avoid highlighting last searched pattern when reloading
 " .vimrc.
