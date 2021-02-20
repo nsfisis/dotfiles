@@ -75,18 +75,13 @@
     ssd = stash drop
     ssp = stash pop
     last = log --pretty=fuller -1
-    # git rev-parse --verify --quiet develop > /dev/null
-    # if [ $? = 0 ]; then
-    #   git log --oneline develop..
+    # LAST_MERGE_COMMIT=$(git last-merge-commit)
+    # if [ -n "$LAST_MERGE_COMMIT" ]; then
+    #   git log --oneline --boundary $LAST_MERGE_COMMIT..
     # else
-    #   git rev-parse --verify --quiet main > /dev/null
-    #   if [ $? = 0 ]; then
-    #     git log --oneline main..
-    #   else
-    #     git log --oneline master..
-    #   fi
+    #   git log --oneline -n 10
     # fi
-    l = "!git rev-parse --verify --quiet develop > /dev/null; if [ $? = 0 ]; then git log --oneline develop..; else git rev-parse --verify --quiet main > /dev/null; if [ $? = 0 ]; then git log --oneline main..; else git log --oneline master..; fi; fi"
+    l = "!LAST_MERGE_COMMIT=$(git last-merge-commit); if [ -n \"$LAST_MERGE_COMMIT\" ]; then git log --oneline --boundary $LAST_MERGE_COMMIT..; else git log --oneline -n 10; fi"
     ll = log --oneline
     logf = log --pretty=fuller
     graph = log --oneline --graph
@@ -103,3 +98,4 @@
     cpick = cherry-pick
     cpickc = cherry-pick --continue
     empty = commit --allow-empty
+    last-merge-commit = "!git rev-list --abbrev-commit --merges HEAD | head -n 1"
