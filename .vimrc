@@ -321,7 +321,7 @@ let &directory = g:MY_ENV.swap_dir . '//'
 
 
 " Command line editing {{{2
-set history=200
+set history=2000
 set wildignore+=*.o,*.obj,*.lib
 set wildignorecase
 set wildmenu
