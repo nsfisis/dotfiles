@@ -133,4 +133,4 @@ fi
 
 # Substitute '###' with '#NNNNN', where 'NNNNN' is the issue number.
 # '$1' is passed by Git, the file name that holds commit message.
-sed -i '' -e "s/###/#${issue_number}/g" $1
+sed -i '' -e "s|###|#${issue_number}|g" $1
