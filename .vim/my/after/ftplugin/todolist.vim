@@ -10,7 +10,7 @@ endif
 FtpluginSetLocal expandtab
 FtpluginSetLocal shiftwidth=4
 FtpluginSetLocal softtabstop=4
-" FtpluginSetLocal foldmethod=indent
+FtpluginSetLocal foldmethod=indent
 
 
 let b:caw_oneline_comment = '//'
