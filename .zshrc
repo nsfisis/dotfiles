@@ -219,6 +219,7 @@ bindkey "^U" backward-kill-line
 # C-j  To go to the parent directory.
 function __cd_parent_dir() {
     pushd .. > /dev/null
+    __update_vcs_info
     zle reset-prompt
 }
 zle -N __cd_parent_dir
@@ -227,6 +228,7 @@ bindkey "^J" __cd_parent_dir
 # C-o  To go to the previous directory.
 function __cd_prev_dir() {
     popd > /dev/null
+    __update_vcs_info
     zle reset-prompt
 }
 zle -N __cd_prev_dir
@@ -257,12 +259,16 @@ zstyle ':vcs_info:*' formats " (%b)%u"
 zstyle ':vcs_info:*' actionformats ' (%b %a)%u'
 
 
-function precmd() {
+function __update_vcs_info() {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     if [[ -n "$vcs_info_msg_0_" ]]; then
         psvar[1]="$vcs_info_msg_0_"
     fi
+}
+
+function precmd() {
+    __update_vcs_info
 }
 
 
