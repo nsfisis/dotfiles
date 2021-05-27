@@ -21,7 +21,9 @@
     ff = false
 
 [rebase]
+    abbreviatecommands = true
     autosquash = true
+    autostash = true
 
 [diff]
     tool = vimdiff
