@@ -2,8 +2,13 @@
 
 for filename in .gitconfig .gitignore_global .vim .vimrc .zshrc
 do
-    # Remove existing symbolic link.
-    rm -rf ~/$filename
-    # Create symbolic link.
+    rm -f ~/$filename
     ln -s ~/dotfiles/$filename ~/$filename
+done
+
+[ -d ~/.config ] || mkdir ~/.config
+for dirname in alacritty
+do
+    rm -f ~/.config/$dirname
+    ln -s ~/dotfiles/.config/$dirname ~/.config/$dirname
 done
