@@ -218,6 +218,8 @@ bindkey "^U" backward-kill-line
 
 # C-j  To go to the parent directory.
 function __cd_parent_dir() {
+    [ -e $BUFFER ] || return
+
     pushd .. > /dev/null
     zle reset-prompt
 }
@@ -226,6 +228,8 @@ bindkey "^J" __cd_parent_dir
 
 # C-o  To go to the previous directory.
 function __cd_prev_dir() {
+    [ -e $BUFFER ] || return
+
     popd > /dev/null
     zle reset-prompt
 }
@@ -234,6 +238,8 @@ bindkey "^O" __cd_prev_dir
 
 # C-g  To go to the project root.
 function __cd_project_root_dir() {
+    [ -e $BUFFER ] || return
+
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
         pushd $(git rev-parse --show-toplevel) > /dev/null
         zle reset-prompt
