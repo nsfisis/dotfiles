@@ -1,14 +1,12 @@
 #!/bin/sh
 
-for filename in .gitconfig .vim .vimrc .zshrc
+for name in .gitconfig .vim .vimrc .zshrc
 do
-    rm -f ~/$filename
-    ln -s ~/dotfiles/$filename ~/$filename
+    ln -s -f ~/dotfiles/$name ~/$name
 done
 
 [ -d ~/.config ] || mkdir ~/.config
-for dirname in alacritty git
+for name in alacritty git starship.toml
 do
-    rm -f ~/.config/$dirname
-    ln -s ~/dotfiles/.config/$dirname ~/.config/$dirname
+    ln -s -f ~/dotfiles/.config/$name ~/.config/$name
 done
