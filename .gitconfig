@@ -5,7 +5,6 @@
 [core]
     editor = vim
     commentchar = ";"
-    excludesfile = ~/.gitignore_global
 
 [help]
     autocorrect = 1
