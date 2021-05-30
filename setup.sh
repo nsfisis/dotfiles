@@ -1,12 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-for name in .gitconfig .vim .vimrc .zshrc
-do
-    ln -s -f ~/dotfiles/$name ~/$name
+for name in .gitconfig .vim .vimrc .zshrc; do
+    if [ ! -L ~/$name ]; then
+        ln -s -f ~/dotfiles/$name ~/$name
+    fi
 done
 
-[ -d ~/.config ] || mkdir ~/.config
-for name in alacritty git starship.toml
-do
-    ln -s -f ~/dotfiles/.config/$name ~/.config/$name
+if [ ! -d ~/.config ]; then
+    mkdir ~/.config
+fi
+
+for name in alacritty fish git starship.toml; do
+    if [ ! -L ~/.config/$name ]; then
+        ln -s -f ~/dotfiles/.config/$name ~/.config/$name
+    fi
 done
