@@ -333,11 +333,6 @@ export EDITOR=vim
 
 
 
-alias ls="ls -G"
-alias lsa="ls -a -G"
-alias lsl="ls -l -G"
-alias lsal="ls -al -G"
-alias lsla="ls -al -G"
 alias rm="rm -i"
 alias cp='cp -i'
 alias mv='mv -i'
@@ -346,8 +341,14 @@ alias e='vim'
 alias o='open'
 alias g='git'
 
-# Alternative
+alias cat='bat'
+alias find='fd'
 alias grep='rg'
+alias ls='exa'
+alias lsa='exa -a'
+alias lsl='exa -l'
+alias lsal='exa -al'
+alias lsla='exa -al'
 
 
 export PATH=/usr/local/opt/gettext/bin:$PATH
