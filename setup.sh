@@ -10,7 +10,7 @@ if [ ! -d ~/.config ]; then
     mkdir ~/.config
 fi
 
-for name in alacritty fish git starship.toml; do
+for name in alacritty fish git; do
     if [ ! -L ~/.config/$name ]; then
         ln -s -f ~/dotfiles/.config/$name ~/.config/$name
     fi

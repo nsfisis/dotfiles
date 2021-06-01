@@ -221,6 +221,7 @@ function __cd_parent_dir() {
     [ -e $BUFFER ] || return
 
     pushd .. > /dev/null
+    __update_vcs_info
     zle reset-prompt
 }
 zle -N __cd_parent_dir
@@ -231,6 +232,7 @@ function __cd_prev_dir() {
     [ -e $BUFFER ] || return
 
     popd > /dev/null
+    __update_vcs_info
     zle reset-prompt
 }
 zle -N __cd_prev_dir
@@ -250,6 +252,39 @@ bindkey "^G" __cd_project_root_dir
 
 
 zmodload zsh/complist
+
+
+
+autoload -Uz vcs_info
+
+
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' unstagedstr "+"
+zstyle ':vcs_info:*' formats " (%b)%u"
+zstyle ':vcs_info:*' actionformats ' (%b %a)%u'
+
+
+function __update_vcs_info() {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    if [[ -n "$vcs_info_msg_0_" ]]; then
+        psvar[1]="$vcs_info_msg_0_"
+    fi
+}
+
+function precmd() {
+    __update_vcs_info
+}
+
+
+
+PROMPT="
+%75F%B%~%b%1(v,%1v,)
+%150F❯%153F❯%159F❯%f "
+
+PROMPT2="%63F❯%62F❯%61F❯%f "
+
+SPROMPT="%179F%BDid you mean %r? (n/y):%b%f "
 
 
 HISTFILE=$HOME/.zsh_history
@@ -325,7 +360,3 @@ export PATH=/usr/local/opt/gettext/bin:$PATH
 
 # To override system-provided Ruby with brewed Ruby
 export PATH=/usr/local/opt/ruby/bin:$PATH
-
-
-
-eval "$(starship init zsh)"
