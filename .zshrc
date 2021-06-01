@@ -1,5 +1,12 @@
 export LANG=ja_JP.UTF-8
 
+export VISUAL=vim
+export EDITOR=vim
+
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
+
 
 ########################
 # Changing Directories #
@@ -324,20 +331,6 @@ function mkcd() {
 }
 
 
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
-
-export LD_LIBRARY_PATH=$HOME/Downloads/lib:$HOME/lib:$LD_LIBRARY_PATH
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
-
-
-export VISUAL=vim
-export EDITOR=vim
-
-
-
-
 alias rm="rm -i"
 alias cp='cp -i'
 alias mv='mv -i'
@@ -357,6 +350,9 @@ alias lsl='exa -l'
 alias lsal='exa -al'
 alias lsla='exa -al'
 
+
+export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 export PATH=/usr/local/opt/gettext/bin:$PATH
 
