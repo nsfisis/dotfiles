@@ -454,8 +454,6 @@ Plug 'GutenYe/json5.vim'
 " K {{{2
 
 " L {{{2
-" Insert parentheses, 'end' and so on.
-Plug 'cohama/lexima.vim'
 " Cool status line.
 Plug 'itchyny/lightline.vim'
 " LSP; Language Server Protocol
@@ -1343,31 +1341,6 @@ nmap  J  <Plug>(jplus-getchar)
 xmap  J  <Plug>(jplus-getchar)
 nmap  gJ  <Plug>(jplus-input)
 xmap  gJ  <Plug>(jplus-input)
-
-
-
-" lexima {{{2
-
-" TODO: work around
-cmap  <C-h>  <BS>
-imap  <C-h>  <BS>
-" To make .vimrc reloadable
-let g:lexima_no_default_rules = 1
-call lexima#set_default_rules()
-
-
-" Note: lexima.vim cannot recognizes <CR>, so use <CR> in lexima.vim's
-" configuration.
-
-" For ruby's multiline comment.
-" =begin
-" =end
-call lexima#add_rule({
-    \ 'char': '<CR>',
-    \ 'at': '\V\^=begin\>\s\*\%#',
-    \ 'input_after': '<CR>=end',
-    \ 'filetype': 'ruby',
-    \ })
 
 
 
