@@ -229,6 +229,7 @@ function __cd_parent_dir() {
 
     pushd .. > /dev/null
     __update_vcs_info
+    __change_terminal_title
     zle reset-prompt
 }
 zle -N __cd_parent_dir
@@ -240,6 +241,7 @@ function __cd_prev_dir() {
 
     popd > /dev/null
     __update_vcs_info
+    __change_terminal_title
     zle reset-prompt
 }
 zle -N __cd_prev_dir
@@ -319,8 +321,13 @@ function showoptions() {
 
 
 
+function __change_terminal_title() {
+    local _title=$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)
+    echo -ne "\033]0;${_title}\007"
+}
+
 function chpwd() {
-    echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"
+    __change_terminal_title
 }
 
 
