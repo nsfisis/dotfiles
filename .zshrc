@@ -341,13 +341,15 @@ export EDITOR=vim
 alias rm="rm -i"
 alias cp='cp -i'
 alias mv='mv -i'
+
 alias zmv='noglob zmv -W'
+alias fd='noglob fd'
+
 alias e='vim'
 alias o='open'
 alias g='git'
 
 alias cat='bat'
-alias find='fd'
 alias grep='rg'
 alias ls='exa'
 alias lsa='exa -a'
