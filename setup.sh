@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for name in .gitconfig .vim .vimrc .zshrc; do
+for name in .gitconfig .tmux.conf .vim .vimrc .zshrc; do
     if [ ! -L ~/$name ]; then
         ln -s -f ~/dotfiles/$name ~/$name
     fi
