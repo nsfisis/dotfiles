@@ -1389,13 +1389,13 @@ endfunction
 
 function! s:lightline_fileformat()
     if &fileformat ==# 'unix'
-        return 'lf'
+        return 'LF'
     elseif &fileformat ==# 'dos'
-        return 'crlf'
+        return 'CRLF'
     elseif &fileformat ==# 'mac'
-        return 'cr'
+        return 'CR'
     else
-        return 'unknown'
+        return '-'
     endif
 endfunction
 
