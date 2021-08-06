@@ -357,9 +357,10 @@ function mkcd() {
 }
 
 
-alias rm="rm -i"
 alias cp='cp -i'
+alias mkdir='mkdir -p'
 alias mv='mv -i'
+alias rm="rm -i"
 
 alias zmv='noglob zmv -W'
 alias fd='noglob fd'
