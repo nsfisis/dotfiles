@@ -1336,6 +1336,7 @@ let g:jplus#input_config = {
     \ ';': {'delimiter_format': '%d '},
     \ 'l': {'delimiter_format': ''},
     \ 'L': {'delimiter_format': ''},
+    \ "\<Tab>": {'delimiter_format': '%d'},
     \ }
 nmap  J  <Plug>(jplus-getchar)
 xmap  J  <Plug>(jplus-getchar)
