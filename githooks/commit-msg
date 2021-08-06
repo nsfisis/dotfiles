@@ -125,7 +125,7 @@ if [[ -z ${gitbranch} ]]; then
 fi
 
 # Extract issue number from branch name.
-local issue_number="${gitbranch##feature/}"
+local issue_number="$(echo "${gitbranch}" | grep -o '[0-9][0-9]*')"
 if [[ -z ${issue_number} ]]; then
     # Failed to extract. Leave the commit message as it is.
     return 0
