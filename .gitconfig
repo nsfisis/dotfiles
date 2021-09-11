@@ -1,7 +1,3 @@
-[user]
-    name = nsfisis
-    email = nsfisis@gmail.com
-
 [core]
     editor = vim
     commentchar = ";"
