@@ -598,6 +598,13 @@ Autocmd BufEnter,WinEnter,BufWinEnter *
     \ let &l:numberwidth = len(line('$')) + 2
 
 
+" Jump to the last cursor position when you open a file.
+Autocmd BufRead *
+    \ if 0 < line("'\"") && line("'\"") <= line('$') && &filetype !~# 'commit' |
+    \     execute "normal g`\"" |
+    \ endif
+
+
 " Syntax highlight for .vimrc {{{2
 
 Autocmd Filetype vim
