@@ -1102,6 +1102,10 @@ function! s:ftplugin_setlocal(qargs) abort
 
     let option_name = substitute(a:qargs, '\L.*', '', '')
 
+    if option_name ==# 'shiftwidth' && exists(':IndentLinesReset') ==# 2
+        IndentLinesReset
+    endif
+
     if exists('b:undo_ftplugin')
         let b:undo_ftplugin .= '|setlocal ' . option_name . '<'
     else
