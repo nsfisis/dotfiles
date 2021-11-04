@@ -1145,6 +1145,12 @@ ColorScheme! ocean
 
 " Plugins configuration {{{1
 
+" Load builtin plugins.
+
+" :help :Man
+runtime ftplugin/man.vim
+
+
 " Disable standard plugins. {{{2
 
 let g:loaded_2html_plugin     = 1
