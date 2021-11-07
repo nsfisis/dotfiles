@@ -366,16 +366,35 @@ alias zmv='noglob zmv -W'
 alias fd='noglob fd'
 
 alias e='vim'
-alias o='open'
 alias g='git'
 
-alias cat='bat'
-alias grep='rg'
-alias ls='exa'
-alias lsa='exa -a'
-alias lsl='exa -l'
-alias lsal='exa -al'
-alias lsla='exa -al'
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias o='open'
+else
+    alias o='xdg-open'
+fi
+
+if type bat >/dev/null 2>&1; then
+    alias cat='bat'
+fi
+
+if type rg >/dev/null 2>&1; then
+    alias grep='rg'
+fi
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias ls='ls --color=none'
+    alias lsa='ls --color=none -a'
+    alias lsl='ls --color=none -l'
+    alias lsal='ls --color=none -al'
+    alias lsla='ls --color=none -al'
+else
+    alias ls='ls -G'
+    alias lsa='ls -G -a'
+    alias lsl='ls -G -l'
+    alias lsal='ls -G -al'
+    alias lsla='ls -G -al'
+fi
 
 
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
