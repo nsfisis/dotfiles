@@ -1164,7 +1164,7 @@ ColorScheme! ocean
 
 " Plugins configuration {{{1
 
-" Load builtin plugins.
+" Load builtin plugins. {{{2
 
 " :help :Man
 runtime ftplugin/man.vim
@@ -1365,7 +1365,7 @@ xmap  sg/  <Plug>(incsearch-easymotion-stay)
 
 " indentline {{{2
 
-let g:indentLine_fileTypeExclude = ['help', 'chart']
+let g:indentLine_fileTypeExclude = ['help']
 
 
 
