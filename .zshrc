@@ -378,9 +378,9 @@ alias e='vim'
 alias g='git'
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    alias o='open'
-else
     alias o='xdg-open'
+else
+    alias o='open'
 fi
 
 if type bat >/dev/null 2>&1; then
@@ -392,17 +392,17 @@ if type rg >/dev/null 2>&1; then
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    alias ls='ls --color=none'
-    alias lsa='ls --color=none -a'
-    alias lsl='ls --color=none -l'
-    alias lsal='ls --color=none -al'
-    alias lsla='ls --color=none -al'
-else
     alias ls='ls -G'
     alias lsa='ls -G -a'
     alias lsl='ls -G -l'
     alias lsal='ls -G -al'
     alias lsla='ls -G -al'
+else
+    alias ls='ls --color=none'
+    alias lsa='ls --color=none -a'
+    alias lsl='ls --color=none -l'
+    alias lsal='ls --color=none -al'
+    alias lsla='ls --color=none -al'
 fi
 
 
