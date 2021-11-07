@@ -90,12 +90,12 @@
     rid = rebase -i develop
     rc = rebase --continue
     m = merge
-    mc = merge --continue
+    mc = merge --continue --no-edit
     mm = mergetool
     pullu = "!git pull upstream $(git cb) --ff"
     pullo = "!git pull origin $(git cb) --ff"
     pusho = "!git push origin $(git cb)"
     cpick = cherry-pick
-    cpickc = cherry-pick --continue
+    cpickc = cherry-pick --continue --no-edit
     empty = commit --allow-empty
     last-merge-commit = "!git rev-list --abbrev-commit --merges HEAD | head -n 1"
