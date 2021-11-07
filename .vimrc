@@ -417,6 +417,10 @@ Plug 'cocopon/colorswatch.vim'
 Plug 'rhysd/committia.vim'
 " Make gui-only color schemes 256colors-compatible.
 Plug 'godlygeek/csapprox'
+" Fast Fuzzy Finder.
+Plug 'ctrlpvim/ctrlp.vim'
+" CtrlP's matcher by builtin `matchfuzzy()`.
+Plug 'mattn/ctrlp-matchfuzzy'
 
 " D {{{2
 " Filer for minimalists.
@@ -1263,6 +1267,12 @@ xmap  m/b  <Plug>(caw:box:comment)
 let g:clang_format#auto_format = 1
 Autocmd FileType javascript ClangFormatAutoDisable
 Autocmd FileType typescript ClangFormatAutoDisable
+
+
+
+" ctrlp {{{2
+
+let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
 
 
