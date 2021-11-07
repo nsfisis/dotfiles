@@ -251,6 +251,9 @@ set noshowmatch
 set matchpairs+=<:>
 set nojoinspaces
 set nrformats-=octal
+if has('patch-8.2.0860')
+    set nrformats+=unsigned
+endif
 
 
 
