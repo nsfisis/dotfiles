@@ -45,7 +45,7 @@
     a = add
     ap = add -p
     b = branch
-    cb = rev-parse --abbrev-ref HEAD
+    current-branch = rev-parse --abbrev-ref HEAD
     c = commit
     fixup = commit --fixup
     amend = commit --amend --no-edit
@@ -92,9 +92,9 @@
     m = merge
     mc = merge --continue --no-edit
     mm = mergetool
-    pullu = "!git pull upstream $(git cb) --ff"
-    pullo = "!git pull origin $(git cb) --ff"
-    pusho = "!git push origin $(git cb)"
+    pullu = "!git pull upstream $(git current-branch) --ff"
+    pullo = "!git pull origin $(git current-branch) --ff"
+    pusho = "!git push origin $(git current-branch)"
     cpick = cherry-pick
     cpickc = cherry-pick --continue --no-edit
     empty = commit --allow-empty
