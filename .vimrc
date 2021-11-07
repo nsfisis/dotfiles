@@ -1051,8 +1051,13 @@ nnoremap <silent>  <C-c>  :<C-u>nohlsearch<CR>
 
 
 
-nnoremap <silent>  go  :<C-u>call <SID>insert_blank_line(0)<CR>
-nnoremap <silent>  gO  :<C-u>call <SID>insert_blank_line(1)<CR>
+nnoremap <silent>  <Plug>(my-insert-blank-lines-after)
+    \ :<C-u>call <SID>insert_blank_line(0)<CR>
+nnoremap <silent>  <Plug>(my-insert-blank-lines-before)
+    \ :<C-u>call <SID>insert_blank_line(1)<CR>
+
+nmap  go  <Plug>(my-insert-blank-lines-after)
+nmap  gO  <Plug>(my-insert-blank-lines-before)
 
 function! s:insert_blank_line(offset) abort
     for i in range(v:count1)
@@ -1540,12 +1545,20 @@ xmap  BB  <Plug>(quickrun)
 
 " repeat {{{2
 
-nmap U <Plug>(RepeatRedo)
-" Work around. vim-repeatの内部構造に大きく依存する。
-" repeat#setregの呼び出しが(ほぼ)副作用を持たないことが必要
+nmap  U  <Plug>(RepeatRedo)
 " Autoload vim-repeat immediately in order to make <Plug>(RepeatRedo) available.
 " repeat#setreg() does nothing here.
 call repeat#setreg('', '')
+
+
+" Make them repeatable with vim-repeat.
+nnoremap <silent>  <Plug>(my-insert-blank-lines-after)
+    \ :<C-u>call <SID>insert_blank_line(0)<Bar>
+    \ silent! call repeat#set("\<Lt>Plug>(my-insert-blank-lines-after)")<CR>
+nnoremap <silent>  <Plug>(my-insert-blank-lines-before)
+    \ :<C-u>call <SID>insert_blank_line(1)<Bar>
+    \ silent! call repeat#set("\<Lt>Plug>(my-insert-blank-lines-before)")<CR>
+
 
 
 " ripgrep {{{2
