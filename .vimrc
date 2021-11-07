@@ -1051,8 +1051,8 @@ nnoremap <silent>  <C-c>  :<C-u>nohlsearch<CR>
 
 
 
-nnoremap <silent>  <Space>o  :<C-u>call <SID>insert_blank_line(0)<CR>
-nnoremap <silent>  <Space>O  :<C-u>call <SID>insert_blank_line(1)<CR>
+nnoremap <silent>  go  :<C-u>call <SID>insert_blank_line(0)<CR>
+nnoremap <silent>  gO  :<C-u>call <SID>insert_blank_line(1)<CR>
 
 function! s:insert_blank_line(offset) abort
     for i in range(v:count1)
