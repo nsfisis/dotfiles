@@ -52,14 +52,28 @@
     clone1 = clone --depth=1
     co = checkout
     cob = checkout -b
-    # git rev-parse --verify --quiet main > /dev/null
-    # if [ $? = 0 ]; then
-    #   git checkout main
-    # else
-    #   git checkout master
-    # fi
-    com = "!git rev-parse --verify --quiet main > /dev/null; if [ $? = 0 ]; then git checkout main; else git checkout master; fi"
-    cod = checkout develop
+    com = "!__fn() { \
+        if git rev-parse --verify --quiet main > /dev/null 2>&1; then \
+            git checkout main \"$@\"; \
+        elif git rev-parse --verify --quiet origin/main > /dev/null 2>&1; then \
+            git checkout origin/main \"$@\"; \
+        elif git rev-parse --verify --quiet master > /dev/null 2>&1; then \
+            git checkout master \"$@\"; \
+        elif git rev-parse --verify --quiet origin/master > /dev/null 2>&1; then \
+            git checkout origin/master \"$@\"; \
+        else \
+            echo 'error: no branch found' >&2; \
+        fi; \
+    }; __fn"
+    cod = "!__fn() { \
+        if git rev-parse --verify --quiet develop > /dev/null 2>&1; then \
+            git checkout develop \"$@\"; \
+        elif git rev-parse --verify --quiet origin/develop > /dev/null 2>&1; then \
+            git checkout origin/develop \"$@\"; \
+        else \
+            echo 'error: no branch found' >&2; \
+        fi; \
+    }; __fn"
     d = diff
     dc = diff --cached
     g = grep
@@ -75,13 +89,14 @@
     ssd = stash drop
     ssp = stash pop
     last = log --pretty=fuller -1
-    # LAST_MERGE_COMMIT=$(git last-merge-commit)
-    # if [ -n "$LAST_MERGE_COMMIT" ]; then
-    #   git log --oneline --boundary $LAST_MERGE_COMMIT..
-    # else
-    #   git log --oneline -n 10
-    # fi
-    l = "!LAST_MERGE_COMMIT=$(git last-merge-commit); if [ -n \"$LAST_MERGE_COMMIT\" ]; then git log --oneline --boundary $LAST_MERGE_COMMIT..; else git log --oneline -n 10; fi"
+    l = "!__fn() { \
+        local last_merge_commit=\"$(git last-merge-commit)\"; \
+        if [[ -n \"$last_merge_commit\" ]]; then \
+            git log --oneline --boundary \"$last_merge_commit\".. \"$@\"; \
+        else \
+            git log --oneline -n 10 \"$@\"; \
+        fi; \
+    }; __fn"
     ll = log --oneline
     logf = log --pretty=fuller
     graph = log --oneline --graph
