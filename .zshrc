@@ -269,10 +269,19 @@ zmodload zsh/complist
 autoload -Uz vcs_info
 
 
+zstyle ':vcs_info:git:*' formats ' (%b)%u%m'
+zstyle ':vcs_info:git:*' actionformats ' (%b %a)%u%m'
+zstyle ':vcs_info:git:*' unstagedstr '+'
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' unstagedstr "+"
-zstyle ':vcs_info:*' formats " (%b)%u"
-zstyle ':vcs_info:*' actionformats ' (%b %a)%u'
+zstyle ':vcs_info:git+set-message:*' hooks git-stash-count
+
+# Add stash count to VCS info.
+function +vi-git-stash-count() {
+    local stash="$(git stash list 2>/dev/null | wc -l | tr -d ' ')"
+    if [[ "${stash}" -gt 0 ]]; then
+        hook_com[misc]+=" [${stash}]"
+    fi
+}
 
 
 function __update_vcs_info() {
