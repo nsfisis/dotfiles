@@ -1247,6 +1247,13 @@ Autocmd FileType typescript ClangFormatAutoDisable
 
 
 
+" dirvish {{{2
+
+" Prevent dirvish from mapping hyphen key to "<Plug>(dirvish_up)".
+nmap  <Plug>(nomap-dirvish_up)  <Plug>(dirvish_up)
+
+
+
 " easyalign {{{2
 
 nmap  =  <Plug>(EasyAlign)
