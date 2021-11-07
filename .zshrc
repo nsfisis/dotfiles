@@ -282,7 +282,9 @@ zstyle ':vcs_info:git+set-message:*' hooks git-stash-count
 function +vi-git-stash-count() {
     local stash="$(git stash list 2>/dev/null | wc -l | tr -d ' ')"
     if [[ "${stash}" -gt 0 ]]; then
-        hook_com[misc]+=" [${stash}]"
+        hook_com[misc]=" [${stash}]"
+    else
+        hook_com[misc]=""
     fi
 }
 
