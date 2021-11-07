@@ -191,6 +191,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 # Complete commands even if input starts with "sudo"
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
+# Exclude the current directory from completion list when typing "../".
+zstyle ':completion:*' ignore-parents parent pwd ..
+
 autoload -U zcalc
 autoload zed
 
