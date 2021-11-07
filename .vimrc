@@ -1272,6 +1272,7 @@ Autocmd FileType typescript ClangFormatAutoDisable
 
 " ctrlp {{{2
 
+let g:ctrlp_map = '<Space>f'
 let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
 
