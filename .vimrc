@@ -607,7 +607,8 @@ Autocmd BufEnter,WinEnter,BufWinEnter *
 
 " Jump to the last cursor position when you open a file.
 Autocmd BufRead *
-    \ if 0 < line("'\"") && line("'\"") <= line('$') && &filetype !~# 'commit' |
+    \ if 0 < line("'\"") && line("'\"") <= line('$') &&
+    \         &filetype !~# 'commit' && &filetype !~# 'rebase' |
     \     execute "normal g`\"" |
     \ endif
 
