@@ -1,6 +1,7 @@
 #!/bin/bash
 
 for name in \
+    .emacs.d \
     .gitconfig \
     .tmux.conf \
     .vim \
