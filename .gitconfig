@@ -103,14 +103,14 @@
     r = rebase
     ri = rebase -i
     rid = rebase -i develop
-    rc = rebase --continue
-    m = merge
-    mc = merge --continue --no-edit
+    rc = "!GIT_EDITOR=true git rebase --continue"
+    m = merge --no-edit
+    mc = "!GIT_EDITOR=true git merge --continue"
     mm = mergetool
     pullu = "!git pull upstream $(git current-branch) --ff"
     pullo = "!git pull origin $(git current-branch) --ff"
     pusho = "!git push origin $(git current-branch)"
     cpick = cherry-pick
-    cpickc = cherry-pick --continue --no-edit
+    cpickc = "!GIT_EDITOR=true cherry-pick --continue"
     empty = commit --allow-empty
     last-merge-commit = "!git rev-list --abbrev-commit --merges HEAD | head -n 1"
