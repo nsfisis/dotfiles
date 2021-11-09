@@ -491,8 +491,6 @@ Plug 'pekepeke/vim-operator-shuffle'
 Plug 'emonkak/vim-operator-sort'
 " Support to define user-defined operator.
 Plug 'kana/vim-operator-user'
-" Emacs' org-mode
-Plug 'jceb/vim-orgmode'
 
 " P {{{2
 " Highlight matched parentheses.
