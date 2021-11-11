@@ -386,9 +386,9 @@ alias e='vim'
 alias g='git'
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    alias o='xdg-open'
-else
     alias o='open'
+else
+    alias o='xdg-open'
 fi
 
 if type bat >/dev/null 2>&1; then
