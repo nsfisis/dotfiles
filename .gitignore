@@ -1,6 +1,3 @@
-/.vim/autoload
-/.vim/cache
-/.vim/plugged
-/.vim/spell
-/.vim/view
+!/.vim/my/
+/.vim/
 /.emacs.d
