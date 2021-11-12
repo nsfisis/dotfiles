@@ -1,3 +1,3 @@
 /.vim/*
 !/.vim/my/
-/.emacs.d
+/.config/emacs

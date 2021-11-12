@@ -6,7 +6,6 @@ if [ ! -f ~/dotfiles/.vim/autoload/plug.vim ]; then
 fi
 
 for name in \
-    .emacs.d \
     .gitconfig \
     .tmux.conf \
     .vim \
@@ -28,6 +27,7 @@ fi
 for name in \
     alacritty \
     bat \
+    emacs \
     git \
     ; \
 do
