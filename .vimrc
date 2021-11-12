@@ -1375,6 +1375,7 @@ xmap  sg/  <Plug>(incsearch-easymotion-stay)
 
 " indentline {{{2
 
+let g:indentLine_conceallevel = 1
 let g:indentLine_fileTypeExclude = ['help']
 
 
