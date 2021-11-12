@@ -6,7 +6,6 @@ if [ ! -f ~/dotfiles/.vim/autoload/plug.vim ]; then
 fi
 
 for name in \
-    .gitconfig \
     .tmux.conf \
     .vim \
     .vimrc \
