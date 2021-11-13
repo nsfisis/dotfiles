@@ -655,8 +655,8 @@ endfunction
 " Mappings {{{1
 
 " Note: |:noremap| defines mappings in |Normal|, |Visual|, |Operator-Pending|
-" and |Select| mode. Because I don't use |Select| mode, |:noremap| is executed
-" as substitute of |:nnoremap|, |:xnoremap| and |:onoremap| for simplicity.
+" and |Select| mode. Because I don't use |Select| mode, I use |:noremap| as
+" substitute of |:nnoremap|, |:xnoremap| and |:onoremap| for simplicity.
 
 
 " Fix the search direction. {{{2
@@ -712,7 +712,7 @@ nnoremap   @N  N.
 nnoremap  @a  9999@@
 
 
-" Execute the laste executed macro again.
+" Execute the last executed macro again.
 nnoremap  `  @@
 
 
@@ -1050,12 +1050,16 @@ xnoremap  g-  g<C-x>
 
 
 
-" Disable unuseful mappings. {{{2
+" Disable unuseful or dangerous mappings. {{{2
 
-" Avoid entering Select mode.
+" Disable Select mode.
 nnoremap  gh  <Nop>
 nnoremap  gH  <Nop>
 nnoremap  g<C-h>  <Nop>
+
+" Disable Ex mode.
+nnoremap  Q  <Nop>
+nnoremap  gQ  <Nop>
 
 nnoremap  ZZ  <Nop>
 nnoremap  ZQ  <Nop>
