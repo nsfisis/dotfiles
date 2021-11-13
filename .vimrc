@@ -1041,12 +1041,12 @@ command! -nargs=+ -complete=command
 
 " Increment/decrement numbers {{{2
 
-nnoremap  +  <C-a>
-nnoremap  -  <C-x>
-xnoremap  +  <C-a>
-xnoremap  -  <C-x>
-xnoremap  g+  g<C-a>
-xnoremap  g-  g<C-x>
+" nnoremap  +  <C-a>
+" nnoremap  -  <C-x>
+" xnoremap  +  <C-a>
+" xnoremap  -  <C-x>
+" xnoremap  g+  g<C-a>
+" xnoremap  g-  g<C-x>
 
 
 
