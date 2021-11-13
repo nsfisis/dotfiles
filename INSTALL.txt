@@ -1,0 +1,31 @@
+macOS (homebrew)
+
+```
+$ brew install \
+    alacritty \
+    bash \
+    bat \
+    cmake \
+    curl \
+    emacs \
+    fd \
+    gcc \
+    git \
+    jq \
+    pandoc \
+    python \
+    ripgrep \
+    ruby \
+    tmux \
+    tokei \
+    tree \
+    vim \
+    zsh \
+    ;
+
+$ brew install --cask \
+    alacritty \
+    emacs \
+    keepassxc \
+    ;
+```
