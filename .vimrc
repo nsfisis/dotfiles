@@ -872,36 +872,12 @@ function! s:bdelete_bang_with_confirm() abort
 endfunction
 
 
-let g:choose_window_indicators = [
-    \ 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';',
-    \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    \ ]
-
-
-function! s:choose_window_filter(popups, winid, key) abort
-    let jump_target = -1
-    for popup in a:popups
-        if a:key ==? popup.indicator
-            let jump_target = popup.target_winid
-        endif
-    endfor
-    if jump_target !=# -1
-        call win_gotoid(jump_target)
-    endif
-
-    call popup_close(a:winid)
-    return v:true
-endfunction
-
-
-function s:choose_window_close_popups(popups, winid, result) abort
-    for popup in a:popups
-        call popup_close(popup.winid)
-    endfor
-endfunction
-
-
 function! s:choose_window_interactively() abort
+    const indicators = [
+        \ 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';',
+        \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+        \ ]
+
     " List normal windows up to 20.
     let wins = []
     for winnr in range(1, winnr('$'))
@@ -909,8 +885,8 @@ function! s:choose_window_interactively() abort
             call add(wins, win_getid(winnr))
         endif
     endfor
-    if len(g:choose_window_indicators) < len(wins)
-        unlet wins[len(g:choose_window_indicators):]
+    if len(indicators) < len(wins)
+        unlet wins[len(indicators):]
     endif
 
     if len(wins) ==# 0
@@ -929,7 +905,7 @@ function! s:choose_window_interactively() abort
     let popups = []
     for i in range(len(wins))
         let winid = wins[i]
-        let indicator = g:choose_window_indicators[i]
+        let indicator = indicators[i]
         let [winy, winx, winh, winw] = s:win_getrect(winid)
         let popup = popup_create(indicator, #{
             \ line: winy + (winh - 5) / 2,
@@ -946,15 +922,24 @@ function! s:choose_window_interactively() abort
             \ })
     endfor
 
-    " Show dialog.
-    let [winy, winx, winh, winw] = s:win_getrect(0)
-    let popup = popup_dialog('Select window', #{
-        \ pos: 'topleft',
-        \ line: winy + (winh - 3) / 2,
-        \ col: winx + (winw - len('Select window') - 4) / 2,
-        \ filter: function(s:SNR .. 'choose_window_filter', [popups]),
-        \ callback: function(s:SNR .. 'choose_window_close_popups', [popups]),
-        \ })
+    " Prompt
+    let result = s:getchar_with_prompt('Select window: ')
+
+    " Jump
+    let jump_target = -1
+    for popup in popups
+        if result ==? popup.indicator
+            let jump_target = popup.target_winid
+        endif
+    endfor
+    if jump_target !=# -1
+        call win_gotoid(jump_target)
+    endif
+
+    " Close popups
+    for popup in popups
+        call popup_close(popup.winid)
+    endfor
 endfunction
 
 
