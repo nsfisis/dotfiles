@@ -872,6 +872,92 @@ function! s:bdelete_bang_with_confirm() abort
 endfunction
 
 
+let g:choose_window_indicators = [
+    \ 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';',
+    \ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    \ ]
+
+
+function! s:choose_window_filter(popups, winid, key) abort
+    let jump_target = -1
+    for popup in a:popups
+        if a:key ==? popup.indicator
+            let jump_target = popup.target_winid
+        endif
+    endfor
+    if jump_target !=# -1
+        call win_gotoid(jump_target)
+    endif
+
+    call popup_close(a:winid)
+    return v:true
+endfunction
+
+
+function s:choose_window_close_popups(popups, winid, result) abort
+    for popup in a:popups
+        call popup_close(popup.winid)
+    endfor
+endfunction
+
+
+function! s:choose_window_interactively() abort
+    " List normal windows up to 20.
+    let wins = []
+    for winnr in range(1, winnr('$'))
+        if winnr !=# winnr() && win_gettype(winnr) ==# ''
+            call add(wins, win_getid(winnr))
+        endif
+    endfor
+    if len(g:choose_window_indicators) < len(wins)
+        unlet wins[len(g:choose_window_indicators):]
+    endif
+
+    if len(wins) ==# 0
+        return
+    endif
+    if len(wins) ==# 1
+        if wins[0] ==# win_getid()
+            call win_gotoid(wins[1])
+        else
+            call win_gotoid(wins[0])
+        endif
+        return
+    endif
+
+    " Show popups.
+    let popups = []
+    for i in range(len(wins))
+        let winid = wins[i]
+        let indicator = g:choose_window_indicators[i]
+        let [winy, winx, winh, winw] = s:win_getrect(winid)
+        let popup = popup_create(indicator, #{
+            \ line: winy + (winh - 5) / 2,
+            \ col: winx + (winw - 9) / 2,
+            \ drag: v:false,
+            \ resize: v:false,
+            \ padding: [1, 3, 1, 3],
+            \ border: [],
+            \ })
+        call add(popups, #{
+            \ winid: popup,
+            \ indicator: indicator,
+            \ target_winid: winid,
+            \ })
+    endfor
+
+    " Show dialog.
+    let [winy, winx, winh, winw] = s:win_getrect(0)
+    let popup = popup_dialog('Select window', #{
+        \ pos: 'topleft',
+        \ line: winy + (winh - 3) / 2,
+        \ col: winx + (winw - len('Select window') - 4) / 2,
+        \ filter: function(s:SNR .. 'choose_window_filter', [popups]),
+        \ callback: function(s:SNR .. 'choose_window_close_popups', [popups]),
+        \ })
+endfunction
+
+
 nnoremap <silent>  tt  :<C-u>tabnew<CR>
 nnoremap <silent>  tT  :<C-u>call <SID>move_current_window_to_tabpage()<CR>
 
@@ -928,6 +1014,10 @@ nnoremap  tc  <C-w>c
 
 nnoremap  to  <C-w>o
 nnoremap <silent>  tO  :<C-u>tabonly<CR>
+
+if has('popupwin')
+    nnoremap <silent>  tg  :<C-u>call <SID>choose_window_interactively()<CR>
+endif
 
 
 
@@ -1023,6 +1113,8 @@ nnoremap <silent>  XX  :<C-u>call SourceThisFile()<CR>
 nnoremap <silent>  XF  :<C-u>function {<C-r>=v:count<CR>}<CR>
 
 nnoremap <silent>  XM  :<C-u>messages<CR>
+
+nnoremap <silent>  XP  :<C-u>call popup_clear(1)<CR>
 
 
 
@@ -1781,6 +1873,18 @@ function! s:input(...) abort
     let result = call('input', a:000)
     call inputrestore()
     return result
+endfunction
+
+
+
+"" Wrapper of |win_screenpos()|, |winheight()| and |winwidth()|.
+"" Returns quadruple consisting of y, x, width and height.
+function! s:win_getrect(...) abort
+    let win = get(a:000, 0, 0)
+    let [y, x] = win_screenpos(win)
+    let h = winheight(win)
+    let w = winwidth(win)
+    return [y, x, h, w]
 endfunction
 
 
