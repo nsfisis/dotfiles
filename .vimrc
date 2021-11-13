@@ -338,12 +338,11 @@ set shell=zsh
 set keywordprg=
 
 
-" multi-byte characters {{{2
+" Encoding {{{2
 
 " Note: if 'fileencoding' is empty, 'encoding' is used.
 set fileencodings=utf-8,cp932,euc-jp
 set termencoding=utf-8
-set ambiwidth=double
 
 
 
