@@ -233,7 +233,7 @@ set helplang=en,ja
 
 " Selecting text {{{2
 
-set clipboard=
+set clipboard=unnamed
 
 
 
