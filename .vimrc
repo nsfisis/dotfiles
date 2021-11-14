@@ -432,6 +432,8 @@ Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/vim-easy-align'
 " Motion on speed.
 Plug 'easymotion/vim-easymotion'
+" SKK (Simple Kana to Kanji conversion program) for Vim.
+Plug 'tyru/eskk.vim'
 
 " F {{{2
 " Makes folding text cool.
@@ -1504,6 +1506,7 @@ let g:lightline = {
     \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
     \ },
     \ 'component_function': {
+    \   'mode': s:SNR .. 'lightline_mode',
     \   'linenum': s:SNR .. 'lightline_linenum',
     \   'fileformat': s:SNR .. 'lightline_fileformat',
     \ },
@@ -1529,6 +1532,23 @@ let g:lightline = {
     \     'inactive': ['tabnum', 'filename', 'modified'],
     \ },
     \ }
+
+function! s:lightline_mode()
+    if get(g:, 'loaded_eskk', v:false) && eskk#is_enabled()
+        const skk_mode_map = #{
+            \ hira: 'あ',
+            \ kata: 'ア',
+            \ hankata: 'ｱ',
+            \ abbrev: 'abbrev',
+            \ ascii: 'A',
+            \ zenei: 'zenei',
+            \ }
+        let skk = ' (' . get(skk_mode_map, eskk#get_mode(), '?') . ')'
+    else
+        let skk = ''
+    endif
+    return lightline#mode() . skk
+endfunction
 
 function! s:lightline_linenum()
     return line('.') . '/' . line('$')
