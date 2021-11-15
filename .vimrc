@@ -1448,6 +1448,10 @@ let g:eskk#large_dictionary = {
 
 let g:eskk#backup_dictionary = g:eskk#dictionary.path . ".bak"
 
+let g:eskk#kakutei_when_unique_candidate = v:true
+let g:eskk#enable_completion = v:false
+" let g:eskk#no_default_mappings = v:true
+
 
 
 " foldcc {{{2
