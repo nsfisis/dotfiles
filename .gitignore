@@ -1,3 +1,4 @@
 /.vim/*
 !/.vim/my/
 /.config/emacs
+vim-startup.log
