@@ -1375,7 +1375,7 @@ let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 " dirvish {{{2
 
 " Prevent dirvish from mapping hyphen key to "<Plug>(dirvish_up)".
-nmap  <Plug>(nomap-dirvish_up)  <Plug>(dirvish_up)
+" nmap  <Plug>(nomap-dirvish_up)  <Plug>(dirvish_up)
 
 
 
@@ -1476,19 +1476,19 @@ Autocmd User eskk-initialize-pre call s:eskk_initialize_pre()
 function! s:eskk_initialize_post() abort
     " I don't use hankata mode for now.
     EskkUnmap -type=mode:hira:toggle-hankata
-    EskkUnmap -type=mode:kata:toggle-hankata <C-q>
+    EskkUnmap -type=mode:kata:toggle-hankata
 
     " I don't use abbrev mode for now.
-    EskkUnmap -type=mode:hira:to-abbrev /
-    EskkUnmap -type=mode:kata:to-abbrev /
+    EskkUnmap -type=mode:hira:to-abbrev
+    EskkUnmap -type=mode:kata:to-abbrev
 
-    " Remap l to zenei mode because I use normal Vim Insert mode for ASCII.
-    EskkUnmap -type=mode:hira:to-ascii l
-    EskkUnmap -type=mode:kata:to-ascii l
-    EskkUnmap -type=mode:hira:to-zenei L
-    EskkUnmap -type=mode:kata:to-zenei L
-    EskkMap -type=mode:hira:to-zenei l
-    EskkMap -type=mode:kata:to-zenei l
+    " I don't use ascii mode for now.
+    EskkUnmap -type=mode:hira:to-ascii
+    EskkUnmap -type=mode:kata:to-ascii
+
+    " Instead, l key disable SKK input.
+    EskkMap -type=disable l
+    EskkMap -type=disable l
 endfunction
 
 
