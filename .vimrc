@@ -43,6 +43,8 @@ let g:MY_ENV.undo_dir      = g:MY_ENV.cache_dir . '/undo'
 let g:MY_ENV.backup_dir    = g:MY_ENV.cache_dir . '/backup'
 let g:MY_ENV.swap_dir      = g:MY_ENV.cache_dir . '/swap'
 let g:MY_ENV.yankround_dir = g:MY_ENV.cache_dir . '/yankround'
+let g:MY_ENV.skk_dir = !empty($XDG_CONFIG_HOME) ? expand('$XDG_CONFIG_HOME/skk') :
+    \                                             expand('$HOME/.config/skk')
 
 for [s:k, s:v] in items(g:MY_ENV)
     if s:k =~# '_dir$' && !isdirectory(s:v)
@@ -1430,6 +1432,24 @@ xmap  sk  <Plug>(easymotion-k)
 
 
 
+" eskk {{{2
+
+let g:eskk#dictionary = {
+    \ 'path': g:MY_ENV.skk_dir . '/jisyo',
+    \ 'sorted': 0,
+    \ 'encoding': 'utf-8',
+    \ }
+
+let g:eskk#large_dictionary = {
+    \ 'path': g:MY_ENV.skk_dir . '/jisyo.L',
+    \ 'sorted': 1,
+    \ 'encoding': 'euc-jp',
+    \ }
+
+let g:eskk#backup_dictionary = g:eskk#dictionary.path . ".bak"
+
+
+
 " foldcc {{{2
 
 set foldtext=FoldCCtext()
@@ -1535,15 +1555,7 @@ let g:lightline = {
 
 function! s:lightline_mode()
     if get(g:, 'loaded_eskk', v:false) && eskk#is_enabled()
-        const skk_mode_map = #{
-            \ hira: 'あ',
-            \ kata: 'ア',
-            \ hankata: 'ｱ',
-            \ abbrev: 'abbrev',
-            \ ascii: 'A',
-            \ zenei: 'zenei',
-            \ }
-        let skk = ' (' . get(skk_mode_map, eskk#get_mode(), '?') . ')'
+        let skk = ' (' . eskk#statusline('%s') . ')'
     else
         let skk = ''
     endif

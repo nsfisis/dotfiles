@@ -35,3 +35,15 @@ do
         ln -s -f ~/dotfiles/.config/"$name" ~/.config/"$name"
     fi
 done
+
+if [ ! -d ~/.config/skk ]; then
+    echo "dir: ~/.config/skk"
+    mkdir ~/.config/skk
+fi
+
+if [ ! -f ~/.config/skk/jisyo.L ]; then
+    echo "download: ~/config/.skk/jisyo.L"
+    _compressed_jisyo="$(mktemp)"
+    curl -fL -o "$_compressed_jisyo" https://skk-dev.github.io/dict/SKK-JISYO.L.gz
+    gunzip -cd "$_compressed_jisyo" > ~/.config/skk/jisyo.L
+fi
