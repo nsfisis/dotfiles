@@ -435,7 +435,7 @@ Plug 'junegunn/vim-easy-align'
 " Motion on speed.
 Plug 'easymotion/vim-easymotion'
 " SKK (Simple Kana to Kanji conversion program) for Vim.
-Plug 'tyru/eskk.vim'
+Plug 'vim-skk/eskk.vim'
 
 " F {{{2
 " Makes folding text cool.
