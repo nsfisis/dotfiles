@@ -415,7 +415,9 @@ Plug 'cocopon/colorswatch.vim'
 " Write git commit message.
 Plug 'rhysd/committia.vim'
 " Make gui-only color schemes 256colors-compatible.
-Plug 'godlygeek/csapprox'
+if !exists('+termguicolors') || !&termguicolors
+    Plug 'godlygeek/csapprox'
+endif
 " Fast Fuzzy Finder.
 Plug 'ctrlpvim/ctrlp.vim'
 " CtrlP's matcher by builtin `matchfuzzy()`.
