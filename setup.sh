@@ -44,6 +44,6 @@ fi
 if [ ! -f ~/.config/skk/jisyo.L ]; then
     echo "download: ~/config/.skk/jisyo.L"
     _compressed_jisyo="$(mktemp)"
-    curl -fL -o "$_compressed_jisyo" https://skk-dev.github.io/dict/SKK-JISYO.L.gz
+    curl -fL -o "$_compressed_jisyo" https://skk-dev.github.io/dict/SKK-JISYO.L.unannotated.gz
     gunzip -cd "$_compressed_jisyo" > ~/.config/skk/jisyo.L
 fi
