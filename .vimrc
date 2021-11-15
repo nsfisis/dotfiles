@@ -1453,6 +1453,48 @@ let g:eskk#enable_completion = v:false
 " let g:eskk#no_default_mappings = v:true
 
 
+function! s:eskk_initialize_pre() abort
+    let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+    call t.add_map('z ', '　')
+    call t.add_map('0.', '0.')
+    call t.add_map('1.', '1.')
+    call t.add_map('2.', '2.')
+    call t.add_map('3.', '3.')
+    call t.add_map('4.', '4.')
+    call t.add_map('5.', '5.')
+    call t.add_map('6.', '6.')
+    call t.add_map('7.', '7.')
+    call t.add_map('8.', '8.')
+    call t.add_map('9.', '9.')
+    call eskk#register_mode_table('hira', t)
+endfunction
+
+
+Autocmd User eskk-initialize-pre call s:eskk_initialize_pre()
+
+
+function! s:eskk_initialize_post() abort
+    " I don't use hankata mode for now.
+    EskkUnmap -type=mode:hira:toggle-hankata
+    EskkUnmap -type=mode:kata:toggle-hankata <C-q>
+
+    " I don't use abbrev mode for now.
+    EskkUnmap -type=mode:hira:to-abbrev /
+    EskkUnmap -type=mode:kata:to-abbrev /
+
+    " Remap l to zenei mode because I use normal Vim Insert mode for ASCII.
+    EskkUnmap -type=mode:hira:to-ascii l
+    EskkUnmap -type=mode:kata:to-ascii l
+    EskkUnmap -type=mode:hira:to-zenei L
+    EskkUnmap -type=mode:kata:to-zenei L
+    EskkMap -type=mode:hira:to-zenei l
+    EskkMap -type=mode:kata:to-zenei l
+endfunction
+
+
+Autocmd User eskk-initialize-post call s:eskk_initialize_post()
+
+
 
 " foldcc {{{2
 
