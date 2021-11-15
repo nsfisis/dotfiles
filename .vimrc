@@ -1185,6 +1185,22 @@ command! -bar -range=%
     \ keeppatterns <line1>,<line2>g/^/m<line1>-1
 
 
+function! s:dummy_man_command(mods, args) abort
+    " Delete the dummy command.
+    delcommand Man
+    " Load man.vim which defines |:Man|.
+    runtime ftplugin/man.vim
+    " Pass the given arguments to it.
+    execute printf("%s Man %s", a:mods, a:args)
+endfunction
+
+
+" To shorten Vim startup, lazily load ftplugin/man.vim.
+command! -complete=shellcmd -nargs=+
+    \ Man
+    \ call s:dummy_man_command(<q-mods>, <f-args>)
+
+
 
 
 " ftplugin {{{1
@@ -1248,12 +1264,6 @@ ColorScheme! ocean
 
 
 " Plugins configuration {{{1
-
-" Load builtin plugins. {{{2
-
-" :help :Man
-runtime ftplugin/man.vim
-
 
 " Disable standard plugins. {{{2
 
