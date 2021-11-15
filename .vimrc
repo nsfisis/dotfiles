@@ -1600,8 +1600,13 @@ let g:lightline = {
     \ }
 
 function! s:lightline_mode()
-    if get(g:, 'loaded_eskk', v:false) && eskk#is_enabled()
-        let skk = ' (' . eskk#statusline('%s') . ')'
+    " Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
+    " without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
+    " stage of the initialization (probably the first rendering of status line),
+    " which slows down Vim startup. Loading eskk can be delayed by checking both
+    " of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
+    if exists('g:loaded_eskk') && exists('g:loaded_autoload_eskk')
+        let skk = eskk#statusline(' (%s)', '')
     else
         let skk = ''
     endif
