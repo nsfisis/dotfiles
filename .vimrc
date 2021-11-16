@@ -429,6 +429,8 @@ Plug 'justinmk/vim-dirvish'
 Plug 'junegunn/vim-easy-align'
 " Motion on speed.
 Plug 'easymotion/vim-easymotion'
+" Integration with EditorConfig (https://editorconfig.org)
+Plug 'editorconfig/editorconfig-vim'
 " SKK (Simple Kana to Kanji conversion program) for Vim.
 Plug 'vim-skk/eskk.vim'
 
