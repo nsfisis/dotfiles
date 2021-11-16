@@ -415,10 +415,6 @@ Plug 'rhysd/vim-clang-format'
 Plug 'cocopon/colorswatch.vim'
 " Write git commit message.
 Plug 'rhysd/committia.vim'
-" Make gui-only color schemes 256colors-compatible.
-if !exists('+termguicolors') || !&termguicolors
-    Plug 'godlygeek/csapprox'
-endif
 " Fast Fuzzy Finder.
 Plug 'ctrlpvim/ctrlp.vim'
 " CtrlP's matcher by builtin `matchfuzzy()`.
@@ -587,6 +583,11 @@ Plug g:MY_ENV.my_dir
 " Fork version of jremmen/vim-ripgrep
 " Integration with ripgrep, fast alternative of grep command.
 Plug 'nsfisis/vim-ripgrep'
+
+" Fork version of godlygeek/csapprox
+" Make gui-only color schemes 256colors-compatible.
+Plug 'nsfisis/csapprox'
+
 
 call plug#end()
 
