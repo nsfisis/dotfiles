@@ -229,7 +229,6 @@ set noshowmode
 set report=999
 set confirm
 set belloff=all
-set helplang=en,ja
 
 
 
@@ -569,8 +568,6 @@ Plug 'leafgarland/typescript-vim'
 " U {{{2
 
 " V {{{2
-" Vim documentation in Japanese.
-Plug 'vim-jp/vimdoc-ja'
 
 " W {{{2
 " Adjust window size.
