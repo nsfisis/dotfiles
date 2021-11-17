@@ -382,217 +382,258 @@ let &viminfo .= ',n' . g:MY_ENV.cache_dir . '/viminfo'
 
 " Installed plugins {{{1
 
+" === BEGIN === {{{2
+
 call plug#begin(g:MY_ENV.plug_dir)
 
-" Filetype-specific plugins are placed at the first letter of the filetype.
-" E.g., plugins for Vim Script are placed in "V", even if their name don't
-" begin with "V".
 
-" A {{{2
-" Switch to related files.
-Plug 'kana/vim-altr'
-" Async job control and completion API for vim-lsp.
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Extend * and #.
-Plug 'haya14busa/vim-asterisk'
-" If a directory is missing, make it automatically.
-Plug 'mopp/autodirmake.vim'
-" Auto-format python code by using autopep8.
-Plug 'tell-k/vim-autopep8'
+" Text editing {{{2
 
-" B {{{2
+" IME {{{3
 
-" C {{{2
-" Capture the output of a command.
-Plug 'tyru/capture.vim'
-" Comment out.
-Plug 'tyru/caw.vim'
-" Integrate with clang-format, the formater for C/C++.
-Plug 'rhysd/vim-clang-format'
-" Show highlight.
-Plug 'cocopon/colorswatch.vim'
-" Write git commit message.
-Plug 'rhysd/committia.vim'
-" Fast Fuzzy Finder.
-Plug 'ctrlpvim/ctrlp.vim'
-" CtrlP's matcher by builtin `matchfuzzy()`.
-Plug 'mattn/ctrlp-matchfuzzy'
-
-" D {{{2
-" Filer for minimalists.
-Plug 'justinmk/vim-dirvish'
-
-" E {{{2
-" Align text.
-Plug 'junegunn/vim-easy-align'
-" Motion on speed.
-Plug 'easymotion/vim-easymotion'
-" Integration with EditorConfig (https://editorconfig.org)
-Plug 'editorconfig/editorconfig-vim'
 " SKK (Simple Kana to Kanji conversion program) for Vim.
 Plug 'vim-skk/eskk.vim'
 
-" F {{{2
-" Makes folding text cool.
-Plug 'LeafCage/foldCC.vim'
+" Operators {{{3
 
-" G {{{2
-
-" H {{{2
-" Syntax for HCL.
-Plug 'b4b4r07/vim-hcl'
-
-" I {{{2
-" Extend incremental search.
-Plug 'haya14busa/incsearch.vim'
-" Incremntal search on EasyMotion.
-Plug 'haya14busa/incsearch-easymotion.vim'
-" Show indent.
-Plug 'Yggdroot/indentLine'
-
-" J {{{2
-" Modern JavaScript
-Plug 'pangloss/vim-javascript'
-" Extend J.
-Plug 'osyo-manga/vim-jplus'
-" Filetype JSON5
-Plug 'GutenYe/json5.vim'
-
-" K {{{2
-
-" L {{{2
-" Cool status line.
-Plug 'itchyny/lightline.vim'
-" LSP; Language Server Protocol
-" Plug 'prabirshrestha/vim-lsp'
-
-" M {{{2
-" MoonScript
-Plug 'leafo/moonscript-vim'
-
-" N {{{2
-" Improve behaviors of I, A and gI in Blockwise-Visual mode.
-Plug 'kana/vim-niceblock'
-" Syntax highlighting for Nginx conf file.
-Plug 'chr4/nginx.vim'
-
-" O {{{2
-" Extract expression and make assingment statement.
-Plug 'tek/vim-operator-assign'
-" Replace text without updating registers.
-Plug 'kana/vim-operator-replace'
-" Reverse text.
-Plug 'tyru/operator-reverse.vim'
-" Search in a specific region.
-Plug 'osyo-manga/vim-operator-search'
-" Shiffle text.
-Plug 'pekepeke/vim-operator-shuffle'
-" Sort text characterwise and linewise.
-Plug 'emonkak/vim-operator-sort'
-" Support to define user-defined operator.
+" Support for user-defined operators.
 Plug 'kana/vim-operator-user'
 
-" P {{{2
-" Highlight matched parentheses.
-Plug 'itchyny/vim-parenmatch'
-" Pretty printing for Vim script.
-Plug 'thinca/vim-prettyprint'
+" Extract expression and make assingment statement.
+Plug 'tek/vim-operator-assign'
 
-" Q {{{2
-" Edit QuickFix and reflect to original buffers.
-Plug 'thinca/vim-qfreplace'
-" Highlight specified words.
-Plug 't9md/vim-quickhl'
-" Run anything.
-Plug 'thinca/vim-quickrun'
+" Replace text without updating registers.
+Plug 'kana/vim-operator-replace'
 
-" R {{{2
-" Extend dot-repeat.
-Plug 'tpope/vim-repeat'
-" Rust the programming language.
-Plug 'rust-lang/rust.vim'
+" Reverse text.
+Plug 'tyru/operator-reverse.vim'
 
-" S {{{2
+" Search in a specific region.
+Plug 'osyo-manga/vim-operator-search'
+
+" Shiffle text.
+Plug 'pekepeke/vim-operator-shuffle'
+
+" Sort text characterwise and linewise.
+Plug 'emonkak/vim-operator-sort'
+
 " Super surround.
 Plug 'machakann/vim-sandwich'
-" Judge Vim power.
-Plug 'thinca/vim-scouter'
-" Split one line format and Join multiline format.
-Plug 'AndrewRadev/splitjoin.vim'
-" Introduce user-defined mode.
-Plug 'kana/vim-submode'
-" Swap arguments.
-Plug 'machakann/vim-swap'
 
-" T {{{2
+" Non-operators {{{3
+
+" Comment out.
+Plug 'tyru/caw.vim'
+
+" Align text.
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+
+
+" Text objects {{{2
+
+" Support for user-defined text objects.
+Plug 'kana/vim-textobj-user'
+
+" Text object for blockwise.
 Plug 'osyo-manga/vim-textobj-blockwise'
+
 " Text object for comment.
 Plug 'thinca/vim-textobj-comment'
+
 " Text object for continuous line.
 Plug 'rhysd/vim-textobj-continuous-line'
+
 " Text object for entire file.
 Plug 'kana/vim-textobj-entire'
+
 " Text object for function.
 Plug 'kana/vim-textobj-function'
+
 " Text object for indent.
 Plug 'kana/vim-textobj-indent'
+
 " Text object for last inserted text.
 Plug 'rhysd/vim-textobj-lastinserted'
+
 " Text object for last pasted text.
 Plug 'gilligan/textobj-lastpaste'
+
 " Text object for last searched pattern.
 Plug 'kana/vim-textobj-lastpat'
+
 " Text object for line.
 Plug 'kana/vim-textobj-line'
+
 " Text object for parameter.
 Plug 'sgur/vim-textobj-parameter'
+
 " Text object for space.
 Plug 'saihoooooooo/vim-textobj-space'
+
 " Text object for syntax.
 Plug 'kana/vim-textobj-syntax'
+
 " Text object for URL.
 Plug 'mattn/vim-textobj-url'
-" Support to define user-defined text object.
-Plug 'kana/vim-textobj-user'
+
 " Text object for words in words.
 Plug 'h1mesuke/textobj-wiw'
-" TOML.
-Plug 'cespare/vim-toml'
-" TypeScript
-Plug 'leafgarland/typescript-vim'
 
-" U {{{2
 
-" V {{{2
+" Search {{{2
 
-" W {{{2
-" Adjust window size.
-Plug 'rhysd/vim-window-adjuster'
+" Extend * and #.
+Plug 'haya14busa/vim-asterisk'
 
-" X {{{2
+" Extend incremental search.
+Plug 'haya14busa/incsearch.vim'
 
-" Y {{{2
-" Remember yank history and paste them.
-Plug 'LeafCage/yankround.vim'
-
-" Z {{{2
-
-" Mine {{{2
-Plug g:MY_ENV.my_dir
-
-" Fork version of jremmen/vim-ripgrep
+" NOTE: it is a fork version of jremmen/vim-ripgrep
 " Integration with ripgrep, fast alternative of grep command.
-Plug 'nsfisis/vim-ripgrep'
+Plug 'nsfisis/vim-ripgrep', { 'on': 'Rg' }
 
-" Fork version of godlygeek/csapprox
+
+" Files {{{2
+
+" Switch to related files.
+Plug 'kana/vim-altr'
+
+" Fast Fuzzy Finder.
+Plug 'ctrlpvim/ctrlp.vim', { 'on': '<Plug>(ctrlp)' }
+
+" CtrlP's matcher by builtin `matchfuzzy()`.
+Plug 'mattn/ctrlp-matchfuzzy', { 'on': '<Plug>(ctrlp)' }
+
+" Filer for minimalists.
+Plug 'justinmk/vim-dirvish'
+
+
+" Appearance {{{2
+
+" Show highlight.
+Plug 'cocopon/colorswatch.vim', { 'on': 'ColorSwatchGenerate' }
+
+" NOTE: it is a fork of godlygeek/csapprox
 " Make gui-only color schemes 256colors-compatible.
 Plug 'nsfisis/csapprox'
 
+" Makes folding text cool.
+Plug 'LeafCage/foldCC.vim'
+
+" Show indent.
+Plug 'Yggdroot/indentLine'
+
+" Cool status line.
+Plug 'itchyny/lightline.vim'
+
+" Highlight matched parentheses.
+Plug 'itchyny/vim-parenmatch'
+
+" Highlight specified words.
+Plug 't9md/vim-quickhl', { 'on': [ 'QuickhlManualReset', '<Plug>(quickhl-manual-this)'] }
+
+
+" Filetypes {{{2
+
+" Syntax {{{3
+
+" HCL
+Plug 'b4b4r07/vim-hcl'
+
+" JavaScript
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+
+" JSON5
+Plug 'GutenYe/json5.vim'
+
+" MoonScript
+Plug 'leafo/moonscript-vim'
+
+" Nginx conf
+Plug 'chr4/nginx.vim'
+
+" Rust
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+" TOML
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+" TypeScript
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
+" Tools {{{3
+
+" C/C++: clang-format
+Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp'] }
+
+" Python: autopep8
+Plug 'tell-k/vim-autopep8', { 'for': 'python' }
+
+
+" QoL {{{2
+
+" If a directory is missing, make it automatically.
+Plug 'mopp/autodirmake.vim'
+
+" Capture the output of a command.
+Plug 'tyru/capture.vim'
+
+" Write git commit message.
+Plug 'rhysd/committia.vim'
+
+" Motion on speed.
+Plug 'easymotion/vim-easymotion', { 'on': [
+    \ '<Plug>(easymotion-Fl)',
+    \ '<Plug>(easymotion-N)',
+    \ '<Plug>(easymotion-Tl)',
+    \ '<Plug>(easymotion-bd-w)',
+    \ '<Plug>(easymotion-fl)',
+    \ '<Plug>(easymotion-j)',
+    \ '<Plug>(easymotion-k)',
+    \ '<Plug>(easymotion-n)',
+    \ '<Plug>(easymotion-s2)',
+    \ '<Plug>(easymotion-tl)',
+    \ ] }
+
+" Integration with EditorConfig (https://editorconfig.org)
+Plug 'editorconfig/editorconfig-vim'
+
+" Extend J.
+Plug 'osyo-manga/vim-jplus'
+
+" Improve behaviors of I, A and gI in Blockwise-Visual mode.
+Plug 'kana/vim-niceblock'
+
+" Edit QuickFix and reflect to original buffers.
+Plug 'thinca/vim-qfreplace'
+
+" Run anything.
+Plug 'thinca/vim-quickrun'
+
+" Extend dot-repeat.
+Plug 'tpope/vim-repeat'
+
+" Split one line format and Join multiline format.
+Plug 'AndrewRadev/splitjoin.vim'
+
+" Introduce user-defined mode.
+Plug 'kana/vim-submode'
+
+" Swap arguments.
+Plug 'machakann/vim-swap'
+
+" Adjust window size.
+Plug 'rhysd/vim-window-adjuster'
+
+" Remember yank history and paste them.
+Plug 'LeafCage/yankround.vim'
+
+
+" === END === {{{2
+
+Plug g:MY_ENV.my_dir
 
 call plug#end()
-
 
 
 
@@ -1516,20 +1557,6 @@ xmap  ?  <Plug>(incsearch-backward)
 nmap  g/  <Plug>(incsearch-stay)
 omap  g/  <Plug>(incsearch-stay)
 xmap  g/  <Plug>(incsearch-stay)
-
-
-
-" incsearch-easymotion {{{2
-
-nmap  s/  <Plug>(incsearch-easymotion-stay)
-omap  s/  <Plug>(incsearch-easymotion-stay)
-xmap  s/  <Plug>(incsearch-easymotion-stay)
-nmap  s?  <Plug>(incsearch-easymotion-stay)
-omap  s?  <Plug>(incsearch-easymotion-stay)
-xmap  s?  <Plug>(incsearch-easymotion-stay)
-nmap  sg/  <Plug>(incsearch-easymotion-stay)
-omap  sg/  <Plug>(incsearch-easymotion-stay)
-xmap  sg/  <Plug>(incsearch-easymotion-stay)
 
 
 
