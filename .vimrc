@@ -1944,8 +1944,6 @@ let g:yankround_use_region_hl = 1
 
 " Utilities {{{1
 
-
-
 "" Wrapper of |getchar()|.
 function! s:getchar()
     let ch = getchar()
@@ -1954,7 +1952,6 @@ function! s:getchar()
     endwhile
     return type(ch) == v:t_number ? nr2char(ch) : ch
 endfunction
-
 
 
 "" Wrapper of |:echo| and |:echohl|.
@@ -1967,13 +1964,11 @@ function! s:echo(message, ...) abort
 endfunction
 
 
-
 "" Wrapper of |getchar()|.
 function! s:getchar_with_prompt(prompt) abort
     call s:echo(a:prompt)
     return s:getchar()
 endfunction
-
 
 
 "" Wrapper of |input()|.
@@ -1987,7 +1982,6 @@ function! s:input(...) abort
 endfunction
 
 
-
 "" Wrapper of |win_screenpos()|, |winheight()| and |winwidth()|.
 "" Returns quadruple consisting of y, x, width and height.
 function! s:win_getrect(...) abort
@@ -1997,113 +1991,6 @@ function! s:win_getrect(...) abort
     let w = winwidth(win)
     return [y, x, h, w]
 endfunction
-
-
-
-
-" They are not used any longer. {{{2
-if 0
-    "" @param nr (WinNr or WinId) 0 means the current window.
-    "" @return (Number) The window width applied 'numberwidth' and 'foldcolumn' to.
-    function! s:displayed_winwidth(nr) abort
-        let winwidth = winwidth(a:nr)
-        let foldcolumn = getwinvar(a:nr, '&foldcolumn')
-        let numberwidth = getwinvar(a:nr, '&number') ?
-            \ max([getwinvar(a:nr, '&numberwidth'), len(line('$'))]) : 0
-
-        return winwidth - foldcolumn - numberwidth
-    endfunction
-
-
-
-    "" Wrapper of |char2nr()|.
-    function! s:char2nr(x, ...) abort
-        return type(a:x) == v:t_number ?
-            \ a:x :
-            \ char2nr(a:x, get(a:000, 0, 0))
-    endfunction
-
-
-
-    "" Wrapper of |nr2char()|.
-    function! s:nr2char(x, ...) abort
-        return type(a:x) == v:t_string ?
-            \ a:x :
-            \ nr2char(a:x, get(a:000, 0, 0))
-    endfunction
-
-
-
-    "" @param begin (Char)
-    "" @param end (Char) Included
-    "" @return ([Char])
-    "" e.g.) s:char_range('1', '5')
-    ""       => ['1', '2', '3', '4', '5']
-    function! s:char_range(begin, end) abort
-        return map(range(s:char2nr(a:begin), s:char2nr(a:end)), 's:nr2char(v:val)')
-    endfunction
-
-
-
-    "" Splits a string character by character.
-    "" @param str (String)
-    "" @return ([Char])
-    "" e.g.) s:each_char('bar')
-    ""       => ['b', 'a', 'r']
-    function! s:each_char(str) abort
-        return split(a:str, '\zs')
-    endfunction
-
-
-
-    "" Returns a list of pairs of index and item.
-    "" @param list (List)
-    "" @return ([[Number, Any]])
-    "" e.g.) s:with_index(['a', 'b', 'c'])
-    ""       => [[0, 'a'], [1, 'b'], [2, 'c']]
-    function! s:with_index(list) abort
-        return map(a:list, '[v:key, v:val]')
-    endfunction
-
-
-
-    "" Concatenates all passed lists and returns it.
-    "" @param ... ([Any])
-    "" @return ([List])
-    function! s:extend_list(...) abort
-        let ret = []
-        for list in a:000
-            call extend(ret, list)
-        endfor
-        return ret
-    endfunction
-
-
-
-    "" @param list ([Any])
-    "" @param length (Number)
-    "" @param [filled_item] (Any)
-    function! s:normalize_list_length(list, length, ...) abort
-        let delta = len(a:list) - a:length
-        if delta < 0 " too short
-            let filled_item = a:1
-            return expand(a:list, repeat(filled_item, -delta))
-        else " too long
-            return a:list[:(delta - 1)]
-        endif
-    endfunction
-
-
-
-    " If the current line contains any multibyte characters, It doesn't work:
-    "     getline('.')[col('.') - 1]
-    " This function can handle multibyte characters.
-    function! s:get_cursor_char() abort
-        return matchstr(getline('.'), '.' , col('.') - 1)
-    endfunction
-endif
-
-
 
 
 
