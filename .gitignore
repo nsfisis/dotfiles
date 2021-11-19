@@ -4,3 +4,4 @@
 /.config/nvim/plugged/
 /.config/emacs
 vim-startup.log
+nvim-startup.log
