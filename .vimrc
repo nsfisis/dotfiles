@@ -114,11 +114,6 @@ language time C
 "   the starting buffer you specified as commandline arguments like
 "   "$ vim ~/.vimrc".
 
-" Initialize all options with Vim's default values.
-set all&
-
-
-
 " Moving around, searching and patterns {{{2
 
 set nowrapscan
