@@ -43,8 +43,16 @@ else
     let g:MY_ENV.cache_home = $XDG_CONFIG_HOME
 endif
 
-let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/vim'
-let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
+if has('nvim')
+    let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/nvim'
+else
+    let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/vim'
+endif
+if has('nvim')
+    let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/nvim'
+else
+    let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
+endif
 
 let g:MY_ENV.my_dir = g:MY_ENV.config_dir . '/my'
 let g:MY_ENV.plug_dir = g:MY_ENV.config_dir . '/plugged'

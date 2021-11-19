@@ -11,6 +11,7 @@ $ brew install \
     gcc \
     git \
     jq \
+    neovim \
     pandoc \
     python \
     ripgrep \

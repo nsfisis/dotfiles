@@ -22,6 +22,7 @@ for name in \
     bat \
     emacs \
     git \
+    nvim \
     vim \
     ; \
 do
