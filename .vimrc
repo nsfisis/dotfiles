@@ -33,25 +33,26 @@ else
 endif
 
 if empty($XDG_CONFIG_HOME)
-    let g:MY_ENV.xdg_config_home = $HOME . '/.config'
+    let g:MY_ENV.config_home = $HOME . '/.config'
 else
-    let g:MY_ENV.xdg_config_home = $XDG_CONFIG_HOME
+    let g:MY_ENV.config_home = $XDG_CONFIG_HOME
 endif
 if empty($XDG_CACHE_HOME)
-    let g:MY_ENV.xdg_cache_home = $HOME . '/.cache'
+    let g:MY_ENV.cache_home = $HOME . '/.cache'
 else
-    let g:MY_ENV.xdg_cache_home = $XDG_CONFIG_HOME
+    let g:MY_ENV.cache_home = $XDG_CONFIG_HOME
 endif
 
-let g:MY_ENV.vim_dir = g:MY_ENV.xdg_config_home . '/vim'
-let g:MY_ENV.my_dir = g:MY_ENV.vim_dir . '/my'
-let g:MY_ENV.plug_dir = g:MY_ENV.vim_dir . '/plugged'
-let g:MY_ENV.cache_dir = g:MY_ENV.xdg_cache_home . '/vim'
+let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/vim'
+let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
+
+let g:MY_ENV.my_dir = g:MY_ENV.config_dir . '/my'
+let g:MY_ENV.plug_dir = g:MY_ENV.config_dir . '/plugged'
 let g:MY_ENV.undo_dir = g:MY_ENV.cache_dir . '/undo'
 let g:MY_ENV.backup_dir = g:MY_ENV.cache_dir . '/backup'
 let g:MY_ENV.swap_dir = g:MY_ENV.cache_dir . '/swap'
 let g:MY_ENV.yankround_dir = g:MY_ENV.cache_dir . '/yankround'
-let g:MY_ENV.skk_dir = g:MY_ENV.xdg_config_home . '/skk'
+let g:MY_ENV.skk_dir = g:MY_ENV.config_home . '/skk'
 
 for [s:k, s:v] in items(g:MY_ENV)
     if s:k =~# '_dir$' && !isdirectory(s:v)
@@ -391,7 +392,7 @@ let &viminfo .= ',n' . g:MY_ENV.cache_dir . '/viminfo'
 
 " === BEGIN === {{{2
 
-execute 'set runtimepath+=' . g:MY_ENV.vim_dir
+execute 'set runtimepath+=' . g:MY_ENV.config_dir
 call plug#begin(g:MY_ENV.plug_dir)
 
 
