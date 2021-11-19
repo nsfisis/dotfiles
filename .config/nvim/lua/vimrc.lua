@@ -42,6 +42,7 @@ function M.register_filetype_autocmds_for_indentation()
       html       = { style = SPACE, width = 2 },
       javascript = { style = SPACE, width = 2 },
       json       = { style = SPACE, width = 2 },
+      leaf       = { style = SPACE, width = 4 },
       lisp       = { style = SPACE, width = 2 },
       lua        = { style = SPACE, width = 3 },
       markdown   = { style = SPACE, width = 4 },
