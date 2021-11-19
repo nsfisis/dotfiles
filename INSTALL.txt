@@ -7,7 +7,6 @@ $ brew install \
     bat \
     cmake \
     curl \
-    emacs \
     fd \
     gcc \
     git \
