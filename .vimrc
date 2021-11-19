@@ -7,26 +7,17 @@ scriptencoding utf-8
 
 " Global settings {{{1
 
-" The ideom to get |<SID>|. {{{2
-
-function! s:get_sid() abort
-    return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_get_sid$')
-endfunction
-
-let s:SID = s:get_sid()
-let s:SNR = '<SNR>' . s:SID . '_'
-
-delfunction s:get_sid
-
-
-
 " Global variables. {{{2
 
 let g:MY_ENV = {}
 
-if has('mac')
+if has('unix')
+    let g:MY_ENV.os = 'unix'
+elseif has('mac')
     let g:MY_ENV.os = 'mac'
-elseif has('win32unix') || has('win32') || has('win64')
+elseif has('wsl')
+    let g:MY_ENV.os = 'wsl'
+elseif has('win32') || has('win64')
     let g:MY_ENV.os = 'windows'
 else
     let g:MY_ENV.os = 'unknown'
@@ -85,17 +76,6 @@ command! -nargs=*
     \ autocmd Vimrc <args>
 
 
-" Variable for re-entrancy of .vimrc {{{2
-
-" If an operation cannot be executed twice, enclose it with if block.
-"
-" if !s:is_reloading_vimrc
-"     ...
-" end
-"
-" See "SourceThisFile()" defined in this file for practical example.
-let s:is_reloading_vimrc = v:vim_did_enter
-
 
 " Language {{{2
 
@@ -120,14 +100,6 @@ set nowrapscan
 set incsearch
 set ignorecase
 set smartcase
-
-
-
-" Tags {{{2
-
-set tags+=../tags
-    \ tags+=../../tags
-set tagcase=match
 
 
 
@@ -199,36 +171,6 @@ set mouse=
 
 
 
-" GUI {{{2
-
-if has('gui_running')
-    set guifont=Ricty\ 14
-    " set guifontwide=Ricty\ 14
-    if exists('+antialias')
-        set antialias
-    endif
-    set guioptions+=M
-        \ guioptions+=c
-        \ guioptions+=i
-        \ guioptions-=A
-        \ guioptions-=L
-        \ guioptions-=P
-        \ guioptions-=R
-        \ guioptions-=T
-        \ guioptions-=a
-        \ guioptions-=b
-        \ guioptions-=e
-        \ guioptions-=h
-        \ guioptions-=l
-        \ guioptions-=m
-        \ guioptions-=r
-    set langmenu=none
-    set winaltkeys=no
-    set guicursor+=a:blinkon0
-endif
-
-
-
 " Messages and info {{{2
 
 set shortmess+=a
@@ -255,7 +197,6 @@ set undofile
 let &undodir = g:MY_ENV.undo_dir
 set textwidth=0
 set backspace=indent,eol,start
-"TODO: set formatoptions+=
 set complete+=t
 set completeopt-=preview
 set pumheight=10
@@ -263,9 +204,7 @@ set noshowmatch
 set matchpairs+=<:>
 set nojoinspaces
 set nrformats-=octal
-if has('patch-8.2.0860')
-    set nrformats+=unsigned
-endif
+    \ nrformats+=unsigned
 
 
 
@@ -286,7 +225,6 @@ set preserveindent
 
 
 " Folding {{{2
-" TODO
 
 set foldlevelstart=0
 set foldopen+=insert
@@ -320,8 +258,6 @@ set fileformats=unix,dos,mac
 set backup
 let &backupdir = g:MY_ENV.backup_dir
 set autowrite
-" Instead, use 'confirm'.
-" set noautowriteall&
 set autoread
 
 
@@ -346,8 +282,8 @@ set wildmenu
 " Executing external commands {{{2
 
 set shell=zsh
-
 set keywordprg=
+
 
 
 " Encoding {{{2
@@ -365,29 +301,6 @@ set sessionoptions+=localoptions
     \ sessionoptions+=resize
     \ sessionoptions+=winpos
 let &viminfo .= ',n' . g:MY_ENV.cache_dir . '/viminfo'
-
-
-
-" Note: List of options that may break plugins' behaviors. {{{2
-
-" I will check these options in my plugins.
-"     * autochdir (as much as possible)
-"     * gdefault
-"     * magic
-"     * selection
-"     * startofline
-"     * whichwrap
-
-" I will not check these options in my plugins, and suppose that they are left
-" default.
-"     * compatible
-"     * cpoptions (i.e., do not use |use-cpo-save| ideom)
-"     * edcompatible
-"     * remap
-"     * cedit (map to <C-f>)
-
-
-
 
 
 
@@ -652,6 +565,7 @@ call plug#end()
 
 " Autocommands {{{1
 
+" Auto-resize windows when Vim is resized.
 Autocmd VimResized * wincmd =
 
 
@@ -672,7 +586,9 @@ Autocmd BufRead *
 " Syntax highlight for .vimrc {{{2
 
 Autocmd Filetype vim
-    \ if expand('%') =~? 'vimrc' | call s:highlight_vimrc() | endif
+    \ if expand('%') =~? 'vimrc' || expand('%') =~? 'init.vim' |
+    \     call s:highlight_vimrc() |
+    \ endif
 
 
 function! s:highlight_vimrc() abort
@@ -1158,7 +1074,7 @@ nnoremap  <C-h>  :<C-u>SmartOpen help<Space>
 " For writing Vim script. {{{2
 
 
-if !s:is_reloading_vimrc
+if !v:vim_did_enter
     " Define this function only when Vim is starting up. |v:vim_did_enter|
     function! SourceThisFile() abort
         let filename = expand('%')
@@ -1635,9 +1551,9 @@ let g:lightline = {
     \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
     \ },
     \ 'component_function': {
-    \   'mode': s:SNR .. 'lightline_mode',
-    \   'linenum': s:SNR .. 'lightline_linenum',
-    \   'fileformat': s:SNR .. 'lightline_fileformat',
+    \   'mode': 'Lightline_mode',
+    \   'linenum': 'Lightline_linenum',
+    \   'fileformat': 'Lightline_fileformat',
     \ },
     \ 'mode_map': {
     \     'n' : 'N',
@@ -1662,7 +1578,7 @@ let g:lightline = {
     \ },
     \ }
 
-function! s:lightline_mode()
+function! Lightline_mode()
     " Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
     " without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
     " stage of the initialization (probably the first rendering of status line),
@@ -1676,11 +1592,11 @@ function! s:lightline_mode()
     return lightline#mode() . skk
 endfunction
 
-function! s:lightline_linenum()
+function! Lightline_linenum()
     return line('.') . '/' . line('$')
 endfunction
 
-function! s:lightline_fileformat()
+function! Lightline_fileformat()
     if &fileformat ==# 'unix'
         return 'LF'
     elseif &fileformat ==# 'dos'
