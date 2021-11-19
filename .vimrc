@@ -966,14 +966,34 @@ function! s:choose_window_interactively() abort
         let winid = wins[i]
         let indicator = indicators[i]
         let [winy, winx, winh, winw] = s:win_getrect(winid)
-        let popup = popup_create(indicator, #{
-            \ line: winy + (winh - 5) / 2,
-            \ col: winx + (winw - 9) / 2,
-            \ drag: v:false,
-            \ resize: v:false,
-            \ padding: [1, 3, 1, 3],
-            \ border: [],
-            \ })
+        if has('nvim')
+            let buf_id = nvim_create_buf(v:false, v:true)
+            call nvim_buf_set_lines(buf_id, 0, -1, v:true, ['', '  ' . indicator . '  ', ''])
+            let popup = nvim_open_win(
+                \ buf_id,
+                \ v:false,
+                \ {
+                \     'relative': 'win',
+                \     'win': winid,
+                \     'row': (winh - 5) / 2,
+                \     'col': (winw - 9) / 2,
+                \     'width': 5,
+                \     'height': 3,
+                \     'focusable': v:false,
+                \     'style': 'minimal',
+                \     'border': 'double',
+                \     'noautocmd': v:true,
+                \ })
+        else
+            let popup = popup_create(indicator, #{
+                \ line: winy + (winh - 5) / 2,
+                \ col: winx + (winw - 9) / 2,
+                \ drag: v:false,
+                \ resize: v:false,
+                \ padding: [1, 3, 1, 3],
+                \ border: [],
+                \ })
+        endif
         call add(popups, #{
             \ winid: popup,
             \ indicator: indicator,
@@ -997,7 +1017,11 @@ function! s:choose_window_interactively() abort
 
     " Close popups
     for popup in popups
-        call popup_close(popup.winid)
+        if has('nvim')
+            call nvim_win_close(popup.winid, v:true)
+        else
+            call popup_close(popup.winid)
+        endif
     endfor
 endfunction
 
@@ -1059,7 +1083,7 @@ nnoremap  tc  <C-w>c
 nnoremap  to  <C-w>o
 nnoremap <silent>  tO  :<C-u>tabonly<CR>
 
-if has('popupwin')
+if has('popupwin') || has('nvim')
     nnoremap <silent>  tg  :<C-u>call <SID>choose_window_interactively()<CR>
 endif
 
