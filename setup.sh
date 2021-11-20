@@ -37,6 +37,12 @@ if [ ! -f ~/dotfiles/.config/vim/autoload/plug.vim ]; then
     curl -fLo ~/dotfiles/.config/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+paq_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
+if [ ! -d "$paq_dir" ]; then
+    echo "clone: $paq_dir"
+    git clone --depth=1 https://github.com/savq/paq-nvim.git "$paq_dir"
+fi
+
 if [ ! -d ~/.config/skk ]; then
     echo "dir: ~/.config/skk"
     mkdir ~/.config/skk
