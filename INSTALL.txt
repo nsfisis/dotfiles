@@ -28,4 +28,9 @@ $ brew install --cask \
     emacs \
     keepassxc \
     ;
+
+# Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
+$ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
+$ sudo atsutil databases -remove
+# Restart your machine.
 ```
