@@ -1495,7 +1495,6 @@ let g:jplus#input_config = {
     \ ';': {'delimiter_format': '%d '},
     \ 'l': {'delimiter_format': ''},
     \ 'L': {'delimiter_format': ''},
-    \ "\<Tab>": {'delimiter_format': '%d'},
     \ }
 nmap  J  <Plug>(jplus-getchar)
 xmap  J  <Plug>(jplus-getchar)
@@ -1607,14 +1606,6 @@ xmap  <C-p>  <Plug>(operator-replace)
 nmap  m?  <Plug>(operator-search)
 omap  m?  <Plug>(operator-search)
 xmap  m?  <Plug>(operator-search)
-
-
-
-" prettyprint {{{2
-
-let g:prettyprint_indent = 2
-let g:prettyprint_string = ['split']
-let g:prettyprint_show_expression = 1
 
 
 
