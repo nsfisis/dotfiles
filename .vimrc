@@ -115,7 +115,7 @@ set display=lastline
 let &fillchars = 'stl: ,stlnc: ,vert: ,fold: ,diff: '
 set cmdheight=2
 set list
-let &listchars="eol:\u00ac,tab:\u25b8 ,trail:\u00b7,extends:\u00bb,precedes:\u00ab"
+let &listchars = "eol:\u00ac,tab:\u25b8 ,trail:\u00b7,extends:\u00bb,precedes:\u00ab"
 set concealcursor=cnv
 
 
@@ -779,7 +779,7 @@ xnoremap  x  "_x
 
 nnoremap  Y  y$
 " In Blockwise-Visual mode, select text linewise.
-" In default, select text characterwise, neither blockwise nor linewise.
+" By default, select text characterwise, neither blockwise nor linewise.
 xnoremap <expr>  Y  mode() ==# 'V' ? 'y' : 'Vy'
 
 
@@ -1522,15 +1522,15 @@ let g:lightline = {
     \   'fileformat': 'Lightline_fileformat',
     \ },
     \ 'mode_map': {
-    \     'n' : 'N',
-    \     'i' : 'I',
-    \     'R' : 'R',
-    \     'v' : 'V',
-    \     'V' : 'V-L',
+    \     'n': 'N',
+    \     'i': 'I',
+    \     'R': 'R',
+    \     'v': 'V',
+    \     'V': 'V-L',
     \     "\<C-v>": 'V-B',
-    \     'c' : 'C',
-    \     's' : 'S',
-    \     'S' : 'S-L',
+    \     'c': 'C',
+    \     's': 'S',
+    \     'S': 'S-L',
     \     "\<C-s>": 'S-B',
     \     't': 'T',
     \ },
