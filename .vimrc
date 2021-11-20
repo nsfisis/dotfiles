@@ -44,7 +44,7 @@ let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
 let g:MY_ENV.data_dir = g:MY_ENV.data_home . '/vim'
 
 let g:MY_ENV.my_dir = g:MY_ENV.config_dir . '/my'
-let g:MY_ENV.plug_dir = g:MY_ENV.config_dir . '/plugged'
+let g:MY_ENV.plug_dir = g:MY_ENV.data_dir . '/plugged'
 let g:MY_ENV.undo_dir = g:MY_ENV.data_dir . '/undo'
 let g:MY_ENV.backup_dir = g:MY_ENV.data_dir . '/backup'
 let g:MY_ENV.swap_dir = g:MY_ENV.data_dir . '/swap'
