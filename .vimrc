@@ -873,12 +873,12 @@ function! s:choose_window_interactively() abort
         let indicator = indicators[i]
         let [winy, winx, winh, winw] = s:win_getrect(winid)
         let popup = popup_create(indicator, #{
-            \ line: winy + (winh - 5) / 2,
-            \ col: winx + (winw - 9) / 2,
+            \ line: winy + (winh - 3) / 2,
+            \ col: winx + (winw - 7) / 2,
             \ drag: v:false,
             \ resize: v:false,
             \ padding: [1, 3, 1, 3],
-            \ border: [],
+            \ border: [0, 0, 0, 0],
             \ })
         call add(popups, #{
             \ winid: popup,
