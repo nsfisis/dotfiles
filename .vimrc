@@ -7,7 +7,7 @@ scriptencoding utf-8
 
 " Global settings {{{1
 
-" Global variables. {{{2
+" Global constants {{{2
 
 let g:MY_ENV = {}
 
@@ -33,24 +33,23 @@ if empty($XDG_CACHE_HOME)
 else
     let g:MY_ENV.cache_home = $XDG_CONFIG_HOME
 endif
+if empty($XDG_DATA_HOME)
+    let g:MY_ENV.data_home = $HOME . '/.local/share'
+else
+    let g:MY_ENV.data_home = $XDG_DATA_HOME
+endif
 
-if has('nvim')
-    let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/nvim'
-else
-    let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/vim'
-endif
-if has('nvim')
-    let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/nvim'
-else
-    let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
-endif
+let g:MY_ENV.config_dir = g:MY_ENV.config_home . '/vim'
+let g:MY_ENV.cache_dir = g:MY_ENV.cache_home . '/vim'
+let g:MY_ENV.data_dir = g:MY_ENV.data_home . '/vim'
 
 let g:MY_ENV.my_dir = g:MY_ENV.config_dir . '/my'
 let g:MY_ENV.plug_dir = g:MY_ENV.config_dir . '/plugged'
-let g:MY_ENV.undo_dir = g:MY_ENV.cache_dir . '/undo'
-let g:MY_ENV.backup_dir = g:MY_ENV.cache_dir . '/backup'
-let g:MY_ENV.swap_dir = g:MY_ENV.cache_dir . '/swap'
-let g:MY_ENV.yankround_dir = g:MY_ENV.cache_dir . '/yankround'
+let g:MY_ENV.undo_dir = g:MY_ENV.data_dir . '/undo'
+let g:MY_ENV.backup_dir = g:MY_ENV.data_dir . '/backup'
+let g:MY_ENV.swap_dir = g:MY_ENV.data_dir . '/swap'
+let g:MY_ENV.vimindo = g:MY_ENV.data_dir . '/viminfo'
+let g:MY_ENV.yankround_dir = g:MY_ENV.data_dir . '/yankround'
 let g:MY_ENV.skk_dir = g:MY_ENV.config_home . '/skk'
 
 for [s:k, s:v] in items(g:MY_ENV)
@@ -110,16 +109,13 @@ set wrap
 set linebreak
 set breakindent
 set breakindentopt+=sbr
-" Use let statement to avoid trailing space.
 let &showbreak = '> '
 set sidescrolloff=20
 set display=lastline
-" Use let statement to avoid trailing space.
 let &fillchars = 'stl: ,stlnc: ,vert: ,fold: ,diff: '
 set cmdheight=2
 set list
-let &listchars="eol:\u00ac,tab:\u25b8 ,extends:\u00bb,precedes:\u00ab"
-set conceallevel=2
+let &listchars="eol:\u00ac,tab:\u25b8 ,trail:\u00b7,extends:\u00bb,precedes:\u00ab"
 set concealcursor=cnv
 
 
@@ -138,15 +134,12 @@ if exists('+termguicolors')
     set termguicolors
 endif
 set t_Co=256
-set nocursorline
 set colorcolumn=+1
 
 
 " Multiple windows {{{2
 
 set laststatus=2
-set equalalways
-set eadirection=both
 set winminheight=0
 set hidden
 set switchbuf=usetab
@@ -174,9 +167,9 @@ set mouse=
 " Messages and info {{{2
 
 set shortmess+=a
-    \ shortmess+=s
-    \ shortmess+=I
-    \ shortmess+=c
+set shortmess+=s
+set shortmess+=I
+set shortmess+=c
 set showcmd
 set noshowmode
 set report=999
@@ -197,14 +190,13 @@ set undofile
 let &undodir = g:MY_ENV.undo_dir
 set textwidth=0
 set backspace=indent,eol,start
-set complete+=t
 set completeopt-=preview
 set pumheight=10
 set noshowmatch
 set matchpairs+=<:>
 set nojoinspaces
 set nrformats-=octal
-    \ nrformats+=unsigned
+set nrformats+=unsigned
 
 
 
@@ -252,7 +244,7 @@ set ttimeoutlen=100
 
 set nofixendofline
 " Note: if 'fileformat' is empty, the first item of 'fileformats' is used.
-set fileformats=unix,dos,mac
+set fileformats=unix,dos
 " Note: these settings make one backup. If you want more backups, see
 "       |'backupext'|.
 set backup
@@ -266,7 +258,7 @@ set autoread
 
 " Note: 'dictionary' is swap files' directory.
 " '//' is converted to swap file's path.
-" If you are editing 'a/b.vim', Vim makes '{g:MY_ENV.cache_dir}/swap/a/b.vim'.
+" If you are editing 'a/b.vim', Vim makes '{g:MY_ENV.swap_dir}/a/b.vim'.
 let &directory = g:MY_ENV.swap_dir . '//'
 
 
@@ -290,17 +282,15 @@ set keywordprg=
 
 " Note: if 'fileencoding' is empty, 'encoding' is used.
 set fileencodings=utf-8,cp932,euc-jp
-set termencoding=utf-8
 
 
 
 " Misc. {{{2
 
-set maxfuncdepth=50
 set sessionoptions+=localoptions
-    \ sessionoptions+=resize
-    \ sessionoptions+=winpos
-let &viminfo .= ',n' . g:MY_ENV.cache_dir . '/viminfo'
+set sessionoptions+=resize
+set sessionoptions+=winpos
+let &viminfofile = g:MY_ENV.vimindo
 
 
 
@@ -882,34 +872,14 @@ function! s:choose_window_interactively() abort
         let winid = wins[i]
         let indicator = indicators[i]
         let [winy, winx, winh, winw] = s:win_getrect(winid)
-        if has('nvim')
-            let buf_id = nvim_create_buf(v:false, v:true)
-            call nvim_buf_set_lines(buf_id, 0, -1, v:true, ['', '  ' . indicator . '  ', ''])
-            let popup = nvim_open_win(
-                \ buf_id,
-                \ v:false,
-                \ {
-                \     'relative': 'win',
-                \     'win': winid,
-                \     'row': (winh - 5) / 2,
-                \     'col': (winw - 9) / 2,
-                \     'width': 5,
-                \     'height': 3,
-                \     'focusable': v:false,
-                \     'style': 'minimal',
-                \     'border': 'double',
-                \     'noautocmd': v:true,
-                \ })
-        else
-            let popup = popup_create(indicator, #{
-                \ line: winy + (winh - 5) / 2,
-                \ col: winx + (winw - 9) / 2,
-                \ drag: v:false,
-                \ resize: v:false,
-                \ padding: [1, 3, 1, 3],
-                \ border: [],
-                \ })
-        endif
+        let popup = popup_create(indicator, #{
+            \ line: winy + (winh - 5) / 2,
+            \ col: winx + (winw - 9) / 2,
+            \ drag: v:false,
+            \ resize: v:false,
+            \ padding: [1, 3, 1, 3],
+            \ border: [],
+            \ })
         call add(popups, #{
             \ winid: popup,
             \ indicator: indicator,
@@ -933,11 +903,7 @@ function! s:choose_window_interactively() abort
 
     " Close popups
     for popup in popups
-        if has('nvim')
-            call nvim_win_close(popup.winid, v:true)
-        else
-            call popup_close(popup.winid)
-        endif
+        call popup_close(popup.winid)
     endfor
 endfunction
 
@@ -999,7 +965,7 @@ nnoremap  tc  <C-w>c
 nnoremap  to  <C-w>o
 nnoremap <silent>  tO  :<C-u>tabonly<CR>
 
-if has('popupwin') || has('nvim')
+if has('popupwin')
     nnoremap <silent>  tg  :<C-u>call <SID>choose_window_interactively()<CR>
 endif
 
@@ -1881,7 +1847,7 @@ nnoremap <silent>  tRr  :<C-u>AdjustScreenWidth <Bar> AdjustScreenHeight<CR>
 
 " yankround {{{2
 
-let g:yankround_dir = g:MY_ENV.cache_dir . '/yankround'
+let g:yankround_dir = g:MY_ENV.yankround_dir
 let g:yankround_use_region_hl = 1
 
 
