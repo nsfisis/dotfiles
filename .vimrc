@@ -1410,7 +1410,14 @@ let g:eskk#backup_dictionary = g:eskk#dictionary.path . ".bak"
 
 let g:eskk#kakutei_when_unique_candidate = v:true
 let g:eskk#enable_completion = v:false
-" let g:eskk#no_default_mappings = v:true
+let g:eskk#egg_like_newline = v:true
+
+" Change default markers because they are EAW (East Asian Width) characters.
+let g:eskk#marker_henkan = '[!]'
+let g:eskk#marker_okuri = '-'
+let g:eskk#marker_henkan_select = '[#]'
+let g:eskk#marker_jisyo_touroku = '[?]'
+
 
 
 function! s:eskk_initialize_pre() abort
@@ -1449,6 +1456,10 @@ function! s:eskk_initialize_post() abort
     " Instead, l key disable SKK input.
     EskkMap -type=disable l
     EskkMap -type=disable l
+
+    " Custom highlight for henkan markers.
+    syntax match skkMarker '\[[!#?]\]'
+    hi link skkMarker Special
 endfunction
 
 

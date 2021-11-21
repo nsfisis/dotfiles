@@ -1345,24 +1345,31 @@ vim.g['eskk#backup_dictionary'] = vim.g['eskk#dictionary'].path .. ".bak"
 
 vim.g['eskk#kakutei_when_unique_candidate'] = true
 vim.g['eskk#enable_completion'] = false
+vim.g['eskk#egg_like_newline'] = true
+
+-- Change default markers because they are EAW (East Asian Width) characters.
+vim.g['eskk#marker_henkan'] = '[!]'
+vim.g['eskk#marker_okuri'] = '-'
+vim.g['eskk#marker_henkan_select'] = '[#]'
+vim.g['eskk#marker_jisyo_touroku'] = '[?]'
 
 
 
 vim.cmd([[
 function My_eskk_initialize_pre()
-    let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-    call t.add_map('z ', '　')
-    call t.add_map('0.', '0.')
-    call t.add_map('1.', '1.')
-    call t.add_map('2.', '2.')
-    call t.add_map('3.', '3.')
-    call t.add_map('4.', '4.')
-    call t.add_map('5.', '5.')
-    call t.add_map('6.', '6.')
-    call t.add_map('7.', '7.')
-    call t.add_map('8.', '8.')
-    call t.add_map('9.', '9.')
-    call eskk#register_mode_table('hira', t)
+   let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
+   call t.add_map('z ', '　')
+   call t.add_map('0.', '0.')
+   call t.add_map('1.', '1.')
+   call t.add_map('2.', '2.')
+   call t.add_map('3.', '3.')
+   call t.add_map('4.', '4.')
+   call t.add_map('5.', '5.')
+   call t.add_map('6.', '6.')
+   call t.add_map('7.', '7.')
+   call t.add_map('8.', '8.')
+   call t.add_map('9.', '9.')
+   call eskk#register_mode_table('hira', t)
 endfunction
 
 
@@ -1370,21 +1377,25 @@ autocmd Vimrc User eskk-initialize-pre call My_eskk_initialize_pre()
 
 
 function My_eskk_initialize_post()
-    " I don't use hankata mode for now.
-    EskkUnmap -type=mode:hira:toggle-hankata
-    EskkUnmap -type=mode:kata:toggle-hankata
+   " I don't use hankata mode for now.
+   EskkUnmap -type=mode:hira:toggle-hankata
+   EskkUnmap -type=mode:kata:toggle-hankata
 
-    " I don't use abbrev mode for now.
-    EskkUnmap -type=mode:hira:to-abbrev
-    EskkUnmap -type=mode:kata:to-abbrev
+   " I don't use abbrev mode for now.
+   EskkUnmap -type=mode:hira:to-abbrev
+   EskkUnmap -type=mode:kata:to-abbrev
 
-    " I don't use ascii mode for now.
-    EskkUnmap -type=mode:hira:to-ascii
-    EskkUnmap -type=mode:kata:to-ascii
+   " I don't use ascii mode for now.
+   EskkUnmap -type=mode:hira:to-ascii
+   EskkUnmap -type=mode:kata:to-ascii
 
-    " Instead, l key disable SKK input.
-    EskkMap -type=disable l
-    EskkMap -type=disable l
+   " Instead, l key disable SKK input.
+   EskkMap -type=disable l
+   EskkMap -type=disable l
+
+   " Custom highlight for henkan markers.
+   syntax match skkMarker '\[[!#?]\]'
+   hi link skkMarker Special
 endfunction
 
 
