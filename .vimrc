@@ -1178,59 +1178,14 @@ endfunction
 
 " Color scheme {{{2
 
-" A command which changes color scheme with fall back.
-command! -bang -nargs=?
-    \ ColorScheme
-    \ call s:colorscheme(<bang>0, <q-args>)
-
-
-function! s:colorscheme(bang, name) abort
-    try
-        if get(g:, 'colors_name') isnot# a:name || a:bang
-            execute 'colorscheme' a:name
-        endif
-    catch
-        " Loading colorscheme failed.
-        " The color scheme, "desert", is one of the built-in ones. Probably, it
-        " will be loaded without any errors.
-        colorscheme desert
-    endtry
-endfunction
-
-
-function! s:extra_highlight() abort
-    if &background != 'dark'
-        return
-    endif
-
-    hi! link YankRoundRegion DiffChange
-
-    hi! link OperatorSandwichBuns   DiffChange
-    hi! link OperatorSandwichStuff  DiffChange
-    hi! link OperatorSandwichDelete DiffChange
-    hi! link OperatorSandwichAdd    OperatorSandwichBuns
-
-    hi EasyMotionShade guifg=#4d4d4d guibg=NONE gui=NONE cterm=NONE
-    hi EasyMotionTarget guifg=#ff7100 guibg=NONE gui=underline cterm=underline
-    hi! link EasyMotionMoveHL IncSearch
-
-    hi statusLineModeNormal   guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeInsert   guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeVisual   guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeOperator guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeReplace  guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeCommand  guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeTerminal guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineModeOther    guifg=NONE    guibg=NONE    gui=bold cterm=bold
-    hi statusLineLeft         guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
-    hi statusLineRight        guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
-endfunction
-
-
-Autocmd ColorScheme ocean call s:extra_highlight()
-
-
-ColorScheme! ocean
+try
+    colorscheme ocean
+catch
+    " Loading colorscheme failed.
+    " The color scheme, "desert", is one of the built-in ones. Probably, it
+    " will be loaded without any errors.
+    colorscheme desert
+endtry
 
 
 

@@ -1105,32 +1105,16 @@ command! -nargs=+
 
 -- Color scheme {{{2
 
--- A command which changes color scheme with fall back.
 vim.cmd([[
-function My_colorscheme(bang, name)
-   try
-      if get(g:, 'colors_name') isnot# a:name || a:bang
-         execute 'colorscheme' a:name
-      end
-   catch
-      " Loading colorscheme failed.
-      " The color scheme, "desert", is one of the built-in ones. Probably, it
-      " will be loaded without any errors.
-      colorscheme desert
-   endtry
-endfunction
+try
+    colorscheme ocean
+catch
+    " Loading colorscheme failed.
+    " The color scheme, "desert", is one of the built-in ones. Probably, it
+    " will be loaded without any errors.
+    colorscheme desert
+endtry
 ]])
-
-
-vim.cmd([[
-command! -bang -nargs=?
-   \ ColorScheme
-   \ call My_colorscheme(<bang>0, <q-args>)
-]])
-
-
-vim.cmd('ColorScheme! ocean')
-
 
 
 

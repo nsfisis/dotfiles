@@ -139,6 +139,30 @@ hi! link WildMenu     Title
 
 
 
+hi! link YankRoundRegion DiffChange
+
+hi! link OperatorSandwichBuns   DiffChange
+hi! link OperatorSandwichStuff  DiffChange
+hi! link OperatorSandwichDelete DiffChange
+hi! link OperatorSandwichAdd    OperatorSandwichBuns
+
+hi EasyMotionShade guifg=#4d4d4d guibg=NONE gui=NONE cterm=NONE
+hi EasyMotionTarget guifg=#ff7100 guibg=NONE gui=underline cterm=underline
+hi! link EasyMotionMoveHL IncSearch
+
+hi statusLineModeNormal   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeInsert   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeVisual   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeOperator guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeReplace  guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeCommand  guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeTerminal guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineModeOther    guifg=NONE    guibg=NONE    gui=bold cterm=bold
+hi statusLineLeft         guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
+hi statusLineRight        guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
+
+
+
 unlet s:pallete
 unlet s:dark
 unlet s:light
