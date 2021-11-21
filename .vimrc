@@ -438,9 +438,6 @@ Plug 'LeafCage/foldCC.vim'
 " Show indent.
 Plug 'Yggdroot/indentLine'
 
-" Cool status line.
-Plug 'itchyny/lightline.vim'
-
 " Highlight matched parentheses.
 Plug 'itchyny/vim-parenmatch'
 
@@ -590,28 +587,6 @@ function! s:highlight_vimrc() abort
 
     hi def link vimrcAutocmd       vimAutocmd
     hi def link vimrcPluginManager vimCommand
-endfunction
-
-
-
-Autocmd ColorScheme ocean call s:extra_highlight()
-
-
-function! s:extra_highlight() abort
-    if &background != 'dark'
-        return
-    endif
-
-    hi! link YankRoundRegion DiffChange
-
-    hi! link OperatorSandwichBuns   DiffChange
-    hi! link OperatorSandwichStuff  DiffChange
-    hi! link OperatorSandwichDelete DiffChange
-    hi! link OperatorSandwichAdd    OperatorSandwichBuns
-
-    hi EasyMotionShade guifg=#4d4d4d guibg=NONE gui=NONE cterm=NONE
-    hi EasyMotionTarget guifg=#ff7100 guibg=NONE gui=underline cterm=underline
-    hi! link EasyMotionMoveHL IncSearch
 endfunction
 
 
@@ -1199,7 +1174,9 @@ endfunction
 
 
 
-" Color scheme {{{1
+" Appearance {{{1
+
+" Color scheme {{{2
 
 " A command which changes color scheme with fall back.
 command! -bang -nargs=?
@@ -1221,7 +1198,199 @@ function! s:colorscheme(bang, name) abort
 endfunction
 
 
+function! s:extra_highlight() abort
+    if &background != 'dark'
+        return
+    endif
+
+    hi! link YankRoundRegion DiffChange
+
+    hi! link OperatorSandwichBuns   DiffChange
+    hi! link OperatorSandwichStuff  DiffChange
+    hi! link OperatorSandwichDelete DiffChange
+    hi! link OperatorSandwichAdd    OperatorSandwichBuns
+
+    hi EasyMotionShade guifg=#4d4d4d guibg=NONE gui=NONE cterm=NONE
+    hi EasyMotionTarget guifg=#ff7100 guibg=NONE gui=underline cterm=underline
+    hi! link EasyMotionMoveHL IncSearch
+
+    hi statusLineModeNormal   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeInsert   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeVisual   guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeOperator guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeReplace  guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeCommand  guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeTerminal guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineModeOther    guifg=NONE    guibg=NONE    gui=bold cterm=bold
+    hi statusLineLeft         guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
+    hi statusLineRight        guifg=#b7b7b7 guibg=#606060 gui=NONE cterm=NONE
+endfunction
+
+
+Autocmd ColorScheme ocean call s:extra_highlight()
+
+
 ColorScheme! ocean
+
+
+
+" Statusline {{{2
+
+set statusline=%!Statusline_build()
+
+function! Statusline_build() abort
+    let winid = g:statusline_winid
+    let bufnr = winbufnr(winid)
+    let is_active = winid ==# win_getid()
+    if is_active
+        let [mode, mode_hl] = s:statusline_mode()
+        let ro = s:statusline_readonly(bufnr)
+        let fname = s:statusline_filename(bufnr)
+        let mod = s:statusline_modified(bufnr)
+        let linenum = s:statusline_linenum(winid)
+        let fenc = s:statusline_fenc_ff(bufnr)
+        let ft = s:statusline_filetype(bufnr)
+        return printf(
+            \ '%%#statusLineMode%s# %s %%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+            \ mode_hl,
+            \ mode,
+            \ empty(ro) ? '' : ro . ' ',
+            \ fname,
+            \ empty(mod) ? '' : ' ' . mod,
+            \ linenum,
+            \ fenc,
+            \ ft)
+    else
+        let ro = s:statusline_readonly(bufnr)
+        let fname = s:statusline_filename(bufnr)
+        let mod = s:statusline_modified(bufnr)
+        let linenum = s:statusline_linenum(winid)
+        let fenc = s:statusline_fenc_ff(bufnr)
+        let ft = s:statusline_filetype(bufnr)
+        return printf(
+            \ '%%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+            \ empty(ro) ? '' : ro . ' ',
+            \ fname,
+            \ empty(mod) ? '' : ' ' . mod,
+            \ linenum,
+            \ fenc,
+            \ ft)
+    endif
+endfunction
+
+function! s:statusline_mode() abort
+    const mode_map = {
+        \ 'n':        ['N',  'Normal'],
+        \ 'no':       ['O',  'Operator'],
+        \ 'nov':      ['Oc', 'Operator'],
+        \ 'noV':      ['Ol', 'Operator'],
+        \ "no\<C-v>": ['Ob', 'Operator'],
+        \ 'niI':      ['In', 'Insert'],
+        \ 'niR':      ['Rn', 'Replace'],
+        \ 'niV':      ['Rn', 'Replace'],
+        \ 'v':        ['V',  'Visual'],
+        \ 'V':        ['Vl', 'Visual'],
+        \ "\<C-v>":   ['Vb', 'Visual'],
+        \ 's':        ['S',  'Visual'],
+        \ 'S':        ['Sl', 'Visual'],
+        \ "\<C-s>":   ['Sb', 'Visual'],
+        \ 'i':        ['I',  'Insert'],
+        \ 'ic':       ['I?', 'Insert'],
+        \ 'ix':       ['I?', 'Insert'],
+        \ 'R':        ['R',  'Replace'],
+        \ 'Rc':       ['R?', 'Replace'],
+        \ 'Rv':       ['R',  'Replace'],
+        \ 'Rx':       ['R?', 'Replace'],
+        \ 'c':        ['C',  'Command'],
+        \ 'cv':       ['C',  'Command'],
+        \ 'ce':       ['C',  'Command'],
+        \ 'r':        ['-',  'Other'],
+        \ 'rm':       ['-',  'Other'],
+        \ 'r?':       ['-',  'Other'],
+        \ '!':        ['-',  'Other'],
+        \ 't':        ['T',  'Terminal'],
+        \ }
+    let [vim_mode, hl] = get(mode_map, mode(v:true), ['-', 'Other'])
+
+    " Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
+    " without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
+    " stage of the initialization (probably the first rendering of status line),
+    " which slows down Vim startup. Loading eskk can be delayed by checking both
+    " of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
+    if exists('g:loaded_eskk') && exists('g:loaded_autoload_eskk')
+        let skk_mode = eskk#statusline(' (%s)', '')
+    else
+        let skk_mode = ''
+    endif
+
+    return [vim_mode . skk_mode, hl]
+endfunction
+
+function! s:statusline_readonly(bufnr) abort
+    let ro = getbufvar(a:bufnr, '&readonly')
+    return ro ? '[RO]' : ''
+endfunction
+
+function! s:statusline_filename(bufnr) abort
+    let name = bufname(a:bufnr)
+    return empty(name) ? '[No Name]' : name
+endfunction
+
+function! s:statusline_modified(bufnr) abort
+    let mod = getbufvar(a:bufnr, '&modified')
+    let ma = getbufvar(a:bufnr, '&modifiable')
+    if mod
+        return '[+]'
+    elseif ma
+        return ''
+    else
+        return '[-]'
+    endif
+endfunction
+
+function! s:statusline_linenum(winid) abort
+    return line('.', a:winid) . '/' . line('$', a:winid)
+endfunction
+
+function! s:statusline_fenc_ff(bufnr) abort
+    let fenc = getbufvar(a:bufnr, '&fileencoding')
+    let ff = getbufvar(a:bufnr, '&fileformat')
+    let bom = getbufvar(a:bufnr, '&bomb')  " BOMB!!
+
+    if fenc ==# ''
+        let fencs = split(&fileencodings, ',')
+        let fenc = get(fencs, 0, &encoding)
+    elseif fenc ==# 'utf-8'
+        let fenc = bom ? 'U8[BOM]' : 'U8'
+    elseif fenc ==# 'utf-16'
+        let fenc = 'U16[BE]'
+    elseif fenc ==# 'utf-16le'
+        let fenc = 'U16[LE]'
+    elseif fenc ==# 'ucs-4'
+        let fenc = 'U32[BE]'
+    elseif fenc ==# 'ucs-4le'
+        let fenc = 'U32[LE]'
+    else
+        let fenc = toupper(fenc)
+    endif
+
+    if ff ==# 'unix'
+        let ff = ''
+    elseif ff ==# 'dos'
+        let ff = ' (CRLF)'
+    elseif ff ==# 'mac'
+        let ff = ' (CR)'
+    else
+        let ff = ' (Unknown)'
+    endif
+
+    return fenc . ff
+endfunction
+
+function! s:statusline_filetype(bufnr) abort
+    let ft = getbufvar(a:bufnr, '&filetype')
+    return empty(ft) ? '[None]' : ft
+endfunction
 
 
 
@@ -1514,76 +1683,6 @@ nmap  gJ  <Plug>(jplus-input)
 xmap  gJ  <Plug>(jplus-input)
 
 
-
-" lightline {{{2
-
-let g:lightline = {
-    \ 'colorscheme': 'jellybeans',
-    \ 'active': {
-    \     'left': [['mode', 'paste'], ['readonly', 'filename', 'modified']],
-    \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
-    \ },
-    \ 'inactive': {
-    \     'left': [['readonly', 'filename', 'modified']],
-    \     'right': [['linenum'], ['fileencoding', 'fileformat', 'filetype']]
-    \ },
-    \ 'component_function': {
-    \   'mode': 'Lightline_mode',
-    \   'linenum': 'Lightline_linenum',
-    \   'fileformat': 'Lightline_fileformat',
-    \ },
-    \ 'mode_map': {
-    \     'n': 'N',
-    \     'i': 'I',
-    \     'R': 'R',
-    \     'v': 'V',
-    \     'V': 'V-L',
-    \     "\<C-v>": 'V-B',
-    \     'c': 'C',
-    \     's': 'S',
-    \     'S': 'S-L',
-    \     "\<C-s>": 'S-B',
-    \     't': 'T',
-    \ },
-    \ 'tabline': {
-    \     'left': [['tabs']],
-    \     'right': [],
-    \ },
-    \ 'tab': {
-    \     'active': ['tabnum', 'filename', 'modified'],
-    \     'inactive': ['tabnum', 'filename', 'modified'],
-    \ },
-    \ }
-
-function! Lightline_mode()
-    " Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
-    " without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
-    " stage of the initialization (probably the first rendering of status line),
-    " which slows down Vim startup. Loading eskk can be delayed by checking both
-    " of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
-    if exists('g:loaded_eskk') && exists('g:loaded_autoload_eskk')
-        let skk = eskk#statusline(' (%s)', '')
-    else
-        let skk = ''
-    endif
-    return lightline#mode() . skk
-endfunction
-
-function! Lightline_linenum()
-    return line('.') . '/' . line('$')
-endfunction
-
-function! Lightline_fileformat()
-    if &fileformat ==# 'unix'
-        return 'LF'
-    elseif &fileformat ==# 'dos'
-        return 'CRLF'
-    elseif &fileformat ==# 'mac'
-        return 'CR'
-    else
-        return '-'
-    endif
-endfunction
 
 
 

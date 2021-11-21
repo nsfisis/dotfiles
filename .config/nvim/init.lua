@@ -353,8 +353,6 @@ paq({
    'LeafCage/foldCC.vim',
    -- Show indent.
    'Yggdroot/indentLine',
-   -- Cool status line.
-   'itchyny/lightline.vim',
    -- Highlight matched parentheses.
    'itchyny/vim-parenmatch',
    -- Highlight specified words.
@@ -562,28 +560,6 @@ vimrc.autocmd('BufRead', '*', function()
    end
 end)
 
-
--- Syntax highlight for .vimrc {{{2
-
-vimrc.autocmd('ColorScheme', 'ocean', function()
-   if vim.o.background ~= 'dark' then
-      return
-   end
-
-   -- yankround
-   vimrc.hi_link('YankRoundRegion', 'DiffChange')
-
-   -- sandwich
-   vimrc.hi_link('OperatorSandwichBuns',   'DiffChange')
-   vimrc.hi_link('OperatorSandwichStuff',  'DiffChange')
-   vimrc.hi_link('OperatorSandwichDelete', 'DiffChange')
-   vimrc.hi_link('OperatorSandwichAdd',    'OperatorSandwichBuns')
-
-   -- easymotion
-   vimrc.hi('EasyMotionShade', 'guifg=#4d4d4d guibg=NONE gui=NONE cterm=NONE')
-   vimrc.hi('EasyMotionTarget', 'guifg=#ff7100 guibg=NONE gui=underline cterm=underline')
-   vimrc.hi_link('EasyMotionMoveHL', 'IncSearch')
-end)
 
 
 -- Mappings {{{1
@@ -1125,7 +1101,9 @@ command! -nargs=+
 
 
 
--- Color scheme {{{1
+-- Appearance {{{1
+
+-- Color scheme {{{2
 
 -- A command which changes color scheme with fall back.
 vim.cmd([[
@@ -1156,6 +1134,180 @@ vim.cmd('ColorScheme! ocean')
 
 
 
+-- Statusline {{{2
+
+vim.o.statusline = '%!v:lua.vimrc.statusline.build()'
+
+vimrc.statusline = {}
+
+function vimrc.statusline.build()
+   local winid = vim.g.statusline_winid
+   local bufnr = vim.fn.winbufnr(winid)
+   local is_active = winid == vim.fn.win_getid()
+   if is_active then
+      local mode, mode_hl = vimrc.statusline.mode()
+      local ro = vimrc.statusline.readonly(bufnr)
+      local fname = vimrc.statusline.filename(bufnr)
+      local mod = vimrc.statusline.modified(bufnr)
+      local linenum = vimrc.statusline.linenum(winid)
+      local fenc = vimrc.statusline.fenc_ff(bufnr)
+      local ft = vimrc.statusline.filetype(bufnr)
+      return string.format(
+         '%%#statusLineMode%s# %s %%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+         mode_hl,
+         mode,
+         ro and ro .. ' ' or '',
+         fname,
+         mod and ' ' .. mod or '',
+         linenum,
+         fenc,
+         ft)
+   else
+      local ro = vimrc.statusline.readonly(bufnr)
+      local fname = vimrc.statusline.filename(bufnr)
+      local mod = vimrc.statusline.modified(bufnr)
+      local linenum = vimrc.statusline.linenum(winid)
+      local fenc = vimrc.statusline.fenc_ff(bufnr)
+      local ft = vimrc.statusline.filetype(bufnr)
+      return string.format(
+         '%%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+         ro and ro .. ' ' or '',
+         fname,
+         mod and ' ' .. mod or '',
+         linenum,
+         fenc,
+         ft)
+   end
+end
+
+function vimrc.statusline.mode()
+   local mode_map = {
+      n                       = { 'N',  'Normal'   },
+      no                      = { 'O',  'Operator' },
+      nov                     = { 'Oc', 'Operator' },
+      noV                     = { 'Ol', 'Operator' },
+      [vimrc.term('no<C-v>')] = { 'Ob', 'Operator' },
+      niI                     = { 'In', 'Insert'   },
+      niR                     = { 'Rn', 'Replace'  },
+      niV                     = { 'Rn', 'Replace'  },
+      v                       = { 'V',  'Visual'   },
+      V                       = { 'Vl', 'Visual'   },
+      [vimrc.term('<C-v>')]   = { 'Vb', 'Visual'   },
+      s                       = { 'S',  'Visual'   },
+      S                       = { 'Sl', 'Visual'   },
+      [vimrc.term('<C-s>')]   = { 'Sb', 'Visual'   },
+      i                       = { 'I',  'Insert'   },
+      ic                      = { 'I?', 'Insert'   },
+      ix                      = { 'I?', 'Insert'   },
+      R                       = { 'R',  'Replace'  },
+      Rc                      = { 'R?', 'Replace'  },
+      Rv                      = { 'R',  'Replace'  },
+      Rx                      = { 'R?', 'Replace'  },
+      c                       = { 'C',  'Command'  },
+      cv                      = { 'C',  'Command'  },
+      ce                      = { 'C',  'Command'  },
+      r                       = { '-',  'Other'    },
+      rm                      = { '-',  'Other'    },
+      ['r?']                  = { '-',  'Other'    },
+      ['!']                   = { '-',  'Other'    },
+      t                       = { 'T',  'Terminal' },
+   }
+   local vim_mode_and_hl = mode_map[vim.fn.mode(true)] or { '-', 'Other' }
+   local vim_mode = vim_mode_and_hl[1]
+   local hl = vim_mode_and_hl[2]
+
+   -- Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
+   -- without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
+   -- stage of the initialization (probably the first rendering of status line),
+   -- which slows down Vim startup. Loading eskk can be delayed by checking both
+   -- of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
+   local skk_mode
+   if vim.g.loaded_eskk and vim.g.loaded_autoload_eskk then
+      skk_mode = vim.fn['eskk#statusline'](' (%s)', '')
+   else
+      skk_mode = ''
+   end
+
+   return vim_mode .. skk_mode, hl
+end
+
+function vimrc.statusline.readonly(bufnr)
+   local ro = vim.fn.getbufvar(bufnr, '&readonly')
+   if ro == 1 then
+      return '[RO]'
+   else
+      return nil
+   end
+end
+
+function vimrc.statusline.filename(bufnr)
+   local name = vim.fn.bufname(bufnr)
+   if name == '' then
+      return '[No Name]'
+   else
+      return name
+   end
+end
+
+function vimrc.statusline.modified(bufnr)
+   local mod = vim.fn.getbufvar(bufnr, '&modified')
+   local ma = vim.fn.getbufvar(bufnr, '&modifiable')
+   if mod == 1 then
+      return '[+]'
+   elseif ma == 0 then
+      return '[-]'
+   else
+      return nil
+   end
+end
+
+function vimrc.statusline.linenum(winid)
+   return vim.fn.line('.', winid) .. '/' .. vim.fn.line('$', winid)
+end
+
+function vimrc.statusline.fenc_ff(bufnr)
+   local fenc = vim.fn.getbufvar(bufnr, '&fileencoding')
+   local ff = vim.fn.getbufvar(bufnr, '&fileformat')
+   local bom = vim.fn.getbufvar(bufnr, '&bomb')  -- BOMB!!
+
+   if fenc == '' then
+      local fencs = vim.fn.split(vim.o.fileencodings, ',')
+      fenc = fencs[1] or vim.o.encoding
+   elseif fenc == 'utf-8' then
+      fenc = bom and 'U8[BOM]' or 'U8'
+   elseif fenc == 'utf-16' then
+      fenc = 'U16[BE]'
+   elseif fenc == 'utf-16le' then
+      fenc = 'U16[LE]'
+   elseif fenc == 'ucs-4' then
+      fenc = 'U32[BE]'
+   elseif fenc == 'ucs-4le' then
+      fenc = 'U32[LE]'
+   else
+      fenc = fenc:upper()
+   end
+
+   if ff == 'unix' then
+      ff = ''
+   elseif ff == 'dos' then
+      ff = ' (CRLF)'
+   elseif ff == 'mac' then
+      ff = ' (CR)'
+   else
+      ff = ' (Unknown)'
+   end
+
+   return fenc .. ff
+end
+
+function vimrc.statusline.filetype(bufnr)
+   local ft = vim.fn.getbufvar(bufnr, '&filetype')
+   if ft == '' then
+      return '[None]'
+   else
+      return ft
+   end
+end
 -- Plugins configuration {{{1
 
 -- Disable standard plugins. {{{2
@@ -1448,101 +1600,6 @@ vimrc.map_plug('n', 'J', '(jplus-getchar)')
 vimrc.map_plug('x', 'J', '(jplus-getchar)')
 vimrc.map_plug('n', 'gJ', '(jplus-input)')
 vimrc.map_plug('x', 'gJ', '(jplus-input)')
-
-
-
--- lightline {{{2
-
-vimrc.lightline = {}
-
-function vimrc.lightline.mode()
-   -- Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
-   -- without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
-   -- stage of the initialization (probably the first rendering of status line),
-   -- which slows down Vim startup. Loading eskk can be delayed by checking both
-   -- of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
-   local skk
-   if vim.g.loaded_eskk and vim.g.loaded_autoload_eskk then
-      skk = vim.fn['eskk#statusline'](' (%s)', '')
-   else
-      skk = ''
-   end
-   return vim.fn['lightline#mode']() .. skk
-end
-
-
-function vimrc.lightline.linenum()
-   return vim.fn.line('.') .. '/' .. vim.fn.line('$')
-end
-
-
-function vimrc.lightline.fileformat()
-   if vim.o.fileformat == 'unix' then
-      return 'LF'
-   elseif vim.o.fileformat == 'dos' then
-      return 'CRLF'
-   elseif vim.o.fileformat == 'mac' then
-      return 'CR'
-   else
-      return '-'
-   end
-end
-
-
-vim.cmd([[
-function! Lightline_mode() abort
-   return v:lua.vimrc.lightline.mode()
-endfunction
-
-function! Lightline_linenum() abort
-   return v:lua.vimrc.lightline.linenum()
-endfunction
-
-function! Lightline_fileformat() abort
-   return v:lua.vimrc.lightline.fileformat()
-endfunction
-]])
-
-
-
-vim.g.lightline = {
-   colorscheme = 'jellybeans',
-   active = {
-      left = {{'mode', 'paste'}, {'readonly', 'filename', 'modified'}},
-      right = {{'linenum'}, {'fileencoding', 'fileformat', 'filetype'}},
-   },
-   inactive = {
-      left = {{'readonly', 'filename', 'modified'}},
-      right = {{'linenum'}, {'fileencoding', 'fileformat', 'filetype'}},
-   },
-   component_function = {
-      mode = 'Lightline_mode',
-      linenum = 'Lightline_linenum',
-      fileformat = 'Lightline_fileformat',
-   },
-   mode_map = {
-      n = 'N',
-      i = 'I',
-      R = 'R',
-      v = 'V',
-      V = 'V-L',
-      [vimrc.term("<C-v>")] = 'V-B',
-      c = 'C',
-      s = 'S',
-      S = 'S-L',
-      [vimrc.term("<C-s>")] = 'S-B',
-      t = 'T',
-   },
-   tabline = {
-      left = {{'tabs'}},
-      right = {},
-   },
-   tab = {
-      active = {'tabnum', 'filename', 'modified'},
-      inactive = {'tabnum', 'filename', 'modified'},
-   },
-}
-
 
 
 
