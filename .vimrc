@@ -1770,6 +1770,9 @@ let g:rustfmt_autosave = 1
 
 " sandwich {{{2
 
+call operator#sandwich#set('add', 'all', 'highlight', 2)
+call operator#sandwich#set('delete', 'all', 'highlight', 0)
+call operator#sandwich#set('replace', 'all', 'highlight', 2)
 
 
 

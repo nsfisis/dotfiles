@@ -1718,6 +1718,9 @@ vim.g.rustfmt_autosave = true
 
 -- sandwich {{{2
 
+vim.fn['operator#sandwich#set']('add', 'all', 'highlight', 2)
+vim.fn['operator#sandwich#set']('delete', 'all', 'highlight', 0)
+vim.fn['operator#sandwich#set']('replace', 'all', 'highlight', 2)
 
 
 
