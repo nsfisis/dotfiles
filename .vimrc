@@ -112,7 +112,7 @@ set breakindentopt+=sbr
 let &showbreak = '> '
 set sidescrolloff=20
 set display=lastline
-let &fillchars = 'stl: ,stlnc: ,vert: ,fold: ,diff: '
+let &fillchars = 'vert: ,fold: ,diff: '
 set cmdheight=2
 set list
 let &listchars = "eol:\u00ac,tab:\u25b8 ,trail:\u00b7,extends:\u00bb,precedes:\u00ab"
@@ -1206,7 +1206,7 @@ function! Statusline_build() abort
         let fenc = s:statusline_fenc_ff(bufnr)
         let ft = s:statusline_filetype(bufnr)
         return printf(
-            \ '%%#statusLineMode%s# %s %%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+            \ '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s | %s | %s ',
             \ mode_hl,
             \ mode,
             \ empty(ro) ? '' : ro . ' ',
@@ -1223,7 +1223,7 @@ function! Statusline_build() abort
         let fenc = s:statusline_fenc_ff(bufnr)
         let ft = s:statusline_filetype(bufnr)
         return printf(
-            \ '%%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+            \ ' %s%s%s %%= %s | %s | %s ',
             \ empty(ro) ? '' : ro . ' ',
             \ fname,
             \ empty(mod) ? '' : ' ' . mod,

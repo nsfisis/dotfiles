@@ -109,7 +109,7 @@ vim.o.breakindent = true
 vim.o.breakindentopt = vim.o.breakindentopt .. ',sbr'
 vim.o.showbreak = '> '
 vim.o.sidescrolloff = 20
-vim.o.fillchars = 'stl: ,stlnc: ,vert: ,fold: ,diff: '
+vim.o.fillchars = 'vert: ,fold: ,diff: '
 vim.o.cmdheight = 2
 vim.o.list = true
 -- \u00ac \xc2\xac
@@ -1137,7 +1137,7 @@ function vimrc.statusline.build()
       local fenc = vimrc.statusline.fenc_ff(bufnr)
       local ft = vimrc.statusline.filetype(bufnr)
       return string.format(
-         '%%#statusLineMode%s# %s %%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+         '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s | %s | %s ',
          mode_hl,
          mode,
          ro and ro .. ' ' or '',
@@ -1154,7 +1154,7 @@ function vimrc.statusline.build()
       local fenc = vimrc.statusline.fenc_ff(bufnr)
       local ft = vimrc.statusline.filetype(bufnr)
       return string.format(
-         '%%#statusLineLeft# %s%s%s %%#StatusLine#%%=%%#statusLineRight# %s | %s | %s ',
+         ' %s%s%s %%= %s | %s | %s ',
          ro and ro .. ' ' or '',
          fname,
          mod and ' ' .. mod or '',

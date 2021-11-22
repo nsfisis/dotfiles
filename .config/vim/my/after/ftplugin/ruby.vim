@@ -11,7 +11,6 @@ FtpluginSetLocal expandtab
 FtpluginSetLocal shiftwidth=2
 FtpluginSetLocal softtabstop=2
 
-let g:ruby_operators = v:true
 let g:ruby_space_errors = v:true
 
 
