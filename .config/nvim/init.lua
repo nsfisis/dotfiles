@@ -1293,6 +1293,28 @@ function vimrc.statusline.filetype(bufnr)
       return ft
    end
 end
+-- Tabline {{{2
+
+vim.o.tabline = '%!v:lua.vimrc.tabline.build()'
+
+vimrc.tabline = {}
+
+function vimrc.tabline.build()
+   local tal = ''
+   for tabnr = 1, vim.fn.tabpagenr('$') do
+      local is_active = tabnr == vim.fn.tabpagenr()
+      local buflist = vim.fn.tabpagebuflist(tabnr)
+      local bufnr = buflist[vim.fn.tabpagewinnr(tabnr)]
+      tal = tal .. string.format(
+         '%%#%s# %s%s ',
+         is_active and 'TabLineSel' or 'TabLine',
+         vimrc.statusline.filename(bufnr),
+         #buflist == 1 and '' or '+')
+   end
+   return tal .. '%#TabLineFill#'
+end
+
+
 -- Plugins configuration {{{1
 
 -- Disable standard plugins. {{{2

@@ -19,7 +19,7 @@ if &background ==# 'dark'
         \ 'comment':   '#8686bf',
         \ 'cursor':    '#5b5bb6',
         \ 'gray':      '#353535',
-        \ 'gray2':     '#353536',
+        \ 'gray2':     '#202020',
         \ 'green':     '#c4e088',
         \ 'green-bg':  '#204020',
         \ 'orange':    '#deab52',
@@ -42,7 +42,7 @@ else
         \ 'comment':   '#a0a0e0',
         \ 'cursor':    '#5b5bb6',
         \ 'gray':      '#bebebe',
-        \ 'gray2':     '#bebebf',
+        \ 'gray2':     '#171717',
         \ 'green':     '#6f9226',
         \ 'green-bg':  '#204020',
         \ 'orange':    '#e79230',
@@ -98,7 +98,6 @@ call s:hl('Title',                    'orange',  'NONE',        'NONE')
 call s:hl('UiCompletion',             'fg',      'gray',        'NONE')
 call s:hl('UiSelection',              'NONE',    'selection',   'NONE')
 call s:hl('UiStatusLine',             'fg',      'gray',        'NONE')
-call s:hl('UiStatusLineNC',           'fg',      'gray2',       'NONE')
 call s:hl('UiStatusLineModeCommand',  'bg',      'blue',        'bold')
 call s:hl('UiStatusLineModeInsert',   'bg',      'green',       'bold')
 call s:hl('UiStatusLineModeNormal',   'bg',      'blue',        'bold')
@@ -107,6 +106,9 @@ call s:hl('UiStatusLineModeOther',    'bg',      'blue',        'bold')
 call s:hl('UiStatusLineModeReplace',  'bg',      'red',         'bold')
 call s:hl('UiStatusLineModeTerminal', 'bg',      'blue',        'bold')
 call s:hl('UiStatusLineModeVisual',   'bg',      'orange',      'bold')
+call s:hl('UiStatusLineNC',           'fg',      'gray2',       'NONE')
+call s:hl('UiTabLine',                'fg',      'gray',        'NONE')
+call s:hl('UiTabLineNC',              'fg',      'bg',          'NONE')
 call s:hl('UiTarget',                 'orange2', 'NONE',        'underline')
 call s:hl('Warning',                  'yellow2', 'NONE',        'NONE')
 
@@ -134,7 +136,6 @@ hi! link DiffText       oceanDiffText
 hi! link Error          oceanError
 hi! link ErrorMsg       oceanError
 hi! link EndOfBuffer    oceanHidden
-hi! link TabLineFill    oceanHidden
 hi! link MatchParen     oceanHidden
 hi! link CursorLineNr   oceanNormal
 hi! link Normal         oceanNormal
@@ -155,9 +156,7 @@ hi! link Visual         oceanUiSelection
 hi! link Special        oceanSpecial
 hi! link NonText        oceanSpecialKey
 hi! link SpecialKey     oceanSpecialKey
-hi! link TabLineSel     oceanUiStatusLine
 hi! link VertSplit      oceanUiStatusLine
-hi! link TabLine        oceanUiStatusLine
 hi! link Comment        oceanSyntaxComment
 hi! link Folded         oceanSyntaxComment
 hi! link ModeMsg        oceanSyntaxComment
@@ -193,6 +192,11 @@ hi! link statusLineModeReplace  oceanUiStatusLineModeReplace
 hi! link statusLineModeCommand  oceanUiStatusLineModeCommand
 hi! link statusLineModeTerminal oceanUiStatusLineModeTerminal
 hi! link statusLineModeOther    oceanUiStatusLineModeOther
+
+
+hi! link TabLineSel  oceanUiTabLine
+hi! link TabLine     oceanUiTabLineNC
+hi! link TabLineFill oceanHidden
 
 
 " Third-party plugins {{{2

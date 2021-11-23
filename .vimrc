@@ -1350,6 +1350,25 @@ endfunction
 
 
 
+" Tabline {{{2
+
+set tabline=%!Tabline_build()
+
+function! Tabline_build() abort
+    let tal = ''
+    for tabnr in range(1, tabpagenr('$'))
+        let is_active = tabnr ==# tabpagenr()
+        let buflist = tabpagebuflist(tabnr)
+        let bufnr = buflist[tabpagewinnr(tabnr) - 1]
+        let tal .= printf(
+            \ '%%#%s# %s%s ',
+            \ is_active ? 'TabLineSel' : 'TabLine',
+            \ s:statusline_filename(bufnr),
+            \ len(buflist) ==# 1 ? '' : '+')
+    endfor
+    return tal . '%#TabLineFill#'
+endfunction
+
 
 " Plugins configuration {{{1
 
