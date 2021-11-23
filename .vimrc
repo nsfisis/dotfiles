@@ -1315,7 +1315,8 @@ function! s:statusline_fenc_ff(bufnr) abort
     if fenc ==# ''
         let fencs = split(&fileencodings, ',')
         let fenc = get(fencs, 0, &encoding)
-    elseif fenc ==# 'utf-8'
+    endif
+    if fenc ==# 'utf-8'
         let fenc = bom ? 'U8[BOM]' : 'U8'
     elseif fenc ==# 'utf-16'
         let fenc = 'U16[BE]'

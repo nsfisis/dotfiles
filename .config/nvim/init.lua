@@ -1257,8 +1257,9 @@ function vimrc.statusline.fenc_ff(bufnr)
    if fenc == '' then
       local fencs = vim.fn.split(vim.o.fileencodings, ',')
       fenc = fencs[1] or vim.o.encoding
-   elseif fenc == 'utf-8' then
-      fenc = bom and 'U8[BOM]' or 'U8'
+   end
+   if fenc == 'utf-8' then
+      fenc = bom == 1 and 'U8[BOM]' or 'U8'
    elseif fenc == 'utf-16' then
       fenc = 'U16[BE]'
    elseif fenc == 'utf-16le' then
