@@ -420,9 +420,10 @@ colors:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/tmux
+  program: /bin/bash
   args:
-    - new-session
+    - -c
+    - 'export PATH="$PATH:/usr/local/bin"; tmux attach -t 0 || tmux new -s 0'
 
 # Startup directory
 #
