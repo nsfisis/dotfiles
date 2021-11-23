@@ -1199,38 +1199,27 @@ function! Statusline_build() abort
     let is_active = winid ==# win_getid()
     if is_active
         let [mode, mode_hl] = s:statusline_mode()
-        let ro = s:statusline_readonly(bufnr)
-        let fname = s:statusline_filename(bufnr)
-        let mod = s:statusline_modified(bufnr)
-        let linenum = s:statusline_linenum(winid)
-        let fenc = s:statusline_fenc_ff(bufnr)
-        let ft = s:statusline_filetype(bufnr)
-        return printf(
-            \ '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s | %s | %s ',
-            \ mode_hl,
-            \ mode,
-            \ empty(ro) ? '' : ro . ' ',
-            \ fname,
-            \ empty(mod) ? '' : ' ' . mod,
-            \ linenum,
-            \ fenc,
-            \ ft)
+        let left = printf('%%#statusLineMode%s# %s %%#StatusLine#', mode_hl, mode)
     else
-        let ro = s:statusline_readonly(bufnr)
-        let fname = s:statusline_filename(bufnr)
-        let mod = s:statusline_modified(bufnr)
-        let linenum = s:statusline_linenum(winid)
-        let fenc = s:statusline_fenc_ff(bufnr)
-        let ft = s:statusline_filetype(bufnr)
-        return printf(
-            \ ' %s%s%s %%= %s | %s | %s ',
-            \ empty(ro) ? '' : ro . ' ',
-            \ fname,
-            \ empty(mod) ? '' : ' ' . mod,
-            \ linenum,
-            \ fenc,
-            \ ft)
+        let left = ''
     endif
+    let ro = s:statusline_readonly(bufnr)
+    let fname = s:statusline_filename(bufnr)
+    let mod = s:statusline_modified(bufnr)
+    let linenum = s:statusline_linenum(winid)
+    let fenc = s:statusline_fenc(bufnr)
+    let ff = s:statusline_ff(bufnr)
+    let ft = s:statusline_filetype(bufnr)
+    return printf(
+        \ '%s %s%s%s %%= %s %s%s %s ',
+        \ left,
+        \ empty(ro) ? '' : ro . ' ',
+        \ fname,
+        \ empty(mod) ? '' : ' ' . mod,
+        \ linenum,
+        \ fenc,
+        \ ff,
+        \ ft)
 endfunction
 
 function! s:statusline_mode() abort
@@ -1288,7 +1277,53 @@ endfunction
 
 function! s:statusline_filename(bufnr) abort
     let name = bufname(a:bufnr)
-    return empty(name) ? '[No Name]' : name
+    if empty(name)
+        return '[No Name]'
+    endif
+
+    let other_paths = []
+    for b in range(1, bufnr('$'))
+        if bufexists(b) && b !=# a:bufnr
+            call add(other_paths, split(bufname(b), '[\/]'))
+        endif
+    endfor
+    let this_path = split(name, '[\/]')
+    let i = -1
+    while v:true
+        let this_path_part = get(this_path, i, '')
+        let unique = v:true
+        let no_parts_remained = v:true
+        for other_path in other_paths
+            let other_path_part = get(other_path, i, '')
+            if this_path_part ==? other_path_part
+                let unique = v:false
+                break
+            endif
+            if other_path_part !=# ''
+                let no_parts_remained = v:false
+            endif
+        endfor
+        if unique
+            break
+        endif
+        if this_path_part ==# '' && no_parts_remained
+            break
+        endif
+        let i -= 1
+    endwhile
+
+    let ret = ''
+    for k in range(i, -1)
+        if len(this_path) < -k
+            continue
+        endif
+        if k ==# i || k == -1
+            let ret .= '/' . this_path[k]
+        else
+            let ret .= '/' . matchlist(this_path[k], '.')[0]
+        endif
+    endfor
+    return ret[1:-1]
 endfunction
 
 function! s:statusline_modified(bufnr) abort
@@ -1307,9 +1342,8 @@ function! s:statusline_linenum(winid) abort
     return line('.', a:winid) . '/' . line('$', a:winid)
 endfunction
 
-function! s:statusline_fenc_ff(bufnr) abort
+function! s:statusline_fenc(bufnr) abort
     let fenc = getbufvar(a:bufnr, '&fileencoding')
-    let ff = getbufvar(a:bufnr, '&fileformat')
     let bom = getbufvar(a:bufnr, '&bomb')  " BOMB!!
 
     if fenc ==# ''
@@ -1317,30 +1351,31 @@ function! s:statusline_fenc_ff(bufnr) abort
         let fenc = get(fencs, 0, &encoding)
     endif
     if fenc ==# 'utf-8'
-        let fenc = bom ? 'U8[BOM]' : 'U8'
+        return bom ? 'U8[BOM]' : 'U8'
     elseif fenc ==# 'utf-16'
-        let fenc = 'U16[BE]'
+        return 'U16[BE]'
     elseif fenc ==# 'utf-16le'
-        let fenc = 'U16[LE]'
+        return 'U16[LE]'
     elseif fenc ==# 'ucs-4'
-        let fenc = 'U32[BE]'
+        return 'U32[BE]'
     elseif fenc ==# 'ucs-4le'
-        let fenc = 'U32[LE]'
+        return 'U32[LE]'
     else
-        let fenc = toupper(fenc)
+        return toupper(fenc)
     endif
+endfunction
 
+function! s:statusline_ff(bufnr) abort
+    let ff = getbufvar(a:bufnr, '&fileformat')
     if ff ==# 'unix'
-        let ff = ''
+        return ''
     elseif ff ==# 'dos'
-        let ff = ' (CRLF)'
+        return ' (CRLF)'
     elseif ff ==# 'mac'
-        let ff = ' (CR)'
+        return ' (CR)'
     else
-        let ff = ' (Unknown)'
+        return ' (Unknown)'
     endif
-
-    return fenc . ff
 endfunction
 
 function! s:statusline_filetype(bufnr) abort
@@ -1361,10 +1396,9 @@ function! Tabline_build() abort
         let buflist = tabpagebuflist(tabnr)
         let bufnr = buflist[tabpagewinnr(tabnr) - 1]
         let tal .= printf(
-            \ '%%#%s# %s%s ',
+            \ '%%#%s# %s ',
             \ is_active ? 'TabLineSel' : 'TabLine',
-            \ s:statusline_filename(bufnr),
-            \ len(buflist) ==# 1 ? '' : '+')
+            \ s:statusline_filename(bufnr))
     endfor
     return tal . '%#TabLineFill#'
 endfunction

@@ -1128,40 +1128,30 @@ function vimrc.statusline.build()
    local winid = vim.g.statusline_winid
    local bufnr = vim.fn.winbufnr(winid)
    local is_active = winid == vim.fn.win_getid()
+   local left
    if is_active then
       local mode, mode_hl = vimrc.statusline.mode()
-      local ro = vimrc.statusline.readonly(bufnr)
-      local fname = vimrc.statusline.filename(bufnr)
-      local mod = vimrc.statusline.modified(bufnr)
-      local linenum = vimrc.statusline.linenum(winid)
-      local fenc = vimrc.statusline.fenc_ff(bufnr)
-      local ft = vimrc.statusline.filetype(bufnr)
-      return string.format(
-         '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s | %s | %s ',
-         mode_hl,
-         mode,
-         ro and ro .. ' ' or '',
-         fname,
-         mod and ' ' .. mod or '',
-         linenum,
-         fenc,
-         ft)
+      left = string.format('%%#statusLineMode%s# %s %%#statusLine#', mode_hl, mode)
    else
-      local ro = vimrc.statusline.readonly(bufnr)
-      local fname = vimrc.statusline.filename(bufnr)
-      local mod = vimrc.statusline.modified(bufnr)
-      local linenum = vimrc.statusline.linenum(winid)
-      local fenc = vimrc.statusline.fenc_ff(bufnr)
-      local ft = vimrc.statusline.filetype(bufnr)
-      return string.format(
-         ' %s%s%s %%= %s | %s | %s ',
-         ro and ro .. ' ' or '',
-         fname,
-         mod and ' ' .. mod or '',
-         linenum,
-         fenc,
-         ft)
+      left = ''
    end
+   local ro = vimrc.statusline.readonly(bufnr)
+   local fname = vimrc.statusline.filename(bufnr)
+   local mod = vimrc.statusline.modified(bufnr)
+   local linenum = vimrc.statusline.linenum(winid)
+   local fenc = vimrc.statusline.fenc(bufnr)
+   local ff = vimrc.statusline.ff(bufnr)
+   local ft = vimrc.statusline.filetype(bufnr)
+   return string.format(
+      '%s %s%s%s %%= %s %s%s %s ',
+      left,
+      ro and ro .. ' ' or '',
+      fname,
+      mod and ' ' .. mod or '',
+      linenum,
+      fenc,
+      ff,
+      ft)
 end
 
 function vimrc.statusline.mode()
@@ -1228,9 +1218,51 @@ function vimrc.statusline.filename(bufnr)
    local name = vim.fn.bufname(bufnr)
    if name == '' then
       return '[No Name]'
-   else
-      return name
    end
+
+   local other_paths = {}
+   for b = 1, vim.fn.bufnr('$') do
+      if vim.fn.bufexists(b) and b ~= bufnr then
+         other_paths[#other_paths+1] = vim.fn.split(vim.fn.bufname(b), '[\\/]')
+      end
+   end
+   local this_path = vim.fn.split(name, '[\\/]')
+   local i = 0
+   while true do
+      local this_path_part = this_path[#this_path+i] or ''
+      local unique = true
+      local no_parts_remained = true
+      for _, other_path in ipairs(other_paths) do
+         local other_path_part = other_path[#other_path+i] or ''
+         if vim.stricmp(this_path_part, other_path_part) == 0 then
+            unique = false
+            break
+         end
+         if other_path_part ~= '' then
+            no_parts_remained = false
+         end
+      end
+      if unique then
+         break
+      end
+      if this_path_part == '' and no_parts_remained then
+         break
+      end
+      i = i - 1
+   end
+
+   local ret = ''
+   for k = i, 0 do
+      if #this_path < 1-k then
+         break
+      end
+      if k == i or k == #this_path then
+         ret = ret .. '/' .. this_path[#this_path+k]
+      else
+         ret = ret .. '/' .. vim.fn.matchlist(this_path[#this_path+k], '.')[1]
+      end
+   end
+   return ret:sub(2)
 end
 
 function vimrc.statusline.modified(bufnr)
@@ -1249,9 +1281,8 @@ function vimrc.statusline.linenum(winid)
    return vim.fn.line('.', winid) .. '/' .. vim.fn.line('$', winid)
 end
 
-function vimrc.statusline.fenc_ff(bufnr)
+function vimrc.statusline.fenc(bufnr)
    local fenc = vim.fn.getbufvar(bufnr, '&fileencoding')
-   local ff = vim.fn.getbufvar(bufnr, '&fileformat')
    local bom = vim.fn.getbufvar(bufnr, '&bomb')  -- BOMB!!
 
    if fenc == '' then
@@ -1259,30 +1290,31 @@ function vimrc.statusline.fenc_ff(bufnr)
       fenc = fencs[1] or vim.o.encoding
    end
    if fenc == 'utf-8' then
-      fenc = bom == 1 and 'U8[BOM]' or 'U8'
+      return bom == 1 and 'U8[BOM]' or 'U8'
    elseif fenc == 'utf-16' then
-      fenc = 'U16[BE]'
+      return 'U16[BE]'
    elseif fenc == 'utf-16le' then
-      fenc = 'U16[LE]'
+      return 'U16[LE]'
    elseif fenc == 'ucs-4' then
-      fenc = 'U32[BE]'
+      return 'U32[BE]'
    elseif fenc == 'ucs-4le' then
-      fenc = 'U32[LE]'
+      return 'U32[LE]'
    else
-      fenc = fenc:upper()
+      return fenc:upper()
    end
+end
 
+function vimrc.statusline.ff(bufnr)
+   local ff = vim.fn.getbufvar(bufnr, '&fileformat')
    if ff == 'unix' then
-      ff = ''
+      return ''
    elseif ff == 'dos' then
-      ff = ' (CRLF)'
+      return ' (CRLF)'
    elseif ff == 'mac' then
-      ff = ' (CR)'
+      return ' (CR)'
    else
-      ff = ' (Unknown)'
+      return ' (Unknown)'
    end
-
-   return fenc .. ff
 end
 
 function vimrc.statusline.filetype(bufnr)
@@ -1306,10 +1338,9 @@ function vimrc.tabline.build()
       local buflist = vim.fn.tabpagebuflist(tabnr)
       local bufnr = buflist[vim.fn.tabpagewinnr(tabnr)]
       tal = tal .. string.format(
-         '%%#%s# %s%s ',
+         '%%#%s# %s ',
          is_active and 'TabLineSel' or 'TabLine',
-         vimrc.statusline.filename(bufnr),
-         #buflist == 1 and '' or '+')
+         vimrc.statusline.filename(bufnr))
    end
    return tal .. '%#TabLineFill#'
 end
