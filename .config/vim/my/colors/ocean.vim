@@ -240,3 +240,23 @@ hi! link phpSpecialFunction oceanSyntaxIdentifier
 
 hi! link rubyDataDirective   oceanSyntaxStatement2
 hi! link rubyStringDelimiter oceanSyntaxString
+
+
+
+
+
+" sh {{{3
+
+hi! link shQuote oceanSyntaxString
+hi! link shDerefSimple oceanSyntaxIdentifier
+hi! link shDerefVar oceanSyntaxIdentifier
+
+
+
+
+
+" Utilities {{{1
+
+command! -bar
+    \ OceanGetHighlightGroupName
+    \ echo synIDattr(synID(line('.'), col('.'), v:false), 'name')
