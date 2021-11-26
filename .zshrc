@@ -382,8 +382,12 @@ alias rm="rm -i"
 alias zmv='noglob zmv -W'
 alias fd='noglob fd'
 
-alias e='vim'
 alias g='git'
+
+alias vim='nvim'
+alias vimdiff='nvim -d'
+alias view='nvim -R'
+alias e='nvim'
 
 if [[ "$(uname)" == "Darwin" ]]; then
     alias o='open'

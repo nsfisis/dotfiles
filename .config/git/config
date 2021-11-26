@@ -1,5 +1,5 @@
 [core]
-    editor = vim
+    editor = nvim
     commentchar = ";"
 
 [help]
@@ -15,6 +15,15 @@
     tool = vimdiff
     ff = false
 
+[mergetool "vimdiff"]
+    cmd = "__fn() { \
+        if [ -z \"$BASE\" ]; then \
+            nvim -d -c 'wincmd l' \"$LOCAL\" \"$MERGED\" \"$REMOTE\"; \
+        else \
+            nvim -d -c '4wincmd w | wincmd J | diffoff' \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"; \
+        fi; \
+    }; __fn"
+
 [rebase]
     abbreviatecommands = true
     autosquash = true
@@ -22,6 +31,9 @@
 
 [diff]
     tool = vimdiff
+
+[difftool "vimdiff"]
+    cmd = "nvim -R -d -c 'wincmd l' -c 'cd $GIT_PREFIX' \"$LOCAL\" \"$REMOTE\""
 
 [init]
     defaultbranch = main
