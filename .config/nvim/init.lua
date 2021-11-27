@@ -394,8 +394,6 @@ paq({
    'thinca/vim-quickrun',
    -- Extend dot-repeat.
    'tpope/vim-repeat',
-   -- Split one line format and Join multiline format.
-   'AndrewRadev/splitjoin.vim',
    -- Introduce user-defined mode.
    'kana/vim-submode',
    -- Swap arguments.
@@ -1755,17 +1753,6 @@ F['operator#sandwich#set']('delete', 'all', 'highlight', 0)
 F['operator#sandwich#set']('replace', 'all', 'highlight', 2)
 
 
-
-
-
--- splitjoin {{{2
-
--- Note: Don't use J{any sign}, 'Jl' and 'JL'. They will conflict with 'vim-jplus'.
-G.splitjoin_split_mapping = ''
-G.splitjoin_join_mapping = ''
-
-vimrc.map('n', 'JS', ':<C-u>SplitjoinSplit<CR>', { silent = true })
-vimrc.map('n', 'JJ', ':<C-u>SplitjoinJoin<CR>', { silent = true })
 
 
 
