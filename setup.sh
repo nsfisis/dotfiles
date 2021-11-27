@@ -23,7 +23,6 @@ for name in \
     emacs \
     git \
     nvim \
-    vim \
     ; \
 do
     if [ ! -L ~/.config/"$name" ]; then
@@ -31,11 +30,6 @@ do
         ln -s -f ~/dotfiles/.config/"$name" ~/.config/"$name"
     fi
 done
-
-if [ ! -f ~/dotfiles/.config/vim/autoload/plug.vim ]; then
-    echo "download: ~/dotfiles/.config/vim/autoload/plug.vim"
-    curl -fLo ~/dotfiles/.config/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
 
 paq_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
 if [ ! -d "$paq_dir" ]; then

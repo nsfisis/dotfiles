@@ -1,4 +1,3 @@
 /.config/vim/autoload/plug.vim
 /.config/emacs
-vim-startup.log
 nvim-startup.log
