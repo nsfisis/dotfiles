@@ -44,7 +44,6 @@ my_env.config_dir = F.stdpath('config')
 my_env.cache_dir = F.stdpath('cache')
 my_env.data_dir = F.stdpath('data')
 
-my_env.my_dir = my_env.config_dir .. '/my'
 my_env.backup_dir = my_env.data_dir .. '/backup'
 my_env.yankround_dir = my_env.data_dir .. '/yankround'
 my_env.skk_dir = my_env.config_home .. '/skk'
@@ -408,7 +407,6 @@ paq({
    -- }}}
 })
 
-O.runtimepath = O.runtimepath .. ',' .. my_env.my_dir
 
 
 -- Utilities {{{1
