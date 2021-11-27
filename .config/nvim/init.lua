@@ -105,7 +105,7 @@ O.breakindentopt = O.breakindentopt .. ',sbr'
 O.showbreak = '> '
 O.sidescrolloff = 20
 O.fillchars = 'vert: ,fold: ,diff: '
-O.cmdheight = 2
+O.cmdheight = 1
 O.list = true
 -- \u00ac \xc2\xac
 -- \u25b8 \xe2\x96\xb8
