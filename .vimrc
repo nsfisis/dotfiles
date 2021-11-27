@@ -1,3 +1,6 @@
+" NOTE: This .vimrc is minimal and not well-maintained because I have migrated
+" from Vim to Neovim.
+
 set encoding=utf-8
 scriptencoding utf-8
 
