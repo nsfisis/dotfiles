@@ -19,9 +19,9 @@ command! -bar
 command! -bar
     \ AutosaveToggle
     \ if exists('b:autosave_timer') |
-    \     call autosave#enable() |
-    \ else |
     \     call autosave#disable() |
+    \ else |
+    \     call autosave#enable() |
     \ endif
 
 

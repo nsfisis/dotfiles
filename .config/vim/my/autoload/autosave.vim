@@ -43,7 +43,7 @@ endfunction
 
 
 function! autosave#enable() abort
-    if has('+timers')
+    if !has('timers') && !has('nvim')
         echohl Error
         echo "Feature '+timers' not available."
         echohl None
