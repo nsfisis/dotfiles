@@ -325,8 +325,6 @@ paq({
    -- Search {{{2
    -- Extend * and #.
    'haya14busa/vim-asterisk',
-   -- Extend incremental search.
-   'haya14busa/incsearch.vim',
    -- NOTE: it is a fork version of jremmen/vim-ripgrep
    -- Integration with ripgrep, fast alternative of grep command.
    'nsfisis/vim-ripgrep',
@@ -1594,20 +1592,6 @@ autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
 
 O.foldtext = 'FoldCCtext()'
 G.foldCCtext_head = 'repeat(">", v:foldlevel) . " "'
-
-
-
--- incsearch {{{2
-
-vimrc.map_plug('n', '/', '(incsearch-forward)')
-vimrc.map_plug('o', '/', '(incsearch-forward)')
-vimrc.map_plug('x', '/', '(incsearch-forward)')
-vimrc.map_plug('n', '?', '(incsearch-backward)')
-vimrc.map_plug('o', '?', '(incsearch-backward)')
-vimrc.map_plug('x', '?', '(incsearch-backward)')
-vimrc.map_plug('n', 'g/', '(incsearch-stay)')
-vimrc.map_plug('o', 'g/', '(incsearch-stay)')
-vimrc.map_plug('x', 'g/', '(incsearch-stay)')
 
 
 
