@@ -2,9 +2,6 @@
     editor = nvim
     commentchar = ";"
 
-[help]
-    autocorrect = 1
-
 [advice]
     detachedhead = false
 
