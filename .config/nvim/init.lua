@@ -12,37 +12,46 @@
 
 -- Global settings {{{1
 
+-- Aliases {{{2
+
+local F = vim.fn
+local G = vim.g
+local O = vim.o
+
+local vimrc = require('vimrc')
+_G.vimrc = vimrc
+
+
 -- Global constants {{{2
 
 local my_env = {}
 
-if vim.fn.has('unix') then
+if F.has('unix') then
    my_env.os = 'unix'
-elseif vim.fn.has('mac') then
+elseif F.has('mac') then
    my_env.os = 'mac'
-elseif vim.fn.has('wsl') then
+elseif F.has('wsl') then
    my_env.os = 'wsl'
-elseif vim.fn.has('win32') or vim.fn.has('win64') then
+elseif F.has('win32') or F.has('win64') then
    my_env.os = 'windows'
 else
    my_env.os = 'unknown'
 end
 
 my_env.config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. '/.config'
-my_env.cache_home = vim.env.XDG_CACHE_HOME or vim.env.HOME .. '/.cache'
-my_env.data_home = vim.env.XDG_DATA_HOME or vim.env.HOME .. '/.local/share'
 
-my_env.config_dir = my_env.config_home .. '/nvim'
-my_env.cache_dir = my_env.cache_home .. '/nvim'
-my_env.data_dir = my_env.data_home .. '/nvim'
+my_env.config_dir = F.stdpath('config')
+my_env.cache_dir = F.stdpath('cache')
+my_env.data_dir = F.stdpath('data')
 
 my_env.my_dir = my_env.config_dir .. '/my'
+my_env.backup_dir = my_env.data_dir .. '/backup'
 my_env.yankround_dir = my_env.data_dir .. '/yankround'
 my_env.skk_dir = my_env.config_home .. '/skk'
 
 for k, v in pairs(my_env) do
-   if vim.endswith(k, '_dir') and not vim.fn.isdirectory(v) then
-      vim.fn.mkdir(v, 'p')
+   if vim.endswith(k, '_dir') and F.isdirectory(v) == 0 then
+      F.mkdir(v, 'p')
    end
 end
 
@@ -58,20 +67,6 @@ augroup END
 ]])
 
 
--- Note: |:autocmd| does not accept |-bar|.
-
-local vimrc = {}
-vimrc.autocmd_callbacks = {}
-_G.vimrc = vimrc
-
-function vimrc.autocmd(event, filter, callback)
-   local callback_id = #vimrc.autocmd_callbacks + 1
-   vimrc.autocmd_callbacks[callback_id] = callback
-   vim.cmd(('autocmd Vimrc %s %s lua vimrc.autocmd_callbacks[%d]()'):format(
-      event,
-      filter,
-      callback_id))
-end
 
 
 
@@ -95,95 +90,95 @@ vim.cmd('language time C')
 
 -- Moving around, searching and patterns {{{2
 
-vim.o.wrapscan = false
-vim.o.ignorecase = true
-vim.o.smartcase = true
+O.wrapscan = false
+O.ignorecase = true
+O.smartcase = true
 
 
 
 -- Displaying text {{{2
 
-vim.o.scrolloff = 7
-vim.o.linebreak = true
-vim.o.breakindent = true
-vim.o.breakindentopt = vim.o.breakindentopt .. ',sbr'
-vim.o.showbreak = '> '
-vim.o.sidescrolloff = 20
-vim.o.fillchars = 'vert: ,fold: ,diff: '
-vim.o.cmdheight = 2
-vim.o.list = true
+O.scrolloff = 7
+O.linebreak = true
+O.breakindent = true
+O.breakindentopt = O.breakindentopt .. ',sbr'
+O.showbreak = '> '
+O.sidescrolloff = 20
+O.fillchars = 'vert: ,fold: ,diff: '
+O.cmdheight = 2
+O.list = true
 -- \u00ac \xc2\xac
 -- \u25b8 \xe2\x96\xb8
 -- \u00b7 \xc2\xb7
 -- \u00bb \xc2\xbb
 -- \u00ab \xc2\xab
-vim.o.listchars = 'eol:\xc2\xac,tab:\xe2\x96\xb8 ,trail:\xc2\xb7,extends:\xc2\xbb,precedes:\xc2\xab'
-vim.o.concealcursor = 'cnv'
+O.listchars = 'eol:\xc2\xac,tab:\xe2\x96\xb8 ,trail:\xc2\xb7,extends:\xc2\xbb,precedes:\xc2\xab'
+O.concealcursor = 'cnv'
 
 
 
 -- Syntax, highlighting and spelling {{{2
 
-vim.o.background = 'dark'
-vim.o.synmaxcol = 500
-vim.o.hlsearch = true
+O.background = 'dark'
+O.synmaxcol = 500
+O.hlsearch = true
 -- Execute nohlsearch to avoid highlighting last searched pattern when reloading
 -- .vimrc.
 vim.cmd('nohlsearch')
-vim.o.termguicolors = true
-vim.o.colorcolumn = '+1'
+O.termguicolors = true
+O.colorcolumn = '+1'
 
 
 -- Multiple windows {{{2
 
-vim.o.winminheight = 0
-vim.o.hidden = true
-vim.o.switchbuf = 'usetab'
+O.winminheight = 0
+O.hidden = true
+O.switchbuf = 'usetab'
 
 
 
 -- Multiple tabpages {{{2
 
-vim.o.showtabline = 2
+O.showtabline = 2
 
 
 
 -- Terminal {{{2
 
-vim.o.title = false
+O.title = false
 
 
 
 -- Using the mouse {{{2
 
-vim.o.mouse = ''
+O.mouse = ''
 
 
 
 -- Messages and info {{{2
 
-vim.o.shortmess = vim.o.shortmess .. 'asIc'
-vim.o.showmode = false
-vim.o.report = 999
-vim.o.confirm = true
+O.shortmess = O.shortmess .. 'asIc'
+O.showmode = false
+O.report = 999
+O.confirm = true
 
 
 
 -- Selecting text {{{2
 
-vim.o.clipboard = 'unnamed'
+O.clipboard = 'unnamed'
 
 
 
 -- Editing text {{{2
 
-vim.o.undofile = true
-vim.o.textwidth = 0
+O.undofile = true
+O.textwidth = 0
 vim.cmd('set completeopt-=preview')
-vim.o.pumheight = 10
-vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
-vim.o.joinspaces = false
-vim.o.nrformats = vim.o.nrformats .. ',unsigned'
+O.pumheight = 10
+O.matchpairs = O.matchpairs .. ',<:>'
+O.joinspaces = false
+O.nrformats = O.nrformats .. ',unsigned'
 
 
 
@@ -191,75 +186,76 @@ vim.o.nrformats = vim.o.nrformats .. ',unsigned'
 -- Note: you should also set them for each file types.
 --       These following settings are global, used for unknown file types.
 
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.expandtab = true
-vim.o.smartindent = true
-vim.o.copyindent = true
-vim.o.preserveindent = true
+O.tabstop = 4
+O.shiftwidth = 4
+O.softtabstop = 4
+O.expandtab = true
+O.smartindent = true
+O.copyindent = true
+O.preserveindent = true
 
 
 
 -- Folding {{{2
 
-vim.o.foldlevelstart = 0
-vim.o.foldopen = vim.o.foldopen .. ',insert'
-vim.o.foldmethod = 'marker'
+O.foldlevelstart = 0
+O.foldopen = O.foldopen .. ',insert'
+O.foldmethod = 'marker'
 
 
 
 -- Diff mode {{{2
 
-vim.o.diffopt = vim.o.diffopt .. ',vertical'
-vim.o.diffopt = vim.o.diffopt .. ',foldcolumn:3'
+O.diffopt = O.diffopt .. ',vertical'
+O.diffopt = O.diffopt .. ',foldcolumn:3'
 
 
 
 -- Mapping {{{2
 
-vim.o.maxmapdepth = 10
-vim.o.timeout = false
+O.maxmapdepth = 10
+O.timeout = false
 
 
 
 -- Reading and writing files {{{2
 
-vim.o.fixendofline = false
+O.fixendofline = false
 -- Note: if 'fileformat' is empty, the first item of 'fileformats' is used.
-vim.o.fileformats = 'unix,dos'
+O.fileformats = 'unix,dos'
 -- Note: these settings make one backup. If you want more backups, see
 --       |'backupext'|.
-vim.o.backup = true
-vim.o.autowrite = true
+O.backup = true
+O.backupdir = my_env.backup_dir
+O.autowrite = true
 
 
 
 -- Command line editing {{{2
-vim.o.wildignore = vim.o.wildignore .. ',*.o,*.obj,*.lib'
-vim.o.wildignorecase = true
+O.wildignore = O.wildignore .. ',*.o,*.obj,*.lib'
+O.wildignorecase = true
 
 
 
 -- Executing external commands {{{2
 
-vim.o.shell = 'zsh'
-vim.o.keywordprg = ''
+O.shell = 'zsh'
+O.keywordprg = ''
 
 
 
 -- Encoding {{{2
 
 -- Note: if 'fileencoding' is empty, 'encoding' is used.
-vim.o.fileencodings = 'utf-8,cp932,euc-jp'
+O.fileencodings = 'utf-8,cp932,euc-jp'
 
 
 
 -- Misc. {{{2
 
-vim.o.sessionoptions = vim.o.sessionoptions .. ',localoptions'
-vim.o.sessionoptions = vim.o.sessionoptions .. ',resize'
-vim.o.sessionoptions = vim.o.sessionoptions .. ',winpos'
+O.sessionoptions = O.sessionoptions .. ',localoptions'
+O.sessionoptions = O.sessionoptions .. ',resize'
+O.sessionoptions = O.sessionoptions .. ',winpos'
 
 
 
@@ -414,7 +410,7 @@ paq({
    -- }}}
 })
 
-vim.o.runtimepath = vim.o.runtimepath .. ',' .. my_env.my_dir
+O.runtimepath = O.runtimepath .. ',' .. my_env.my_dir
 
 
 -- Utilities {{{1
@@ -492,11 +488,11 @@ end
 
 -- Wrapper of |getchar()|.
 function vimrc.getchar()
-   local ch = vim.fn.getchar()
+   local ch = F.getchar()
    while ch == "\\<CursorHold>" do
-      ch = vim.fn.getchar()
+      ch = F.getchar()
    end
-   return type(ch) == 'number' and vim.fn.nr2char(ch) or ch
+   return type(ch) == 'number' and F.nr2char(ch) or ch
 end
 
 
@@ -523,9 +519,9 @@ end
 -- Only when it is used in a mapping, |inputsave()| and |inputstore()| are
 -- required.
 function vimrc.input(prompt)
-   vim.fn.inputsave()
-   local result = vim.fn.input(prompt)
-   vim.fn.inputrestore()
+   F.inputsave()
+   local result = F.input(prompt)
+   F.inputrestore()
    return result
 end
 
@@ -547,14 +543,14 @@ end)
 -- Calculate 'numberwidth' to fit file size.
 -- Note: extra 2 is the room of left and right spaces.
 vimrc.autocmd('BufEnter,WinEnter,BufWinEnter', '*', function()
-   vim.wo.numberwidth = #tostring(vim.fn.line('$')) + 2
+   vim.wo.numberwidth = #tostring(F.line('$')) + 2
 end)
 
 
 -- Jump to the last cursor position when you open a file.
 vimrc.autocmd('BufRead', '*', function()
-   if 0 < vim.fn.line("'\"") and vim.fn.line("'\"") <= vim.fn.line('$') and
-      not vim.o.filetype:match('commit') and not vim.o.filetype:match('rebase')
+   if 0 < F.line("'\"") and F.line("'\"") <= F.line('$') and
+      not O.filetype:match('commit') and not O.filetype:match('rebase')
    then
       vim.cmd('normal g`"')
    end
@@ -615,9 +611,9 @@ vimrc.map('i', '<C-d>', '<Del>')
 
 -- Go elsewhere without deviding the undo history.
 vimrc.map_expr('i', '<C-a>', function()
-   local repeat_ = vim.fn['repeat']
-   local line = vim.fn.getline('.')
-   local cursor_col = vim.fn.col('.')
+   local repeat_ = F['repeat']
+   local line = F.getline('.')
+   local cursor_col = F.col('.')
    local space_idx = vim.regex('^\\S'):match_str(line)
 
    if cursor_col == space_idx + 1 then
@@ -654,7 +650,7 @@ vimrc.map('i', '<Right>', '<Nop>')
 
 
 vimrc.map_expr('n', 'gA', function()
-   local line = vim.fn.getline('.')
+   local line = F.getline('.')
    if vim.endswith(line, ';;') then -- for OCaml
       return 'A\\<C-g>U\\<Left>\\<C-g>U\\<Left>'
    elseif vim.regex('[,;)]$'):match_str(line) then
@@ -747,7 +743,7 @@ vimrc.map('n', 'gff', 'gF')
 vimrc.fn = {}
 
 function vimrc.fn.move_current_window_to_tabpage()
-   if vim.fn.winnr('$') == 1 then
+   if F.winnr('$') == 1 then
       -- Leave the current window and open it in a new tabpage.
       -- Because :wincmd T fails when the current tabpage has only one window.
       vim.cmd('tab split')
@@ -775,9 +771,9 @@ function vimrc.fn.choose_window_interactively()
 
    -- List normal windows up to 20.
    local wins = {}
-   for winnr = 1, vim.fn.winnr('$') do
-      if winnr ~= vim.fn.winnr() and vim.fn.win_gettype(winnr) == '' then
-         wins[#wins+1] = vim.fn.win_getid(winnr)
+   for winnr = 1, F.winnr('$') do
+      if winnr ~= F.winnr() and F.win_gettype(winnr) == '' then
+         wins[#wins+1] = F.win_getid(winnr)
       end
    end
    if #indicators < #wins then
@@ -791,10 +787,10 @@ function vimrc.fn.choose_window_interactively()
       return
    end
    if #wins == 1 then
-      if wins[1] == vim.fn.win_getid() then
-         vim.fn.win_gotoid(wins[2])
+      if wins[1] == F.win_getid() then
+         F.win_gotoid(wins[2])
       else
-         vim.fn.win_gotoid(wins[1])
+         F.win_gotoid(wins[1])
       end
       return
    end
@@ -812,8 +808,8 @@ function vimrc.fn.choose_window_interactively()
          {
             relative = 'win',
             win = winid,
-            row = (vim.fn.winheight(winid) - 5) / 2,
-            col = (vim.fn.winwidth(winid) - 9) / 2,
+            row = (F.winheight(winid) - 5) / 2,
+            col = (F.winwidth(winid) - 9) / 2,
             width = 5,
             height = 1,
             focusable = false,
@@ -839,7 +835,7 @@ function vimrc.fn.choose_window_interactively()
       end
    end
    if jump_target ~= -1 then
-      vim.fn.win_gotoid(jump_target)
+      F.win_gotoid(jump_target)
    end
 
    -- Close popups
@@ -912,7 +908,7 @@ vimrc.map('n', 'tg', ':<C-u>call v:lua.vimrc.fn.choose_window_interactively()<CR
 
 function vimrc.fn.smart_open(command)
    local modifiers
-   if vim.fn.winwidth(vim.fn.winnr()) < 150 then
+   if F.winwidth(F.winnr()) < 150 then
       modifiers = 'topleft'
    else
       modifiers = 'vertical botright'
@@ -929,17 +925,17 @@ function vimrc.fn.smart_open(command)
       let g:__ok = v:false
    endtry
    ]]):format(modifiers, command))
-   if not vim.g.__ok then
+   if not G.__ok then
       return
    end
 
-   if vim.o.filetype == 'help' then
+   if O.filetype == 'help' then
       if vim.bo.textwidth > 0 then
          vim.cmd(('vertical resize %d'):format(vim.bo.textwidth))
       end
       -- Move the cursor to the beginning of the line as help tags are often
       -- right-justfied.
-      vim.fn.cursor(
+      F.cursor(
          0 --[[ stay in the current line ]],
          1 --[[ move to the beginning of the line ]])
    end
@@ -1026,7 +1022,7 @@ vimrc.map('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent = true })
 
 function vimrc.map_callbacks.insert_blank_line(offset)
    for i = 1, vim.v.count1 do
-      vim.fn.append(vim.fn.line('.') - offset, '')
+      F.append(F.line('.') - offset, '')
    end
 end
 
@@ -1120,14 +1116,14 @@ endtry
 
 -- Statusline {{{2
 
-vim.o.statusline = '%!v:lua.vimrc.statusline.build()'
+O.statusline = '%!v:lua.vimrc.statusline.build()'
 
 vimrc.statusline = {}
 
 function vimrc.statusline.build()
-   local winid = vim.g.statusline_winid
-   local bufnr = vim.fn.winbufnr(winid)
-   local is_active = winid == vim.fn.win_getid()
+   local winid = G.statusline_winid
+   local bufnr = F.winbufnr(winid)
+   local is_active = winid == F.win_getid()
    local left
    if is_active then
       local mode, mode_hl = vimrc.statusline.mode()
@@ -1186,7 +1182,7 @@ function vimrc.statusline.mode()
       ['!']                   = { '-',  'Other'    },
       t                       = { 'T',  'Terminal' },
    }
-   local vim_mode_and_hl = mode_map[vim.fn.mode(true)] or { '-', 'Other' }
+   local vim_mode_and_hl = mode_map[F.mode(true)] or { '-', 'Other' }
    local vim_mode = vim_mode_and_hl[1]
    local hl = vim_mode_and_hl[2]
 
@@ -1196,8 +1192,8 @@ function vimrc.statusline.mode()
    -- which slows down Vim startup. Loading eskk can be delayed by checking both
    -- of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
    local skk_mode
-   if vim.g.loaded_eskk and vim.g.loaded_autoload_eskk then
-      skk_mode = vim.fn['eskk#statusline'](' (%s)', '')
+   if G.loaded_eskk and G.loaded_autoload_eskk then
+      skk_mode = F['eskk#statusline'](' (%s)', '')
    else
       skk_mode = ''
    end
@@ -1206,7 +1202,7 @@ function vimrc.statusline.mode()
 end
 
 function vimrc.statusline.readonly(bufnr)
-   local ro = vim.fn.getbufvar(bufnr, '&readonly')
+   local ro = F.getbufvar(bufnr, '&readonly')
    if ro == 1 then
       return '[RO]'
    else
@@ -1215,18 +1211,18 @@ function vimrc.statusline.readonly(bufnr)
 end
 
 function vimrc.statusline.filename(bufnr)
-   local name = vim.fn.bufname(bufnr)
+   local name = F.bufname(bufnr)
    if name == '' then
       return '[No Name]'
    end
 
    local other_paths = {}
-   for b = 1, vim.fn.bufnr('$') do
-      if vim.fn.bufexists(b) and b ~= bufnr then
-         other_paths[#other_paths+1] = vim.fn.split(vim.fn.bufname(b), '[\\/]')
+   for b = 1, F.bufnr('$') do
+      if F.bufexists(b) and b ~= bufnr then
+         other_paths[#other_paths+1] = F.split(F.bufname(b), '[\\/]')
       end
    end
-   local this_path = vim.fn.split(name, '[\\/]')
+   local this_path = F.split(name, '[\\/]')
    local i = 0
    while true do
       local this_path_part = this_path[#this_path+i] or ''
@@ -1259,15 +1255,15 @@ function vimrc.statusline.filename(bufnr)
       if k == i or k == #this_path then
          ret = ret .. '/' .. this_path[#this_path+k]
       else
-         ret = ret .. '/' .. vim.fn.matchlist(this_path[#this_path+k], '.')[1]
+         ret = ret .. '/' .. F.matchlist(this_path[#this_path+k], '.')[1]
       end
    end
    return ret:sub(2)
 end
 
 function vimrc.statusline.modified(bufnr)
-   local mod = vim.fn.getbufvar(bufnr, '&modified')
-   local ma = vim.fn.getbufvar(bufnr, '&modifiable')
+   local mod = F.getbufvar(bufnr, '&modified')
+   local ma = F.getbufvar(bufnr, '&modifiable')
    if mod == 1 then
       return '[+]'
    elseif ma == 0 then
@@ -1278,16 +1274,16 @@ function vimrc.statusline.modified(bufnr)
 end
 
 function vimrc.statusline.linenum(winid)
-   return vim.fn.line('.', winid) .. '/' .. vim.fn.line('$', winid)
+   return F.line('.', winid) .. '/' .. F.line('$', winid)
 end
 
 function vimrc.statusline.fenc(bufnr)
-   local fenc = vim.fn.getbufvar(bufnr, '&fileencoding')
-   local bom = vim.fn.getbufvar(bufnr, '&bomb')  -- BOMB!!
+   local fenc = F.getbufvar(bufnr, '&fileencoding')
+   local bom = F.getbufvar(bufnr, '&bomb')  -- BOMB!!
 
    if fenc == '' then
-      local fencs = vim.fn.split(vim.o.fileencodings, ',')
-      fenc = fencs[1] or vim.o.encoding
+      local fencs = F.split(O.fileencodings, ',')
+      fenc = fencs[1] or O.encoding
    end
    if fenc == 'utf-8' then
       return bom == 1 and 'U8[BOM]' or 'U8'
@@ -1305,7 +1301,7 @@ function vimrc.statusline.fenc(bufnr)
 end
 
 function vimrc.statusline.ff(bufnr)
-   local ff = vim.fn.getbufvar(bufnr, '&fileformat')
+   local ff = F.getbufvar(bufnr, '&fileformat')
    if ff == 'unix' then
       return ''
    elseif ff == 'dos' then
@@ -1318,7 +1314,7 @@ function vimrc.statusline.ff(bufnr)
 end
 
 function vimrc.statusline.filetype(bufnr)
-   local ft = vim.fn.getbufvar(bufnr, '&filetype')
+   local ft = F.getbufvar(bufnr, '&filetype')
    if ft == '' then
       return '[None]'
    else
@@ -1327,16 +1323,16 @@ function vimrc.statusline.filetype(bufnr)
 end
 -- Tabline {{{2
 
-vim.o.tabline = '%!v:lua.vimrc.tabline.build()'
+O.tabline = '%!v:lua.vimrc.tabline.build()'
 
 vimrc.tabline = {}
 
 function vimrc.tabline.build()
    local tal = ''
-   for tabnr = 1, vim.fn.tabpagenr('$') do
-      local is_active = tabnr == vim.fn.tabpagenr()
-      local buflist = vim.fn.tabpagebuflist(tabnr)
-      local bufnr = buflist[vim.fn.tabpagewinnr(tabnr)]
+   for tabnr = 1, F.tabpagenr('$') do
+      local is_active = tabnr == F.tabpagenr()
+      local buflist = F.tabpagebuflist(tabnr)
+      local bufnr = buflist[F.tabpagewinnr(tabnr)]
       tal = tal .. string.format(
          '%%#%s# %s ',
          is_active and 'TabLineSel' or 'TabLine',
@@ -1350,22 +1346,22 @@ end
 
 -- Disable standard plugins. {{{2
 
-vim.g.loaded_gzip             = 1
-vim.g.loaded_matchparen       = 1
-vim.g.loaded_netrw            = 1
-vim.g.loaded_netrwPlugin      = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_tarPlugin        = 1
-vim.g.loaded_zipPlugin        = 1
+G.loaded_gzip             = 1
+G.loaded_matchparen       = 1
+G.loaded_netrw            = 1
+G.loaded_netrwPlugin      = 1
+G.loaded_spellfile_plugin = 1
+G.loaded_tarPlugin        = 1
+G.loaded_zipPlugin        = 1
 
 
 
 -- altr {{{2
 
 -- C/C++
-vim.fn['altr#define']('%.c', '%.cpp', '%.cc', '%.h', '%.hh', '%.hpp')
+F['altr#define']('%.c', '%.cpp', '%.cc', '%.h', '%.hh', '%.hpp')
 -- Vim
-vim.fn['altr#define']('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
+F['altr#define']('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
 
 -- Go to File Alternative
 vimrc.map_plug('n', 'gfa', '(altr-forward)')
@@ -1408,14 +1404,14 @@ xmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 
 -- autodirmake {{{2
 
-vim.g['autodirmake#msg_highlight'] = 'Question'
+G['autodirmake#msg_highlight'] = 'Question'
 
 
 
 -- autopep8 {{{2
 
-vim.g.autopep8_on_save = true
-vim.g.autopep8_disable_show_diff = true
+G.autopep8_on_save = true
+G.autopep8_disable_show_diff = true
 
 vim.cmd([[
 command!
@@ -1427,7 +1423,7 @@ command!
 
 -- caw {{{2
 
-vim.g.caw_no_default_keymappings = true
+G.caw_no_default_keymappings = true
 
 vimrc.map_plug('n', 'm//', '(caw:hatpos:toggle)')
 vimrc.map_plug('x', 'm//', '(caw:hatpos:toggle)')
@@ -1442,7 +1438,7 @@ vimrc.map_plug('x', 'm/b', '(caw:box:comment)')
 
 -- clang-format {{{2
 
-vim.g['clang_format#auto_format'] = true
+G['clang_format#auto_format'] = true
 
 vimrc.autocmd('FileType', 'javascript,typescript', function()
    vim.cmd('ClangFormatAutoDisable')
@@ -1452,8 +1448,8 @@ end)
 
 -- ctrlp {{{2
 
-vim.g.ctrlp_map = '<Space>f'
-vim.g.ctrlp_match_func = { match = 'ctrlp_matchfuzzy#matcher' }
+G.ctrlp_map = '<Space>f'
+G.ctrlp_match_func = { match = 'ctrlp_matchfuzzy#matcher' }
 
 
 
@@ -1473,13 +1469,13 @@ vimrc.map_plug('x', '=', '(EasyAlign)')
 
 -- easymotion {{{2
 
-vim.g.EasyMotion_keys = 'asdfghweryuiocvbnmjkl;'
-vim.g.EasyMotion_space_jump_first = true
-vim.g.EasyMotion_do_shade = false
-vim.g.EasyMotion_do_mappings = false
-vim.g.EasyMotion_smartcase = true
-vim.g.EasyMotion_verbose = false
-vim.g.EasyMotion_startofline = false
+G.EasyMotion_keys = 'asdfghweryuiocvbnmjkl;'
+G.EasyMotion_space_jump_first = true
+G.EasyMotion_do_shade = false
+G.EasyMotion_do_mappings = false
+G.EasyMotion_smartcase = true
+G.EasyMotion_verbose = false
+G.EasyMotion_startofline = false
 
 vimrc.map_plug('n', 'f', '(easymotion-fl)')
 vimrc.map_plug('o', 'f', '(easymotion-fl)')
@@ -1519,29 +1515,29 @@ vimrc.map_plug('x', 'sk', '(easymotion-k)')
 
 -- eskk {{{2
 
-vim.g['eskk#dictionary'] = {
+G['eskk#dictionary'] = {
    path = my_env.skk_dir .. '/jisyo',
    sorted = false,
    encoding = 'utf-8',
 }
 
-vim.g['eskk#large_dictionary'] = {
+G['eskk#large_dictionary'] = {
    path = my_env.skk_dir .. '/jisyo.L',
    sorted = true,
    encoding = 'euc-jp',
 }
 
-vim.g['eskk#backup_dictionary'] = vim.g['eskk#dictionary'].path .. ".bak"
+G['eskk#backup_dictionary'] = G['eskk#dictionary'].path .. ".bak"
 
-vim.g['eskk#kakutei_when_unique_candidate'] = true
-vim.g['eskk#enable_completion'] = false
-vim.g['eskk#egg_like_newline'] = true
+G['eskk#kakutei_when_unique_candidate'] = true
+G['eskk#enable_completion'] = false
+G['eskk#egg_like_newline'] = true
 
 -- Change default markers because they are EAW (East Asian Width) characters.
-vim.g['eskk#marker_henkan'] = '[!]'
-vim.g['eskk#marker_okuri'] = '-'
-vim.g['eskk#marker_henkan_select'] = '[#]'
-vim.g['eskk#marker_jisyo_touroku'] = '[?]'
+G['eskk#marker_henkan'] = '[!]'
+G['eskk#marker_okuri'] = '-'
+G['eskk#marker_henkan_select'] = '[#]'
+G['eskk#marker_jisyo_touroku'] = '[?]'
 
 
 
@@ -1596,8 +1592,8 @@ autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
 
 -- foldcc {{{2
 
-vim.o.foldtext = 'FoldCCtext()'
-vim.g.foldCCtext_head = 'repeat(">", v:foldlevel) . " "'
+O.foldtext = 'FoldCCtext()'
+G.foldCCtext_head = 'repeat(">", v:foldlevel) . " "'
 
 
 
@@ -1617,14 +1613,14 @@ vimrc.map_plug('x', 'g/', '(incsearch-stay)')
 
 -- indentline {{{2
 
-vim.g.indentLine_conceallevel = 1
-vim.g.indentLine_fileTypeExclude = { 'help' }
+G.indentLine_conceallevel = 1
+G.indentLine_fileTypeExclude = { 'help' }
 
 
 
 -- jplus {{{2
 
-vim.g['jplus#input_config'] = {
+G['jplus#input_config'] = {
    __DEFAULT__ = { delimiter_format = ' %d ' },
    __EMPTY__ = { delimiter_format = '' },
    [' '] = { delimiter_format = ' ' },
@@ -1684,7 +1680,7 @@ vimrc.map('n', 'br', ':<C-u>Qfreplace SmartOpen<CR>', { silent = true })
 -- quickhl {{{2
 
 -- TODO: CUI
-vim.g.quickhl_manual_colors = {
+G.quickhl_manual_colors = {
    'guifg=#101020 guibg=#8080c0 gui=bold',
    'guifg=#101020 guibg=#80c080 gui=bold',
    'guifg=#101020 guibg=#c08080 gui=bold',
@@ -1705,9 +1701,9 @@ vimrc.map('n', '<C-c>', ':<C-u>nohlsearch <Bar> QuickhlManualReset<CR>', { silen
 
 -- quickrun {{{2
 
-vim.g.quickrun_no_default_key_mappings = true
+G.quickrun_no_default_key_mappings = true
 
-vim.g.quickrun_config = {
+G.quickrun_config = {
    cpp = {
       cmdopt = '--std=c++17 -Wall -Wextra',
    },
@@ -1734,7 +1730,7 @@ vimrc.map_plug('x', 'BB', '(quickrun)')
 vimrc.map_plug('n', 'U', '(RepeatRedo)')
 -- Autoload vim-repeat immediately in order to make <Plug>(RepeatRedo) available.
 -- repeat#setreg() does nothing here.
-vim.fn['repeat#setreg']('', '')
+F['repeat#setreg']('', '')
 
 
 -- Make them repeatable with vim-repeat.
@@ -1753,8 +1749,8 @@ nnoremap <silent>  <Plug>(my-insert-blank-lines-before)
 
 -- Workaround: do not open quickfix window.
 -- exe g:rg_window_location 'copen'
-vim.g.rg_window_location = 'silent! echo'
-vim.g.rg_jump_to_first = true
+G.rg_window_location = 'silent! echo'
+G.rg_jump_to_first = true
 
 vim.cmd([[
 command! -bang -nargs=* -complete=file -bar
@@ -1765,16 +1761,16 @@ command! -bang -nargs=* -complete=file -bar
 
 -- rust {{{2
 
-vim.g.rustfmt_autosave = true
+G.rustfmt_autosave = true
 
 
 
 
 -- sandwich {{{2
 
-vim.fn['operator#sandwich#set']('add', 'all', 'highlight', 2)
-vim.fn['operator#sandwich#set']('delete', 'all', 'highlight', 0)
-vim.fn['operator#sandwich#set']('replace', 'all', 'highlight', 2)
+F['operator#sandwich#set']('add', 'all', 'highlight', 2)
+F['operator#sandwich#set']('delete', 'all', 'highlight', 0)
+F['operator#sandwich#set']('replace', 'all', 'highlight', 2)
 
 
 
@@ -1783,8 +1779,8 @@ vim.fn['operator#sandwich#set']('replace', 'all', 'highlight', 2)
 -- splitjoin {{{2
 
 -- Note: Don't use J{any sign}, 'Jl' and 'JL'. They will conflict with 'vim-jplus'.
-vim.g.splitjoin_split_mapping = ''
-vim.g.splitjoin_join_mapping = ''
+G.splitjoin_split_mapping = ''
+G.splitjoin_join_mapping = ''
 
 vimrc.map('n', 'JS', ':<C-u>SplitjoinSplit<CR>', { silent = true })
 vimrc.map('n', 'JJ', ':<C-u>SplitjoinJoin<CR>', { silent = true })
@@ -1794,52 +1790,52 @@ vimrc.map('n', 'JJ', ':<C-u>SplitjoinJoin<CR>', { silent = true })
 -- submode {{{2
 
 -- Global settings {{{3
-vim.g.submode_always_show_submode = true
-vim.g.submode_keyseqs_to_leave = { '<C-c>', '<ESC>' }
-vim.g.submode_keep_leaving_key = true
+G.submode_always_show_submode = true
+G.submode_keyseqs_to_leave = { '<C-c>', '<ESC>' }
+G.submode_keep_leaving_key = true
 
 
 -- yankround {{{3
-vim.fn['submode#enter_with']('YankRound', 'nv', 'rs', 'gp', '<Plug>(yankround-p)')
-vim.fn['submode#enter_with']('YankRound', 'nv', 'rs', 'gP', '<Plug>(yankround-P)')
-vim.fn['submode#map']('YankRound', 'nv', 'rs', 'p', '<Plug>(yankround-prev)')
-vim.fn['submode#map']('YankRound', 'nv', 'rs', 'P', '<Plug>(yankround-next)')
+F['submode#enter_with']('YankRound', 'nv', 'rs', 'gp', '<Plug>(yankround-p)')
+F['submode#enter_with']('YankRound', 'nv', 'rs', 'gP', '<Plug>(yankround-P)')
+F['submode#map']('YankRound', 'nv', 'rs', 'p', '<Plug>(yankround-prev)')
+F['submode#map']('YankRound', 'nv', 'rs', 'P', '<Plug>(yankround-next)')
 
 -- swap {{{3
-vim.fn['submode#enter_with']('Swap', 'n', 'r', 'g>', '<Plug>(swap-next)')
-vim.fn['submode#map']('Swap', 'n', 'r', '<', '<Plug>(swap-prev)')
-vim.fn['submode#enter_with']('Swap', 'n', 'r', 'g<', '<Plug>(swap-prev)')
-vim.fn['submode#map']('Swap', 'n', 'r', '>', '<Plug>(swap-next)')
+F['submode#enter_with']('Swap', 'n', 'r', 'g>', '<Plug>(swap-next)')
+F['submode#map']('Swap', 'n', 'r', '<', '<Plug>(swap-prev)')
+F['submode#enter_with']('Swap', 'n', 'r', 'g<', '<Plug>(swap-prev)')
+F['submode#map']('Swap', 'n', 'r', '>', '<Plug>(swap-next)')
 
 -- Resizing a window (height) {{{3
-vim.fn['submode#enter_with']('WinResizeH', 'n', '', 'trh')
-vim.fn['submode#enter_with']('WinResizeH', 'n', '', 'trh')
-vim.fn['submode#map']('WinResizeH', 'n', '', '+', '<C-w>+')
-vim.fn['submode#map']('WinResizeH', 'n', '', '-', '<C-w>-')
+F['submode#enter_with']('WinResizeH', 'n', '', 'trh')
+F['submode#enter_with']('WinResizeH', 'n', '', 'trh')
+F['submode#map']('WinResizeH', 'n', '', '+', '<C-w>+')
+F['submode#map']('WinResizeH', 'n', '', '-', '<C-w>-')
 
 -- Resizing a window (width) {{{3
-vim.fn['submode#enter_with']('WinResizeW', 'n', '', 'trw')
-vim.fn['submode#enter_with']('WinResizeW', 'n', '', 'trw')
-vim.fn['submode#map']('WinResizeW', 'n', '', '+', '<C-w>>')
-vim.fn['submode#map']('WinResizeW', 'n', '', '-', '<C-w><Lt>')
+F['submode#enter_with']('WinResizeW', 'n', '', 'trw')
+F['submode#enter_with']('WinResizeW', 'n', '', 'trw')
+F['submode#map']('WinResizeW', 'n', '', '+', '<C-w>>')
+F['submode#map']('WinResizeW', 'n', '', '-', '<C-w><Lt>')
 
 -- Super undo/redo {{{3
-vim.fn['submode#enter_with']('Undo/Redo', 'n', '', 'gu', 'g-')
-vim.fn['submode#map']('Undo/Redo', 'n', '', 'u', 'g-')
-vim.fn['submode#enter_with']('Undo/Redo', 'n', '', 'gU', 'g+')
-vim.fn['submode#map']('Undo/Redo', 'n', '', 'U', 'g+')
+F['submode#enter_with']('Undo/Redo', 'n', '', 'gu', 'g-')
+F['submode#map']('Undo/Redo', 'n', '', 'u', 'g-')
+F['submode#enter_with']('Undo/Redo', 'n', '', 'gU', 'g+')
+F['submode#map']('Undo/Redo', 'n', '', 'U', 'g+')
 
 
 
 -- swap {{{2
 
-vim.g.swap_no_default_key_mappings = true
+G.swap_no_default_key_mappings = true
 
 
 
 -- textobj-continuousline {{{2
 
-vim.g.textobj_continuous_line_no_default_key_mappings = true
+G.textobj_continuous_line_no_default_key_mappings = true
 
 vimrc.map_plug('o', 'aL', '(textobj-continuous-cpp-a)')
 vimrc.map_plug('x', 'aL', '(textobj-continuous-cpp-a)')
@@ -1857,7 +1853,7 @@ autocmd Vimrc FileType vim xmap <buffer>  iL  <Plug>(textobj-continuous-vim-i)
 
 -- textobj-lastpaste {{{2
 
-vim.g.textobj_lastpaste_no_default_key_mappings = true
+G.textobj_lastpaste_no_default_key_mappings = true
 
 vimrc.map_plug('o', 'iP', '(textobj-lastpaste-i)')
 vimrc.map_plug('x', 'iP', '(textobj-lastpaste-i)')
@@ -1868,7 +1864,7 @@ vimrc.map_plug('x', 'aP', '(textobj-lastpaste-a)')
 
 -- textobj-space {{{2
 
-vim.g.textobj_space_no_default_key_mappings = true
+G.textobj_space_no_default_key_mappings = true
 
 vimrc.map_plug('o', 'a<Space>', '(textobj-space-a)')
 vimrc.map_plug('x', 'a<Space>', '(textobj-space-a)')
@@ -1878,7 +1874,7 @@ vimrc.map_plug('x', 'i<Space>', '(textobj-space-i)')
 
 -- textobj-wiw {{{2
 
-vim.g.textobj_wiw_no_default_key_mappings = true
+G.textobj_wiw_no_default_key_mappings = true
 
 vimrc.map_plug('n', '<C-w>', '(textobj-wiw-n)')
 vimrc.map_plug('o', '<C-w>', '(textobj-wiw-n)')
@@ -1912,8 +1908,8 @@ vimrc.map('n', 'tRr', ':<C-u>AdjustScreenWidth <Bar> AdjustScreenHeight<CR>', { 
 
 -- yankround {{{2
 
-vim.g.yankround_dir = my_env.yankround_dir
-vim.g.yankround_use_region_hl = true
+G.yankround_dir = my_env.yankround_dir
+G.yankround_use_region_hl = true
 
 
 
