@@ -1,12 +1,12 @@
---[==========================================================================[--
---                                                                            --
---                  _                __  _       _ _     _                    --
---       _ ____   _(_)_ __ ___      / / (_)_ __ (_) |_  | |_   _  __ _        --
---      | '_ \ \ / / | '_ ` _ \    / /  | | '_ \| | __| | | | | |/ _` |       --
---      | | | \ V /| | | | | | |  / /   | | | | | | |_ _| | |_| | (_| |       --
---      |_| |_|\_/ |_|_| |_| |_| /_/    |_|_| |_|_|\__(_)_|\__,_|\__,_|       --
---                                                                            --
---]==========================================================================]--
+--[========================================================================[--
+--                                                                          --
+--                 _                __  _       _ _     _                   --
+--      _ ____   _(_)_ __ ___      / / (_)_ __ (_) |_  | |_   _  __ _       --
+--     | '_ \ \ / / | '_ ` _ \    / /  | | '_ \| | __| | | | | |/ _` |      --
+--     | | | \ V /| | | | | | |  / /   | | | | | | |_ _| | |_| | (_| |      --
+--     |_| |_|\_/ |_|_| |_| |_| /_/    |_|_| |_|_|\__(_)_|\__,_|\__,_|      --
+--                                                                          --
+--]========================================================================]--
 
 
 
@@ -1054,43 +1054,6 @@ command! -bar -range=%
 
 
 
--- ftplugin {{{1
-
--- This command do the followings:
---     * Execute |:setlocal| for each options.
---     * Set information to restore the original setting to b:|undo_ftplugin|.
-
--- This command is used in my/ftplugin/*.vim.
-
--- Note: specify only single option.
-
-vim.cmd([[
-function My_ftplugin_setlocal(qargs)
-   execute 'setlocal' a:qargs
-
-   let option_name = substitute(a:qargs, '\L.*', '', '')
-
-   if option_name ==# 'shiftwidth' && exists(':IndentLinesReset') ==# 2
-      IndentLinesReset
-   end
-
-   if exists('b:undo_ftplugin')
-      let b:undo_ftplugin .= '|setlocal ' .. option_name .. '<'
-   else
-      let b:undo_ftplugin = 'setlocal ' .. option_name .. '<'
-   end
-endfunction
-]])
-
-vim.cmd([[
-command! -nargs=+
-   \ FtpluginSetLocal
-   \ call My_ftplugin_setlocal(<q-args>)
-]])
-
-
-
-
 -- Appearance {{{1
 
 -- Color scheme {{{2
@@ -1884,7 +1847,3 @@ G.yankround_use_region_hl = true
 
 
 
--- Modelines {{{1
-
--- vim: expandtab:softtabstop=3:shiftwidth=3:textwidth=80:colorcolumn=+1:
--- vim: foldenable:foldmethod=marker:foldlevel=0:

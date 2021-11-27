@@ -15,5 +15,31 @@ function vimrc.autocmd(event, filter, callback)
 end
 
 
+local conf = {}
+conf.SPACE = true
+conf.TAB = false
+function conf.indent(style, width)
+   vim.bo.expandtab = style
+   vim.bo.tabstop = width
+   vim.bo.shiftwidth = width
+   vim.bo.softtabstop = width
+
+   if vim.fn.exists(':IndentLinesReset') == 2 then
+      vim.cmd('IndentLinesReset')
+   end
+end
+
+function vimrc.after_ftplugin(ft, callback)
+   local var_name = 'did_ftplugin_' .. ft .. '_after'
+   if vim.b[var_name] ~= nil then
+      return
+   end
+
+   callback(conf)
+
+   vim.b[var_name] = true
+end
+
+
 
 return vimrc
