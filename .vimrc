@@ -90,7 +90,9 @@ set noshowmatch
 set matchpairs+=<:>
 set nojoinspaces
 set nrformats-=octal
-set nrformats+=unsigned
+if has('patch-8.2.0860')
+    set nrformats+=unsigned
+endif
 
 set tabstop=4
 set shiftwidth=4
