@@ -34,3 +34,34 @@ $ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com
 $ sudo atsutil databases -remove
 # Restart your machine.
 ```
+
+
+
+Ubuntu (apt)
+
+```
+$ sudo apt install \
+    alacritty \
+    bash \
+    bat \
+    cmake \
+    curl \
+    emacs \
+    fd-find \
+    gcc \
+    git \
+    jq \
+    keepassxc \
+    neovim \
+    pandoc \
+    python \
+    ripgrep \
+    ruby \
+    tmux \
+    vim \
+    zsh \
+    ;
+
+$ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(which batcat)")/bat"
+$ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
+```
