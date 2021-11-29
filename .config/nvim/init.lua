@@ -945,6 +945,33 @@ command! -nargs=+ -complete=command
 
 
 
+-- Toggle options {{{2
+
+vimrc.map('n', 'T', '<Nop>')
+
+vimrc.map('n', 'Tb', ':<C-u>if &background == "dark" <Bar>set background=light <Bar>else <Bar>set background=dark <Bar>endif<CR>', { silent = true })
+vimrc.map('n', 'Tc', ':<C-u>set cursorcolumn! <Bar>set cursorline!<CR>', { silent = true })
+vimrc.map('n', 'Td', ':<C-u>if &diff <Bar>diffoff <Bar>else <Bar>diffthis <Bar>endif<CR>', { silent = true })
+vimrc.map('n', 'Te', ':<C-u>set expandtab!<CR>', { silent = true })
+vimrc.map('n', 'Th', ':<C-u>set hlsearch!<CR>', { silent = true })
+vimrc.map('n', 'Tn', ':<C-u>set number!<CR>', { silent = true })
+vimrc.map('n', 'Ts', ':<C-u>set spell!<CR>', { silent = true })
+vimrc.map('n', 'T8', ':<C-u>if &textwidth ==# 80 <Bar>set textwidth= <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>', { silent = true })
+vimrc.map('n', 'T0', ':<C-u>if &textwidth ==# 100 <Bar>set textwidth= <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>', { silent = true })
+vimrc.map('n', 'T2', ':<C-u>if &textwidth ==# 120 <Bar>set textwidth= <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>', { silent = true })
+vimrc.map('n', 'Tw', ':<C-u>set wrap!<CR>', { silent = true })
+
+vimrc.map('n', 'TB', 'Tb', { noremap = false })
+vimrc.map('n', 'TC', 'Tc', { noremap = false })
+vimrc.map('n', 'TD', 'Td', { noremap = false })
+vimrc.map('n', 'TE', 'Te', { noremap = false })
+vimrc.map('n', 'TH', 'Th', { noremap = false })
+vimrc.map('n', 'TN', 'Tn', { noremap = false })
+vimrc.map('n', 'TS', 'Ts', { noremap = false })
+vimrc.map('n', 'TW', 'Tw', { noremap = false })
+
+
+
 -- Increment/decrement numbers {{{2
 
 -- nnoremap  +  <C-a>

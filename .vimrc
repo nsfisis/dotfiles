@@ -289,6 +289,29 @@ nnoremap  tc  <C-w>c
 nnoremap  to  <C-w>o
 nnoremap <silent>  tO  :<C-u>tabonly<CR>
 
+nnoremap  T  <Nop>
+
+nnoremap <silent>  Tb  :<C-u>if &background == 'dark' <Bar>set background=light <Bar>else <Bar>set background=dark <Bar>endif<CR>
+nnoremap <silent>  Tc  :<C-u>set cursorcolumn! <Bar>set cursorline!<CR>
+nnoremap <silent>  Td  :<C-u>if &diff <Bar>diffoff <Bar>else <Bar>diffthis <Bar>endif<CR>
+nnoremap <silent>  Te  :<C-u>set expandtab!<CR>
+nnoremap <silent>  Th  :<C-u>set hlsearch!<CR>
+nnoremap <silent>  Tn  :<C-u>set number!<CR>
+nnoremap <silent>  Ts  :<C-u>set spell!<CR>
+nnoremap <silent>  T8  :<C-u>if &textwidth ==# 80 <Bar>set textwidth= <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>
+nnoremap <silent>  T0  :<C-u>if &textwidth ==# 100 <Bar>set textwidth= <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>
+nnoremap <silent>  T2  :<C-u>if &textwidth ==# 120 <Bar>set textwidth= <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>
+nnoremap <silent>  Tw  :<C-u>set wrap!<CR>
+
+nmap  TB  Tb
+nmap  TC  Tc
+nmap  TD  Td
+nmap  TE  Te
+nmap  TH  Th
+nmap  TN  Tn
+nmap  TS  Ts
+nmap  TW  Tw
+
 nnoremap  gh  <Nop>
 nnoremap  gH  <Nop>
 nnoremap  g<C-h>  <Nop>
