@@ -1549,9 +1549,32 @@ require('hop').setup {
    keys = 'asdfghweryuiocvbnmjkl;',
 }
 
--- TODO: hop cannot emulate these behaviors of EasyMotion.
--- let g:EasyMotion_space_jump_first = v:true
--- let g:EasyMotion_startofline = v:false
+-- Emulate `g:EasyMotion_startofline = 0` in hop.nvim.
+function vimrc.map_callbacks.hop_jk(opts)
+   local hop = require('hop')
+   local jump_target = require('hop.jump_target')
+
+   local column = F.col('.')
+   local match
+   if column == 1 then
+      match = function(_)
+         return 0, 1, false
+      end
+   else
+      local pat = vim.regex('\\%' .. column .. 'c')
+      match = function(s)
+         return pat:match_str(s)
+      end
+   end
+   setmetatable(opts, { __index = hop.opts })
+   hop.hint_with(
+      jump_target.jump_targets_by_scanning_lines({
+         oneshot = true,
+         match = match,
+      }),
+      opts
+   )
+end
 
 vimrc.map('', '<Plug>(hop-f)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent = true })
 vimrc.map('', '<Plug>(hop-F)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent = true })
@@ -1561,8 +1584,8 @@ vimrc.map('', '<Plug>(hop-T)', "<Cmd>lua require('hop').hint_char1({ direction =
 vimrc.map('', '<Plug>(hop-s2)', "<Cmd>lua require('hop').hint_char2()<CR>", { silent = true })
 vimrc.map('', '<Plug>(hop-n)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  }, vim.fn.getreg('/'))<CR>", { silent = true })
 vimrc.map('', '<Plug>(hop-N)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR }, vim.fn.getreg('/'))<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-j)', "<Cmd>lua require('hop').hint_lines({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  })<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-k)', "<Cmd>lua require('hop').hint_lines({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-j)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-k)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })<CR>", { silent = true })
 
 vimrc.map_plug('n', 'f', '(hop-f)')
 vimrc.map_plug('o', 'f', '(hop-f)')
