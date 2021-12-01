@@ -423,8 +423,18 @@ function vimrc.map(mode, lhs, rhs, opts)
    if opts == nil then
       opts = {}
    end
-   if opts.noremap == nil then
-      opts.noremap = true
+   opts.noremap = true
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      rhs,
+      opts)
+end
+
+
+function vimrc.remap(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
    end
    vim.api.nvim_set_keymap(
       mode,
@@ -440,9 +450,7 @@ function vimrc.map_expr(mode, lhs, rhs, opts)
    if opts == nil then
       opts = {}
    end
-   if opts.noremap == nil then
-      opts.noremap = true
-   end
+   opts.noremap = true
    opts.expr = true
    local callback_id = #vimrc.map_callbacks + 1
    vimrc.map_callbacks[callback_id] = rhs
@@ -961,14 +969,14 @@ vimrc.map('n', 'T0', ':<C-u>if &textwidth ==# 100 <Bar>set textwidth= <Bar>else 
 vimrc.map('n', 'T2', ':<C-u>if &textwidth ==# 120 <Bar>set textwidth= <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>', { silent = true })
 vimrc.map('n', 'Tw', ':<C-u>set wrap!<CR>', { silent = true })
 
-vimrc.map('n', 'TB', 'Tb', { noremap = false })
-vimrc.map('n', 'TC', 'Tc', { noremap = false })
-vimrc.map('n', 'TD', 'Td', { noremap = false })
-vimrc.map('n', 'TE', 'Te', { noremap = false })
-vimrc.map('n', 'TH', 'Th', { noremap = false })
-vimrc.map('n', 'TN', 'Tn', { noremap = false })
-vimrc.map('n', 'TS', 'Ts', { noremap = false })
-vimrc.map('n', 'TW', 'Tw', { noremap = false })
+vimrc.remap('n', 'TB', 'Tb')
+vimrc.remap('n', 'TC', 'Tc')
+vimrc.remap('n', 'TD', 'Td')
+vimrc.remap('n', 'TE', 'Te')
+vimrc.remap('n', 'TH', 'Th')
+vimrc.remap('n', 'TN', 'Tn')
+vimrc.remap('n', 'TS', 'Ts')
+vimrc.remap('n', 'TW', 'Tw')
 
 
 
@@ -1033,7 +1041,7 @@ vimrc.map('!', '<C-r>;', '<C-r>:')
 
 -- Since <ESC> may be mapped to something else somewhere, it should be :map, not
 -- :noremap.
-vimrc.map('!', 'jk', '<ESC>', { noremap = false })
+vimrc.remap('!', 'jk', '<ESC>')
 
 
 
