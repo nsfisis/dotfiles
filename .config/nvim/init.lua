@@ -380,8 +380,8 @@ paq({
    'tyru/capture.vim',
    -- Write git commit message.
    'rhysd/committia.vim',
-   -- Motion on speed.
-   'easymotion/vim-easymotion',
+   -- Neovim clone of EasyMotion
+   'phaazon/hop.nvim',
    -- Integration with EditorConfig (https://editorconfig.org)
    'editorconfig/editorconfig-vim',
    -- Extend J.
@@ -1459,52 +1459,6 @@ vimrc.map_plug('x', '=', '(EasyAlign)')
 
 
 
--- easymotion {{{2
-
-G.EasyMotion_keys = 'asdfghweryuiocvbnmjkl;'
-G.EasyMotion_space_jump_first = true
-G.EasyMotion_do_shade = false
-G.EasyMotion_do_mappings = false
-G.EasyMotion_smartcase = true
-G.EasyMotion_verbose = false
-G.EasyMotion_startofline = false
-
-vimrc.map_plug('n', 'f', '(easymotion-fl)')
-vimrc.map_plug('o', 'f', '(easymotion-fl)')
-vimrc.map_plug('x', 'f', '(easymotion-fl)')
-vimrc.map_plug('n', 'F', '(easymotion-Fl)')
-vimrc.map_plug('o', 'F', '(easymotion-Fl)')
-vimrc.map_plug('x', 'F', '(easymotion-Fl)')
-vimrc.map_plug('o', 't', '(easymotion-tl)')
-vimrc.map_plug('x', 't', '(easymotion-tl)')
-vimrc.map_plug('o', 'T', '(easymotion-Tl)')
-vimrc.map_plug('x', 'T', '(easymotion-Tl)')
-
--- Note: Don't use the following key sequences! It is used 'vim-sandwich'.
---  * sa
---  * sd
---  * sr
-vimrc.map_plug('n', 'ss', '(easymotion-s2)')
-vimrc.map_plug('o', 'ss', '(easymotion-s2)')
-vimrc.map_plug('x', 'ss', '(easymotion-s2)')
-vimrc.map_plug('n', 'sw', '(easymotion-bd-w)')
-vimrc.map_plug('o', 'sw', '(easymotion-bd-w)')
-vimrc.map_plug('x', 'sw', '(easymotion-bd-w)')
-vimrc.map_plug('n', 'sn', '(easymotion-n)')
-vimrc.map_plug('o', 'sn', '(easymotion-n)')
-vimrc.map_plug('x', 'sn', '(easymotion-n)')
-vimrc.map_plug('n', 'sN', '(easymotion-N)')
-vimrc.map_plug('o', 'sN', '(easymotion-N)')
-vimrc.map_plug('x', 'sN', '(easymotion-N)')
-vimrc.map_plug('n', 'sj', '(easymotion-j)')
-vimrc.map_plug('o', 'sj', '(easymotion-j)')
-vimrc.map_plug('x', 'sj', '(easymotion-j)')
-vimrc.map_plug('n', 'sk', '(easymotion-k)')
-vimrc.map_plug('o', 'sk', '(easymotion-k)')
-vimrc.map_plug('x', 'sk', '(easymotion-k)')
-
-
-
 -- eskk {{{2
 
 G['eskk#dictionary'] = {
@@ -1586,6 +1540,60 @@ autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
 
 O.foldtext = 'FoldCCtext()'
 G.foldCCtext_head = 'repeat(">", v:foldlevel) . " "'
+
+
+
+-- hop {{{2
+
+require('hop').setup {
+   keys = 'asdfghweryuiocvbnmjkl;',
+}
+
+-- TODO: hop cannot emulate these behaviors of EasyMotion.
+-- let g:EasyMotion_space_jump_first = v:true
+-- let g:EasyMotion_startofline = v:false
+
+vimrc.map('', '<Plug>(hop-f)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-F)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-t)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-T)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent = true })
+
+vimrc.map('', '<Plug>(hop-s2)', "<Cmd>lua require('hop').hint_char2()<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-n)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  }, vim.fn.getreg('/'))<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-N)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR }, vim.fn.getreg('/'))<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-j)', "<Cmd>lua require('hop').hint_lines({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  })<CR>", { silent = true })
+vimrc.map('', '<Plug>(hop-k)', "<Cmd>lua require('hop').hint_lines({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })<CR>", { silent = true })
+
+vimrc.map_plug('n', 'f', '(hop-f)')
+vimrc.map_plug('o', 'f', '(hop-f)')
+vimrc.map_plug('x', 'f', '(hop-f)')
+vimrc.map_plug('n', 'F', '(hop-F)')
+vimrc.map_plug('o', 'F', '(hop-F)')
+vimrc.map_plug('x', 'F', '(hop-F)')
+vimrc.map_plug('o', 't', '(hop-t)')
+vimrc.map_plug('x', 't', '(hop-t)')
+vimrc.map_plug('o', 'T', '(hop-T)')
+vimrc.map_plug('x', 'T', '(hop-T)')
+
+-- Note: Don't use the following key sequences! It is used 'vim-sandwich'.
+--  * sa
+--  * sd
+--  * sr
+vimrc.map_plug('n', 'ss', '(hop-s2)')
+vimrc.map_plug('o', 'ss', '(hop-s2)')
+vimrc.map_plug('x', 'ss', '(hop-s2)')
+vimrc.map_plug('n', 'sn', '(hop-n)')
+vimrc.map_plug('o', 'sn', '(hop-n)')
+vimrc.map_plug('x', 'sn', '(hop-n)')
+vimrc.map_plug('n', 'sN', '(hop-N)')
+vimrc.map_plug('o', 'sN', '(hop-N)')
+vimrc.map_plug('x', 'sN', '(hop-N)')
+vimrc.map_plug('n', 'sj', '(hop-j)')
+vimrc.map_plug('o', 'sj', '(hop-j)')
+vimrc.map_plug('x', 'sj', '(hop-j)')
+vimrc.map_plug('n', 'sk', '(hop-k)')
+vimrc.map_plug('o', 'sk', '(hop-k)')
+vimrc.map_plug('x', 'sk', '(hop-k)')
 
 
 

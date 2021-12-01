@@ -208,8 +208,9 @@ hi! link OperatorSandwichBuns   oceanUiSelection
 hi! link OperatorSandwichChange oceanUiSelection
 hi! link OperatorSandwichDelete oceanUiSelection
 
-hi! link EasyMotionMoveHL oceanSearch
-hi! link EasyMotionTarget oceanUiTarget
+hi! link HopNextKey oceanUiTarget
+hi! link HopNextKey1 oceanUiTarget
+hi! link HopNextKey2 oceanUiTarget
 
 
 " File types {{{2
