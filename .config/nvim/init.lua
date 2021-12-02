@@ -1487,21 +1487,23 @@ G['eskk#marker_jisyo_touroku'] = '[?]'
 
 
 
-vim.cmd([[
+vim.cmd([=[
 function My_eskk_initialize_pre()
-   let t = eskk#table#new('rom_to_hira*', 'rom_to_hira')
-   call t.add_map('z ', '　')
-   call t.add_map('0.', '0.')
-   call t.add_map('1.', '1.')
-   call t.add_map('2.', '2.')
-   call t.add_map('3.', '3.')
-   call t.add_map('4.', '4.')
-   call t.add_map('5.', '5.')
-   call t.add_map('6.', '6.')
-   call t.add_map('7.', '7.')
-   call t.add_map('8.', '8.')
-   call t.add_map('9.', '9.')
-   call eskk#register_mode_table('hira', t)
+   for [orgtable, mode] in [['rom_to_hira', 'hira'], ['rom_to_kata', 'kata']]
+      let t = eskk#table#new(orgtable . '*', orgtable)
+      call t.add_map('z ', '　')
+      call t.add_map('0.', '0.')
+      call t.add_map('1.', '1.')
+      call t.add_map('2.', '2.')
+      call t.add_map('3.', '3.')
+      call t.add_map('4.', '4.')
+      call t.add_map('5.', '5.')
+      call t.add_map('6.', '6.')
+      call t.add_map('7.', '7.')
+      call t.add_map('8.', '8.')
+      call t.add_map('9.', '9.')
+      call eskk#register_mode_table(mode, t)
+   endfor
 endfunction
 
 
@@ -1525,6 +1527,8 @@ function My_eskk_initialize_post()
    EskkMap -type=disable l
    EskkMap -type=disable l
 
+   map!  jk  <Plug>(eskk:disable)<ESC>
+
    " Custom highlight for henkan markers.
    syntax match skkMarker '\[[!#?]\]'
    hi link skkMarker Special
@@ -1532,7 +1536,7 @@ endfunction
 
 
 autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
-]])
+]=])
 
 
 
