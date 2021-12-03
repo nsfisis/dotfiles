@@ -488,6 +488,9 @@ function vimrc.map_plug(mode, lhs, rhs, opts)
 end
 
 
+vimrc.unmap = vim.api.nvim_del_keymap
+
+
 -- Wrapper of |getchar()|.
 function vimrc.getchar()
    local ch = F.getchar()
@@ -1065,6 +1068,11 @@ vimrc.map_plug('n', 'gO', '(my-insert-blank-lines-before)')
 
 
 vimrc.map('n', '<Space>w', ':<C-u>write<CR>', { silent = true })
+
+vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { silent = true, nowait = true })
+
+
+
 
 
 -- Abbreviations {{{1
