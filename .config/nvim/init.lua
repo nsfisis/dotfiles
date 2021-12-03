@@ -38,6 +38,8 @@ else
    my_env.os = 'unknown'
 end
 
+my_env.home = vim.env.HOME or F.expand('~')
+
 my_env.config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. '/.config'
 
 my_env.config_dir = F.stdpath('config')
@@ -46,7 +48,9 @@ my_env.data_dir = F.stdpath('data')
 
 my_env.backup_dir = my_env.data_dir .. '/backup'
 my_env.yankround_dir = my_env.data_dir .. '/yankround'
+
 my_env.skk_dir = my_env.config_home .. '/skk'
+my_env.scratch_dir = my_env.home .. '/scratch'
 
 for k, v in pairs(my_env) do
    if vim.endswith(k, '_dir') and F.isdirectory(v) == 0 then
@@ -994,6 +998,52 @@ vimrc.remap('n', 'TW', 'Tw')
 
 
 
+-- Open *scratch* buffer {{{2
+
+local extension_mapping = {
+   bash       = 'sh',
+   haskell    = 'hs',
+   javascript = 'js',
+   markdown   = 'md',
+   python     = 'py',
+   ruby       = 'rb',
+   rust       = 'rs',
+   typescript = 'ts',
+   zsh        = 'sh',
+}
+
+local function make_scratch_buffer_name(ft)
+   local now = F.localtime()
+   if ft == '' then
+      ft = 'txt'
+   end
+   local ext = extension_mapping[ft] or ft
+   return my_env.scratch_dir .. '/' .. F.strftime('%Y-%m', now), F.strftime('%d-%H%M%S'), ext
+end
+
+function vimrc.fn.open_scratch()
+   local ft = vim.trim(vimrc.input('filetype: '))
+   local dir, fname, ext = make_scratch_buffer_name(ft)
+   if F.isdirectory(dir) == 0 then
+      F.mkdir(dir, 'p')
+   end
+   vim.cmd(('edit %s/%s.%s'):format(dir, fname, ext))
+   if vim.bo.filetype ~= ft then
+      vim.cmd('setlocal filetype=' .. ft)
+   end
+   vim.b._scratch_ = true
+end
+
+vim.cmd([[
+command!
+   \ Scratch
+   \ call v:lua.vimrc.fn.open_scratch()
+]])
+
+vimrc.map('n', '<Space>s', '<Cmd>Scratch<CR>', { silent = true })
+
+
+
 -- Disable unuseful or dangerous mappings. {{{2
 
 -- Disable Select mode.
@@ -1214,6 +1264,9 @@ function vimrc.statusline.filename(bufnr)
    local name = F.bufname(bufnr)
    if name == '' then
       return '[No Name]'
+   end
+   if vim.b._scratch_ then
+       return '*scratch*'
    end
 
    local other_paths = {}
