@@ -352,8 +352,6 @@ paq({
    -- Python: autopep8
    'tell-k/vim-autopep8',
    -- QoL {{{2
-   -- If a directory is missing, make it automatically.
-   'mopp/autodirmake.vim',
    -- Capture the output of a command.
    'tyru/capture.vim',
    -- Write git commit message.
@@ -407,6 +405,22 @@ vimrc.autocmd('BufRead', '*', function()
    then
       vim.cmd('normal g`"')
    end
+end)
+
+
+-- Port this to Lua: https://github.com/mopp/autodirmake.vim
+-- License: NYSL
+vimrc.autocmd('BufWritePre', '*', function()
+   local dir = F.expand('<afile>:p:h')
+   if F.isdirectory(dir) ~= 0 then
+      return
+   end
+   vimrc.echo(('"%s" does not exist. Create? [y/N] '):format(dir), 'Question')
+   local answer = vimrc.getchar()
+   if answer ~= 'y' and answer ~= 'Y' then
+      return
+   end
+   F.mkdir(dir, 'p')
 end)
 
 
@@ -1298,12 +1312,6 @@ nmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 omap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 xmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 ]])
-
-
-
--- autodirmake {{{2
-
-G['autodirmake#msg_highlight'] = 'Question'
 
 
 
