@@ -1150,12 +1150,12 @@ command! -bar -range=%
 
 vim.cmd([[
 try
-    colorscheme ocean
+   colorscheme ocean
 catch
-    " Loading colorscheme failed.
-    " The color scheme, "desert", is one of the built-in ones. Probably, it
-    " will be loaded without any errors.
-    colorscheme desert
+   " Loading colorscheme failed.
+   " The color scheme, "desert", is one of the built-in ones. Probably, it
+   " will be loaded without any errors.
+   colorscheme desert
 endtry
 ]])
 
