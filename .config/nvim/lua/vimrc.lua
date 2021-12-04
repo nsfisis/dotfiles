@@ -1,11 +1,11 @@
-local vimrc = {}
+local M = {}
 
 
 
 local autocmd_callbacks = {}
-vimrc.autocmd_callbacks = autocmd_callbacks
+M.autocmd_callbacks = autocmd_callbacks
 
-function vimrc.autocmd(event, filter, callback)
+function M.autocmd(event, filter, callback)
    local callback_id = #autocmd_callbacks + 1
    autocmd_callbacks[callback_id] = callback
    vim.cmd(('autocmd Vimrc %s %s lua vimrc.autocmd_callbacks[%d]()'):format(
@@ -16,7 +16,7 @@ end
 
 
 
-function vimrc.after_ftplugin(ft, callback)
+function M.after_ftplugin(ft, callback)
    local var_name = 'did_ftplugin_' .. ft .. '_after'
    if vim.b[var_name] ~= nil then
       return
@@ -29,42 +29,42 @@ end
 
 
 
-local SPACE = true
-local TAB = false
+function M.register_filetype_autocmds_for_indentation()
+   local SPACE = true
+   local TAB = false
 
-local indentation_settings = {
-   c          = { style = SPACE, width = 4 },
-   cmake      = { style = SPACE, width = 2 },
-   cpp        = { style = SPACE, width = 4 },
-   css        = { style = SPACE, width = 2 },
-   go         = { style = TAB,   width = 4 },
-   haskell    = { style = SPACE, width = 4 },
-   html       = { style = SPACE, width = 2 },
-   javascript = { style = SPACE, width = 2 },
-   json       = { style = SPACE, width = 2 },
-   lisp       = { style = SPACE, width = 2 },
-   lua        = { style = SPACE, width = 3 },
-   markdown   = { style = SPACE, width = 4 },
-   php        = { style = SPACE, width = 2 },
-   python     = { style = SPACE, width = 4 },
-   ruby       = { style = SPACE, width = 2 },
-   toml       = { style = SPACE, width = 2 },
-   typescript = { style = SPACE, width = 2 },
-   vim        = { style = SPACE, width = 4 },
-   yaml       = { style = SPACE, width = 2 },
-}
+   local indentation_settings = {
+      c          = { style = SPACE, width = 4 },
+      cmake      = { style = SPACE, width = 2 },
+      cpp        = { style = SPACE, width = 4 },
+      css        = { style = SPACE, width = 2 },
+      go         = { style = TAB,   width = 4 },
+      haskell    = { style = SPACE, width = 4 },
+      html       = { style = SPACE, width = 2 },
+      javascript = { style = SPACE, width = 2 },
+      json       = { style = SPACE, width = 2 },
+      lisp       = { style = SPACE, width = 2 },
+      lua        = { style = SPACE, width = 3 },
+      markdown   = { style = SPACE, width = 4 },
+      php        = { style = SPACE, width = 2 },
+      python     = { style = SPACE, width = 4 },
+      ruby       = { style = SPACE, width = 2 },
+      toml       = { style = SPACE, width = 2 },
+      typescript = { style = SPACE, width = 2 },
+      vim        = { style = SPACE, width = 4 },
+      yaml       = { style = SPACE, width = 2 },
+   }
 
-function vimrc.register_filetype_autocmds_for_indentation()
    for ft, setting in pairs(indentation_settings) do
-      vim.cmd(([[autocmd Vimrc FileType %s call v:lua.vimrc._set_indentation(%s, %d)]]):format(
+      vim.cmd(([[autocmd Vimrc FileType %s lua vimrc._set_indentation(%s, %d)]]):format(
          ft,
-         setting.style and 'v:true' or 'v:false',
+         setting.style,
          setting.width
       ))
    end
 end
 
-function vimrc._set_indentation(style, width)
+function M._set_indentation(style, width)
    vim.bo.expandtab = style
    vim.bo.tabstop = width
    vim.bo.shiftwidth = width
@@ -77,4 +77,4 @@ end
 
 
 
-return vimrc
+return M

@@ -22,6 +22,11 @@ local vimrc = require('vimrc')
 _G.vimrc = vimrc
 
 
+local function iabbrev(from, to)
+   vim.cmd(('inoreabbrev %s %s'):format(from, to))
+end
+
+
 -- Global constants {{{2
 
 local my_env = {}
@@ -1129,9 +1134,9 @@ vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
 
 -- Abbreviations {{{1
 
-vim.cmd('inoreabbrev retrun return')
-vim.cmd('inoreabbrev reutrn return')
-vim.cmd('inoreabbrev tihs this')
+iabbrev('retrun', 'return')
+iabbrev('reutrn', 'return')
+iabbrev('tihs', 'this')
 
 
 

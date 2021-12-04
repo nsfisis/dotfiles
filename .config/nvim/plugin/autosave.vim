@@ -5,25 +5,17 @@ if exists('g:loaded_autosave')
 endif
 
 
-
 command! -bar
     \ AutosaveEnable
-    \ call autosave#enable()
-
+    \ lua require('autosave').enable()
 
 command! -bar
     \ AutosaveDisable
-    \ call autosave#disable()
-
+    \ lua require('autosave').disable()
 
 command! -bar
     \ AutosaveToggle
-    \ if exists('b:autosave_timer') |
-    \     call autosave#disable() |
-    \ else |
-    \     call autosave#enable() |
-    \ endif
-
+    \ lua require('autosave').toggle()
 
 
 let g:loaded_autosave = 1
