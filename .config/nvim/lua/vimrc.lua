@@ -1,7 +1,6 @@
 local M = {}
 
 
-
 local autocmd_callbacks = {}
 M.autocmd_callbacks = autocmd_callbacks
 
@@ -73,6 +72,133 @@ function M._set_indentation(style, width)
    if vim.fn.exists(':IndentLinesReset') == 2 then
       vim.cmd('IndentLinesReset')
    end
+end
+
+
+
+function M.hi(group, attributes)
+   vim.cmd(('highlight! %s %s'):format(group, attributes))
+end
+
+
+function M.hi_link(from, to)
+   vim.cmd(('highlight! link %s %s'):format(from, to))
+end
+
+function M.map(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
+   end
+   opts.noremap = true
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      rhs,
+      opts)
+end
+
+
+function M.remap(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
+   end
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      rhs,
+      opts)
+end
+
+
+M.map_callbacks = {}
+
+function M.map_expr(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
+   end
+   opts.noremap = true
+   opts.expr = true
+   local callback_id = #M.map_callbacks + 1
+   M.map_callbacks[callback_id] = rhs
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      ('v:lua.vimrc.map_callbacks[%d]()'):format(callback_id),
+      opts)
+end
+
+
+function M.map_cmd(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
+   end
+   opts.noremap = true
+   opts.silent = true
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      (':<C-u>%s<CR>'):format(rhs),
+      opts)
+end
+
+
+function M.map_plug(mode, lhs, rhs, opts)
+   if opts == nil then
+      opts = {}
+   end
+   vim.api.nvim_set_keymap(
+      mode,
+      lhs,
+      '<Plug>' .. rhs,
+      opts)
+end
+
+
+M.unmap = vim.api.nvim_del_keymap
+
+
+-- Wrapper of |getchar()|.
+function M.getchar()
+   local ch = vim.fn.getchar()
+   while ch == "\\<CursorHold>" do
+      ch = vim.fn.getchar()
+   end
+   return type(ch) == 'number' and vim.fn.nr2char(ch) or ch
+end
+
+
+-- Wrapper of |:echo| and |:echohl|.
+function M.echo(message, hl)
+   if not hl then
+      hl = 'None'
+   end
+   vim.cmd('redraw')
+   vim.cmd('echohl ' .. hl)
+   vim.cmd('echo "' .. message .. '"')
+   vim.cmd('echohl None')
+end
+
+
+-- Wrapper of |getchar()|.
+function M.getchar_with_prompt(prompt)
+   M.echo(prompt, 'Question')
+   return M.getchar()
+end
+
+
+-- Wrapper of |input()|.
+-- Only when it is used in a mapping, |inputsave()| and |inputstore()| are
+-- required.
+function M.input(prompt)
+   vim.fn.inputsave()
+   local result = vim.fn.input(prompt)
+   vim.fn.inputrestore()
+   return result
+end
+
+
+function M.term(s)
+   return vim.api.nvim_replace_termcodes(s, true, true, true)
 end
 
 

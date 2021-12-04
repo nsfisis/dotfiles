@@ -17,10 +17,10 @@
 local F = vim.fn
 local G = vim.g
 local O = vim.o
+local OPT = vim.opt
 
 local vimrc = require('vimrc')
 _G.vimrc = vimrc
-
 
 local function iabbrev(from, to)
    vim.cmd(('inoreabbrev %s %s'):format(from, to))
@@ -76,25 +76,16 @@ augroup END
 
 
 
-
-
 -- Language {{{2
 
 -- Disable L10N.
-
 vim.cmd('language messages C')
 vim.cmd('language time C')
 
 
 
 
-
 -- Options {{{1
-
--- * Use |:set|, not |:setglobal|.
---   |:setglobal| does not set local options, so options are not set in
---   the starting buffer you specified as commandline arguments like
---   "$ vim ~/.vimrc".
 
 -- Moving around, searching and patterns {{{2
 
@@ -103,26 +94,29 @@ O.ignorecase = true
 O.smartcase = true
 
 
-
 -- Displaying text {{{2
 
 O.scrolloff = 7
 O.linebreak = true
 O.breakindent = true
-O.breakindentopt = O.breakindentopt .. ',sbr'
+OPT.breakindentopt:append('sbr')
 O.showbreak = '> '
 O.sidescrolloff = 20
-O.fillchars = 'vert: ,fold: ,diff: '
+OPT.fillchars = {
+   vert = ' ',
+   fold = ' ',
+   diff = ' ',
+}
 O.cmdheight = 1
 O.list = true
--- \u00ac \xc2\xac
--- \u25b8 \xe2\x96\xb8
--- \u00b7 \xc2\xb7
--- \u00bb \xc2\xbb
--- \u00ab \xc2\xab
-O.listchars = 'eol:\xc2\xac,tab:\xe2\x96\xb8 ,trail:\xc2\xb7,extends:\xc2\xbb,precedes:\xc2\xab'
+OPT.listchars = {
+   eol = '\xc2\xac', -- u00ac
+   tab = '\xe2\x96\xb8 ', -- u25b8
+   trail = '\xc2\xb7', -- u00b7
+   extends = '\xc2\xbb', -- u00bb
+   precedes = '\xc2\xab', -- u00ab
+}
 O.concealcursor = 'cnv'
-
 
 
 -- Syntax, highlighting and spelling {{{2
@@ -130,9 +124,6 @@ O.concealcursor = 'cnv'
 O.background = 'dark'
 O.synmaxcol = 500
 O.hlsearch = true
--- Execute nohlsearch to avoid highlighting last searched pattern when reloading
--- .vimrc.
-vim.cmd('nohlsearch')
 O.termguicolors = true
 O.colorcolumn = '+1'
 
@@ -144,11 +135,9 @@ O.hidden = true
 O.switchbuf = 'usetab'
 
 
-
 -- Multiple tabpages {{{2
 
 O.showtabline = 2
-
 
 
 -- Terminal {{{2
@@ -156,20 +145,17 @@ O.showtabline = 2
 O.title = false
 
 
-
 -- Using the mouse {{{2
 
 O.mouse = ''
 
 
-
 -- Messages and info {{{2
 
-O.shortmess = O.shortmess .. 'asIc'
+OPT.shortmess:append('asIc')
 O.showmode = false
 O.report = 999
 O.confirm = true
-
 
 
 -- Selecting text {{{2
@@ -177,22 +163,20 @@ O.confirm = true
 O.clipboard = 'unnamed'
 
 
-
 -- Editing text {{{2
 
 O.undofile = true
 O.textwidth = 0
-vim.cmd('set completeopt-=preview')
+OPT.completeopt:remove('preview')
 O.pumheight = 10
-O.matchpairs = O.matchpairs .. ',<:>'
+OPT.matchpairs:append('<:>')
 O.joinspaces = false
-O.nrformats = O.nrformats .. ',unsigned'
-
+OPT.nrformats:append('unsigned')
 
 
 -- Tabs and indenting {{{2
 -- Note: you should also set them for each file types.
---       These following settings are global, used for unknown file types.
+--       These following settings are used for unknown file types.
 
 O.tabstop = 4
 O.shiftwidth = 4
@@ -203,20 +187,17 @@ O.copyindent = true
 O.preserveindent = true
 
 
-
 -- Folding {{{2
 
 O.foldlevelstart = 0
-O.foldopen = O.foldopen .. ',insert'
+OPT.foldopen:append('insert')
 O.foldmethod = 'marker'
-
 
 
 -- Diff mode {{{2
 
-O.diffopt = O.diffopt .. ',vertical'
-O.diffopt = O.diffopt .. ',foldcolumn:3'
-
+OPT.diffopt:append('vertical')
+OPT.diffopt:append('foldcolumn:3')
 
 
 -- Mapping {{{2
@@ -225,24 +206,21 @@ O.maxmapdepth = 10
 O.timeout = false
 
 
-
 -- Reading and writing files {{{2
 
 O.fixendofline = false
--- Note: if 'fileformat' is empty, the first item of 'fileformats' is used.
 O.fileformats = 'unix,dos'
--- Note: these settings make one backup. If you want more backups, see
---       |'backupext'|.
 O.backup = true
 O.backupdir = my_env.backup_dir
 O.autowrite = true
 
 
-
 -- Command line editing {{{2
-O.wildignore = O.wildignore .. ',*.o,*.obj,*.lib'
-O.wildignorecase = true
 
+OPT.wildignore:append('*.o')
+OPT.wildignore:append('*.obj')
+OPT.wildignore:append('*.lib')
+O.wildignorecase = true
 
 
 -- Executing external commands {{{2
@@ -251,20 +229,12 @@ O.shell = 'zsh'
 O.keywordprg = ''
 
 
-
 -- Encoding {{{2
 
--- Note: if 'fileencoding' is empty, 'encoding' is used.
 O.fileencodings = 'utf-8,cp932,euc-jp'
 
 
-
 -- Misc. {{{2
-
-O.sessionoptions = O.sessionoptions .. ',localoptions'
-O.sessionoptions = O.sessionoptions .. ',resize'
-O.sessionoptions = O.sessionoptions .. ',winpos'
-
 
 
 -- Installed plugins {{{1
@@ -412,136 +382,6 @@ paq({
    'LeafCage/yankround.vim',
    -- }}}
 })
-
-
-
--- Utilities {{{1
-
-function vimrc.hi(group, attributes)
-   vim.cmd(('highlight! %s %s'):format(group, attributes))
-end
-
-
-function vimrc.hi_link(from, to)
-   vim.cmd(('highlight! link %s %s'):format(from, to))
-end
-
-
-function vimrc.map(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      rhs,
-      opts)
-end
-
-
-function vimrc.remap(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      rhs,
-      opts)
-end
-
-
-vimrc.map_callbacks = {}
-
-function vimrc.map_expr(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   opts.expr = true
-   local callback_id = #vimrc.map_callbacks + 1
-   vimrc.map_callbacks[callback_id] = rhs
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      ('v:lua.vimrc.map_callbacks[%d]()'):format(callback_id),
-      opts)
-end
-
-
-function vimrc.map_cmd(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   opts.silent = true
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      (':<C-u>%s<CR>'):format(rhs),
-      opts)
-end
-
-
-function vimrc.map_plug(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      '<Plug>' .. rhs,
-      opts)
-end
-
-
-vimrc.unmap = vim.api.nvim_del_keymap
-
-
--- Wrapper of |getchar()|.
-function vimrc.getchar()
-   local ch = F.getchar()
-   while ch == "\\<CursorHold>" do
-      ch = F.getchar()
-   end
-   return type(ch) == 'number' and F.nr2char(ch) or ch
-end
-
-
--- Wrapper of |:echo| and |:echohl|.
-function vimrc.echo(message, hl)
-   if not hl then
-      hl = 'None'
-   end
-   vim.cmd('redraw')
-   vim.cmd('echohl ' .. hl)
-   vim.cmd('echo "' .. message .. '"')
-   vim.cmd('echohl None')
-end
-
-
--- Wrapper of |getchar()|.
-function vimrc.getchar_with_prompt(prompt)
-   vimrc.echo(prompt, 'Question')
-   return vimrc.getchar()
-end
-
-
--- Wrapper of |input()|.
--- Only when it is used in a mapping, |inputsave()| and |inputstore()| are
--- required.
-function vimrc.input(prompt)
-   F.inputsave()
-   local result = F.input(prompt)
-   F.inputrestore()
-   return result
-end
-
-
-function vimrc.term(s)
-   return vim.api.nvim_replace_termcodes(s, true, true, true)
-end
 
 
 
@@ -1158,16 +998,11 @@ command! -bar -range=%
 
 -- Color scheme {{{2
 
-vim.cmd([[
-try
-   colorscheme ocean
-catch
-   " Loading colorscheme failed.
-   " The color scheme, "desert", is one of the built-in ones. Probably, it
-   " will be loaded without any errors.
-   colorscheme desert
-endtry
-]])
+if not pcall(function() vim.cmd('colorscheme ocean') end) then
+   -- Load "desert", one of the built-in colorschemes, instead of mine
+   -- when nvim failed to load it.
+   vim.cmd('colorscheme desert')
+end
 
 
 
@@ -1273,7 +1108,7 @@ function vimrc.statusline.filename(bufnr)
       return '[No Name]'
    end
    if vim.b._scratch_ then
-       return '*scratch*'
+      return '*scratch*'
    end
 
    local other_paths = {}
@@ -1381,6 +1216,9 @@ function vimrc.statusline.filetype(bufnr)
       return ft
    end
 end
+
+
+
 -- Tabline {{{2
 
 O.tabline = '%!v:lua.vimrc.tabline.build()'
@@ -1400,6 +1238,7 @@ function vimrc.tabline.build()
    end
    return tal .. '%#TabLineFill#'
 end
+
 
 
 -- Plugins configuration {{{1
