@@ -343,9 +343,6 @@ paq({
    -- Appearance {{{2
    -- Show highlight.
    'cocopon/colorswatch.vim',
-   -- NOTE: it is a fork of godlygeek/csapprox
-   -- Make gui-only color schemes 256colors-compatible.
-   'nsfisis/csapprox',
    -- Makes folding text cool.
    'LeafCage/foldCC.vim',
    -- Show indent.
