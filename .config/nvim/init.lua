@@ -597,9 +597,9 @@ vimrc.map('x', '<C-r>', '"')
 
 
 
-vimrc.map('n', '@j', 'j.')
-vimrc.map('n', '@k', 'k.')
-vimrc.map('n', '@n', 'n.')
+F.setreg('j', 'j.')
+F.setreg('k', 'k.')
+F.setreg('n', 'n.')
 vimrc.map('n', '@N', 'N.')
 
 -- Repeat the last executed macro as many times as possible.
