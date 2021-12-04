@@ -329,6 +329,8 @@ paq({
    -- Highlight specified words.
    't9md/vim-quickhl',
    -- Filetypes {{{2
+   -- Faster replacement for bundled filetype.vim
+   'nathom/filetype.nvim',
    -- C/C++
    'rhysd/vim-clang-format',
    -- Python
@@ -1436,6 +1438,16 @@ endfunction
 
 autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
 ]=])
+
+
+
+-- filetype.nvim {{{2
+
+require('filetype').setup({
+   overrides = {
+      -- My settings here
+   },
+})
 
 
 
