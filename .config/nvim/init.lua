@@ -1144,10 +1144,10 @@ function vimrc.statusline.filename(bufnr)
 
    local ret = ''
    for k = i, 0 do
-      if #this_path < 1-k then
+      if #this_path < 1 - k then
          break
       end
-      if k == i or k == #this_path then
+      if k == i or k == 0 then
          ret = ret .. '/' .. this_path[#this_path+k]
       else
          ret = ret .. '/' .. F.matchlist(this_path[#this_path+k], '.')[1]
