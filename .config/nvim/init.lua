@@ -329,28 +329,12 @@ paq({
    -- Highlight specified words.
    't9md/vim-quickhl',
    -- Filetypes {{{2
-   -- Syntax {{{3
-   -- HCL
-   'b4b4r07/vim-hcl',
-   -- JavaScript
-   'pangloss/vim-javascript',
-   -- JSON5
-   'GutenYe/json5.vim',
-   -- MoonScript
-   'leafo/moonscript-vim',
-   -- Nginx conf
-   'chr4/nginx.vim',
+   -- C/C++
+   'rhysd/vim-clang-format',
+   -- Python
+   'tell-k/vim-autopep8',
    -- Rust
    'rust-lang/rust.vim',
-   -- TOML
-   'cespare/vim-toml',
-   -- TypeScript
-   'leafgarland/typescript-vim',
-   -- Tools {{{3
-   -- C/C++: clang-format
-   'rhysd/vim-clang-format',
-   -- Python: autopep8
-   'tell-k/vim-autopep8',
    -- QoL {{{2
    -- Capture the output of a command.
    'tyru/capture.vim',
