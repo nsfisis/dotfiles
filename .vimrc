@@ -340,7 +340,8 @@ cmap  jk  <ESC>
 
 nnoremap <silent>  <C-c>  :<C-u>nohlsearch<CR>
 
-nnoremap <silent>  <Space>w  :<C-u>write<CR>
+nnoremap <silent>  <Space>w  :<C-u>update<CR>
+nnoremap <silent> <nowait>  Z  :<C-u>wqall<CR>
 
 
 inoreabbrev  retrun  return
