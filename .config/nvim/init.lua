@@ -565,6 +565,9 @@ vimrc.autocmd('BufRead', '*', function()
 end)
 
 
+vimrc.register_filetype_autocmds_for_indentation()
+
+
 
 -- Mappings {{{1
 

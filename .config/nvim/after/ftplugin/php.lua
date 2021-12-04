@@ -1,6 +1,4 @@
 vimrc.after_ftplugin('php', function(conf)
-   conf.indent(conf.SPACE, 2)
-
    -- If a buffer is empty, insert `<?php` tag and 2 blank lines, and position the
    -- cursor at the end of the buffer (line 3, column 0).
    --
