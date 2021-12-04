@@ -2,12 +2,19 @@ local M = {}
 
 
 local INTERVAL_MS = 10 * 1000
-local SILENT = true
+local SILENT = false
 
 
 -- Because a timer cannot be converted to Vim value,
 -- store indice of timers instead of timer instances.
 local timers = {}
+
+
+local function echo(text, hl_group)
+   if SILENT then return end
+
+   vim.api.nvim_echo({{ text, hl_group }}, false, {})
+end
 
 
 local function handler()
@@ -24,19 +31,9 @@ local function handler()
       return
    end
 
-   if not SILENT then
-      vim.cmd([[echohl Comment]])
-      vim.cmd([[echo 'Auto-saving...']])
-      vim.cmd([[echohl None]])
-   end
-
-   vim.cmd([[silent! write]])
-
-   if not SILENT then
-      vim.cmd([[echohl Comment]])
-      vim.cmd([[echo 'Saved.']])
-      vim.cmd([[echohl None]])
-   end
+   echo('Auto-saving...', 'Comment')
+   vim.cmd('silent! write')
+   echo('Saved.', 'Comment')
 end
 
 

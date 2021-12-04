@@ -173,9 +173,7 @@ function M.echo(message, hl)
       hl = 'None'
    end
    vim.cmd('redraw')
-   vim.cmd('echohl ' .. hl)
-   vim.cmd('echo "' .. message .. '"')
-   vim.cmd('echohl None')
+   vim.api.nvim_echo({{ message, hl }}, false, {})
 end
 
 
