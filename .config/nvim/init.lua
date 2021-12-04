@@ -349,6 +349,8 @@ paq({
    'Yggdroot/indentLine',
    -- Highlight matched parentheses.
    'itchyny/vim-parenmatch',
+   -- Tree-sitter integration.
+   'nvim-treesitter/nvim-treesitter',
    -- Highlight specified words.
    't9md/vim-quickhl',
    -- Filetypes {{{2
@@ -1956,6 +1958,33 @@ vimrc.map_plug('x', 'i<C-w>', '(textobj-wiw-i)')
 
 
 
+-- nvim-treesitter {{{2
+
+require('nvim-treesitter.configs').setup {
+   ensure_installed = 'maintained',
+   sync_install = false,
+   highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+   },
+   --[[
+   incremental_selection = {
+      enable = true,
+      keymaps = {
+         init_selection = 'TODO',
+         node_incremental = 'TODO',
+         scope_incremental = 'TODO',
+         node_decremental = 'TODO',
+      },
+   },
+   --]]
+   indent = {
+      enable = true,
+   },
+}
+
+
+
 -- window-adjuster {{{2
 
 vimrc.map('n', 'tRw', ':<C-u>AdjustScreenWidth<CR>', { silent = true })
@@ -1970,8 +1999,3 @@ vimrc.map('n', 'tRr', ':<C-u>AdjustScreenWidth <Bar> AdjustScreenHeight<CR>', { 
 
 G.yankround_dir = my_env.yankround_dir
 G.yankround_use_region_hl = true
-
-
-
-
-
