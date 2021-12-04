@@ -1114,9 +1114,9 @@ vimrc.map_plug('n', 'go', '(my-insert-blank-lines-after)')
 vimrc.map_plug('n', 'gO', '(my-insert-blank-lines-before)')
 
 
-vimrc.map('n', '<Space>w', ':<C-u>write<CR>', { silent = true })
+vimrc.map('n', '<Space>w', '<Cmd>update<CR>')
 
-vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { silent = true, nowait = true })
+vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
 
 
 
