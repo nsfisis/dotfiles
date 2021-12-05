@@ -201,4 +201,9 @@ end
 
 
 
+function M.iabbrev(from, to)
+   vim.cmd(('inoreabbrev %s %s'):format(from, to))
+end
+
+
 return M

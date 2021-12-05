@@ -22,10 +22,6 @@ local OPT = vim.opt
 local vimrc = require('vimrc')
 _G.vimrc = vimrc
 
-local function iabbrev(from, to)
-   vim.cmd(('inoreabbrev %s %s'):format(from, to))
-end
-
 
 -- Global constants {{{2
 
@@ -237,138 +233,6 @@ O.fileencodings = 'utf-8,cp932,euc-jp'
 -- Misc. {{{2
 
 
--- Installed plugins {{{1
-
-local paq = require('paq')
-paq({
-   -- Text editing {{{2
-   -- IME {{{3
-   -- SKK (Simple Kana to Kanji conversion program) for Vim.
-   'vim-skk/eskk.vim',
-   -- Operators {{{3
-   -- Support for user-defined operators.
-   'kana/vim-operator-user',
-   -- Extract expression and make assingment statement.
-   'tek/vim-operator-assign',
-   -- Replace text without updating registers.
-   'kana/vim-operator-replace',
-   -- Reverse text.
-   'tyru/operator-reverse.vim',
-   -- Search in a specific region.
-   'osyo-manga/vim-operator-search',
-   -- Shiffle text.
-   'pekepeke/vim-operator-shuffle',
-   -- Sort text characterwise and linewise.
-   'emonkak/vim-operator-sort',
-   -- Super surround.
-   'machakann/vim-sandwich',
-   -- Non-operators {{{3
-   -- Comment out.
-   'tyru/caw.vim',
-   -- Align text.
-   'junegunn/vim-easy-align',
-   -- Text objects {{{2
-   -- Support for user-defined text objects.
-   'kana/vim-textobj-user',
-   -- Text object for blockwise.
-   'osyo-manga/vim-textobj-blockwise',
-   -- Text object for comment.
-   'thinca/vim-textobj-comment',
-   -- Text object for continuous line.
-   'rhysd/vim-textobj-continuous-line',
-   -- Text object for entire file.
-   'kana/vim-textobj-entire',
-   -- Text object for function.
-   'kana/vim-textobj-function',
-   -- Text object for indent.
-   'kana/vim-textobj-indent',
-   -- Text object for last inserted text.
-   'rhysd/vim-textobj-lastinserted',
-   -- Text object for last pasted text.
-   'gilligan/textobj-lastpaste',
-   -- Text object for last searched pattern.
-   'kana/vim-textobj-lastpat',
-   -- Text object for line.
-   'kana/vim-textobj-line',
-   -- Text object for parameter.
-   'sgur/vim-textobj-parameter',
-   -- Text object for space.
-   'saihoooooooo/vim-textobj-space',
-   -- Text object for syntax.
-   'kana/vim-textobj-syntax',
-   -- Text object for URL.
-   'mattn/vim-textobj-url',
-   -- Text object for words in words.
-   'h1mesuke/textobj-wiw',
-   -- Search {{{2
-   -- Extend * and #.
-   'haya14busa/vim-asterisk',
-   -- NOTE: it is a fork version of jremmen/vim-ripgrep
-   -- Integration with ripgrep, fast alternative of grep command.
-   'nsfisis/vim-ripgrep',
-   -- Files {{{2
-   -- Switch to related files.
-   'kana/vim-altr',
-   -- Fast Fuzzy Finder.
-   'ctrlpvim/ctrlp.vim',
-   -- CtrlP's matcher by builtin `matchfuzzy()`.
-   'mattn/ctrlp-matchfuzzy',
-   -- Filer for minimalists.
-   'justinmk/vim-dirvish',
-   -- Appearance {{{2
-   -- Show highlight.
-   'cocopon/colorswatch.vim',
-   -- Makes folding text cool.
-   'LeafCage/foldCC.vim',
-   -- Show indent.
-   'Yggdroot/indentLine',
-   -- Highlight matched parentheses.
-   'itchyny/vim-parenmatch',
-   -- Tree-sitter integration.
-   'nvim-treesitter/nvim-treesitter',
-   -- Highlight specified words.
-   't9md/vim-quickhl',
-   -- Filetypes {{{2
-   -- Faster replacement for bundled filetype.vim
-   'nathom/filetype.nvim',
-   -- C/C++
-   'rhysd/vim-clang-format',
-   -- Python
-   'tell-k/vim-autopep8',
-   -- Rust
-   'rust-lang/rust.vim',
-   -- QoL {{{2
-   -- Capture the output of a command.
-   'tyru/capture.vim',
-   -- Write git commit message.
-   'rhysd/committia.vim',
-   -- Neovim clone of EasyMotion
-   'phaazon/hop.nvim',
-   -- Integration with EditorConfig (https://editorconfig.org)
-   'editorconfig/editorconfig-vim',
-   -- Extend J.
-   'osyo-manga/vim-jplus',
-   -- Improve behaviors of I, A and gI in Blockwise-Visual mode.
-   'kana/vim-niceblock',
-   -- Edit QuickFix and reflect to original buffers.
-   'thinca/vim-qfreplace',
-   -- Run anything.
-   'thinca/vim-quickrun',
-   -- Extend dot-repeat.
-   'tpope/vim-repeat',
-   -- Introduce user-defined mode.
-   'kana/vim-submode',
-   -- Swap arguments.
-   'machakann/vim-swap',
-   -- Adjust window size.
-   'rhysd/vim-window-adjuster',
-   -- Remember yank history and paste them.
-   'LeafCage/yankround.vim',
-   -- }}}
-})
-
-
-
 -- Autocommands {{{1
 
 -- Auto-resize windows when Vim is resized.
@@ -394,7 +258,7 @@ vimrc.autocmd('BufRead', '*', function()
 end)
 
 
--- Port this to Lua: https://github.com/mopp/autodirmake.vim
+-- Lua version of https://github.com/mopp/autodirmake.vim
 -- License: NYSL
 vimrc.autocmd('BufWritePre', '*', function()
    local dir = F.expand('<afile>:p:h')
@@ -417,33 +281,28 @@ vimrc.register_filetype_autocmds_for_indentation()
 -- Mappings {{{1
 
 -- Note: |:noremap| defines mappings in |Normal|, |Visual|, |Operator-Pending|
--- and |Select| mode. Because I don't use |Select| mode, I use |:noremap| as
--- substitute of |:nnoremap|, |:xnoremap| and |:onoremap| for simplicity.
+-- and |Select| mode. Because I don't use |Select| mode, I use |:noremap|
+-- instead of |:nnoremap|, |:xnoremap| and |:onoremap| for simplicity.
 
 
--- Fix the search direction. {{{2
+-- Searching {{{2
 
+-- Fix direction of n and N.
 vimrc.map('', 'n', "v:searchforward ? 'n' : 'N'", { expr = true })
 vimrc.map('', 'N', "v:searchforward ? 'N' : 'n'", { expr = true })
 
 vimrc.map('', 'gn', "v:searchforward ? 'gn' : 'gN'", { expr = true })
 vimrc.map('', 'gN', "v:searchforward ? 'gN' : 'gn'", { expr = true })
 
-
-
 vimrc.map('n', '&', ':%&&<CR>', { silent = true })
 vimrc.map('x', '&', ':%&&<CR>', { silent = true })
 
 
-
 -- Registers and macros. {{{2
-
 
 -- Access an resister in the same way in Insert and Commandline mode.
 vimrc.map('n', '<C-r>', '"')
 vimrc.map('x', '<C-r>', '"')
-
-
 
 F.setreg('j', 'j.')
 F.setreg('k', 'k.')
@@ -455,10 +314,8 @@ vimrc.map('n', '@N', 'N.')
 vimrc.map('n', '@a', '9999@@')
 vimrc.map('n', '@a', '9999@@')
 
-
 -- Execute the last executed macro again.
 vimrc.map('n', '`', '@@')
-
 
 
 -- Emacs like key mappings in Insert and CommandLine mode. {{{2
@@ -925,6 +782,17 @@ vimrc.map('n', 'XM', ':<C-u>messages<CR>', { silent = true })
 
 
 
+
+
+
+-- Abbreviations {{{2
+
+vimrc.iabbrev('retrun', 'return')
+vimrc.iabbrev('reutrn', 'return')
+vimrc.iabbrev('tihs', 'this')
+
+
+
 -- Misc. {{{2
 
 vimrc.map('o', 'gv', ':<C-u>normal! gv<CR>', { silent = true })
@@ -967,17 +835,6 @@ vimrc.map_plug('n', 'gO', '(my-insert-blank-lines-before)')
 vimrc.map('n', '<Space>w', '<Cmd>update<CR>')
 
 vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
-
-
-
-
-
--- Abbreviations {{{1
-
-iabbrev('retrun', 'return')
-iabbrev('reutrn', 'return')
-iabbrev('tihs', 'this')
-
 
 
 -- Commands {{{1
@@ -1238,6 +1095,138 @@ function vimrc.tabline.build()
    end
    return tal .. '%#TabLineFill#'
 end
+
+
+
+-- Plugins {{{1
+
+local paq = require('paq')
+paq({
+   -- Text editing {{{2
+   -- IME {{{3
+   -- SKK (Simple Kana to Kanji conversion program) for Vim.
+   'vim-skk/eskk.vim',
+   -- Operators {{{3
+   -- Support for user-defined operators.
+   'kana/vim-operator-user',
+   -- Extract expression and make assingment statement.
+   'tek/vim-operator-assign',
+   -- Replace text without updating registers.
+   'kana/vim-operator-replace',
+   -- Reverse text.
+   'tyru/operator-reverse.vim',
+   -- Search in a specific region.
+   'osyo-manga/vim-operator-search',
+   -- Shiffle text.
+   'pekepeke/vim-operator-shuffle',
+   -- Sort text characterwise and linewise.
+   'emonkak/vim-operator-sort',
+   -- Super surround.
+   'machakann/vim-sandwich',
+   -- Non-operators {{{3
+   -- Comment out.
+   'tyru/caw.vim',
+   -- Align text.
+   'junegunn/vim-easy-align',
+   -- Text objects {{{2
+   -- Support for user-defined text objects.
+   'kana/vim-textobj-user',
+   -- Text object for blockwise.
+   'osyo-manga/vim-textobj-blockwise',
+   -- Text object for comment.
+   'thinca/vim-textobj-comment',
+   -- Text object for continuous line.
+   'rhysd/vim-textobj-continuous-line',
+   -- Text object for entire file.
+   'kana/vim-textobj-entire',
+   -- Text object for function.
+   'kana/vim-textobj-function',
+   -- Text object for indent.
+   'kana/vim-textobj-indent',
+   -- Text object for last inserted text.
+   'rhysd/vim-textobj-lastinserted',
+   -- Text object for last pasted text.
+   'gilligan/textobj-lastpaste',
+   -- Text object for last searched pattern.
+   'kana/vim-textobj-lastpat',
+   -- Text object for line.
+   'kana/vim-textobj-line',
+   -- Text object for parameter.
+   'sgur/vim-textobj-parameter',
+   -- Text object for space.
+   'saihoooooooo/vim-textobj-space',
+   -- Text object for syntax.
+   'kana/vim-textobj-syntax',
+   -- Text object for URL.
+   'mattn/vim-textobj-url',
+   -- Text object for words in words.
+   'h1mesuke/textobj-wiw',
+   -- Search {{{2
+   -- Extend * and #.
+   'haya14busa/vim-asterisk',
+   -- NOTE: it is a fork version of jremmen/vim-ripgrep
+   -- Integration with ripgrep, fast alternative of grep command.
+   'nsfisis/vim-ripgrep',
+   -- Files {{{2
+   -- Switch to related files.
+   'kana/vim-altr',
+   -- Fast Fuzzy Finder.
+   'ctrlpvim/ctrlp.vim',
+   -- CtrlP's matcher by builtin `matchfuzzy()`.
+   'mattn/ctrlp-matchfuzzy',
+   -- Filer for minimalists.
+   'justinmk/vim-dirvish',
+   -- Appearance {{{2
+   -- Show highlight.
+   'cocopon/colorswatch.vim',
+   -- Makes folding text cool.
+   'LeafCage/foldCC.vim',
+   -- Show indent.
+   'Yggdroot/indentLine',
+   -- Highlight matched parentheses.
+   'itchyny/vim-parenmatch',
+   -- Tree-sitter integration.
+   'nvim-treesitter/nvim-treesitter',
+   -- Highlight specified words.
+   't9md/vim-quickhl',
+   -- Filetypes {{{2
+   -- Faster replacement for bundled filetype.vim
+   'nathom/filetype.nvim',
+   -- C/C++
+   'rhysd/vim-clang-format',
+   -- Python
+   'tell-k/vim-autopep8',
+   -- Rust
+   'rust-lang/rust.vim',
+   -- QoL {{{2
+   -- Capture the output of a command.
+   'tyru/capture.vim',
+   -- Write git commit message.
+   'rhysd/committia.vim',
+   -- Neovim clone of EasyMotion
+   'phaazon/hop.nvim',
+   -- Integration with EditorConfig (https://editorconfig.org)
+   'editorconfig/editorconfig-vim',
+   -- Extend J.
+   'osyo-manga/vim-jplus',
+   -- Improve behaviors of I, A and gI in Blockwise-Visual mode.
+   'kana/vim-niceblock',
+   -- Edit QuickFix and reflect to original buffers.
+   'thinca/vim-qfreplace',
+   -- Run anything.
+   'thinca/vim-quickrun',
+   -- Extend dot-repeat.
+   'tpope/vim-repeat',
+   -- Introduce user-defined mode.
+   'kana/vim-submode',
+   -- Swap arguments.
+   'machakann/vim-swap',
+   -- Adjust window size.
+   'rhysd/vim-window-adjuster',
+   -- Remember yank history and paste them.
+   'LeafCage/yankround.vim',
+   -- }}}
+})
 
 
 
