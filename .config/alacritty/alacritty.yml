@@ -423,7 +423,7 @@ shell:
   program: /bin/bash
   args:
     - -c
-    - 'export PATH="$PATH:/usr/local/bin"; tmux attach -t 0 || tmux new -s 0'
+    - 'export PATH="$PATH:/usr/bin:/usr/local/bin"; tmux attach -t 0 || tmux new -s 0'
 
 # Startup directory
 #
