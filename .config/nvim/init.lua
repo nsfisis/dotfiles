@@ -668,6 +668,7 @@ command! -nargs=+ -complete=command
 
 vimrc.map('n', 'T', '<Nop>')
 
+vimrc.map('n', 'Ta', ':<C-u>AutosaveToggle<CR>', { silent = true })
 vimrc.map('n', 'Tb', ':<C-u>if &background == "dark" <Bar>set background=light <Bar>else <Bar>set background=dark <Bar>endif<CR>', { silent = true })
 vimrc.map('n', 'Tc', ':<C-u>set cursorcolumn! <Bar>set cursorline!<CR>', { silent = true })
 vimrc.map('n', 'Td', ':<C-u>if &diff <Bar>diffoff <Bar>else <Bar>diffthis <Bar>endif<CR>', { silent = true })
@@ -680,6 +681,7 @@ vimrc.map('n', 'T0', ':<C-u>if &textwidth ==# 100 <Bar>set textwidth= <Bar>else 
 vimrc.map('n', 'T2', ':<C-u>if &textwidth ==# 120 <Bar>set textwidth= <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>', { silent = true })
 vimrc.map('n', 'Tw', ':<C-u>set wrap!<CR>', { silent = true })
 
+vimrc.remap('n', 'TA', 'Ta')
 vimrc.remap('n', 'TB', 'Tb')
 vimrc.remap('n', 'TC', 'Tc')
 vimrc.remap('n', 'TD', 'Td')
