@@ -410,11 +410,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias lsal='ls -G -al'
     alias lsla='ls -G -al'
 else
-    alias ls='ls --color=none'
-    alias lsa='ls --color=none -a'
-    alias lsl='ls --color=none -l'
-    alias lsal='ls --color=none -al'
-    alias lsla='ls --color=none -al'
+    alias ls='ls --color=always'
+    alias lsa='ls --color=always -a'
+    alias lsl='ls --color=always -l'
+    alias lsal='ls --color=always -al'
+    alias lsla='ls --color=always -al'
 fi
 
 
