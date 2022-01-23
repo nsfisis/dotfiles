@@ -1196,6 +1196,8 @@ paq({
    'nathom/filetype.nvim',
    -- C/C++
    'rhysd/vim-clang-format',
+   -- HTML/CSS
+   'mattn/emmet-vim',
    -- Python
    'tell-k/vim-autopep8',
    -- Rust
@@ -1348,6 +1350,15 @@ G.ctrlp_match_func = { match = 'ctrlp_matchfuzzy#matcher' }
 
 vimrc.map_plug('n', '=', '(EasyAlign)')
 vimrc.map_plug('x', '=', '(EasyAlign)')
+
+
+
+-- emmet {{{2
+
+G.user_emmet_install_global = false
+vimrc.autocmd('FileType', 'html,css', function()
+   vim.cmd('EmmetInstall')
+end)
 
 
 
