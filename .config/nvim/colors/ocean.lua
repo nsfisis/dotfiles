@@ -252,6 +252,10 @@ link('shQuote',       'SyntaxString')
 link('shDerefSimple', 'SyntaxIdentifier')
 link('shDerefVar',    'SyntaxIdentifier')
 
+-- sql {{{3
+
+link('sqlKeyword', 'SyntaxStatement2')
+
 
 
 
