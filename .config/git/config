@@ -116,6 +116,7 @@
     ri = rebase -i
     rid = rebase -i develop
     rc = "!GIT_EDITOR=true git rebase --continue"
+    rep = restore -p
     m = "!__fn() { \
         if [[ \"$1\" == --abort ]]; then \
             git merge --abort; \
