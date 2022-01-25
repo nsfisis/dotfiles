@@ -1001,6 +1001,10 @@ function vimrc.statusline.filename(bufnr)
       i = i - 1
    end
 
+   if i <= -(#this_path) then
+      i = -(#this_path) + 1
+   end
+
    local ret = ''
    for k = i, 0 do
       if #this_path < 1 - k then
