@@ -417,6 +417,10 @@ else
     alias lsla='ls --color=always -al'
 fi
 
+if [[ "$(uname)" == "Darwin" ]]; then
+    alias tac='tail -r'
+fi
+
 
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
