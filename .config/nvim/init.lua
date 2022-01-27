@@ -966,7 +966,7 @@ function vimrc.statusline.filename(bufnr)
    if name == '' then
       return '[No Name]'
    end
-   if vim.b._scratch_ then
+   if vim.b[bufnr]._scratch_ then
       return '*scratch*'
    end
 
