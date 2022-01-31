@@ -738,6 +738,9 @@ function vimrc.fn.open_scratch()
       vim.cmd('setlocal filetype=' .. ft)
    end
    vim.b._scratch_ = true
+   if vim.fn.exists(':AutosaveEnable') == 2 then
+      vim.cmd('AutosaveEnable')
+   end
 end
 
 vim.cmd([[
