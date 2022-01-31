@@ -733,7 +733,7 @@ function vimrc.fn.open_scratch()
    if F.isdirectory(dir) == 0 then
       F.mkdir(dir, 'p')
    end
-   vim.cmd(('edit %s/%s.%s'):format(dir, fname, ext))
+   vim.cmd(('SmartTabEdit %s/%s.%s'):format(dir, fname, ext))
    if vim.bo.filetype ~= ft then
       vim.cmd('setlocal filetype=' .. ft)
    end
@@ -852,6 +852,32 @@ vim.cmd([[
 command! -bar -range=%
    \ Reverse
    \ keeppatterns <line1>,<line2>g/^/m<line1>-1
+]])
+
+
+
+function vimrc.fn.smart_tabedit(mods, args)
+   local is_empty_buffer = (
+      F.bufname() == ''
+      and not vim.bo.modified
+      and F.line('$') <= 1
+      and F.getline('.') == ''
+   )
+
+   if is_empty_buffer then
+      vim.cmd(mods .. ' edit ' .. args)
+   else
+      vim.cmd(mods .. ' tabedit ' .. args)
+   end
+end
+
+
+-- If the current buffer is empty, open a file with the current window;
+-- otherwise open a new tab.
+vim.cmd([[
+command! -bar -complete=file -nargs=*
+   \ SmartTabEdit
+   \ call v:lua.vimrc.fn.smart_tabedit(<q-mods>, <q-args>)
 ]])
 
 
