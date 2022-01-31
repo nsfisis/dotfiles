@@ -706,7 +706,7 @@ vimrc.remap('n', 'TW', 'Tw')
 
 -- Open *scratch* buffer {{{2
 
-local extension_mapping = {
+local EXTENSION_MAPPING = {
    bash       = 'sh',
    haskell    = 'hs',
    javascript = 'js',
@@ -723,7 +723,7 @@ local function make_scratch_buffer_name(ft)
    if ft == '' then
       ft = 'txt'
    end
-   local ext = extension_mapping[ft] or ft
+   local ext = EXTENSION_MAPPING[ft] or ft
    return my_env.scratch_dir .. '/' .. F.strftime('%Y-%m', now), F.strftime('%d-%H%M%S'), ext
 end
 

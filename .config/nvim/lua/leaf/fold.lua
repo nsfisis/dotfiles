@@ -11,12 +11,13 @@ end
 
 
 function M.foldexpr()
-   local current_line_indent = F.indent(V.lnum)
+   local lnum = V.lnum
+   local current_line_indent = F.indent(lnum)
    local task_level = math.floor(current_line_indent / F.shiftwidth())
-   if V.lnum == F.line('$') then
+   if lnum == F.line('$') then
       return task_level
    end
-   local next_line_indent = F.indent(V.lnum + 1)
+   local next_line_indent = F.indent(lnum + 1)
    if current_line_indent < next_line_indent then
       return ('>%d'):format(task_level + 1)
    else
