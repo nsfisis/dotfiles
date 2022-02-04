@@ -298,9 +298,9 @@ nnoremap <silent>  Te  :<C-u>set expandtab!<CR>
 nnoremap <silent>  Th  :<C-u>set hlsearch!<CR>
 nnoremap <silent>  Tn  :<C-u>set number!<CR>
 nnoremap <silent>  Ts  :<C-u>set spell!<CR>
-nnoremap <silent>  T8  :<C-u>if &textwidth ==# 80 <Bar>set textwidth= <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>
-nnoremap <silent>  T0  :<C-u>if &textwidth ==# 100 <Bar>set textwidth= <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>
-nnoremap <silent>  T2  :<C-u>if &textwidth ==# 120 <Bar>set textwidth= <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>
+nnoremap <silent>  T8  :<C-u>if &textwidth ==# 80 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>
+nnoremap <silent>  T0  :<C-u>if &textwidth ==# 100 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>
+nnoremap <silent>  T2  :<C-u>if &textwidth ==# 120 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>
 nnoremap <silent>  Tw  :<C-u>set wrap!<CR>
 
 nmap  TB  Tb
