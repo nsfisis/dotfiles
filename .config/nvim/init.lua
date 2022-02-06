@@ -1421,7 +1421,7 @@ G['eskk#large_dictionary'] = {
    encoding = 'euc-jp',
 }
 
-G['eskk#backup_dictionary'] = G['eskk#dictionary'].path .. ".bak"
+G['eskk#backup_dictionary'] = G['eskk#dictionary'].path .. '.bak'
 
 G['eskk#kakutei_when_unique_candidate'] = true
 G['eskk#enable_completion'] = false
@@ -1450,6 +1450,8 @@ function My_eskk_initialize_pre()
       call t.add_map('7.', '7.')
       call t.add_map('8.', '8.')
       call t.add_map('9.', '9.')
+      " Workaround: 'zl' does not work as 'l' key leaves from SKK mode.
+      call t.add_map('zL', '→')
       call eskk#register_mode_table(mode, t)
    endfor
 endfunction
@@ -1472,7 +1474,6 @@ function My_eskk_initialize_post()
    EskkUnmap -type=mode:kata:to-ascii
 
    " Instead, l key disable SKK input.
-   EskkMap -type=disable l
    EskkMap -type=disable l
 
    map!  jk  <Plug>(eskk:disable)<ESC>
