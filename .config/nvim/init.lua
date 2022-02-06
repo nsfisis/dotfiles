@@ -842,6 +842,11 @@ vimrc.map('n', '<Space>w', '<Cmd>update<CR>')
 vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
 
 
+-- `s` is used as a prefix key of plugin sandwich and hop.
+vimrc.map('n', 's', '<Nop>')
+vimrc.map('x', 's', '<Nop>')
+
+
 -- Commands {{{1
 
 -- Reverse a selected range in line-wise.
