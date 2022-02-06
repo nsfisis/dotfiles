@@ -147,6 +147,7 @@ function M.map_plug(mode, lhs, rhs, opts)
    if opts == nil then
       opts = {}
    end
+   opts.silent = true
    vim.api.nvim_set_keymap(
       mode,
       lhs,
