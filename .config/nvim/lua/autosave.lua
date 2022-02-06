@@ -17,23 +17,26 @@ local function echo(text, hl_group)
 end
 
 
-local function handler()
-   if not vim.bo.modified then
+local function handler(bufnr)
+   if not vim.bo[bufnr].modified then
       return
    end
-   if vim.bo.readonly then
+   if vim.bo[bufnr].readonly then
       return
    end
-   if vim.bo.buftype ~= '' then
+   if vim.bo[bufnr].buftype ~= '' then
       return
    end
-   if vim.fn.bufname() == '' then
+   local bufname = vim.fn.bufname(bufnr)
+   if bufname == '' then
       return
    end
 
-   echo('Auto-saving...', 'Comment')
-   vim.cmd('silent! write')
-   echo('Saved.', 'Comment')
+   echo(('Auto-saving %s...'):format(bufname), 'Comment')
+   for _, win_id in ipairs(vim.fn.win_findbuf(bufnr)) do
+      vim.fn.win_execute(win_id, 'silent! update', true)
+   end
+   echo(('%s saved.'):format(bufname), 'Comment')
 end
 
 
@@ -42,8 +45,14 @@ function M.enable()
       return
    end
 
+   local bufnr = vim.fn.bufnr()
    local timer = vim.loop.new_timer()
-   timer:start(INTERVAL_MS, INTERVAL_MS, vim.schedule_wrap(handler))
+   timer:start(
+      INTERVAL_MS,
+      INTERVAL_MS,
+      vim.schedule_wrap(function ()
+         handler(bufnr)
+      end))
    local tid = #timers + 1
    timers[tid] = timer
    vim.b.autosave_timer_id = tid
