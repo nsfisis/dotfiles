@@ -916,16 +916,18 @@ function vimrc.statusline.build()
    local mod = vimrc.statusline.modified(bufnr)
    local linenum = vimrc.statusline.linenum(winid)
    local fenc = vimrc.statusline.fenc(bufnr)
+   local eol = vimrc.statusline.eol(bufnr)
    local ff = vimrc.statusline.ff(bufnr)
    local ft = vimrc.statusline.filetype(bufnr)
    return string.format(
-      '%s %s%s%s %%= %s %s%s %s ',
+      '%s %s%s%s %%= %s %s%s%s %s ',
       left,
       ro and ro .. ' ' or '',
       fname,
       mod and ' ' .. mod or '',
       linenum,
       fenc,
+      eol,
       ff,
       ft)
 end
@@ -1085,6 +1087,11 @@ function vimrc.statusline.fenc(bufnr)
    else
       return fenc:upper()
    end
+end
+
+function vimrc.statusline.eol(bufnr)
+   local eol = F.getbufvar(bufnr, '&endofline')
+   return eol == 0 and '[noeol]' or ''
 end
 
 function vimrc.statusline.ff(bufnr)
