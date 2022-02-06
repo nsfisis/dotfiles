@@ -1743,7 +1743,24 @@ F['operator#sandwich#set']('add', 'all', 'highlight', 2)
 F['operator#sandwich#set']('delete', 'all', 'highlight', 0)
 F['operator#sandwich#set']('replace', 'all', 'highlight', 2)
 
+do
+   local rs = F['sandwich#get_recipes']()
 
+   rs[#rs+1] = {
+      buns = {'「', '」'},
+      input = {'j[', 'j]'},
+   }
+   rs[#rs+1] = {
+      buns = {'『', '』'},
+      input = {'j{', 'j}'},
+   }
+   rs[#rs+1] = {
+      buns = {'【', '】'},
+      input = {'j(', 'j)'},
+   }
+
+   G['sandwich#recipes'] = rs
+end
 
 
 
