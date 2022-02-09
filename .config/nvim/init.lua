@@ -1476,6 +1476,9 @@ function My_eskk_initialize_post()
    " Instead, l key disable SKK input.
    EskkMap -type=disable l
 
+   " I type <C-m> for new line.
+   EskkMap -type=kakutei <C-m>
+
    map!  jk  <Plug>(eskk:disable)<ESC>
 
    " Custom highlight for henkan markers.
