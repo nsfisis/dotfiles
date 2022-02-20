@@ -998,10 +998,10 @@ function vimrc.statusline.readonly(bufnr)
 end
 
 function vimrc.statusline.filename(bufnr)
-   local name = F.bufname(bufnr)
-   if name == '' then
+   if F.bufname(bufnr) == '' then
       return '[No Name]'
    end
+   local name = F.expand(('#%s:p'):format(bufnr))
    if vim.b[bufnr]._scratch_ then
       return '*scratch*'
    end
