@@ -919,17 +919,19 @@ function vimrc.statusline.build()
    local ro = vimrc.statusline.readonly(bufnr)
    local fname = vimrc.statusline.filename(bufnr)
    local mod = vimrc.statusline.modified(bufnr)
+   local extra_info = vimrc.statusline.extra_info(bufnr, winid)
    local linenum = vimrc.statusline.linenum(winid)
    local fenc = vimrc.statusline.fenc(bufnr)
    local eol = vimrc.statusline.eol(bufnr)
    local ff = vimrc.statusline.ff(bufnr)
    local ft = vimrc.statusline.filetype(bufnr)
    return string.format(
-      '%s %s%s%s %%= %s %s%s%s %s ',
+      '%s %s%s%s %%= %s%s %s%s%s %s ',
       left,
       ro and ro .. ' ' or '',
       fname,
       mod and ' ' .. mod or '',
+      extra_info == '' and '' or extra_info .. ' ',
       linenum,
       fenc,
       eol,
@@ -1065,6 +1067,12 @@ function vimrc.statusline.modified(bufnr)
    else
       return nil
    end
+end
+
+function vimrc.statusline.extra_info(bufnr, winid)
+   local autosave = F.getbufvar(bufnr, 'autosave_timer_id', -1) ~= -1
+   local spell = F.getwinvar(winid, '&spell') == 1
+   return (autosave and '(A)' or '') .. (spell and '(S)' or '')
 end
 
 function vimrc.statusline.linenum(winid)
