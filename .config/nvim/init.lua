@@ -19,8 +19,10 @@ local G = vim.g
 local O = vim.o
 local OPT = vim.opt
 
+local uniquify = require('uniquify')
 local vimrc = require('vimrc')
 _G.vimrc = vimrc
+
 
 
 -- Global constants {{{2
@@ -1003,58 +1005,19 @@ function vimrc.statusline.filename(bufnr)
    if F.bufname(bufnr) == '' then
       return '[No Name]'
    end
-   local name = F.expand(('#%s:p'):format(bufnr))
    if vim.b[bufnr]._scratch_ then
       return '*scratch*'
    end
 
+   local this_path = F.expand(('#%s:p'):format(bufnr))
    local other_paths = {}
    for b = 1, F.bufnr('$') do
       if F.bufexists(b) and b ~= bufnr then
-         other_paths[#other_paths+1] = F.split(F.bufname(b), '[\\/]')
+         other_paths[#other_paths+1] = F.bufname(b)
       end
-   end
-   local this_path = F.split(name, '[\\/]')
-   local i = 0
-   while true do
-      local this_path_part = this_path[#this_path+i] or ''
-      local unique = true
-      local no_parts_remained = true
-      for _, other_path in ipairs(other_paths) do
-         local other_path_part = other_path[#other_path+i] or ''
-         if vim.stricmp(this_path_part, other_path_part) == 0 then
-            unique = false
-            break
-         end
-         if other_path_part ~= '' then
-            no_parts_remained = false
-         end
-      end
-      if unique then
-         break
-      end
-      if this_path_part == '' and no_parts_remained then
-         break
-      end
-      i = i - 1
    end
 
-   if i <= -(#this_path) then
-      i = -(#this_path) + 1
-   end
-
-   local ret = ''
-   for k = i, 0 do
-      if #this_path < 1 - k then
-         break
-      end
-      if k == i or k == 0 then
-         ret = ret .. '/' .. this_path[#this_path+k]
-      else
-         ret = ret .. '/' .. F.matchlist(this_path[#this_path+k], '.')[1]
-      end
-   end
-   return ret:sub(2)
+   return uniquify.uniquify(this_path, other_paths)
 end
 
 function vimrc.statusline.modified(bufnr)
