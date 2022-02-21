@@ -168,7 +168,8 @@ xnoremap  <C-r>  "
 let @j = 'j.'
 let @k = 'k.'
 let @n = 'n.'
-nnoremap   @N  N.
+let @m = 'N.'
+nnoremap  @N  @m
 nnoremap  @a  9999@@
 nnoremap  `  @@
 
