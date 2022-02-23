@@ -1,2 +1,3 @@
+/.config/alacritty/alacritty.local.yml
 /.config/emacs
-nvim-startup.log
+/nvim-startup.log

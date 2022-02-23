@@ -31,6 +31,13 @@ do
     fi
 done
 
+echo "symlink: ~/.config/alacritty/alacritty.local.yml"
+if [[ "$(uname)" == "Darwin" ]]; then
+    ln -s -f ~/.config/alacritty/alacritty.macos.yml ~/.config/alacritty/alacritty.local.yml
+else
+    ln -s -f ~/.config/alacritty/alacritty.linux.yml ~/.config/alacritty/alacritty.local.yml
+fi
+
 paq_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
 if [ ! -d "$paq_dir" ]; then
     echo "clone: $paq_dir"
