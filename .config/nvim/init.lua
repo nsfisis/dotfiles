@@ -1572,6 +1572,7 @@ G['jplus#input_config'] = {
    __EMPTY__ = { delimiter_format = '' },
    [' '] = { delimiter_format = ' ' },
    [','] = { delimiter_format = '%d ' },
+   [':'] = { delimiter_format = '%d ' },
    [';'] = { delimiter_format = '%d ' },
    l = { delimiter_format = '' },
    L = { delimiter_format = '' },
