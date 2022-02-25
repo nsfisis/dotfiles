@@ -2,7 +2,6 @@ macOS (homebrew)
 
 ```
 $ brew install \
-    alacritty \
     bash \
     bat \
     cmake \
@@ -11,6 +10,7 @@ $ brew install \
     gcc \
     git \
     jq \
+    ncurses \
     neovim \
     pandoc \
     python \
@@ -32,6 +32,10 @@ $ brew install --cask \
 # Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
 $ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
 $ sudo atsutil databases -remove
+
+$ /usr/local/opt/ncurses/bin/infocmp tmux-256color > /var/tmp/tmux-256color.info
+$ tic -xe tmux-256color /var/tmp/tmux-256color.info
+
 # Restart your machine.
 ```
 
