@@ -55,6 +55,20 @@ else
 end
 
 
+-- Set colors for `Normal` group. {{{1
+
+-- Why do I highlight `Normal` first?
+--   Because setting colors for it may change `background` option, which causes
+--   the highlight groups that depend on `background` to change.
+--
+-- Why do I set `ctermfg` and `ctermbg` here?
+--   Because Vim doesn't notify background/foreground colors to a terminal
+--   unless `ctermfg` or `ctermbg` is explicitly configured to `Normal`
+--   highlight group.
+--
+-- See also `:h :hi-normal-cterm`.
+vim.cmd(('hi! Normal ctermfg=0 ctermbg=0 guifg=%s guibg=%s'):format(palette.fg, palette.bg))
+
 
 -- Semantic highlight group {{{1
 
@@ -142,7 +156,6 @@ link('ErrorMsg',       'Error')
 link('EndOfBuffer',    'Hidden')
 link('MatchParen',     'Hidden')
 link('CursorLineNr',   'Normal')
-link('Normal',         'Normal')
 link('MoreMsg',        'Prompt')
 link('Question',       'Prompt')
 link('IncSearch',      'Search')
@@ -179,6 +192,11 @@ link('Visual',         'UiSelection')
 link('ColorColumn',    'UiSelection')
 link('VertSplit',      'UiStatusLine')
 link('WarningMsg',     'Warning')
+
+
+-- Tree-sitter {{{2
+
+link('TSText', 'Normal')
 
 
 -- 'statusline' and 'tabline' {{{2
