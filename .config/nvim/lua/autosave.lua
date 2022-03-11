@@ -2,7 +2,7 @@ local M = {}
 
 
 local INTERVAL_MS = 10 * 1000
-local SILENT = false
+local SILENT = true
 
 
 -- Because a timer cannot be converted to Vim value,
