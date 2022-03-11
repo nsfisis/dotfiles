@@ -437,7 +437,14 @@ shell:
   program: /bin/bash
   args:
     - -c
-    - 'export PATH="$PATH:/usr/bin:/usr/local/bin"; tmux attach -t 0 || tmux new -s 0'
+    - >
+        export PATH="$PATH:/usr/bin:/usr/local/bin";
+        session="$({ tmux ls -F "#{session_name}" 2>/dev/null; echo "New (n)"; } | fzf --no-sort --reverse --no-info --prompt="Select tmux session" --select-1 --bind='n:last+accept')";
+        if [[ "$session" = "New (n)" ]]; then
+          tmux new -s "$(date '+%Y-%m-%d')";
+        else
+          tmux attach -t "$session";
+        fi
 
 # Startup directory
 #
