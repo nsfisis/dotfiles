@@ -1156,8 +1156,6 @@ paq({
    'thinca/vim-textobj-comment',
    -- Text object for continuous line.
    'rhysd/vim-textobj-continuous-line',
-   -- Text object for entire file.
-   'kana/vim-textobj-entire',
    -- Text object for function.
    'kana/vim-textobj-function',
    -- Text object for indent.
