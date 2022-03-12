@@ -439,9 +439,9 @@ shell:
     - -c
     - >
         export PATH="$PATH:/usr/bin:/usr/local/bin";
-        session="$({ tmux ls -F "#{session_name}" 2>/dev/null; echo "New (n)"; } | fzf --no-sort --reverse --no-info --prompt="Select tmux session" --select-1 --bind='n:last+accept')";
+        session="$({ tmux ls -F "#{session_name}" 2>/dev/null; echo "New (n)"; } | fzf --no-sort --reverse --no-info --prompt="Select tmux session" --select-1 --bind='n:last+accept' --no-mouse)";
         if [[ "$session" = "New (n)" ]]; then
-          tmux new -s "$(date '+%Y-%m-%d')";
+          tmux new -s "$(date '+%Y-%m-%d %H%M%S')";
         else
           tmux attach -t "$session";
         fi
