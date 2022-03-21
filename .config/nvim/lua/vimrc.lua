@@ -112,6 +112,7 @@ end
 
 
 M.map_callbacks = {}
+local map_callback_id = 1
 
 function M.map_expr(mode, lhs, rhs, opts)
    if opts == nil then
@@ -119,13 +120,13 @@ function M.map_expr(mode, lhs, rhs, opts)
    end
    opts.noremap = true
    opts.expr = true
-   local callback_id = #M.map_callbacks + 1
-   M.map_callbacks[callback_id] = rhs
+   M.map_callbacks['_' .. map_callback_id] = rhs
    vim.api.nvim_set_keymap(
       mode,
       lhs,
-      ('v:lua.vimrc.map_callbacks[%d]()'):format(callback_id),
+      ('v:lua.vimrc.map_callbacks._%d()'):format(map_callback_id),
       opts)
+   map_callback_id = map_callback_id + 1
 end
 
 

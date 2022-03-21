@@ -368,9 +368,9 @@ vimrc.map('i', '<Right>', '<Nop>')
 vimrc.map_expr('n', 'gA', function()
    local line = F.getline('.')
    if vim.endswith(line, ';;') then -- for OCaml
-      return 'A\\<C-g>U\\<Left>\\<C-g>U\\<Left>'
+      return vimrc.term([[A<C-g>U<Left><C-g>U<Left>]])
    elseif vim.regex('[,;)]$'):match_str(line) then
-      return 'A\\<C-g>U\\<Left>'
+      return vimrc.term([[A<C-g>U<Left>]])
    else
       return 'A'
    end
