@@ -326,22 +326,7 @@ vimrc.map('n', '`', '@@')
 vimrc.map('i', '<C-d>', '<Del>')
 
 -- Go elsewhere without deviding the undo history.
-vimrc.map_expr('i', '<C-a>', function()
-   local repeat_ = F['repeat']
-   local line = F.getline('.')
-   local cursor_col = F.col('.')
-   local space_idx = vim.regex('^\\S'):match_str(line)
-
-   if cursor_col == space_idx + 1 then
-      return repeat_("\\<C-g>U\\<Left>", cursor_col - 1)
-   else
-      if cursor_col < space_idx then
-         return repeat_("\\<C-g>U\\<Right>", space_idx - cursor_col + 1)
-      else
-         return repeat_("\\<C-g>U\\<Left>", cursor_col - 1 - space_idx)
-      end
-   end
-end)
+vimrc.map('i', '<C-a>', "repeat('<C-g>U<Left>', col('.') - 1)", { expr = true })
 vimrc.map('i', '<C-e>', "repeat('<C-g>U<Right>', col('$') - col('.'))", { expr = true })
 vimrc.map('i', '<C-b>', '<C-g>U<Left>')
 vimrc.map('i', '<C-f>', '<C-g>U<Right>')
