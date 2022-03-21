@@ -1422,6 +1422,8 @@ function My_eskk_initialize_pre()
       call t.add_map('7.', '7.')
       call t.add_map('8.', '8.')
       call t.add_map('9.', '9.')
+      call t.add_map(':', ':')
+      call t.add_map('z:', '：')
       " Workaround: 'zl' does not work as 'l' key leaves from SKK mode.
       call t.add_map('zL', '→')
       call eskk#register_mode_table(mode, t)
