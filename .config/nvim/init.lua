@@ -1380,7 +1380,6 @@ G['eskk#backup_dictionary'] = G['eskk#dictionary'].path .. '.bak'
 
 -- NOTE:
 -- Boolean values are not accepted because eskk#utils#set_default() checks types.
-G['eskk#kakutei_when_unique_candidate'] = 1
 G['eskk#enable_completion'] = 0
 G['eskk#egg_like_newline'] = 1
 
