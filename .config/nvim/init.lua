@@ -1172,10 +1172,6 @@ paq({
    -- Files {{{2
    -- Switch to related files.
    'kana/vim-altr',
-   -- Fast Fuzzy Finder.
-   'ctrlpvim/ctrlp.vim',
-   -- CtrlP's matcher by builtin `matchfuzzy()`.
-   'mattn/ctrlp-matchfuzzy',
    -- Filer for minimalists.
    'justinmk/vim-dirvish',
    -- Appearance {{{2
@@ -1329,13 +1325,6 @@ G['clang_format#auto_format'] = true
 vimrc.autocmd('FileType', 'javascript,typescript', function()
    vim.cmd('ClangFormatAutoDisable')
 end)
-
-
-
--- ctrlp {{{2
-
-G.ctrlp_map = '<Space>f'
-G.ctrlp_match_func = { match = 'ctrlp_matchfuzzy#matcher' }
 
 
 
