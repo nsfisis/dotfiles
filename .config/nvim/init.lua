@@ -1187,6 +1187,9 @@ paq({
    'nvim-treesitter/nvim-treesitter',
    -- Highlight specified words.
    't9md/vim-quickhl',
+   -- Yet another tree-sitter indentation.
+   -- TODO: uninstall it once the official nvim-treesitter provides sane indentation.
+   'yioneko/nvim-yati',
    -- Filetypes {{{2
    -- Faster replacement for bundled filetype.vim
    'nathom/filetype.nvim',
@@ -1846,6 +1849,9 @@ require('nvim-treesitter.configs').setup {
    },
    --]]
    indent = {
+      enable = true,
+   },
+   yati = {
       enable = true,
    },
 }
