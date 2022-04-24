@@ -780,6 +780,7 @@ vimrc.map('n', 'XM', ':<C-u>messages<CR>', { silent = true })
 
 -- Abbreviations {{{2
 
+vimrc.iabbrev('TOOD', 'TODO')
 vimrc.iabbrev('retrun', 'return')
 vimrc.iabbrev('reutrn', 'return')
 vimrc.iabbrev('tihs', 'this')
