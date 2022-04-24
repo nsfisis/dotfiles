@@ -1832,7 +1832,7 @@ vimrc.map_plug('x', 'i<C-w>', '(textobj-wiw-i)')
 -- nvim-treesitter {{{2
 
 require('nvim-treesitter.configs').setup {
-   ensure_installed = 'maintained',
+   ensure_installed = 'all',
    sync_install = false,
    highlight = {
       enable = true,
