@@ -64,13 +64,10 @@ end
 
 
 
--- The autogroup used in .vimrc {{{2
+-- The augroup used in .vimrc {{{2
 
-vim.cmd([[
-augroup Vimrc
-   autocmd!
-augroup END
-]])
+vimrc.augroup = vimrc.augroup or {}
+vimrc.augroup.vimrc = vim.api.nvim_create_augroup('Vimrc', {})
 
 
 
