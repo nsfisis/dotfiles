@@ -1329,6 +1329,20 @@ end)
 
 
 
+-- committia {{{2
+
+do
+   local committia_hooks = {}
+
+   function committia_hooks.edit_open(_info)
+      vim.wo.spell = true
+   end
+
+   G.committia_hooks = committia_hooks
+end
+
+
+
 -- dirvish {{{2
 
 -- Prevent dirvish from mapping hyphen key to "<Plug>(dirvish_up)".
