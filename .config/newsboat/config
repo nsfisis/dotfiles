@@ -1,0 +1,11 @@
+refresh-on-startup yes
+reload-threads 10
+show-read-feeds no
+show-read-articles no
+
+bind-key j down
+bind-key k up
+bind-key J next-feed
+bind-key K prev-feed
+bind-key g home
+bind-key G end

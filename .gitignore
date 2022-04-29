@@ -1,3 +1,4 @@
 /.config/alacritty/alacritty.local.yml
 /.config/emacs
+/.config/newsboat/urls
 /nvim-startup.log
