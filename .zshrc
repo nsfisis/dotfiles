@@ -429,3 +429,5 @@ export PATH=/usr/local/opt/gettext/bin:$PATH
 
 # To override system-provided Ruby with brewed Ruby
 export PATH=/usr/local/opt/ruby/bin:$PATH
+
+export PATH=$HOME/go/bin:$PATH
