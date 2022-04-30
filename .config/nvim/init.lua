@@ -66,8 +66,7 @@ end
 
 -- The augroup used in .vimrc {{{2
 
-vimrc.augroup = vimrc.augroup or {}
-vimrc.augroup.vimrc = vim.api.nvim_create_augroup('Vimrc', {})
+vimrc.create_augroup_for_vimrc()
 
 
 
@@ -235,42 +234,48 @@ O.fileencodings = 'utf-8,cp932,euc-jp'
 -- Autocommands {{{1
 
 -- Auto-resize windows when Vim is resized.
-vimrc.autocmd('VimResized', '*', function()
-   vim.cmd('wincmd =')
-end)
+vimrc.autocmd('VimResized', {
+   command = 'wincmd =',
+})
 
 
 -- Calculate 'numberwidth' to fit file size.
 -- Note: extra 2 is the room of left and right spaces.
-vimrc.autocmd('BufEnter,WinEnter,BufWinEnter', '*', function()
-   vim.wo.numberwidth = #tostring(F.line('$')) + 2
-end)
+vimrc.autocmd({'BufEnter', 'WinEnter', 'BufWinEnter'}, {
+   callback = function()
+      vim.wo.numberwidth = #tostring(F.line('$')) + 2
+   end,
+})
 
 
 -- Jump to the last cursor position when you open a file.
-vimrc.autocmd('BufRead', '*', function()
-   if 0 < F.line("'\"") and F.line("'\"") <= F.line('$') and
-      not O.filetype:match('commit') and not O.filetype:match('rebase')
-   then
-      vim.cmd('normal g`"')
-   end
-end)
+vimrc.autocmd('BufRead', {
+   callback = function()
+      if 0 < F.line("'\"") and F.line("'\"") <= F.line('$') and
+         not O.filetype:match('commit') and not O.filetype:match('rebase')
+      then
+         vim.cmd('normal g`"')
+      end
+   end,
+})
 
 
 -- Lua version of https://github.com/mopp/autodirmake.vim
 -- License: NYSL
-vimrc.autocmd('BufWritePre', '*', function()
-   local dir = F.expand('<afile>:p:h')
-   if F.isdirectory(dir) ~= 0 then
-      return
-   end
-   vimrc.echo(('"%s" does not exist. Create? [y/N] '):format(dir), 'Question')
-   local answer = vimrc.getchar()
-   if answer ~= 'y' and answer ~= 'Y' then
-      return
-   end
-   F.mkdir(dir, 'p')
-end)
+vimrc.autocmd('BufWritePre', {
+   callback = function()
+      local dir = F.expand('<afile>:p:h')
+      if F.isdirectory(dir) ~= 0 then
+         return
+      end
+      vimrc.echo(('"%s" does not exist. Create? [y/N] '):format(dir), 'Question')
+      local answer = vimrc.getchar()
+      if answer ~= 'y' and answer ~= 'Y' then
+         return
+      end
+      F.mkdir(dir, 'p')
+   end,
+})
 
 
 vimrc.register_filetype_autocmds_for_indentation()
@@ -1323,9 +1328,10 @@ vimrc.map_plug('x', 'm/b', '(caw:box:comment)')
 
 G['clang_format#auto_format'] = true
 
-vimrc.autocmd('FileType', 'javascript,typescript', function()
-   vim.cmd('ClangFormatAutoDisable')
-end)
+vimrc.autocmd('FileType', {
+   pattern = {'javascript', 'typescript'},
+   command = 'ClangFormatAutoDisable',
+})
 
 
 
@@ -1360,9 +1366,10 @@ vimrc.map_plug('x', '=', '(EasyAlign)')
 -- emmet {{{2
 
 G.user_emmet_install_global = false
-vimrc.autocmd('FileType', 'html,css', function()
-   vim.cmd('EmmetInstall')
-end)
+vimrc.autocmd('FileType', {
+   pattern = {'html', 'css'},
+   command = 'EmmetInstall',
+})
 
 
 
@@ -1786,12 +1793,22 @@ vimrc.map_plug('x', 'aL', '(textobj-continuous-cpp-a)')
 vimrc.map_plug('o', 'iL', '(textobj-continuous-cpp-i)')
 vimrc.map_plug('x', 'iL', '(textobj-continuous-cpp-i)')
 
-vim.cmd([[
-autocmd Vimrc FileType vim omap <buffer>  aL  <Plug>(textobj-continuous-vim-a)
-autocmd Vimrc FileType vim xmap <buffer>  aL  <Plug>(textobj-continuous-vim-a)
-autocmd Vimrc FileType vim omap <buffer>  iL  <Plug>(textobj-continuous-vim-i)
-autocmd Vimrc FileType vim xmap <buffer>  iL  <Plug>(textobj-continuous-vim-i)
-]])
+vimrc.autocmd('FileType', {
+   pattern = 'vim',
+   command = 'omap <buffer>  aL  <Plug>(textobj-continuous-vim-a)',
+})
+vimrc.autocmd('FileType', {
+   pattern = 'vim',
+   command = 'xmap <buffer>  aL  <Plug>(textobj-continuous-vim-a)',
+})
+vimrc.autocmd('FileType', {
+   pattern = 'vim',
+   command = 'omap <buffer>  iL  <Plug>(textobj-continuous-vim-i)',
+})
+vimrc.autocmd('FileType', {
+   pattern = 'vim',
+   command = 'xmap <buffer>  iL  <Plug>(textobj-continuous-vim-i)',
+})
 
 
 

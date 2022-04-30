@@ -1,16 +1,18 @@
 local M = {}
 
 
-local autocmd_callbacks = {}
-M.autocmd_callbacks = autocmd_callbacks
 
-function M.autocmd(event, filter, callback)
-   local callback_id = #autocmd_callbacks + 1
-   autocmd_callbacks[callback_id] = callback
-   vim.cmd(('autocmd Vimrc %s %s lua vimrc.autocmd_callbacks[%d]()'):format(
-      event,
-      filter,
-      callback_id))
+local vimrc_augroup
+
+function M.create_augroup_for_vimrc()
+   vimrc_augroup = vim.api.nvim_create_augroup('Vimrc', {})
+end
+
+function M.autocmd(event, opts)
+   if not opts.group then
+      opts.group = vimrc_augroup
+   end
+   vim.api.nvim_create_autocmd(event, opts)
 end
 
 
@@ -26,6 +28,18 @@ function M.after_ftplugin(ft, callback)
    vim.b[var_name] = true
 end
 
+
+
+local function set_indentation(style, width)
+   vim.bo.expandtab = style
+   vim.bo.tabstop = width
+   vim.bo.shiftwidth = width
+   vim.bo.softtabstop = width
+
+   if vim.fn.exists(':IndentLinesReset') == 2 then
+      vim.cmd('IndentLinesReset')
+   end
+end
 
 
 function M.register_filetype_autocmds_for_indentation()
@@ -56,22 +70,12 @@ function M.register_filetype_autocmds_for_indentation()
    }
 
    for ft, setting in pairs(indentation_settings) do
-      vim.cmd(([[autocmd Vimrc FileType %s lua vimrc._set_indentation(%s, %d)]]):format(
-         ft,
-         setting.style,
-         setting.width
-      ))
-   end
-end
-
-function M._set_indentation(style, width)
-   vim.bo.expandtab = style
-   vim.bo.tabstop = width
-   vim.bo.shiftwidth = width
-   vim.bo.softtabstop = width
-
-   if vim.fn.exists(':IndentLinesReset') == 2 then
-      vim.cmd('IndentLinesReset')
+      vimrc.autocmd('FileType', {
+         pattern = ft,
+         callback = function()
+            set_indentation(setting.style, setting.width)
+         end,
+      })
    end
 end
 
