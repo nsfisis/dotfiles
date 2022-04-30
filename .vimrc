@@ -345,6 +345,7 @@ nnoremap <silent>  <Space>w  :<C-u>update<CR>
 nnoremap <silent> <nowait>  Z  :<C-u>wqall<CR>
 
 
+inoreabbrev  TOOD  TODO
 inoreabbrev  retrun  return
 inoreabbrev  reutrn  return
 inoreabbrev  tihs  this
