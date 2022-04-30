@@ -762,7 +762,7 @@ vimrc.map('n', '<C-h>', ':<C-u>SmartOpen help<Space>')
 
 -- For writing Vim script. {{{2
 
-vimrc.map('n', 'XV', ':<C-u>tabedit $MYVIMRC<CR>', { silent = true })
+vimrc.map('n', 'XV', ':<C-u>SmartTabEdit $MYVIMRC<CR>', { silent = true })
 
 -- See |numbered-function|.
 vimrc.map('n', 'XF', ':<C-u>function {<C-r>=v:count<CR>}<CR>', { silent = true })
