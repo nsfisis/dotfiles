@@ -1109,6 +1109,9 @@ end
 
 local paq = require('paq')
 paq({
+   -- Libraries {{{2
+   -- telescope.nvim depends on it.
+   'nvim-lua/plenary.nvim',
    -- Text editing {{{2
    -- IME {{{3
    -- SKK (Simple Kana to Kanji conversion program) for Vim.
@@ -1227,6 +1230,8 @@ paq({
    'kana/vim-submode',
    -- Swap arguments.
    'machakann/vim-swap',
+   -- Fuzzy finder.
+   'nvim-telescope/telescope.nvim',
    -- Adjust window size.
    'rhysd/vim-window-adjuster',
    -- Remember yank history and paste them.
