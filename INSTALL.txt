@@ -31,6 +31,9 @@ $ brew install --cask \
     keepassxc \
     ;
 
+$ brew tap "rhysd/hgrep" "https://github.com/rhysd/hgrep"
+$ brew install hgrep
+
 # Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
 $ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
 $ sudo atsutil databases -remove
@@ -72,4 +75,6 @@ $ sudo apt install \
 
 $ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(which batcat)")/bat"
 $ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
+
+$ cargo install hgrep
 ```
