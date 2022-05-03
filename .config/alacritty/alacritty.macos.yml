@@ -12,3 +12,8 @@ hints:
       binding:
         key: U
         mods: Command
+
+key_bindings:
+  - { key: Key0, mods: Command, action: ResetFontSize    }
+  - { key: Key1, mods: Command, action: IncreaseFontSize }
+  - { key: Key2, mods: Command, action: DecreaseFontSize }
