@@ -1203,8 +1203,6 @@ paq({
    'rhysd/vim-clang-format',
    -- HTML/CSS
    'mattn/emmet-vim',
-   -- Python
-   'tell-k/vim-autopep8',
    -- Rust
    'rust-lang/rust.vim',
    -- QoL {{{2
@@ -1297,19 +1295,6 @@ xmap <expr>  #  My_asterisk('<Plug>(asterisk-z*)', 1)
 nmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 omap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 xmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
-]])
-
-
-
--- autopep8 {{{2
-
-G.autopep8_on_save = true
-G.autopep8_disable_show_diff = true
-
-vim.cmd([[
-command!
-   \ Autopep8Disable
-   \ let g:autopep8_on_save = 0
 ]])
 
 
