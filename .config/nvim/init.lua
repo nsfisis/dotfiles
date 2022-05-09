@@ -644,12 +644,15 @@ function vimrc.fn.smart_open(command)
    end
 end
 
-
-vim.cmd([[
-command! -nargs=+ -complete=command
-   \ SmartOpen
-   \ call v:lua.vimrc.fn.smart_open(<q-args>)
-]])
+vim.api.nvim_create_user_command(
+   'SmartOpen',
+   function(opts) vimrc.fn.smart_open(opts.args) end,
+   {
+      desc = 'Smartly open a new buffer',
+      nargs = '+',
+      complete = 'command',
+   }
+)
 
 
 
@@ -733,11 +736,13 @@ function vimrc.fn.open_scratch()
    end
 end
 
-vim.cmd([[
-command!
-   \ Scratch
-   \ call v:lua.vimrc.fn.open_scratch()
-]])
+vim.api.nvim_create_user_command(
+   'Scratch',
+   function() vimrc.fn.open_scratch() end,
+   {
+      desc = 'Open a *scratch* buffer',
+   }
+)
 
 vimrc.map('n', '<Space>s', '<Cmd>Scratch<CR>', { silent = true })
 
@@ -844,11 +849,15 @@ vimrc.map('x', 's', '<Nop>')
 -- Note: directly calling `g/^/m` will overwrite the current search pattern with
 -- '^' and highlight it, which is not expected.
 -- :h :keeppatterns
-vim.cmd([[
-command! -bar -range=%
-   \ Reverse
-   \ keeppatterns <line1>,<line2>g/^/m<line1>-1
-]])
+vim.api.nvim_create_user_command(
+   'Reverse',
+   'keeppatterns <line1>,<line2>g/^/m<line1>-1',
+   {
+      desc = 'Reverse lines',
+      bar = true,
+      range = '%',
+   }
+)
 
 
 
@@ -870,11 +879,15 @@ end
 
 -- If the current buffer is empty, open a file with the current window;
 -- otherwise open a new tab.
-vim.cmd([[
-command! -bar -complete=file -nargs=*
-   \ SmartTabEdit
-   \ call v:lua.vimrc.fn.smart_tabedit(<q-mods>, <q-args>)
-]])
+vim.api.nvim_create_user_command(
+   'SmartTabEdit',
+   function(opts) vimrc.fn.smart_tabedit(opts.mods, opts.args) end,
+   {
+      desc = 'Smartly open a file',
+      nargs = '*',
+      complete = 'file',
+   }
+)
 
 
 
@@ -1687,11 +1700,16 @@ nnoremap <silent>  <Plug>(my-insert-blank-lines-before)
 G.rg_window_location = 'silent! echo'
 G.rg_jump_to_first = true
 
-vim.cmd([[
-command! -bang -nargs=* -complete=file -bar
-   \ RG
-   \ Rg<bang> <args>
-]])
+vim.api.nvim_create_user_command(
+   'RG',
+   'Rg<bang> <args>',
+   {
+      bang = true,
+      bar = true,
+      nargs = '*',
+      complete = 'file',
+   }
+)
 
 
 -- rust {{{2

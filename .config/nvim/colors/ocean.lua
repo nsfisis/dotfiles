@@ -278,10 +278,3 @@ link('sqlKeyword', 'SyntaxStatement2')
 
 
 
--- Utilities {{{1
-
-vim.cmd([[
-command! -bar
-   \ OceanGetHighlightGroupName
-   \ echo synIDattr(synID(line('.'), col('.'), v:false), 'name')
-]])
