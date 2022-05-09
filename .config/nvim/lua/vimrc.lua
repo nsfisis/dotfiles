@@ -90,78 +90,9 @@ function M.hi_link(from, to)
    vim.cmd(('highlight! link %s %s'):format(from, to))
 end
 
-function M.map(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      rhs,
-      opts)
-end
-
-
-function M.remap(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      rhs,
-      opts)
-end
-
 
 M.map_callbacks = {}
-local map_callback_id = 1
 
-function M.map_expr(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   opts.expr = true
-   M.map_callbacks['_' .. map_callback_id] = rhs
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      ('v:lua.vimrc.map_callbacks._%d()'):format(map_callback_id),
-      opts)
-   map_callback_id = map_callback_id + 1
-end
-
-
-function M.map_cmd(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.noremap = true
-   opts.silent = true
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      (':<C-u>%s<CR>'):format(rhs),
-      opts)
-end
-
-
-function M.map_plug(mode, lhs, rhs, opts)
-   if opts == nil then
-      opts = {}
-   end
-   opts.silent = true
-   vim.api.nvim_set_keymap(
-      mode,
-      lhs,
-      '<Plug>' .. rhs,
-      opts)
-end
-
-
-M.unmap = vim.api.nvim_del_keymap
 
 
 -- Wrapper of |getchar()|.

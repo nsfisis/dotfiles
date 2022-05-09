@@ -292,152 +292,145 @@ vimrc.register_filetype_autocmds_for_indentation()
 -- Searching {{{2
 
 -- Fix direction of n and N.
-vimrc.map('', 'n', "v:searchforward ? 'n' : 'N'", { expr = true })
-vimrc.map('', 'N', "v:searchforward ? 'N' : 'n'", { expr = true })
+vim.keymap.set('', 'n', "v:searchforward ? 'n' : 'N'", { expr=true })
+vim.keymap.set('', 'N', "v:searchforward ? 'N' : 'n'", { expr=true })
 
-vimrc.map('', 'gn', "v:searchforward ? 'gn' : 'gN'", { expr = true })
-vimrc.map('', 'gN', "v:searchforward ? 'gN' : 'gn'", { expr = true })
+vim.keymap.set('', 'gn', "v:searchforward ? 'gn' : 'gN'", { expr=true })
+vim.keymap.set('', 'gN', "v:searchforward ? 'gN' : 'gn'", { expr=true })
 
-vimrc.map('n', '&', ':%&&<CR>', { silent = true })
-vimrc.map('x', '&', ':%&&<CR>', { silent = true })
+vim.keymap.set({'n', 'x'}, '&', '<Cmd>%&&<CR>')
 
 
 -- Registers and macros. {{{2
 
 -- Access an resister in the same way in Insert and Commandline mode.
-vimrc.map('n', '<C-r>', '"')
-vimrc.map('x', '<C-r>', '"')
+vim.keymap.set({'n', 'x'}, '<C-r>', '"')
 
 F.setreg('j', 'j.')
 F.setreg('k', 'k.')
 F.setreg('n', 'n.')
 F.setreg('m', 'N.')
-vimrc.map('n', '@N', '@m')
+vim.keymap.set('n', '@N', '@m')
 
 -- Repeat the last executed macro as many times as possible.
 -- a => all
-vimrc.map('n', '@a', '9999@@')
-vimrc.map('n', '@a', '9999@@')
+vim.keymap.set('n', '@a', '9999@@')
 
 -- Execute the last executed macro again.
-vimrc.map('n', '`', '@@')
+vim.keymap.set('n', '`', '@@')
 
 
 -- Emacs like key mappings in Insert and CommandLine mode. {{{2
 
-vimrc.map('i', '<C-d>', '<Del>')
+vim.keymap.set('i', '<C-d>', '<Del>')
 
 -- Go elsewhere without deviding the undo history.
-vimrc.map('i', '<C-a>', "repeat('<C-g>U<Left>', col('.') - 1)", { expr = true })
-vimrc.map('i', '<C-e>', "repeat('<C-g>U<Right>', col('$') - col('.'))", { expr = true })
-vimrc.map('i', '<C-b>', '<C-g>U<Left>')
-vimrc.map('i', '<C-f>', '<C-g>U<Right>')
+vim.keymap.set('i', '<C-a>', "repeat('<C-g>U<Left>', col('.') - 1)", { expr=true })
+vim.keymap.set('i', '<C-e>', "repeat('<C-g>U<Right>', col('$') - col('.'))", { expr=true })
+vim.keymap.set('i', '<C-b>', '<C-g>U<Left>')
+vim.keymap.set('i', '<C-f>', '<C-g>U<Right>')
 
 -- Delete something deviding the undo history.
-vimrc.map('i', '<C-u>', '<C-g>u<C-u>')
-vimrc.map('i', '<C-w>', '<C-g>u<C-w>')
+vim.keymap.set('i', '<C-u>', '<C-g>u<C-u>')
+vim.keymap.set('i', '<C-w>', '<C-g>u<C-w>')
 
-vimrc.map('c', '<C-a>', '<Home>')
-vimrc.map('c', '<C-e>', '<End>')
-vimrc.map('c', '<C-f>', '<Right>')
-vimrc.map('c', '<C-b>', '<Left>')
-vimrc.map('c', '<C-n>', '<Down>')
-vimrc.map('c', '<C-p>', '<Up>')
-vimrc.map('c', '<C-d>', '<Del>')
+vim.keymap.set('c', '<C-a>', '<Home>')
+vim.keymap.set('c', '<C-e>', '<End>')
+vim.keymap.set('c', '<C-f>', '<Right>')
+vim.keymap.set('c', '<C-b>', '<Left>')
+vim.keymap.set('c', '<C-n>', '<Down>')
+vim.keymap.set('c', '<C-p>', '<Up>')
+vim.keymap.set('c', '<C-d>', '<Del>')
 
-vimrc.map('c', '<Left>', '<Nop>')
-vimrc.map('i', '<Left>', '<Nop>')
-vimrc.map('c', '<Right>', '<Nop>')
-vimrc.map('i', '<Right>', '<Nop>')
+vim.keymap.set({'c', 'i'}, '<Left>', '<Nop>')
+vim.keymap.set({'c', 'i'}, '<Right>', '<Nop>')
 
 
 
-vimrc.map_expr('n', 'gA', function()
+vim.keymap.set('n', 'gA', function()
    local line = F.getline('.')
    if vim.endswith(line, ';;') then -- for OCaml
-      return vimrc.term([[A<C-g>U<Left><C-g>U<Left>]])
+      return 'A<C-g>U<Left><C-g>U<Left>'
    elseif vim.regex('[,;)]$'):match_str(line) then
-      return vimrc.term([[A<C-g>U<Left>]])
+      return 'A<C-g>U<Left>'
    else
       return 'A'
    end
-end)
+end, { expr=true, replace_keycodes=true })
 
 
 
 -- QuickFix or location list. {{{2
 
-vimrc.map_cmd('n', 'bb', 'cc')
+vim.keymap.set('n', 'bb', '<Cmd>cc<CR>')
 
-vimrc.map('n', 'bn', ':<C-u><C-r>=v:count1<CR>cnext<CR>', { silent = true })
-vimrc.map('n', 'bp', ':<C-u><C-r>=v:count1<CR>cprevious<CR>', { silent = true })
+vim.keymap.set('n', 'bn', ':<C-u><C-r>=v:count1<CR>cnext<CR>', { silent = true })
+vim.keymap.set('n', 'bp', ':<C-u><C-r>=v:count1<CR>cprevious<CR>', { silent = true })
 
-vimrc.map_cmd('n', 'bf', 'cfirst')
-vimrc.map_cmd('n', 'bl', 'clast')
+vim.keymap.set('n', 'bf', '<Cmd>cfirst<CR>')
+vim.keymap.set('n', 'bl', '<Cmd>clast<CR>')
 
-vimrc.map_cmd('n', 'bS', 'colder')
-vimrc.map_cmd('n', 'bs', 'cnewer')
+vim.keymap.set('n', 'bS', '<Cmd>colder<CR>')
+vim.keymap.set('n', 'bs', '<Cmd>cnewer<CR>')
 
 
 
 -- Operators {{{2
 
 -- Throw deleted text into the black hole register ("_).
-vimrc.map('n', 'c', '"_c')
-vimrc.map('x', 'c', '"_c')
-vimrc.map('n', 'C', '"_C')
-vimrc.map('x', 'C', '"_C')
+vim.keymap.set({'n', 'x'}, 'c', '"_c')
+vim.keymap.set({'n', 'x'}, 'C', '"_C')
 
 
-vimrc.map('', 'g=', '=')
+vim.keymap.set('', 'g=', '=')
 
 
-vimrc.map('', 'ml', 'gu')
-vimrc.map('', 'mu', 'gU')
+vim.keymap.set('', 'ml', 'gu')
+vim.keymap.set('', 'mu', 'gU')
 
-vimrc.map('', 'gu', '<Nop>')
-vimrc.map('', 'gU', '<Nop>')
-vimrc.map('x', 'u', '<Nop>')
-vimrc.map('x', 'U', '<Nop>')
-
-
-vimrc.map('x', 'x', '"_x')
+vim.keymap.set('', 'gu', '<Nop>')
+vim.keymap.set('', 'gU', '<Nop>')
+vim.keymap.set('x', 'u', '<Nop>')
+vim.keymap.set('x', 'U', '<Nop>')
 
 
-vimrc.map('n', 'Y', 'y$')
+vim.keymap.set('x', 'x', '"_x')
+
+
+vim.keymap.set('n', 'Y', 'y$')
 -- In Blockwise-Visual mode, select text linewise.
 -- By default, select text characterwise, neither blockwise nor linewise.
-vimrc.map('x', 'Y', "mode() ==# 'V' ? 'y' : 'Vy'", { expr = true })
+vim.keymap.set('x', 'Y', "mode() ==# 'V' ? 'y' : 'Vy'", { expr=true })
 
 
 
 -- Swap the keys entering Replace mode and Visual-Replace mode.
-vimrc.map('n', 'R', 'gR')
-vimrc.map('n', 'gR', 'R')
-vimrc.map('n', 'r', 'gr')
-vimrc.map('n', 'gr', 'r')
+vim.keymap.set('n', 'R', 'gR')
+vim.keymap.set('n', 'gR', 'R')
+vim.keymap.set('n', 'r', 'gr')
+vim.keymap.set('n', 'gr', 'r')
 
 
-vimrc.map('n', 'U', '<C-r>')
+vim.keymap.set('n', 'U', '<C-r>')
 
 
 
 
 -- Motions {{{2
 
-vimrc.map('', 'H', '^')
-vimrc.map('', 'L', '$')
-vimrc.map('', 'M', '%')
+vim.keymap.set('', 'H', '^')
+vim.keymap.set('', 'L', '$')
+vim.keymap.set('', 'M', '%')
 
-vimrc.map('', 'gw', 'b')
-vimrc.map('', 'gW', 'B')
+vim.keymap.set('', 'gw', 'b')
+vim.keymap.set('', 'gW', 'B')
 
-vimrc.map('', 'k', 'gk')
-vimrc.map('', 'j', 'gj')
-vimrc.map('', 'gk', 'k')
-vimrc.map('', 'gj', 'j')
+vim.keymap.set('', 'k', 'gk')
+vim.keymap.set('', 'j', 'gj')
+vim.keymap.set('', 'gk', 'k')
+vim.keymap.set('', 'gj', 'j')
 
-vimrc.map('n', 'gff', 'gF')
+vim.keymap.set('n', 'gff', 'gF')
 
 
 
@@ -453,15 +446,6 @@ function vimrc.fn.move_current_window_to_tabpage()
    else
       -- Close the current window and re-open it in a new tabpage.
       vim.cmd('wincmd T')
-   end
-end
-
-
-function vimrc.fn.bdelete_bang_with_confirm()
-   if string.lower(vimrc.getchar_with_prompt('Delete? (y/n) ')) == 'y' then
-      vim.cmd('bdelete!')
-   else
-      vimrc.echo('Canceled')
    end
 end
 
@@ -548,64 +532,63 @@ function vimrc.fn.choose_window_interactively()
 end
 
 
-vimrc.map('n', 'tt', ':<C-u>tabnew<CR>', { silent = true })
-vimrc.map('n', 'tT', ':<C-u>call v:lua.vimrc.fn.move_current_window_to_tabpage()<CR>', { silent = true })
+vim.keymap.set('n', 'tt', '<Cmd>tabnew<CR>')
+vim.keymap.set('n', 'tT', vimrc.fn.move_current_window_to_tabpage)
 
-vimrc.map('n', 'tn', ":<C-u><C-r>=(tabpagenr() + v:count1 - 1) % tabpagenr('$') + 1<CR>tabnext<CR>", { silent = true })
-vimrc.map('n', 'tp', ":<C-u><C-r>=(tabpagenr('$') * 10 + tabpagenr() - v:count1 - 1) % tabpagenr('$') + 1<CR>tabnext<CR>", { silent = true })
+vim.keymap.set('n', 'tn', ":<C-u><C-r>=(tabpagenr() + v:count1 - 1) % tabpagenr('$') + 1<CR>tabnext<CR>", { silent=true })
+vim.keymap.set('n', 'tp', ":<C-u><C-r>=(tabpagenr('$') * 10 + tabpagenr() - v:count1 - 1) % tabpagenr('$') + 1<CR>tabnext<CR>", { silent=true })
 
-vimrc.map('n', 'tN', ':<C-u>tabmove +<CR>', { silent = true })
-vimrc.map('n', 'tP', ':<C-u>tabmove -<CR>', { silent = true })
+vim.keymap.set('n', 'tN', '<Cmd>tabmove +<CR>')
+vim.keymap.set('n', 'tP', '<Cmd>tabmove -<CR>')
 
-vimrc.map('n', 'tsh', ':<C-u>leftabove vsplit<CR>', { silent = true })
-vimrc.map('n', 'tsj', ':<C-u>rightbelow split<CR>', { silent = true })
-vimrc.map('n', 'tsk', ':<C-u>leftabove split<CR>', { silent = true })
-vimrc.map('n', 'tsl', ':<C-u>rightbelow vsplit<CR>', { silent = true })
+vim.keymap.set('n', 'tsh', '<Cmd>leftabove vsplit<CR>')
+vim.keymap.set('n', 'tsj', '<Cmd>rightbelow split<CR>')
+vim.keymap.set('n', 'tsk', '<Cmd>leftabove split<CR>')
+vim.keymap.set('n', 'tsl', '<Cmd>rightbelow vsplit<CR>')
 
-vimrc.map('n', 'tsH', ':<C-u>topleft vsplit<CR>', { silent = true })
-vimrc.map('n', 'tsJ', ':<C-u>botright split<CR>', { silent = true })
-vimrc.map('n', 'tsK', ':<C-u>topleft split<CR>', { silent = true })
-vimrc.map('n', 'tsL', ':<C-u>botright vsplit<CR>', { silent = true })
+vim.keymap.set('n', 'tsH', '<Cmd>topleft vsplit<CR>')
+vim.keymap.set('n', 'tsJ', '<Cmd>botright split<CR>')
+vim.keymap.set('n', 'tsK', '<Cmd>topleft split<CR>')
+vim.keymap.set('n', 'tsL', '<Cmd>botright vsplit<CR>')
 
-vimrc.map('n', 'twh', ':<C-u>leftabove vnew<CR>', { silent = true })
-vimrc.map('n', 'twj', ':<C-u>rightbelow new<CR>', { silent = true })
-vimrc.map('n', 'twk', ':<C-u>leftabove new<CR>', { silent = true })
-vimrc.map('n', 'twl', ':<C-u>rightbelow vnew<CR>', { silent = true })
+vim.keymap.set('n', 'twh', '<Cmd>leftabove vnew<CR>')
+vim.keymap.set('n', 'twj', '<Cmd>rightbelow new<CR>')
+vim.keymap.set('n', 'twk', '<Cmd>leftabove new<CR>')
+vim.keymap.set('n', 'twl', '<Cmd>rightbelow vnew<CR>')
 
-vimrc.map('n', 'twH', ':<C-u>topleft vnew<CR>', { silent = true })
-vimrc.map('n', 'twJ', ':<C-u>botright new<CR>', { silent = true })
-vimrc.map('n', 'twK', ':<C-u>topleft new<CR>', { silent = true })
-vimrc.map('n', 'twL', ':<C-u>botright vnew<CR>', { silent = true })
+vim.keymap.set('n', 'twH', '<Cmd>topleft vnew<CR>')
+vim.keymap.set('n', 'twJ', '<Cmd>botright new<CR>')
+vim.keymap.set('n', 'twK', '<Cmd>topleft new<CR>')
+vim.keymap.set('n', 'twL', '<Cmd>botright vnew<CR>')
 
-vimrc.map('n', 'th', '<C-w>h')
-vimrc.map('n', 'tj', '<C-w>j')
-vimrc.map('n', 'tk', '<C-w>k')
-vimrc.map('n', 'tl', '<C-w>l')
+vim.keymap.set('n', 'th', '<C-w>h')
+vim.keymap.set('n', 'tj', '<C-w>j')
+vim.keymap.set('n', 'tk', '<C-w>k')
+vim.keymap.set('n', 'tl', '<C-w>l')
 
-vimrc.map('n', 'tH', '<C-w>H')
-vimrc.map('n', 'tJ', '<C-w>J')
-vimrc.map('n', 'tK', '<C-w>K')
-vimrc.map('n', 'tL', '<C-w>L')
+vim.keymap.set('n', 'tH', '<C-w>H')
+vim.keymap.set('n', 'tJ', '<C-w>J')
+vim.keymap.set('n', 'tK', '<C-w>K')
+vim.keymap.set('n', 'tL', '<C-w>L')
 
-vimrc.map('n', 'tx', '<C-w>x')
+vim.keymap.set('n', 'tx', '<C-w>x')
 
 -- r => manual resize.
 -- R => automatic resize.
-vimrc.map('n', 'tRH', '<C-w>_')
-vimrc.map('n', 'tRW', '<C-w><Bar>')
-vimrc.map('n', 'tRR', '<C-w>_<C-w><Bar>')
+vim.keymap.set('n', 'tRH', '<C-w>_')
+vim.keymap.set('n', 'tRW', '<C-w><Bar>')
+vim.keymap.set('n', 'tRR', '<C-w>_<C-w><Bar>')
 
-vimrc.map('n', 't=', '<C-w>=')
+vim.keymap.set('n', 't=', '<C-w>=')
 
-vimrc.map('n', 'tq', ':<C-u>bdelete<CR>', { silent = true })
-vimrc.map('n', 'tQ', ':<C-u>call v:lua.vimrc.fn.bdelete_bang_with_confirm()<CR>', { silent = true })
+vim.keymap.set('n', 'tq', '<Cmd>bdelete<CR>')
 
-vimrc.map('n', 'tc', '<C-w>c')
+vim.keymap.set('n', 'tc', '<C-w>c')
 
-vimrc.map('n', 'to', '<C-w>o')
-vimrc.map('n', 'tO', ':<C-u>tabonly<CR>', { silent = true })
+vim.keymap.set('n', 'to', '<C-w>o')
+vim.keymap.set('n', 'tO', '<Cmd>tabonly<CR>')
 
-vimrc.map('n', 'tg', ':<C-u>call v:lua.vimrc.fn.choose_window_interactively()<CR>', { silent = true })
+vim.keymap.set('n', 'tg', vimrc.fn.choose_window_interactively)
 
 
 
@@ -659,30 +642,30 @@ vim.api.nvim_create_user_command(
 
 -- Toggle options {{{2
 
-vimrc.map('n', 'T', '<Nop>')
+vim.keymap.set('n', 'T', '<Nop>')
 
-vimrc.map('n', 'Ta', ':<C-u>AutosaveToggle<CR>', { silent = true })
-vimrc.map('n', 'Tb', ':<C-u>if &background == "dark" <Bar>set background=light <Bar>else <Bar>set background=dark <Bar>endif<CR>', { silent = true })
-vimrc.map('n', 'Tc', ':<C-u>set cursorcolumn! <Bar>set cursorline!<CR>', { silent = true })
-vimrc.map('n', 'Td', ':<C-u>if &diff <Bar>diffoff <Bar>else <Bar>diffthis <Bar>endif<CR>', { silent = true })
-vimrc.map('n', 'Te', ':<C-u>set expandtab!<CR>', { silent = true })
-vimrc.map('n', 'Th', ':<C-u>set hlsearch!<CR>', { silent = true })
-vimrc.map('n', 'Tn', ':<C-u>set number!<CR>', { silent = true })
-vimrc.map('n', 'Ts', ':<C-u>set spell!<CR>', { silent = true })
-vimrc.map('n', 'T8', ':<C-u>if &textwidth ==# 80 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>', { silent = true })
-vimrc.map('n', 'T0', ':<C-u>if &textwidth ==# 100 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>', { silent = true })
-vimrc.map('n', 'T2', ':<C-u>if &textwidth ==# 120 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>', { silent = true })
-vimrc.map('n', 'Tw', ':<C-u>set wrap!<CR>', { silent = true })
+vim.keymap.set('n', 'Ta', '<Cmd>AutosaveToggle<CR>')
+vim.keymap.set('n', 'Tb', ':<C-u>if &background == "dark" <Bar>set background=light <Bar>else <Bar>set background=dark <Bar>endif<CR>', { silent=true })
+vim.keymap.set('n', 'Tc', ':<C-u>set cursorcolumn! <Bar>set cursorline!<CR>', { silent=true })
+vim.keymap.set('n', 'Td', ':<C-u>if &diff <Bar>diffoff <Bar>else <Bar>diffthis <Bar>endif<CR>', { silent=true })
+vim.keymap.set('n', 'Te', '<Cmd>set expandtab!<CR>')
+vim.keymap.set('n', 'Th', '<Cmd>set hlsearch!<CR>')
+vim.keymap.set('n', 'Tn', '<Cmd>set number!<CR>')
+vim.keymap.set('n', 'Ts', '<Cmd>set spell!<CR>')
+vim.keymap.set('n', 'T8', ':<C-u>if &textwidth ==# 80 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=80 <Bar>endif<CR>', { silent=true })
+vim.keymap.set('n', 'T0', ':<C-u>if &textwidth ==# 100 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=100 <Bar>endif<CR>', { silent=true })
+vim.keymap.set('n', 'T2', ':<C-u>if &textwidth ==# 120 <Bar>set textwidth=0 <Bar>else <Bar>set textwidth=120 <Bar>endif<CR>', { silent=true })
+vim.keymap.set('n', 'Tw', '<Cmd>set wrap!<CR>')
 
-vimrc.remap('n', 'TA', 'Ta')
-vimrc.remap('n', 'TB', 'Tb')
-vimrc.remap('n', 'TC', 'Tc')
-vimrc.remap('n', 'TD', 'Td')
-vimrc.remap('n', 'TE', 'Te')
-vimrc.remap('n', 'TH', 'Th')
-vimrc.remap('n', 'TN', 'Tn')
-vimrc.remap('n', 'TS', 'Ts')
-vimrc.remap('n', 'TW', 'Tw')
+vim.keymap.set('n', 'TA', 'Ta', { remap=true })
+vim.keymap.set('n', 'TB', 'Tb', { remap=true })
+vim.keymap.set('n', 'TC', 'Tc', { remap=true })
+vim.keymap.set('n', 'TD', 'Td', { remap=true })
+vim.keymap.set('n', 'TE', 'Te', { remap=true })
+vim.keymap.set('n', 'TH', 'Th', { remap=true })
+vim.keymap.set('n', 'TN', 'Tn', { remap=true })
+vim.keymap.set('n', 'TS', 'Ts', { remap=true })
+vim.keymap.set('n', 'TW', 'Tw', { remap=true })
 
 
 
@@ -744,40 +727,40 @@ vim.api.nvim_create_user_command(
    }
 )
 
-vimrc.map('n', '<Space>s', '<Cmd>Scratch<CR>', { silent = true })
+vim.keymap.set('n', '<Space>s', '<Cmd>Scratch<CR>')
 
 
 
 -- Disable unuseful or dangerous mappings. {{{2
 
 -- Disable Select mode.
-vimrc.map('n', 'gh', '<Nop>')
-vimrc.map('n', 'gH', '<Nop>')
-vimrc.map('n', 'g<C-h>', '<Nop>')
+vim.keymap.set('n', 'gh', '<Nop>')
+vim.keymap.set('n', 'gH', '<Nop>')
+vim.keymap.set('n', 'g<C-h>', '<Nop>')
 
 -- Disable Ex mode.
-vimrc.map('n', 'Q', '<Nop>')
-vimrc.map('n', 'gQ', '<Nop>')
+vim.keymap.set('n', 'Q', '<Nop>')
+vim.keymap.set('n', 'gQ', '<Nop>')
 
-vimrc.map('n', 'ZZ', '<Nop>')
-vimrc.map('n', 'ZQ', '<Nop>')
+vim.keymap.set('n', 'ZZ', '<Nop>')
+vim.keymap.set('n', 'ZQ', '<Nop>')
 
 
 -- Help {{{2
 
 -- Search help.
-vimrc.map('n', '<C-h>', ':<C-u>SmartOpen help<Space>')
+vim.keymap.set('n', '<C-h>', ':<C-u>SmartOpen help<Space>')
 
 
 
 -- For writing Vim script. {{{2
 
-vimrc.map('n', 'XV', ':<C-u>SmartTabEdit $MYVIMRC<CR>', { silent = true })
+vim.keymap.set('n', 'XV', '<Cmd>SmartTabEdit $MYVIMRC<CR>')
 
 -- See |numbered-function|.
-vimrc.map('n', 'XF', ':<C-u>function {<C-r>=v:count<CR>}<CR>', { silent = true })
+vim.keymap.set('n', 'XF', ':<C-u>function {<C-r>=v:count<CR>}<CR>', { silent=true })
 
-vimrc.map('n', 'XM', ':<C-u>messages<CR>', { silent = true })
+vim.keymap.set('n', 'XM', '<Cmd>messages<CR>')
 
 
 
@@ -796,25 +779,25 @@ vimrc.iabbrev('tihs', 'this')
 
 -- Misc. {{{2
 
-vimrc.map('o', 'gv', ':<C-u>normal! gv<CR>', { silent = true })
+vim.keymap.set('o', 'gv', ':<C-u>normal! gv<CR>', { silent=true })
 
 -- Swap : and ;.
-vimrc.map('n', ';', ':')
-vimrc.map('n', ':', ';')
-vimrc.map('x', ';', ':')
-vimrc.map('x', ':', ';')
-vimrc.map('n', '@;', '@:')
-vimrc.map('x', '@;', '@:')
-vimrc.map('!', '<C-r>;', '<C-r>:')
+vim.keymap.set('n', ';', ':')
+vim.keymap.set('n', ':', ';')
+vim.keymap.set('x', ';', ':')
+vim.keymap.set('x', ':', ';')
+vim.keymap.set('n', '@;', '@:')
+vim.keymap.set('x', '@;', '@:')
+vim.keymap.set('!', '<C-r>;', '<C-r>:')
 
 
 -- Since <ESC> may be mapped to something else somewhere, it should be :map, not
 -- :noremap.
-vimrc.remap('!', 'jk', '<ESC>')
+vim.keymap.set('!', 'jk', '<ESC>', { remap=true })
 
 
 
-vimrc.map('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent = true })
+vim.keymap.set('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent=true })
 
 
 
@@ -824,23 +807,23 @@ function vimrc.map_callbacks.insert_blank_line(offset)
    end
 end
 
-vimrc.map('n', '<Plug>(my-insert-blank-lines-after)',
+vim.keymap.set('n', '<Plug>(my-insert-blank-lines-after)',
    'call v:lua.vimrc.map_callbacks.insert_blank_line(0)')
-vimrc.map('n', '<Plug>(my-insert-blank-lines-before)',
+vim.keymap.set('n', '<Plug>(my-insert-blank-lines-before)',
    'call v:lua.vimrc.map_callbacks.insert_blank_line(1)')
 
-vimrc.map_plug('n', 'go', '(my-insert-blank-lines-after)')
-vimrc.map_plug('n', 'gO', '(my-insert-blank-lines-before)')
+vim.keymap.set('n', 'go', '<Plug>(my-insert-blank-lines-after)')
+vim.keymap.set('n', 'gO', '<Plug>(my-insert-blank-lines-before)')
 
 
-vimrc.map('n', '<Space>w', '<Cmd>update<CR>')
+vim.keymap.set('n', '<Space>w', '<Cmd>update<CR>')
 
-vimrc.map('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
+vim.keymap.set('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
 
 
 -- `s` is used as a prefix key of plugin sandwich and hop.
-vimrc.map('n', 's', '<Nop>')
-vimrc.map('x', 's', '<Nop>')
+vim.keymap.set('n', 's', '<Nop>')
+vim.keymap.set('x', 's', '<Nop>')
 
 
 -- Commands {{{1
@@ -1274,7 +1257,7 @@ F['altr#define']('%.c', '%.cpp', '%.cc', '%.h', '%.hh', '%.hpp')
 F['altr#define']('autoload/%.vim', 'doc/%.txt', 'plugin/%.vim')
 
 -- Go to File Alternative
-vimrc.map_plug('n', 'gfa', '(altr-forward)')
+vim.keymap.set('n', 'gfa', '<Plug>(altr-forward)')
 
 
 
@@ -1316,14 +1299,14 @@ xmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
 
 G.caw_no_default_keymappings = true
 
-vimrc.map_plug('n', 'm//', '(caw:hatpos:toggle)')
-vimrc.map_plug('x', 'm//', '(caw:hatpos:toggle)')
-vimrc.map_plug('n', 'm/w', '(caw:wrap:comment)')
-vimrc.map_plug('x', 'm/w', '(caw:wrap:comment)')
-vimrc.map_plug('n', 'm/W', '(caw:wrap:uncomment)')
-vimrc.map_plug('x', 'm/W', '(caw:wrap:uncomment)')
-vimrc.map_plug('n', 'm/b', '(caw:box:comment)')
-vimrc.map_plug('x', 'm/b', '(caw:box:comment)')
+vim.keymap.set('n', 'm//', '<Plug>(caw:hatpos:toggle)')
+vim.keymap.set('x', 'm//', '<Plug>(caw:hatpos:toggle)')
+vim.keymap.set('n', 'm/w', '<Plug>(caw:wrap:comment)')
+vim.keymap.set('x', 'm/w', '<Plug>(caw:wrap:comment)')
+vim.keymap.set('n', 'm/W', '<Plug>(caw:wrap:uncomment)')
+vim.keymap.set('x', 'm/W', '<Plug>(caw:wrap:uncomment)')
+vim.keymap.set('n', 'm/b', '<Plug>(caw:box:comment)')
+vim.keymap.set('x', 'm/b', '<Plug>(caw:box:comment)')
 
 
 
@@ -1361,8 +1344,8 @@ end
 
 -- easyalign {{{2
 
-vimrc.map_plug('n', '=', '(EasyAlign)')
-vimrc.map_plug('x', '=', '(EasyAlign)')
+vim.keymap.set('n', '=', '<Plug>(EasyAlign)')
+vim.keymap.set('x', '=', '<Plug>(EasyAlign)')
 
 
 
@@ -1514,47 +1497,47 @@ function vimrc.map_callbacks.hop_jk(opts)
    )
 end
 
-vimrc.map('', '<Plug>(hop-f)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-F)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-t)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-T)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent = true })
+vim.keymap.set('', '<Plug>(hop-f)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-F)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-t)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true })<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-T)', "<Cmd>lua require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", { silent=true })
 
-vimrc.map('', '<Plug>(hop-s2)', "<Cmd>lua require('hop').hint_char2()<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-n)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  }, vim.fn.getreg('/'))<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-N)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR }, vim.fn.getreg('/'))<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-j)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  })<CR>", { silent = true })
-vimrc.map('', '<Plug>(hop-k)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })<CR>", { silent = true })
+vim.keymap.set('', '<Plug>(hop-s2)', "<Cmd>lua require('hop').hint_char2()<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-n)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  }, vim.fn.getreg('/'))<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-N)', "<Cmd>lua require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR }, vim.fn.getreg('/'))<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-j)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  })<CR>", { silent=true })
+vim.keymap.set('', '<Plug>(hop-k)', "<Cmd>lua vimrc.map_callbacks.hop_jk({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })<CR>", { silent=true })
 
-vimrc.map_plug('n', 'f', '(hop-f)')
-vimrc.map_plug('o', 'f', '(hop-f)')
-vimrc.map_plug('x', 'f', '(hop-f)')
-vimrc.map_plug('n', 'F', '(hop-F)')
-vimrc.map_plug('o', 'F', '(hop-F)')
-vimrc.map_plug('x', 'F', '(hop-F)')
-vimrc.map_plug('o', 't', '(hop-t)')
-vimrc.map_plug('x', 't', '(hop-t)')
-vimrc.map_plug('o', 'T', '(hop-T)')
-vimrc.map_plug('x', 'T', '(hop-T)')
+vim.keymap.set('n', 'f', '<Plug>(hop-f)')
+vim.keymap.set('o', 'f', '<Plug>(hop-f)')
+vim.keymap.set('x', 'f', '<Plug>(hop-f)')
+vim.keymap.set('n', 'F', '<Plug>(hop-F)')
+vim.keymap.set('o', 'F', '<Plug>(hop-F)')
+vim.keymap.set('x', 'F', '<Plug>(hop-F)')
+vim.keymap.set('o', 't', '<Plug>(hop-t)')
+vim.keymap.set('x', 't', '<Plug>(hop-t)')
+vim.keymap.set('o', 'T', '<Plug>(hop-T)')
+vim.keymap.set('x', 'T', '<Plug>(hop-T)')
 
 -- Note: Don't use the following key sequences! It is used 'vim-sandwich'.
 --  * sa
 --  * sd
 --  * sr
-vimrc.map_plug('n', 'ss', '(hop-s2)')
-vimrc.map_plug('o', 'ss', '(hop-s2)')
-vimrc.map_plug('x', 'ss', '(hop-s2)')
-vimrc.map_plug('n', 'sn', '(hop-n)')
-vimrc.map_plug('o', 'sn', '(hop-n)')
-vimrc.map_plug('x', 'sn', '(hop-n)')
-vimrc.map_plug('n', 'sN', '(hop-N)')
-vimrc.map_plug('o', 'sN', '(hop-N)')
-vimrc.map_plug('x', 'sN', '(hop-N)')
-vimrc.map_plug('n', 'sj', '(hop-j)')
-vimrc.map_plug('o', 'sj', '(hop-j)')
-vimrc.map_plug('x', 'sj', '(hop-j)')
-vimrc.map_plug('n', 'sk', '(hop-k)')
-vimrc.map_plug('o', 'sk', '(hop-k)')
-vimrc.map_plug('x', 'sk', '(hop-k)')
+vim.keymap.set('n', 'ss', '<Plug>(hop-s2)')
+vim.keymap.set('o', 'ss', '<Plug>(hop-s2)')
+vim.keymap.set('x', 'ss', '<Plug>(hop-s2)')
+vim.keymap.set('n', 'sn', '<Plug>(hop-n)')
+vim.keymap.set('o', 'sn', '<Plug>(hop-n)')
+vim.keymap.set('x', 'sn', '<Plug>(hop-n)')
+vim.keymap.set('n', 'sN', '<Plug>(hop-N)')
+vim.keymap.set('o', 'sN', '<Plug>(hop-N)')
+vim.keymap.set('x', 'sN', '<Plug>(hop-N)')
+vim.keymap.set('n', 'sj', '<Plug>(hop-j)')
+vim.keymap.set('o', 'sj', '<Plug>(hop-j)')
+vim.keymap.set('x', 'sj', '<Plug>(hop-j)')
+vim.keymap.set('n', 'sk', '<Plug>(hop-k)')
+vim.keymap.set('o', 'sk', '<Plug>(hop-k)')
+vim.keymap.set('x', 'sk', '<Plug>(hop-k)')
 
 
 
@@ -1578,10 +1561,10 @@ G['jplus#input_config'] = {
    L = { delimiter_format = '' },
 }
 
-vimrc.map_plug('n', 'J', '(jplus-getchar)')
-vimrc.map_plug('x', 'J', '(jplus-getchar)')
-vimrc.map_plug('n', 'gJ', '(jplus-input)')
-vimrc.map_plug('x', 'gJ', '(jplus-input)')
+vim.keymap.set('n', 'J', '<Plug>(jplus-getchar)')
+vim.keymap.set('x', 'J', '<Plug>(jplus-getchar)')
+vim.keymap.set('n', 'gJ', '<Plug>(jplus-input)')
+vim.keymap.set('x', 'gJ', '<Plug>(jplus-input)')
 
 
 
@@ -1593,9 +1576,9 @@ vimrc.map_plug('x', 'gJ', '(jplus-input)')
 
 -- niceblock {{{2
 
-vimrc.map_plug('x', 'I', '(niceblock-I)')
-vimrc.map_plug('x', 'gI', '(niceblock-gI)')
-vimrc.map_plug('x', 'A', '(niceblock-A)')
+vim.keymap.set('x', 'I', '<Plug>(niceblock-I)')
+vim.keymap.set('x', 'gI', '<Plug>(niceblock-gI)')
+vim.keymap.set('x', 'A', '<Plug>(niceblock-A)')
 
 
 
@@ -1604,24 +1587,24 @@ vimrc.map_plug('x', 'A', '(niceblock-A)')
 
 -- operator-replace {{{2
 
-vimrc.map_plug('n', '<C-p>', '(operator-replace)')
-vimrc.map_plug('o', '<C-p>', '(operator-replace)')
-vimrc.map_plug('x', '<C-p>', '(operator-replace)')
+vim.keymap.set('n', '<C-p>', '<Plug>(operator-replace)')
+vim.keymap.set('o', '<C-p>', '<Plug>(operator-replace)')
+vim.keymap.set('x', '<C-p>', '<Plug>(operator-replace)')
 
 
 
 -- operator-search {{{2
 
 -- Note: m/ is the prefix of comment out.
-vimrc.map_plug('n', 'm?', '(operator-search)')
-vimrc.map_plug('o', 'm?', '(operator-search)')
-vimrc.map_plug('x', 'm?', '(operator-search)')
+vim.keymap.set('n', 'm?', '<Plug>(operator-search)')
+vim.keymap.set('o', 'm?', '<Plug>(operator-search)')
+vim.keymap.set('x', 'm?', '<Plug>(operator-search)')
 
 
 
 -- qfreplace {{{2
 
-vimrc.map('n', 'br', ':<C-u>Qfreplace SmartOpen<CR>', { silent = true })
+vim.keymap.set('n', 'br', ':<C-u>Qfreplace SmartOpen<CR>', { silent=true })
 
 
 
@@ -1641,9 +1624,9 @@ G.quickhl_manual_colors = {
    'guifg=#101020 guibg=#ffffa0 gui=bold',
 }
 
-vimrc.map_plug('n', '"', '(quickhl-manual-this)')
-vimrc.map_plug('x', '"', '(quickhl-manual-this)')
-vimrc.map('n', '<C-c>', ':<C-u>nohlsearch <Bar> QuickhlManualReset<CR>', { silent = true })
+vim.keymap.set('n', '"', '<Plug>(quickhl-manual-this)')
+vim.keymap.set('x', '"', '<Plug>(quickhl-manual-this)')
+vim.keymap.set('n', '<C-c>', ':<C-u>nohlsearch <Bar> QuickhlManualReset<CR>', { silent=true })
 
 
 
@@ -1667,15 +1650,15 @@ G.quickrun_config = {
 }
 
 
-vimrc.map_plug('n', 'BB', '(quickrun)')
-vimrc.map_plug('x', 'BB', '(quickrun)')
+vim.keymap.set('n', 'BB', '<Plug>(quickrun)')
+vim.keymap.set('x', 'BB', '<Plug>(quickrun)')
 
 
 
 
 -- repeat {{{2
 
-vimrc.map_plug('n', 'U', '(RepeatRedo)')
+vim.keymap.set('n', 'U', '<Plug>(RepeatRedo)')
 -- Autoload vim-repeat immediately in order to make <Plug>(RepeatRedo) available.
 -- repeat#setreg() does nothing here.
 F['repeat#setreg']('', '')
@@ -1796,10 +1779,10 @@ G.swap_no_default_key_mappings = true
 
 G.textobj_continuous_line_no_default_key_mappings = true
 
-vimrc.map_plug('o', 'aL', '(textobj-continuous-cpp-a)')
-vimrc.map_plug('x', 'aL', '(textobj-continuous-cpp-a)')
-vimrc.map_plug('o', 'iL', '(textobj-continuous-cpp-i)')
-vimrc.map_plug('x', 'iL', '(textobj-continuous-cpp-i)')
+vim.keymap.set('o', 'aL', '<Plug>(textobj-continuous-cpp-a)')
+vim.keymap.set('x', 'aL', '<Plug>(textobj-continuous-cpp-a)')
+vim.keymap.set('o', 'iL', '<Plug>(textobj-continuous-cpp-i)')
+vim.keymap.set('x', 'iL', '<Plug>(textobj-continuous-cpp-i)')
 
 vimrc.autocmd('FileType', {
    pattern = 'vim',
@@ -1824,10 +1807,10 @@ vimrc.autocmd('FileType', {
 
 G.textobj_lastpaste_no_default_key_mappings = true
 
-vimrc.map_plug('o', 'iP', '(textobj-lastpaste-i)')
-vimrc.map_plug('x', 'iP', '(textobj-lastpaste-i)')
-vimrc.map_plug('o', 'aP', '(textobj-lastpaste-a)')
-vimrc.map_plug('x', 'aP', '(textobj-lastpaste-a)')
+vim.keymap.set('o', 'iP', '<Plug>(textobj-lastpaste-i)')
+vim.keymap.set('x', 'iP', '<Plug>(textobj-lastpaste-i)')
+vim.keymap.set('o', 'aP', '<Plug>(textobj-lastpaste-a)')
+vim.keymap.set('x', 'aP', '<Plug>(textobj-lastpaste-a)')
 
 
 
@@ -1835,33 +1818,33 @@ vimrc.map_plug('x', 'aP', '(textobj-lastpaste-a)')
 
 G.textobj_space_no_default_key_mappings = true
 
-vimrc.map_plug('o', 'a<Space>', '(textobj-space-a)')
-vimrc.map_plug('x', 'a<Space>', '(textobj-space-a)')
-vimrc.map_plug('o', 'i<Space>', '(textobj-space-i)')
-vimrc.map_plug('x', 'i<Space>', '(textobj-space-i)')
+vim.keymap.set('o', 'a<Space>', '<Plug>(textobj-space-a)')
+vim.keymap.set('x', 'a<Space>', '<Plug>(textobj-space-a)')
+vim.keymap.set('o', 'i<Space>', '<Plug>(textobj-space-i)')
+vim.keymap.set('x', 'i<Space>', '<Plug>(textobj-space-i)')
 
 
 -- textobj-wiw {{{2
 
 G.textobj_wiw_no_default_key_mappings = true
 
-vimrc.map_plug('n', '<C-w>', '(textobj-wiw-n)')
-vimrc.map_plug('o', '<C-w>', '(textobj-wiw-n)')
-vimrc.map_plug('x', '<C-w>', '(textobj-wiw-n)')
-vimrc.map_plug('n', 'g<C-w>', '(textobj-wiw-p)')
-vimrc.map_plug('o', 'g<C-w>', '(textobj-wiw-p)')
-vimrc.map_plug('x', 'g<C-w>', '(textobj-wiw-p)')
-vimrc.map_plug('n', '<C-e>', '(textobj-wiw-N)')
-vimrc.map_plug('o', '<C-e>', '(textobj-wiw-N)')
-vimrc.map_plug('x', '<C-e>', '(textobj-wiw-N)')
-vimrc.map_plug('n', 'g<C-e>', '(textobj-wiw-P)')
-vimrc.map_plug('o', 'g<C-e>', '(textobj-wiw-P)')
-vimrc.map_plug('x', 'g<C-e>', '(textobj-wiw-P)')
+vim.keymap.set('n', '<C-w>', '<Plug>(textobj-wiw-n)')
+vim.keymap.set('o', '<C-w>', '<Plug>(textobj-wiw-n)')
+vim.keymap.set('x', '<C-w>', '<Plug>(textobj-wiw-n)')
+vim.keymap.set('n', 'g<C-w>', '<Plug>(textobj-wiw-p)')
+vim.keymap.set('o', 'g<C-w>', '<Plug>(textobj-wiw-p)')
+vim.keymap.set('x', 'g<C-w>', '<Plug>(textobj-wiw-p)')
+vim.keymap.set('n', '<C-e>', '<Plug>(textobj-wiw-N)')
+vim.keymap.set('o', '<C-e>', '<Plug>(textobj-wiw-N)')
+vim.keymap.set('x', '<C-e>', '<Plug>(textobj-wiw-N)')
+vim.keymap.set('n', 'g<C-e>', '<Plug>(textobj-wiw-P)')
+vim.keymap.set('o', 'g<C-e>', '<Plug>(textobj-wiw-P)')
+vim.keymap.set('x', 'g<C-e>', '<Plug>(textobj-wiw-P)')
 
-vimrc.map_plug('o', 'a<C-w>', '(textobj-wiw-a)')
-vimrc.map_plug('x', 'a<C-w>', '(textobj-wiw-a)')
-vimrc.map_plug('o', 'i<C-w>', '(textobj-wiw-i)')
-vimrc.map_plug('x', 'i<C-w>', '(textobj-wiw-i)')
+vim.keymap.set('o', 'a<C-w>', '<Plug>(textobj-wiw-a)')
+vim.keymap.set('x', 'a<C-w>', '<Plug>(textobj-wiw-a)')
+vim.keymap.set('o', 'i<C-w>', '<Plug>(textobj-wiw-i)')
+vim.keymap.set('x', 'i<C-w>', '<Plug>(textobj-wiw-i)')
 
 
 
@@ -1897,9 +1880,9 @@ require('nvim-treesitter.configs').setup {
 
 -- window-adjuster {{{2
 
-vimrc.map('n', 'tRw', ':<C-u>AdjustScreenWidth<CR>', { silent = true })
-vimrc.map('n', 'tRh', ':<C-u>AdjustScreenHeight<CR>', { silent = true })
-vimrc.map('n', 'tRr', ':<C-u>AdjustScreenWidth <Bar> AdjustScreenHeight<CR>', { silent = true })
+vim.keymap.set('n', 'tRw', '<Cmd>AdjustScreenWidth<CR>')
+vim.keymap.set('n', 'tRh', '<Cmd>AdjustScreenHeight<CR>')
+vim.keymap.set('n', 'tRr', ':<C-u>AdjustScreenWidth <Bar> AdjustScreenHeight<CR>', { silent=true })
 
 
 
