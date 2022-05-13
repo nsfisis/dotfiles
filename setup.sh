@@ -6,6 +6,7 @@
 for name in \
     .tmux.conf \
     .vimrc \
+    .zshenv \
     .zshrc \
     ; \
 do
