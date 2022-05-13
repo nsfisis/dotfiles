@@ -4,7 +4,6 @@
 
 # Make symlinks to dot files. {{{2
 for name in \
-    .tmux.conf \
     .vimrc \
     .zshenv \
     .zshrc \
@@ -30,6 +29,7 @@ for name in \
     git \
     newsboat \
     nvim \
+    tmux \
     ; \
 do
     if [ ! -L ~/.config/"$name" ]; then
