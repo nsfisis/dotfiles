@@ -149,8 +149,6 @@ setopt IGNORE_EOF
 # Regard '#' as comment even in interactive mode.
 setopt INTERACTIVE_COMMENTS
 
-# Even if the command contains "/", perform path search. If you specified "X11/xinit", zsh will execute "/usr/local/bin/X11/xinit".
-setopt PATH_DIRS
 
 # Allow the short form of the loop statement.
 setopt SHORT_LOOPS
