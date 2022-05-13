@@ -315,7 +315,7 @@ PROMPT2="%63F❯%62F❯%61F❯%f "
 SPROMPT="%179F%BDid you mean %r? (n/y):%b%f "
 
 
-HISTFILE=$HOME/.zsh_history
+HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
