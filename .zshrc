@@ -149,6 +149,8 @@ setopt IGNORE_EOF
 # Regard '#' as comment even in interactive mode.
 setopt INTERACTIVE_COMMENTS
 
+# Wait 10 seconds before executing `rm *` or `rm path/*`.
+setopt RM_STAR_WAIT
 
 # Allow the short form of the loop statement.
 setopt SHORT_LOOPS
