@@ -1187,6 +1187,8 @@ paq({
    'itchyny/vim-parenmatch',
    -- Tree-sitter integration.
    'nvim-treesitter/nvim-treesitter',
+   -- Tree-sitter debugging.
+   'nvim-treesitter/playground',
    -- Highlight specified words.
    't9md/vim-quickhl',
    -- Yet another tree-sitter indentation.
