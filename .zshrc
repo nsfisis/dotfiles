@@ -406,15 +406,15 @@ fi
 if [[ "$(uname)" == "Darwin" ]]; then
     alias ls='ls -G'
     alias lsa='ls -G -a'
-    alias lsl='ls -G -l'
+    alias ll='ls -G -l'
     alias lsal='ls -G -al'
-    alias lsla='ls -G -al'
+    alias lla='ls -G -al'
 else
     alias ls='ls --color=always'
     alias lsa='ls --color=always -a'
-    alias lsl='ls --color=always -l'
+    alias ll='ls --color=always -l'
     alias lsal='ls --color=always -al'
-    alias lsla='ls --color=always -al'
+    alias lla='ls --color=always -al'
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
