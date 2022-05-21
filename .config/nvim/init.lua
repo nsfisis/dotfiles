@@ -1181,8 +1181,8 @@ paq({
    'cocopon/colorswatch.vim',
    -- Makes folding text cool.
    'LeafCage/foldCC.vim',
-   -- Show indent.
-   'Yggdroot/indentLine',
+   -- Show indentation guide.
+   'lukas-reineke/indent-blankline.nvim',
    -- Highlight matched parentheses.
    'itchyny/vim-parenmatch',
    -- Tree-sitter integration.
@@ -1543,10 +1543,12 @@ vim.keymap.set('x', 'sk', '<Plug>(hop-k)')
 
 
 
--- indentline {{{2
+-- indent-blankline.nvim {{{2
 
-G.indentLine_conceallevel = 1
-G.indentLine_fileTypeExclude = { 'help' }
+require("indent_blankline").setup {
+   char_blankline = ' ',
+   show_first_indent_level = false,
+}
 
 
 

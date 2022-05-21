@@ -35,10 +35,6 @@ local function set_indentation(style, width)
    vim.bo.tabstop = width
    vim.bo.shiftwidth = width
    vim.bo.softtabstop = width
-
-   if vim.fn.exists(':IndentLinesReset') == 2 then
-      vim.cmd('IndentLinesReset')
-   end
 end
 
 
