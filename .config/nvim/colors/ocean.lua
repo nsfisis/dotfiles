@@ -8,49 +8,43 @@ vim.g.colors_name = 'ocean'
 local palette
 if vim.o.background == 'dark' then
    palette = {
-      NONE      = 'NONE',
-      fg        = '#b1b1c8',
-      bg        = '#101020',
-      blue      = '#6e6eff',
-      blue_bg   = '#202050',
-      blue2     = '#70b0ff',
-      comment   = '#8686bf',
-      cursor    = '#5b5bb6',
-      gray      = '#353535',
-      gray2     = '#202020',
-      green     = '#c4e088',
-      green_bg  = '#204020',
-      orange    = '#deab52',
-      orange2   = '#ff7100',
-      red       = '#a65f49',
-      red_bg    = '#402020',
-      selection = '#303060',
-      yellow    = '#a68f49',
-      yellow2   = '#a89562',
-      yellow3   = '#5c5241',
+      NONE        = 'NONE',
+      fg          = '#b1b1c8',
+      bg          = '#101020',
+      gray        = '#353535',
+      dark_gray   = '#202020',
+      comment     = '#8686bf',
+      selection   = '#303060',
+      blue        = '#6e6eff',
+      cyan        = '#70b0ff',
+      green       = '#bdd792',
+      orange      = '#deab52',
+      red         = '#a65f49',
+      magenta     = '#bd91e6',
+      yellow      = '#a68f49',
+      diff_add    = '#202050',
+      diff_change = '#204020',
+      diff_delete = '#402020',
    }
 else
    palette = {
-      NONE      = 'NONE',
-      fg        = '#203050',
-      bg        = '#f5f5ff',
-      blue      = '#6e6eff',
-      blue_bg   = '#202050',
-      blue2     = '#6f8fff',
-      comment   = '#a0a0e0',
-      cursor    = '#5b5bb6',
-      gray      = '#bebebe',
-      gray2     = '#171717',
-      green     = '#6f9226',
-      green_bg  = '#204020',
-      orange    = '#e79230',
-      orange2   = '#ff7100',
-      red       = '#d77253',
-      red_bg    = '#402020',
-      selection = '#f0f0d0',
-      yellow    = '#cba224',
-      yellow2   = '#af8e29',
-      yellow3   = '#c6b683',
+      NONE        = 'NONE',
+      fg          = '#203050',
+      bg          = '#f5f5ff',
+      gray        = '#bebebe',
+      dark_gray   = '#171717',
+      comment     = '#a0a0e0',
+      selection   = '#f0f0d0',
+      blue        = '#6e6eff',
+      cyan        = '#6f8fff',
+      green       = '#6f9226',
+      orange      = '#e79230',
+      red         = '#d77253',
+      magenta     = '#8967a8',
+      yellow      = '#cba224',
+      diff_add    = '#202050',
+      diff_change = '#204020',
+      diff_delete = '#402020',
    }
 end
 
@@ -85,29 +79,31 @@ end
 
 
 hl('AnalysisError',            'red',     'NONE',        'underline')
-hl('AnalysisWarning',          'yellow2', 'NONE',        'underline')
-hl('Cursor',                   'fg',      'cursor',      'NONE')
+hl('AnalysisWarning',          'yellow',  'NONE',        'underline')
+hl('Cursor',                   'fg',      'bg',          'NONE')
 hl('DecorationBold',           'NONE',    'NONE',        'bold')
 hl('DecorationUnderlined',     'NONE',    'NONE',        'underline')
-hl('DiffAdd',                  'NONE',    'blue_bg',     'NONE')
-hl('DiffChange',               'NONE',    'green_bg',    'NONE')
-hl('DiffDelete',               'NONE',    'red_bg',      'NONE')
-hl('DiffText',                 'NONE',    'green_bg',    'underline')
+hl('DiffAdd',                  'NONE',    'diff_add',    'NONE')
+hl('DiffChange',               'NONE',    'diff_change', 'NONE')
+hl('DiffDelete',               'NONE',    'diff_delete', 'NONE')
+hl('DiffText',                 'NONE',    'diff_change', 'underline')
 hl('Error',                    'red',     'NONE',        'NONE')
 hl('Hidden',                   'bg',      'bg',          'NONE')
 hl('Normal',                   'fg',      'bg',          'NONE')
 hl('Prompt',                   'comment', 'NONE',        'bold')
-hl('Search',                   'bg',      'yellow3',     'NONE')
+hl('Search',                   'bg',      'comment',     'NONE')
 hl('Special',                  'red',     'NONE',        'NONE')
 hl('SpecialKey',               'gray',    'NONE',        'NONE')
 hl('SyntaxComment',            'comment', 'NONE',        'NONE')
 hl('SyntaxCommentSpecial',     'fg',      'NONE',        'bold')
-hl('SyntaxConstant',           'red',     'NONE',        'NONE')
-hl('SyntaxIdentifier',         'green',   'NONE',        'NONE')
+hl('SyntaxConstant',           'magenta', 'NONE',        'NONE')
+hl('SyntaxIdentifier',         'fg',      'NONE',        'NONE')
+hl('SyntaxKeyword',            'blue',    'NONE',        'NONE')
+hl('SyntaxMacro',              'orange',  'NONE',        'NONE')
+hl('SyntaxOperator',           'blue',    'NONE',        'NONE')
 hl('SyntaxStatement',          'blue',    'NONE',        'bold')
-hl('SyntaxStatement2',         'blue',    'NONE',        'NONE')
 hl('SyntaxString',             'yellow',  'NONE',        'NONE')
-hl('SyntaxType',               'blue2',   'NONE',        'NONE')
+hl('SyntaxType',               'cyan',    'NONE',        'NONE')
 hl('Title',                    'orange',  'NONE',        'NONE')
 hl('UiCompletion',             'fg',      'gray',        'NONE')
 hl('UiSelection',              'NONE',    'selection',   'NONE')
@@ -120,11 +116,11 @@ hl('UiStatusLineModeOther',    'bg',      'blue',        'bold')
 hl('UiStatusLineModeReplace',  'bg',      'red',         'bold')
 hl('UiStatusLineModeTerminal', 'bg',      'blue',        'bold')
 hl('UiStatusLineModeVisual',   'bg',      'orange',      'bold')
-hl('UiStatusLineNC',           'comment', 'gray2',       'NONE')
+hl('UiStatusLineNC',           'comment', 'dark_gray',   'NONE')
 hl('UiTabLine',                'fg',      'gray',        'NONE')
 hl('UiTabLineNC',              'comment', 'bg',          'NONE')
-hl('UiTarget',                 'orange2', 'NONE',        'underline')
-hl('Warning',                  'yellow2', 'NONE',        'NONE')
+hl('UiTarget',                 'orange',  'NONE',        'underline')
+hl('Warning',                  'yellow',  'NONE',        'NONE')
 
 
 
@@ -156,6 +152,7 @@ link('ErrorMsg',       'Error')
 link('EndOfBuffer',    'Hidden')
 link('MatchParen',     'Hidden')
 link('CursorLineNr',   'Normal')
+link('Delimiter',      'Normal')
 link('MoreMsg',        'Prompt')
 link('Question',       'Prompt')
 link('IncSearch',      'Search')
@@ -170,9 +167,9 @@ link('SpecialComment', 'SyntaxCommentSpecial')
 link('Todo',           'SyntaxCommentSpecial')
 link('Constant',       'SyntaxConstant')
 link('Identifier',     'SyntaxIdentifier')
+link('PreProc',        'SyntaxMacro')
+link('Operator',       'SyntaxOperator')
 link('Statement',      'SyntaxStatement')
-link('Operator',       'SyntaxStatement2')
-link('PreProc',        'SyntaxStatement2')
 link('Character',      'SyntaxString')
 link('String',         'SyntaxString')
 link('Directory',      'SyntaxType')
@@ -196,7 +193,11 @@ link('WarningMsg',     'Warning')
 
 -- Tree-sitter {{{2
 
-link('TSText', 'Normal')
+link('TSText',         'Normal')
+link('TSNamespace',    'SyntaxIdentifier')
+link('TSFuncBuiltin',  'SyntaxKeyword')
+link('TSVariable',     'SyntaxIdentifier')
+link('TSStringEscape', 'Special')
 
 
 -- 'statusline' and 'tabline' {{{2
@@ -247,9 +248,9 @@ link('cppRawStringDelimiter', 'SyntaxString')
 
 -- html {{{3
 
-link('htmlEndTag',  'SyntaxStatement2')
-link('htmlTag',     'SyntaxStatement2')
-link('htmlTagName', 'SyntaxStatement2')
+link('htmlEndTag',  'SyntaxKeyword')
+link('htmlTag',     'SyntaxKeyword')
+link('htmlTagName', 'SyntaxKeyword')
 
 -- php {{{3
 
@@ -261,7 +262,7 @@ link('phpSpecialFunction', 'SyntaxIdentifier')
 
 -- ruby {{{3
 
-link('rubyDataDirective',   'SyntaxStatement2')
+link('rubyDataDirective',   'SyntaxKeyword')
 link('rubyStringDelimiter', 'SyntaxString')
 
 -- sh {{{3
@@ -272,7 +273,7 @@ link('shDerefVar',    'SyntaxIdentifier')
 
 -- sql {{{3
 
-link('sqlKeyword', 'SyntaxStatement2')
+link('sqlKeyword', 'SyntaxKeyword')
 
 
 
