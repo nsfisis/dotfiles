@@ -62,13 +62,7 @@
     fixup = commit --fixup
     amend = commit --amend --no-edit
     clone1 = clone --depth=1
-    sw = "!__fn() { \
-        if [[ \"$1\" == origin/* || \"$1\" == upstream/* ]]; then \
-            git switch -d \"$@\"; \
-        else \
-            git switch \"$@\"; \
-        fi; \
-    }; __fn"
+    sw = "!~/bin/gitalias/git-sw"
     swc = switch -c
     swm = "!__fn() { \
         if git rev-parse --verify --quiet main > /dev/null 2>&1; then \

@@ -3,3 +3,6 @@ newsboat
 
 skk
     Share jisyo file between machines without opening the content
+
+golang
+    Add golang to INSTALL.txt

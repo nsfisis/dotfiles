@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Requirements. {{{1
+
+ok=1
+for exe in \
+    curl \
+    git \
+    go \
+    gunzip \
+    ; \
+do
+    if which "$exe" >/dev/null; then
+        :
+    else
+        echo "error: $exe is missing" >&2
+        ok=0
+    fi
+done
+if [[ $ok = 0 ]]; then
+    exit 1
+fi
+
 # Configurations. {{{1
 
 # Make symlinks to dot files. {{{2
@@ -38,6 +59,21 @@ do
     fi
 done
 
+# Tools. {{{1
+
+# Golang: {{{2
+for name in \
+    gitalias/git-sw \
+    ; \
+do
+    src_file="src/$name.go"
+    bin_file="bin/$name"
+    if [[ "$bin_file" -ot "$src_file" ]]; then
+        echo "build: $bin_file"
+        go build -o "$bin_file" "$src_file"
+    fi
+done
+
 # Scripts. {{{1
 
 # Make ~/bin directory. {{{2
@@ -45,10 +81,15 @@ if [ ! -d ~/bin ]; then
     echo "dir: ~/bin"
     mkdir ~/bin
 fi
+if [ ! -d ~/bin/gitalias ]; then
+    echo "dir: ~/bin/gitalias"
+    mkdir ~/bin/gitalias
+fi
 
 # Make symlinks to utility scripts. {{{2
 for name in \
     tmux-pane-idx \
+    gitalias/git-sw \
     ; \
 do
     if [ ! -L ~/bin/"$name" ]; then
