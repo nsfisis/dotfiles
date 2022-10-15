@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"unicode"
 )
 
 func main() {
@@ -12,9 +13,16 @@ func main() {
 	if requiresDetachFlag(os.Args) {
 		gitArgs = append(gitArgs, "--detach")
 	}
+	firstPositionalArg := true
 	for i, argv := range os.Args {
 		if i == 0 {
 			continue // argv[0] is a program name.
+		}
+		if firstPositionalArg && !strings.HasPrefix(argv, "-") {
+			if isInt(argv) {
+				argv = "feature/" + argv
+			}
+			firstPositionalArg = false
 		}
 		gitArgs = append(gitArgs, argv)
 	}
@@ -44,4 +52,13 @@ func requiresDetachFlag(argv []string) bool {
 	}
 	firstArg := argv[1]
 	return strings.HasPrefix(firstArg, "origin/") || strings.HasPrefix(firstArg, "upstream/")
+}
+
+func isInt(s string) bool {
+	for _, c := range s {
+		if !unicode.IsDigit(c) {
+			return false
+		}
+	}
+	return true
 }
