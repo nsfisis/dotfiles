@@ -383,6 +383,7 @@ alias zmv='noglob zmv -W'
 alias fd='noglob fd'
 
 alias g='git'
+alias gs='git s'
 
 alias vim='nvim'
 alias vimdiff='nvim -d'
