@@ -700,7 +700,7 @@ local function make_scratch_buffer_name(ft)
       ft = 'txt'
    end
    local ext = EXTENSION_MAPPING[ft] or ft
-   return my_env.scratch_dir .. '/' .. F.strftime('%Y-%m', now), F.strftime('%d-%H%M%S'), ext
+   return my_env.scratch_dir .. '/' .. F.strftime('%Y-%m', now), F.strftime('%Y-%m-%d-%H%M%S'), ext
 end
 
 function vimrc.fn.open_scratch()
