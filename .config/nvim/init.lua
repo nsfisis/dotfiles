@@ -704,7 +704,12 @@ local function make_scratch_buffer_name(ft)
 end
 
 function vimrc.fn.open_scratch()
-   local ft = vim.trim(vimrc.input('filetype: '))
+   local ok, ft = pcall(function() return vimrc.input('filetype: ') end)
+   if not ok then
+      vimrc.echo('Canceled', 'ErrorMsg')
+      return
+   end
+   ft = vim.trim(ft)
    local dir, fname, ext = make_scratch_buffer_name(ft)
    if F.isdirectory(dir) == 0 then
       F.mkdir(dir, 'p')
