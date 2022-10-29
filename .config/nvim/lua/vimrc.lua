@@ -62,6 +62,7 @@ function M.register_filetype_autocmds_for_indentation()
       toml       = { style = SPACE, width = 2 },
       typescript = { style = SPACE, width = 2 },
       vim        = { style = SPACE, width = 4 },
+      xml        = { style = SPACE, width = 2 },
       yaml       = { style = SPACE, width = 2 },
    }
 
