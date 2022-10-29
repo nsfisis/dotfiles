@@ -47,6 +47,7 @@ function M.register_filetype_autocmds_for_indentation()
       cmake      = { style = SPACE, width = 2 },
       cpp        = { style = SPACE, width = 4 },
       css        = { style = SPACE, width = 2 },
+      docbk      = { style = SPACE, width = 2 },
       go         = { style = TAB,   width = 4 },
       haskell    = { style = SPACE, width = 4 },
       html       = { style = SPACE, width = 2 },

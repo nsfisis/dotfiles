@@ -157,6 +157,7 @@ autocmd Vimrc FileType c          set expandtab   tabstop=4 shiftwidth=4 softtab
 autocmd Vimrc FileType cmake      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType cpp        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType css        set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType docbk      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType go         set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType haskell    set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType html       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
