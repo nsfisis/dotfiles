@@ -379,6 +379,7 @@ alias mkdir='mkdir -p'
 alias mv='mv -i'
 alias rm="rm -i"
 alias ssh='TERM=xterm-256color ssh'
+alias tree='tree -N'
 
 alias zmv='noglob zmv -W'
 alias fd='noglob fd'
