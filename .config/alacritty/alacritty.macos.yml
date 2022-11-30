@@ -17,3 +17,8 @@ key_bindings:
   - { key: Key0, mods: Command, action: ResetFontSize    }
   - { key: Key1, mods: Command, action: IncreaseFontSize }
   - { key: Key2, mods: Command, action: DecreaseFontSize }
+  # Workaround:
+  #   Alacritty v0.11.0-rc1 or later emits Yen symbol when you type Yen key
+  #   even if you set "backslash" to "a character by Yen key".
+  #   See also: https://github.com/rust-windowing/winit/issues/2577
+  - { key: Yen, chars: "\x5c" }
