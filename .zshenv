@@ -8,3 +8,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node_repl_history"
 # SQLite
 export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
+
+
+# Path
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
