@@ -9,3 +9,13 @@ bind-key J next-feed
 bind-key K prev-feed
 bind-key g home
 bind-key G end
+
+color background        white black
+color listnormal        white black
+color listfocus         white black bold reverse
+color listnormal_unread white black
+color listfocus_unread  white black bold reverse
+color info              white black bold
+color article           white black
+
+highlight article "[a-z]+://[^ ]+" white black underline
