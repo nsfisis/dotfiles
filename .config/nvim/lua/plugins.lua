@@ -119,28 +119,6 @@ packer.startup(function(use)
          vim.keymap.set('x', '<C-p>', '<Plug>(operator-replace)')
       end,
    }
-   -- Reverse text.
-   use {
-      'tyru/operator-reverse.vim',
-   }
-   -- Search in a specific region.
-   use {
-      'osyo-manga/vim-operator-search',
-      config = function()
-         -- Note: m/ is the prefix of comment out.
-         vim.keymap.set('n', 'm?', '<Plug>(operator-search)')
-         vim.keymap.set('o', 'm?', '<Plug>(operator-search)')
-         vim.keymap.set('x', 'm?', '<Plug>(operator-search)')
-      end,
-   }
-   -- Shiffle text.
-   use {
-      'pekepeke/vim-operator-shuffle',
-   }
-   -- Sort text characterwise and linewise.
-   use {
-      'emonkak/vim-operator-sort',
-   }
    -- Super surround.
    use {
       'machakann/vim-sandwich',
@@ -209,64 +187,9 @@ packer.startup(function(use)
    use {
       'thinca/vim-textobj-comment',
    }
-   -- Text object for continuous line.
-   use {
-      'rhysd/vim-textobj-continuous-line',
-      config = function()
-         local vimrc = require('vimrc')
-
-         vim.g.textobj_continuous_line_no_default_key_mappings = true
-
-         vim.keymap.set('o', 'aL', '<Plug>(textobj-continuous-cpp-a)')
-         vim.keymap.set('x', 'aL', '<Plug>(textobj-continuous-cpp-a)')
-         vim.keymap.set('o', 'iL', '<Plug>(textobj-continuous-cpp-i)')
-         vim.keymap.set('x', 'iL', '<Plug>(textobj-continuous-cpp-i)')
-
-         vimrc.autocmd('FileType', {
-            pattern = 'vim',
-            command = 'omap <buffer>  aL  <Plug>(textobj-continuous-vim-a)',
-         })
-         vimrc.autocmd('FileType', {
-            pattern = 'vim',
-            command = 'xmap <buffer>  aL  <Plug>(textobj-continuous-vim-a)',
-         })
-         vimrc.autocmd('FileType', {
-            pattern = 'vim',
-            command = 'omap <buffer>  iL  <Plug>(textobj-continuous-vim-i)',
-         })
-         vimrc.autocmd('FileType', {
-            pattern = 'vim',
-            command = 'xmap <buffer>  iL  <Plug>(textobj-continuous-vim-i)',
-         })
-      end,
-   }
-   -- Text object for function.
-   use {
-      'kana/vim-textobj-function',
-   }
    -- Text object for indent.
    use {
       'kana/vim-textobj-indent',
-   }
-   -- Text object for last inserted text.
-   use {
-      'rhysd/vim-textobj-lastinserted',
-   }
-   -- Text object for last pasted text.
-   use {
-      'gilligan/textobj-lastpaste',
-      config = function()
-         vim.g.textobj_lastpaste_no_default_key_mappings = true
-
-         vim.keymap.set('o', 'iP', '<Plug>(textobj-lastpaste-i)')
-         vim.keymap.set('x', 'iP', '<Plug>(textobj-lastpaste-i)')
-         vim.keymap.set('o', 'aP', '<Plug>(textobj-lastpaste-a)')
-         vim.keymap.set('x', 'aP', '<Plug>(textobj-lastpaste-a)')
-      end,
-   }
-   -- Text object for last searched pattern.
-   use {
-      'kana/vim-textobj-lastpat',
    }
    -- Text object for line.
    use {
