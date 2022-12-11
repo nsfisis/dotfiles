@@ -110,11 +110,11 @@ if [ ! -f ~/.config/alacritty/alacritty.local.yml ]; then
     fi
 fi
 
-# Neovim: paq-nvim {{{2
-paq_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
-if [ ! -d "$paq_dir" ]; then
-    echo "clone: $paq_dir"
-    git clone --depth=1 https://github.com/savq/paq-nvim.git "$paq_dir"
+# Neovim: packer.nvim {{{2
+packer_nvim_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/packer/opt/packer.nvim
+if [ ! -d "$packer_nvim_dir" ]; then
+    echo "clone: $packer_nvim_dir"
+    git clone --depth=1 https://github.com/wbthomason/packer.nvim "$packer_nvim_dir"
 fi
 
 # SKK {{{2

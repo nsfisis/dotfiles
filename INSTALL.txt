@@ -41,6 +41,8 @@ $ sudo atsutil databases -remove
 $ /usr/local/opt/ncurses/bin/infocmp tmux-256color > /var/tmp/tmux-256color.info
 $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 
+$ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
 # Restart your machine.
 ```
 
@@ -77,4 +79,6 @@ $ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(whi
 $ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
 
 $ cargo install hgrep
+
+$ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 ```
