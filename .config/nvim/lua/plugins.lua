@@ -152,6 +152,12 @@ packer.startup(function(use)
    use {
       'tyru/caw.vim',
       opt = true,
+      keys = {
+         {'n', 'm//'}, {'x', 'm//'},
+         {'n', 'm/w'}, {'x', 'm/w'},
+         {'n', 'm/W'}, {'x', 'm/W'},
+         {'n', 'm/b'}, {'x', 'm/b'},
+      },
       setup = function()
          vim.g.caw_no_default_keymappings = true
       end,
@@ -203,6 +209,10 @@ packer.startup(function(use)
    use {
       'saihoooooooo/vim-textobj-space',
       opt = true,
+      keys = {
+         {'o', 'a<Space>'}, {'x', 'a<Space>'},
+         {'o', 'i<Space>'}, {'x', 'i<Space>'},
+      },
       setup = function()
          vim.g.textobj_space_no_default_key_mappings = true
       end,
@@ -225,6 +235,14 @@ packer.startup(function(use)
    use {
       'h1mesuke/textobj-wiw',
       opt = true,
+      keys = {
+         {'n', '<C-w>'}, {'o', '<C-w>'}, {'x', '<C-w>'},
+         {'n', 'g<C-w>'}, {'o', 'g<C-w>'}, {'x', 'g<C-w>'},
+         {'n', '<C-e>'}, {'o', '<C-e>'}, {'x', '<C-e>'},
+         {'n', 'g<C-e>'}, {'o', 'g<C-e>'}, {'x', 'g<C-e>'},
+         {'o', 'a<C-w>'}, {'x', 'a<C-w>'},
+         {'o', 'i<C-w>'}, {'x', 'i<C-w>'},
+      },
       setup = function()
          vim.g.textobj_wiw_no_default_key_mappings = true
       end,
@@ -353,6 +371,7 @@ packer.startup(function(use)
    -- Tree-sitter integration.
    use {
       'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
       config = function()
          require('nvim-treesitter.configs').setup {
             ensure_installed = 'all',
@@ -443,6 +462,9 @@ packer.startup(function(use)
    use {
       'mattn/emmet-vim',
       opt = true,
+      cmd = {
+         'EmmetInstall',
+      },
       setup = function()
          local vimrc = require('vimrc')
 
@@ -660,6 +682,11 @@ packer.startup(function(use)
          vim.fn['submode#map']('Swap', 'n', 'rs', '<', '<Plug>(swap-prev)')
          vim.fn['submode#enter_with']('Swap', 'n', 'rs', 'g<', '<Plug>(swap-prev)')
          vim.fn['submode#map']('Swap', 'n', 'rs', '>', '<Plug>(swap-next)')
+
+         -- TODO
+         if packer_plugins['vim-swap'] and not packer_plugins['vim-swap'].loaded then
+            vim.cmd.packadd('vim-swap')
+         end
 
          -- Resizing a window (height) {{{3
          vim.fn['submode#enter_with']('WinResizeH', 'n', 's', 'trh')
