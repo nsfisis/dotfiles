@@ -646,7 +646,7 @@ packer.startup(function(use)
       config = function()
          -- Global settings {{{3
          vim.g.submode_always_show_submode = true
-         vim.g.submode_keyseqs_to_leave = { '<C-c>', '<ESC>' }
+         vim.g.submode_keyseqs_to_leave = {'<C-c>', '<ESC>'}
          vim.g.submode_keep_leaving_key = true
 
          -- yankround {{{3
@@ -656,28 +656,28 @@ packer.startup(function(use)
          vim.fn['submode#map']('YankRound', 'nv', 'rs', 'P', '<Plug>(yankround-next)')
 
          -- swap {{{3
-         vim.fn['submode#enter_with']('Swap', 'n', 'r', 'g>', '<Plug>(swap-next)')
-         vim.fn['submode#map']('Swap', 'n', 'r', '<', '<Plug>(swap-prev)')
-         vim.fn['submode#enter_with']('Swap', 'n', 'r', 'g<', '<Plug>(swap-prev)')
-         vim.fn['submode#map']('Swap', 'n', 'r', '>', '<Plug>(swap-next)')
+         vim.fn['submode#enter_with']('Swap', 'n', 'rs', 'g>', '<Plug>(swap-next)')
+         vim.fn['submode#map']('Swap', 'n', 'rs', '<', '<Plug>(swap-prev)')
+         vim.fn['submode#enter_with']('Swap', 'n', 'rs', 'g<', '<Plug>(swap-prev)')
+         vim.fn['submode#map']('Swap', 'n', 'rs', '>', '<Plug>(swap-next)')
 
          -- Resizing a window (height) {{{3
-         vim.fn['submode#enter_with']('WinResizeH', 'n', '', 'trh')
-         vim.fn['submode#enter_with']('WinResizeH', 'n', '', 'trh')
-         vim.fn['submode#map']('WinResizeH', 'n', '', '+', '<C-w>+')
-         vim.fn['submode#map']('WinResizeH', 'n', '', '-', '<C-w>-')
+         vim.fn['submode#enter_with']('WinResizeH', 'n', 's', 'trh')
+         vim.fn['submode#enter_with']('WinResizeH', 'n', 's', 'trh')
+         vim.fn['submode#map']('WinResizeH', 'n', 's', '+', '<C-w>+')
+         vim.fn['submode#map']('WinResizeH', 'n', 's', '-', '<C-w>-')
 
          -- Resizing a window (width) {{{3
-         vim.fn['submode#enter_with']('WinResizeW', 'n', '', 'trw')
-         vim.fn['submode#enter_with']('WinResizeW', 'n', '', 'trw')
-         vim.fn['submode#map']('WinResizeW', 'n', '', '+', '<C-w>>')
-         vim.fn['submode#map']('WinResizeW', 'n', '', '-', '<C-w><Lt>')
+         vim.fn['submode#enter_with']('WinResizeW', 'n', 's', 'trw')
+         vim.fn['submode#enter_with']('WinResizeW', 'n', 's', 'trw')
+         vim.fn['submode#map']('WinResizeW', 'n', 's', '+', '<C-w>>')
+         vim.fn['submode#map']('WinResizeW', 'n', 's', '-', '<C-w><Lt>')
 
          -- Super undo/redo {{{3
-         vim.fn['submode#enter_with']('Undo/Redo', 'n', '', 'gu', 'g-')
-         vim.fn['submode#map']('Undo/Redo', 'n', '', 'u', 'g-')
-         vim.fn['submode#enter_with']('Undo/Redo', 'n', '', 'gU', 'g+')
-         vim.fn['submode#map']('Undo/Redo', 'n', '', 'U', 'g+')
+         vim.fn['submode#enter_with']('Undo/Redo', 'n', 's', 'gu', 'g-')
+         vim.fn['submode#map']('Undo/Redo', 'n', 's', 'u', 'g-')
+         vim.fn['submode#enter_with']('Undo/Redo', 'n', 's', 'gU', 'g+')
+         vim.fn['submode#map']('Undo/Redo', 'n', 's', 'U', 'g+')
          -- }}}
       end,
    }
