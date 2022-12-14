@@ -77,6 +77,8 @@ $ sudo apt install \
 $ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(which batcat)")/bat"
 $ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
 
+$ sudo adduser $(whoami) docker
+
 $ cargo install hgrep
 $ cargo install alacritty
 
