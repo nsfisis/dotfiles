@@ -103,7 +103,7 @@ setopt NUMERIC_GLOB_SORT
 # History #
 ###########
 
-# Do not beep when refer to unexisting history.
+# Do not beep when you refer to unexisting history record.
 setopt NO_HIST_BEEP
 
 # Erase oldest duplicate history when history file is full.
@@ -223,9 +223,6 @@ bindkey '^S' history-incremental-pattern-search-forward
 autoload -Uz zmv
 
 
-# history command's format
-HISTTIMEFORMAT="[%Y/%M/%D %H:%M:%S] "
-
 # Limit of completion list
 LISTMAX=1000
 
@@ -321,6 +318,7 @@ PROMPT2="%63F❯%62F❯%61F❯%f "
 SPROMPT="%179F%BDid you mean %r? (n/y):%b%f "
 
 
+HISTTIMEFORMAT="[%Y/%M/%D %H:%M:%S] "
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
