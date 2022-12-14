@@ -113,7 +113,13 @@ packer.startup(function(use)
    -- Replace text without updating registers.
    use {
       'kana/vim-operator-replace',
-      config = function()
+      opt = true,
+      keys = {
+         {'n', '<Plug>(operator-replace)'},
+         {'o', '<Plug>(operator-replace)'},
+         {'x', '<Plug>(operator-replace)'},
+      },
+      setup = function()
          vim.keymap.set('n', '<C-p>', '<Plug>(operator-replace)')
          vim.keymap.set('o', '<C-p>', '<Plug>(operator-replace)')
          vim.keymap.set('x', '<C-p>', '<Plug>(operator-replace)')
@@ -175,7 +181,13 @@ packer.startup(function(use)
    -- Align text.
    use {
       'junegunn/vim-easy-align',
-      config = function()
+      opt = true,
+      cmd = {'EasyAlign'},
+      keys = {
+         {'n', '<Plug>(EasyAlign)'},
+         {'x', '<Plug>(EasyAlign)'},
+      },
+      setup = function()
          vim.keymap.set('n', '=', '<Plug>(EasyAlign)')
          vim.keymap.set('x', '=', '<Plug>(EasyAlign)')
       end,
@@ -305,6 +317,8 @@ packer.startup(function(use)
    -- Integration with ripgrep, fast alternative of grep command.
    use {
       'nsfisis/vim-ripgrep',
+      opt = true,
+      cmd = {'Rg', 'RG'},
       config = function()
          -- Workaround: do not open quickfix window.
          -- exe g:rg_window_location 'copen'
@@ -345,6 +359,8 @@ packer.startup(function(use)
    -- Show highlight.
    use {
       'cocopon/colorswatch.vim',
+      opt = true,
+      cmd = {'ColorSwatchGenerate'},
    }
    -- Makes folding text cool.
    use {
@@ -462,9 +478,7 @@ packer.startup(function(use)
    use {
       'mattn/emmet-vim',
       opt = true,
-      cmd = {
-         'EmmetInstall',
-      },
+      cmd = {'EmmetInstall'},
       setup = function()
          local vimrc = require('vimrc')
 
@@ -486,6 +500,8 @@ packer.startup(function(use)
    -- Capture the output of a command.
    use {
       'tyru/capture.vim',
+      opt = true,
+      cmd = {'Capture'},
    }
    -- Write git commit message.
    use {
@@ -615,6 +631,8 @@ packer.startup(function(use)
    -- Edit QuickFix and reflect to original buffers.
    use {
       'thinca/vim-qfreplace',
+      opt = true,
+      cmd = {'Qfreplace'},
       config = function()
          vim.keymap.set('n', 'br', ':<C-u>Qfreplace SmartOpen<CR>', { silent=true })
       end,
