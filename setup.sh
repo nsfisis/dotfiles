@@ -21,6 +21,23 @@ if [[ $ok = 0 ]]; then
     exit 1
 fi
 
+# XDG Base Directories. {{{1
+(
+    source ~/dotfiles/.zshenv
+    for dir in \
+        "$XDG_CONFIG_HOME" \
+        "$XDG_CACHE_HOME" \
+        "$XDG_DATA_HOME" \
+        "$XDG_STATE_HOME" \
+        ; \
+    do
+        if [ ! -d "$dir" ]; then
+            echo "dir: $dir"
+            mkdir -p "$dir"
+        fi
+    done
+)
+
 # Configurations. {{{1
 
 # Make symlinks to dot files. {{{2
@@ -35,12 +52,6 @@ do
         ln -s -f ~/dotfiles/"$name" ~/"$name"
     fi
 done
-
-# Make ~/.config directory. {{{2
-if [ ! -d ~/.config ]; then
-    echo "dir: ~/.config"
-    mkdir ~/.config
-fi
 
 # Make symlinks to dot directories. {{{2
 for name in \
