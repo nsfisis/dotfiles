@@ -148,4 +148,12 @@ if [ ! -f ~/.config/skk/jisyo.L ]; then
     gunzip -cd "$_compressed_jisyo" > ~/.config/skk/jisyo.L
 fi
 
+# Zsh {{{2
+if [ ! -d "$XDG_STATE_HOME/zsh" ]; then
+    echo "dir: $XDG_STATE_HOME/zsh"
+    mkdir -p "$XDG_STATE_HOME/zsh"
+fi
+
+# }}}
+# }}}
 # vim: foldmethod=marker
