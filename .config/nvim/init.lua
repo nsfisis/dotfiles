@@ -292,9 +292,7 @@ vim.keymap.set('n', '`', '@@')
 
 vim.keymap.set('i', '<C-d>', '<Del>')
 
--- Go elsewhere without deviding the undo history.
-vim.keymap.set('i', '<C-a>', "repeat('<C-g>U<Left>', col('.') - 1)", { expr=true })
-vim.keymap.set('i', '<C-e>', "repeat('<C-g>U<Right>', col('$') - col('.'))", { expr=true })
+-- Go elsewhere without dividing the undo history.
 vim.keymap.set('i', '<C-b>', '<C-g>U<Left>')
 vim.keymap.set('i', '<C-f>', '<C-g>U<Right>')
 

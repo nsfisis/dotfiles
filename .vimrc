@@ -197,8 +197,6 @@ nnoremap  `  @@
 
 inoremap  <C-d>  <Del>
 
-inoremap <expr>  <C-a>  repeat("\<C-g>U\<Left>", col('.') - 1)
-inoremap <expr>  <C-e>  repeat("\<C-g>U\<Right>", col('$') - col('.'))
 inoremap  <C-b>  <C-g>U<Left>
 inoremap  <C-f>  <C-g>U<Right>
 
