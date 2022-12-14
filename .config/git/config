@@ -135,3 +135,12 @@
     cpickc = "!GIT_EDITOR=true git cherry-pick --continue"
     empty = commit --allow-empty
     last-merge-commit = "!git rev-list --abbrev-commit --merges HEAD | head -n 1"
+    config-user = "!__fn() { \
+        if [ \"$1\" = nsfisis ]; then \
+            git config user.name nsfisis && git config user.email nsfisis@gmail.com; \
+        elif [ \"$1\" = \"\" ]; then \
+            echo \"usage: git config-user <user>\" >&2; \
+        else \
+            echo \"unknown user: $1\" >&2; \
+        fi; \
+    }; __fn"
