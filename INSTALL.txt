@@ -52,7 +52,6 @@ Ubuntu (apt)
 
 ```
 $ sudo apt install \
-    alacritty \
     bash \
     bat \
     cmake \
@@ -67,7 +66,7 @@ $ sudo apt install \
     neovim \
     newsboat \
     pandoc \
-    python \
+    python-is-python3 \
     ripgrep \
     ruby \
     tmux \
@@ -79,6 +78,9 @@ $ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(whi
 $ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
 
 $ cargo install hgrep
+$ cargo install alacritty
+
+$ snap install zig --classic --edge
 
 $ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 ```
