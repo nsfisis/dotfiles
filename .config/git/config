@@ -104,7 +104,7 @@
     last = log --pretty=fuller -1
     l = "!__fn() { \
         local last_merge_commit=\"$(git last-merge-commit)\"; \
-        if [[ -n \"$last_merge_commit\" ]]; then \
+        if [ -n \"$last_merge_commit\" ]; then \
             git log --oneline --boundary \"$last_merge_commit\".. \"$@\"; \
         else \
             git log --oneline -n 10 \"$@\"; \
@@ -120,7 +120,7 @@
     re = restore
     rep = restore -p
     m = "!__fn() { \
-        if [[ \"$1\" == --abort ]]; then \
+        if [ \"$1\" = --abort ]; then \
             git merge --abort; \
         else \
             git merge --no-edit \"$@\"; \
