@@ -124,7 +124,7 @@ fi
 # Bat {{{2
 if type bat >/dev/null 2>&1; then
     echo "bat: rebuild cache"
-    bat cache --clean && bat cache --build
+    bat cache --clear && bat cache --build
 fi
 
 # Neovim: packer.nvim {{{2
