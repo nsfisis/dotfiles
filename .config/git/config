@@ -59,6 +59,7 @@
     b = branch
     current-branch = rev-parse --abbrev-ref HEAD
     c = commit
+    fetch1 = fetch --depth=1
     fixup = commit --fixup
     amend = commit --amend --no-edit
     clone1 = clone --depth=1
