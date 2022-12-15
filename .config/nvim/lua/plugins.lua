@@ -517,6 +517,7 @@ packer.startup(function(use)
    -- Neovim clone of EasyMotion
    use {
       'phaazon/hop.nvim',
+      branch = 'v2', -- Hop.nvim's README recommends this.
       config = function()
          local vimrc = require('vimrc')
 
