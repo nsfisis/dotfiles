@@ -17,3 +17,7 @@ key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize    }
   - { key: Key1, mods: Control, action: IncreaseFontSize }
   - { key: Key2, mods: Control, action: DecreaseFontSize }
+
+font:
+  normal:
+    family: monospace
