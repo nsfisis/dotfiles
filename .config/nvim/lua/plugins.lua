@@ -554,8 +554,8 @@ packer.startup(function(use)
 
          vim.keymap.set('', '<Plug>(hop-f)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true }) end, { silent=true })
          vim.keymap.set('', '<Plug>(hop-F)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }) end, { silent=true })
-         vim.keymap.set('', '<Plug>(hop-t)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true }) end, { silent=true })
-         vim.keymap.set('', '<Plug>(hop-T)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }) end, { silent=true })
+         vim.keymap.set('', '<Plug>(hop-t)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR,  current_line_only = true, hint_offset = -1 }) end, { silent=true })
+         vim.keymap.set('', '<Plug>(hop-T)', function() require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }) end, { silent=true })
 
          vim.keymap.set('', '<Plug>(hop-s2)', function() require('hop').hint_char2() end, { silent=true })
          vim.keymap.set('', '<Plug>(hop-n)',  function() require('hop').hint_patterns({ direction = require('hop.hint').HintDirection.AFTER_CURSOR  }, vim.fn.getreg('/')) end, { silent=true })
