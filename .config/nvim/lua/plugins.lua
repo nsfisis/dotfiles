@@ -156,26 +156,33 @@ packer.startup(function(use)
    -- Non-operators {{{3
    -- Comment out.
    use {
-      'tyru/caw.vim',
+      'numToStr/Comment.nvim',
       opt = true,
       keys = {
-         {'n', 'm//'}, {'x', 'm//'},
-         {'n', 'm/w'}, {'x', 'm/w'},
-         {'n', 'm/W'}, {'x', 'm/W'},
-         {'n', 'm/b'}, {'x', 'm/b'},
+         {'n', 'm//'},
+         {'n', 'm??'},
+         {'n', 'm/'}, {'x', 'm/'},
+         {'n', 'm?'}, {'x', 'm?'},
+         {'n', 'm/O'},
+         {'n', 'm/o'},
+         {'n', 'm/A'},
       },
-      setup = function()
-         vim.g.caw_no_default_keymappings = true
-      end,
       config = function()
-         vim.keymap.set('n', 'm//', '<Plug>(caw:hatpos:toggle)')
-         vim.keymap.set('x', 'm//', '<Plug>(caw:hatpos:toggle)')
-         vim.keymap.set('n', 'm/w', '<Plug>(caw:wrap:comment)')
-         vim.keymap.set('x', 'm/w', '<Plug>(caw:wrap:comment)')
-         vim.keymap.set('n', 'm/W', '<Plug>(caw:wrap:uncomment)')
-         vim.keymap.set('x', 'm/W', '<Plug>(caw:wrap:uncomment)')
-         vim.keymap.set('n', 'm/b', '<Plug>(caw:box:comment)')
-         vim.keymap.set('x', 'm/b', '<Plug>(caw:box:comment)')
+         require('Comment').setup {
+            toggler = {
+               line = 'm//',
+               block = 'm??',
+            },
+            opleader = {
+               line = 'm/',
+               block = 'm?',
+            },
+            extra = {
+               above = 'm/O',
+               below = 'm/o',
+               eol = 'm/A',
+            },
+         }
       end,
    }
    -- Align text.
