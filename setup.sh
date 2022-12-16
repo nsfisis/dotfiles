@@ -121,12 +121,6 @@ if [ ! -f ~/.config/alacritty/alacritty.local.yml ]; then
     fi
 fi
 
-# Bat {{{2
-if type bat >/dev/null 2>&1; then
-    echo "bat: rebuild cache"
-    bat cache --clear && bat cache --build
-fi
-
 # Neovim: packer.nvim {{{2
 packer_nvim_dir="${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/packer/opt/packer.nvim
 if [ ! -d "$packer_nvim_dir" ]; then
