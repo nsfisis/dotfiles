@@ -142,4 +142,9 @@ function M.iabbrev(from, to)
 end
 
 
+function M.cabbrev(from, to)
+   vim.cmd(('cnoreabbrev %s %s'):format(from, to))
+end
+
+
 return M

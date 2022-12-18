@@ -371,6 +371,9 @@ inoreabbrev  reutrn  return
 inoreabbrev  tihs  this
 
 
+cnoreabbrev  S  %s
+
+
 set background=dark
 colorscheme desert
 

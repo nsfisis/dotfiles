@@ -747,6 +747,9 @@ vimrc.iabbrev('reutrn', 'return')
 vimrc.iabbrev('tihs', 'this')
 
 
+vimrc.cabbrev('S', '%s')
+
+
 
 -- Misc. {{{2
 
