@@ -289,35 +289,14 @@ packer.startup(function(use)
    -- Extend * and #.
    use {
       'haya14busa/vim-asterisk',
-      config = function()
-         vim.cmd([[
-         function! My_asterisk(ret, keeppos)
-            let g:asterisk#keeppos = a:keeppos
-            return a:ret
-         endfunction
-         ]])
-
-         -- Do not keep the relative cursor position.
-         vim.cmd([[
-         nmap <expr>  *  My_asterisk('<Plug>(asterisk-z*)', 0)
-         omap <expr>  *  My_asterisk('<Plug>(asterisk-z*)', 0)
-         xmap <expr>  *  My_asterisk('<Plug>(asterisk-z*)', 0)
-         nmap <expr>  g*  My_asterisk('<Plug>(asterisk-gz*)', 0)
-         omap <expr>  g*  My_asterisk('<Plug>(asterisk-gz*)', 0)
-         xmap <expr>  g*  My_asterisk('<Plug>(asterisk-gz*)', 0)
-         ]])
-
-         -- Keep the relative cursor position (use offset like /s+1).
-         -- Note: I fix the search direction in typing 'n' and 'N', so there is no
-         -- difference between '*' and '#'.
-         vim.cmd([[
-         nmap <expr>  #  My_asterisk('<Plug>(asterisk-z*)', 1)
-         omap <expr>  #  My_asterisk('<Plug>(asterisk-z*)', 1)
-         xmap <expr>  #  My_asterisk('<Plug>(asterisk-z*)', 1)
-         nmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
-         omap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
-         xmap <expr>  g#  My_asterisk('<Plug>(asterisk-gz*)', 1)
-         ]])
+      opt = true,
+      keys = {
+         {'n', '<Plug>(asterisk-z*)'}, {'x', '<Plug>(asterisk-z*)'},
+         {'n', '<Plug>(asterisk-gz*)'}, {'x', '<Plug>(asterisk-gz*)'},
+      },
+      setup = function()
+         vim.keymap.set({'n', 'x'}, '*', '<Plug>(asterisk-z*)')
+         vim.keymap.set({'n', 'x'}, 'g*', '<Plug>(asterisk-gz*)')
       end,
    }
    -- NOTE: it is a fork version of jremmen/vim-ripgrep
