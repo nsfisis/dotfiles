@@ -40,7 +40,7 @@ $ sudo atsutil databases -remove
 $ /usr/local/opt/ncurses/bin/infocmp tmux-256color > /var/tmp/tmux-256color.info
 $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 
-$ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+$ go install github.com/rhysd/vim-startuptime@latest
 
 # Restart your machine.
 ```
@@ -83,7 +83,7 @@ $ sudo adduser $(whoami) docker
 $ cargo install hgrep
 $ cargo install alacritty
 
-$ snap install zig --classic --edge
+$ go install github.com/rhysd/vim-startuptime@latest
 
-$ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+$ snap install zig --classic --edge
 ```

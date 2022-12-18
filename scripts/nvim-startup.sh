@@ -1,11 +1,9 @@
 #!/bin/bash
 
-if [[ "$1" == '-s' ]]; then
-    _filter='sort -nr -k2'
+if type vim-startuptime >/dev/null 2>&1; then
+    vim-startuptime -vimpath nvim > ./nvim-startup.log
 else
-    _filter='cat'
+    log="$(mktemp)"
+    nvim --startuptime "$log" +q
+    sort -nr -k2 "$log" > ./nvim-startup.log
 fi
-
-log="$(mktemp)"
-nvim --startuptime "$log" +q
-$_filter "$log" > ./nvim-startup.log
