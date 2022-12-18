@@ -1,5 +1,4 @@
 /.config/alacritty/alacritty.local.yml
-/.config/emacs
 /.config/newsboat/urls
 /.config/nvim/plugin/packer_compiled.lua
 /bin/gitalias/git-*

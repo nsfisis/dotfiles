@@ -27,7 +27,6 @@ $ brew install \
 
 $ brew install --cask \
     alacritty \
-    emacs \
     keepassxc \
     ;
 
@@ -56,7 +55,6 @@ $ sudo apt install \
     bat \
     cmake \
     curl \
-    emacs \
     fd-find \
     fzf \
     gcc \

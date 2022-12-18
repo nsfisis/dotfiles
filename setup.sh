@@ -57,7 +57,6 @@ done
 for name in \
     alacritty \
     bat \
-    emacs \
     git \
     newsboat \
     nvim \
