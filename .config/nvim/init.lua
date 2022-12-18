@@ -27,7 +27,7 @@ _G.vimrc = vimrc
 
 -- Environment {{{2
 
-local my_env = require('my_env')
+local my_env = require('vimrc.my_env')
 my_env.mkdir()
 
 
@@ -1104,7 +1104,7 @@ G.loaded_zipPlugin        = 1
 
 vim.api.nvim_create_user_command(
    'PackerSync',
-   function() require('plugins').sync() end,
+   function() require('vimrc.plugins').sync() end,
    {
       desc = '[packer.nvim] Synchronize plugins',
    }
@@ -1116,6 +1116,6 @@ vimrc.autocmd('BufWritePost', {
          pattern = 'PackerCompileDone',
          command = 'echo "[packer] Finished compiling lazy-loaders!"'
       })
-      require('plugins').compile()
+      require('vimrc.plugins').compile()
    end,
 })

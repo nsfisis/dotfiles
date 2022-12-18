@@ -1,6 +1,8 @@
 local M = {}
 
-local F = vim.fn
+local V = vim
+local E = V.env
+local F = V.fn
 
 if F.has('unix') then
    M.os = 'unix'
@@ -14,9 +16,9 @@ else
    M.os = 'unknown'
 end
 
-M.home = vim.env.HOME or F.expand('~')
+M.home = E.HOME or F.expand('~')
 
-M.config_home = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. '/.config'
+M.config_home = E.XDG_CONFIG_HOME or E.HOME .. '/.config'
 
 M.config_dir = F.stdpath('config')
 M.cache_dir = F.stdpath('cache')
@@ -30,7 +32,7 @@ M.scratch_dir = M.home .. '/scratch'
 
 function M.mkdir()
    for k, v in pairs(M) do
-      if vim.endswith(k, '_dir') and F.isdirectory(v) == 0 then
+      if V.endswith(k, '_dir') and F.isdirectory(v) == 0 then
          F.mkdir(v, 'p')
       end
    end

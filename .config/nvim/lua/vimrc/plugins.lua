@@ -19,7 +19,7 @@ packer.startup(function(use)
    use {
       'vim-skk/eskk.vim',
       config = function()
-         local my_env = require('my_env')
+         local my_env = require('vimrc.my_env')
 
          vim.g['eskk#dictionary'] = {
             path = my_env.skk_dir .. '/jisyo',
@@ -765,7 +765,7 @@ packer.startup(function(use)
    use {
       'LeafCage/yankround.vim',
       config = function()
-         local my_env = require('my_env')
+         local my_env = require('vimrc.my_env')
 
          vim.g.yankround_dir = my_env.yankround_dir
          vim.g.yankround_use_region_hl = true
