@@ -653,6 +653,10 @@ packer.startup(function(use)
          vim.keymap.set('x', 'A', '<Plug>(niceblock-A)')
       end,
    }
+   -- Edit QuickFix freely.
+   use {
+      'itchyny/vim-qfedit',
+   }
    -- Edit QuickFix and reflect to original buffers.
    use {
       'thinca/vim-qfreplace',
