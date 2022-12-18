@@ -1112,6 +1112,7 @@ vim.api.nvim_create_user_command(
 vimrc.autocmd('BufWritePost', {
    pattern = {'plugins.lua'},
    callback = function()
+      vim.cmd('source <afile>')
       vimrc.autocmd('User', {
          pattern = 'PackerCompileDone',
          command = 'echo "[packer] Finished compiling lazy-loaders!"'
