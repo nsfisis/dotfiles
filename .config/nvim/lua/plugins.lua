@@ -358,9 +358,25 @@ packer.startup(function(use)
          vim.keymap.set('n', 'gfa', '<Plug>(altr-forward)')
       end,
    }
-   -- Filer for minimalists.
+   -- Full-featured filer.
    use {
-      'justinmk/vim-dirvish',
+      'lambdalisue/fern.vim',
+      opt = true,
+      cmd = {'Fern'},
+      config = function()
+         local vimrc = require('vimrc')
+
+         vimrc.autocmd('FileType', {
+            pattern = {'fern'},
+            callback = function()
+               vim.keymap.del('n', 't', { buffer = true })
+            end,
+         })
+      end,
+   }
+   -- Fern plugin: hijack Netrw.
+   use {
+      'lambdalisue/fern-hijack.vim',
    }
    -- Appearance {{{2
    -- Show highlight.
