@@ -771,20 +771,31 @@ vim.keymap.set('!', 'jk', '<ESC>', { remap=true })
 vim.keymap.set('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent=true })
 
 
-
-function vimrc.map_callbacks.insert_blank_line(offset)
-   for i = 1, vim.v.count1 do
-      F.append(F.line('.') - offset, '')
-   end
-end
-
-vim.keymap.set('n', '<Plug>(my-insert-blank-lines-after)',
-   'call v:lua.vimrc.map_callbacks.insert_blank_line(0)')
-vim.keymap.set('n', '<Plug>(my-insert-blank-lines-before)',
-   'call v:lua.vimrc.map_callbacks.insert_blank_line(1)')
-
-vim.keymap.set('n', 'go', '<Plug>(my-insert-blank-lines-after)')
-vim.keymap.set('n', 'gO', '<Plug>(my-insert-blank-lines-before)')
+-- Lua function cannot be set to 'operatorfunc' for now.
+vim.cmd([[
+   function! Vimrc_insert_black_line_below(type = '') abort
+      if a:type ==# ''
+         set operatorfunc=Vimrc_insert_black_line_below
+         return 'g@ '
+      else
+         for i in range(v:count1)
+            call append(line('.'), '')
+         endfor
+      endif
+   endfunction
+   function! Vimrc_insert_black_line_above(type = '') abort
+      if a:type ==# ''
+         set operatorfunc=Vimrc_insert_black_line_above
+         return 'g@ '
+      else
+         for i in range(v:count1)
+            call append(line('.') - 1, '')
+         endfor
+      endif
+   endfunction
+]])
+vim.keymap.set('n', 'go', F.Vimrc_insert_black_line_below, { expr = true })
+vim.keymap.set('n', 'gO', F.Vimrc_insert_black_line_above, { expr = true })
 
 
 vim.keymap.set('n', '<Space>w', '<Cmd>update<CR>')

@@ -693,16 +693,6 @@ packer.startup(function(use)
          -- Autoload vim-repeat immediately in order to make <Plug>(RepeatRedo) available.
          -- repeat#setreg() does nothing here.
          vim.fn['repeat#setreg']('', '')
-
-         -- Make them repeatable with vim-repeat.
-         vim.cmd([[
-         nnoremap <silent>  <Plug>(my-insert-blank-lines-after)
-            \ :<C-u>call v:lua.vimrc.map_callbacks.insert_blank_line(0)<Bar>
-            \ silent! call repeat#set("\<Lt>Plug>(my-insert-blank-lines-after)")<CR>
-         nnoremap <silent>  <Plug>(my-insert-blank-lines-before)
-            \ :<C-u>call v:lua.vimrc.map_callbacks.insert_blank_line(1)<Bar>
-            \ silent! call repeat#set("\<Lt>Plug>(my-insert-blank-lines-before)")<CR>
-         ]])
       end,
    }
    -- Introduce user-defined mode.
