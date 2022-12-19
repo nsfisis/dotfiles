@@ -34,9 +34,9 @@ C(
       )
 
       if is_empty_buffer then
-         vim.cmd(mods .. ' edit ' .. args)
+         vim.cmd(opts.mods .. ' edit ' .. opts.args)
       else
-         vim.cmd(mods .. ' tabedit ' .. args)
+         vim.cmd(opts.mods .. ' tabedit ' .. opts.args)
       end
    end,
    {

@@ -348,7 +348,9 @@ packer.startup(function(use)
          vimrc.autocmd('FileType', {
             pattern = {'fern'},
             callback = function()
-               vim.keymap.del('n', 't', { buffer = true })
+               if vim.fn.hasmapto('<Plug>(fern-action-open:tabedit)', 'n') == 1 then
+                  vim.keymap.del('n', 't', { buffer = true })
+               end
             end,
          })
       end,

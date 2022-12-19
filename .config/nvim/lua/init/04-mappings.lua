@@ -4,6 +4,7 @@ local O = vim.o
 local K = vim.keymap
 
 local vimrc = require('vimrc')
+local my_env = require('vimrc.my_env')
 
 
 -- Note: |:noremap| defines mappings in |Normal|, |Visual|, |Operator-Pending|
