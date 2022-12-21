@@ -8,6 +8,12 @@ local stricmp = vim.stricmp
 
 
 function M.uniquify(this_path, other_paths)
+   for i = 1, #other_paths do
+      if other_paths[i] == this_path then
+         table.remove(other_paths, i)
+      end
+   end
+
    -- Split each path into slash-separated parts.
    for i = 1, #other_paths do
       other_paths[i] = split(other_paths[i], '[\\/]')

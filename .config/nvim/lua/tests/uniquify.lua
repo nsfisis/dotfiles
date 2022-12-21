@@ -17,6 +17,7 @@ function M.test(t)
       {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'spam/bar/baz.txt'}},
       {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'fiz/foo/bar/baz.txt', 'spam/bar/baz.txt'}},
       {'fiz/f/b/baz.txt', 'fiz/foo/bar/baz.txt', {'foo/bar/baz.txt'}},
+      {'foo.txt',         'bar/foo.txt',         {'bar/foo.txt'}},
    }
 
    for _, row in ipairs(test_cases) do
