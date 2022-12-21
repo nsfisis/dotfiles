@@ -122,15 +122,33 @@ function vimrc.statusline.filename(bufnr)
       return '*scratch*'
    end
 
-   local this_path = F.expand(('#%s:p'):format(bufnr))
+   local simplify_bufname
+   if vim.b[bufnr].fern then
+      simplify_bufname = function(bufname)
+         bufname = F['fern#fri#parse'](bufname).path
+         if vim.startswith(bufname, 'file://') then
+            bufname = bufname:sub(#'file://' + 1)
+         end
+         return bufname
+      end
+   else
+      simplify_bufname = function(bufname) return bufname end
+   end
+
+   local this_path = simplify_bufname(F.expand(('#%s:p'):format(bufnr)))
    local other_paths = {}
    for b = 1, F.bufnr('$') do
       if F.bufexists(b) and b ~= bufnr then
-         other_paths[#other_paths+1] = F.bufname(b)
+         other_paths[#other_paths+1] = simplify_bufname(F.bufname(b))
       end
    end
 
-   return uniquify.uniquify(this_path, other_paths)
+   local result = uniquify.uniquify(this_path, other_paths)
+   if vim.b[bufnr].fern then
+      return '[fern] ' .. result .. '/'
+   else
+      return result
+   end
 end
 
 function vimrc.statusline.modified(bufnr)
