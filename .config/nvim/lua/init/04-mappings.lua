@@ -311,54 +311,6 @@ K.set('n', 'tg', choose_window_interactively)
 
 
 
-local function smart_open(command)
-   local modifiers
-   if F.winwidth(F.winnr()) < 150 then
-      modifiers = 'topleft'
-   else
-      modifiers = 'vertical botright'
-   end
-
-   vim.cmd(([[
-   try
-      %s %s
-      let g:__ok = v:true
-   catch
-      echohl Error
-      echo v:exception
-      echohl None
-      let g:__ok = v:false
-   endtry
-   ]]):format(modifiers, command))
-   if not G.__ok then
-      return
-   end
-
-   if O.filetype == 'help' then
-      if vim.bo.textwidth > 0 then
-         vim.cmd(('vertical resize %d'):format(vim.bo.textwidth))
-      end
-      -- Move the cursor to the beginning of the line as help tags are often
-      -- right-justfied.
-      F.cursor(
-         0 --[[ stay in the current line ]],
-         1 --[[ move to the beginning of the line ]])
-   end
-end
-
-vim.api.nvim_create_user_command(
-   'SmartOpen',
-   function(opts) smart_open(opts.args) end,
-   {
-      desc = 'Smartly open a new buffer',
-      nargs = '+',
-      complete = 'command',
-   }
-)
-
-
-
-
 -- Toggle options {{{1
 
 K.set('n', 'T', '<Nop>')
