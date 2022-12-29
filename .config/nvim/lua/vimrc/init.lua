@@ -60,6 +60,7 @@ function M.register_filetype_autocmds_for_indentation()
       php        = { style = SPACE, width = 2 },
       python     = { style = SPACE, width = 4 },
       ruby       = { style = SPACE, width = 2 },
+      satysfi    = { style = SPACE, width = 2 },
       toml       = { style = SPACE, width = 2 },
       typescript = { style = SPACE, width = 2 },
       vim        = { style = SPACE, width = 4 },

@@ -170,6 +170,7 @@ autocmd Vimrc FileType markdown   set expandtab   tabstop=4 shiftwidth=4 softtab
 autocmd Vimrc FileType php        set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType python     set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType ruby       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType satysfi    set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType toml       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType typescript set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType vim        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4

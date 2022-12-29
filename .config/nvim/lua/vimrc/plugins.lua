@@ -459,7 +459,11 @@ packer.startup(function(use)
       config = function()
          require('filetype').setup({
             overrides = {
-               -- My settings here
+               extensions = {
+                  saty = 'satysfi',
+                  satyg = 'satysfi',
+                  satyh = 'satysfi',
+               },
             },
          })
       end,
