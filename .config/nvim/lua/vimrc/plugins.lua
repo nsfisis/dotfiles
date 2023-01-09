@@ -391,7 +391,7 @@ packer.startup(function(use)
    -- Tree-sitter integration.
    use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
+      run = ':TSUpdateSync',
       config = function()
          require('nvim-treesitter.configs').setup {
             ensure_installed = 'all',
