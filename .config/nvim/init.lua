@@ -8,6 +8,10 @@
 --                                          --
 --]========================================]--
 
+-- Fast Lua loader (experimental):
+-- https://github.com/neovim/neovim/pull/22668
+if vim.loader then vim.loader.enable() end
+
 require('init.00-bootstrap')
 require('init.01-options')
 require('init.02-commands')
