@@ -2,26 +2,12 @@ macOS (homebrew)
 
 ```
 $ brew install \
-    bash \
-    bat \
-    cmake \
-    curl \
-    fd \
-    fzf \
     gcc \
-    git \
-    jq \
     ncurses \
     neovim \
-    newsboat \
-    pandoc \
     python \
-    ripgrep \
     ruby \
     tmux \
-    tokei \
-    tree \
-    vim \
     zsh \
     ;
 
@@ -53,24 +39,11 @@ Ubuntu (apt)
 
 ```
 $ sudo apt install \
-    bash \
-    bat \
-    cmake \
-    curl \
-    fd-find \
-    fzf \
     gcc \
-    git \
-    jq \
-    keepassxc \
     neovim \
-    newsboat \
-    pandoc \
     python-is-python3 \
-    ripgrep \
     ruby \
     tmux \
-    vim \
     zsh \
     ;
 
@@ -87,11 +60,4 @@ $ cargo install alacritty
 $ cargo install cargo-compete
 
 $ go install github.com/rhysd/vim-startuptime@latest
-
-$ [[ ! -d ~/tmp ]] && mkdir; cd ~/tmp
-$ curl -fsSL https://deno.land/x/install/install.sh > deno_install.sh
-$ sh deno_install.sh
-$ # deno upgrade
-
-$ snap install zig --classic --edge
 ```

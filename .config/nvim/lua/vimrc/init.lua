@@ -66,6 +66,7 @@ function M.register_filetype_autocmds_for_indentation()
       lisp            = { style = SPACE, width = 2 },
       lua             = { style = SPACE, width = 3 },
       markdown        = { style = SPACE, width = 4 },
+      nix             = { style = SPACE, width = 2 },
       php             = { style = SPACE, width = 2 },
       python          = { style = SPACE, width = 4 },
       ruby            = { style = SPACE, width = 2 },
