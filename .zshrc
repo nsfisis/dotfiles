@@ -440,3 +440,5 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH=/usr/local/go/bin:$PATH
+
+eval "$(direnv hook zsh)"
