@@ -10,21 +10,25 @@ vim.g.loaded_zipPlugin        = 1
 
 
 --- Load and configure third-party plugins. {{{1
-vim.api.nvim_create_user_command(
-   'PackerSync',
-   function() require('vimrc.plugins').sync() end,
-   {
-      desc = '[packer.nvim] Synchronize plugins',
-   }
-)
-vimrc.autocmd('BufWritePost', {
-   pattern = {'plugins.lua'},
-   callback = function()
-      vim.cmd('source <afile>')
-      vimrc.autocmd('User', {
-         pattern = 'PackerCompileDone',
-         command = 'echo "[packer] Finished compiling lazy-loaders!"'
-      })
-      require('vimrc.plugins').compile()
-   end,
-})
+local lazy_path = require('vimrc.my_env').data_dir .. '/lazy/lazy.nvim'
+if vim.loop.fs_stat(lazy_path) then
+   vim.opt.rtp:prepend(lazy_path)
+   require('lazy').setup('vimrc.plugins')
+else
+   vim.api.nvim_create_user_command(
+      'LazySetup',
+      function()
+         vim.fn.system({
+            'git',
+            'clone',
+            '--filter=blob:none',
+            'https://github.com/folke/lazy.nvim.git',
+            '--branch=stable',
+            lazy_path,
+         })
+      end,
+      {
+         desc = '[lazy.nvim] Setup itself',
+      }
+   )
+end
