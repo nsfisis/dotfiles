@@ -1,9 +1,13 @@
 { config, pkgs, ... }:
+
+let
+  isWayland = builtins.getEnv "XDG_SESSION_TYPE" == "wayland";
+in
 {
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   programs.home-manager.enable = true;
 
@@ -31,7 +35,7 @@
     pkgs.tree
     pkgs.zig
     # pkgs.zsh
-  ];
+  ] ++ pkgs.lib.optional isWayland pkgs.wl-clipboard;
 
   home.file = {
     # "hoge".source = dotfiles/piyo;
