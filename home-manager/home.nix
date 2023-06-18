@@ -21,6 +21,7 @@
     pkgs.jq
     # pkgs.neovim
     pkgs.newsboat
+    pkgs.nodejs_18
     pkgs.pandoc
     pkgs.python311
     pkgs.ripgrep
