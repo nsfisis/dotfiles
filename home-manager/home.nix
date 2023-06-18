@@ -53,4 +53,34 @@ in
     enable = true;
     nix-direnv.enable = true;
   };
+
+  programs.tmux = {
+    enable = true;
+
+    sensibleOnTop = false;
+
+    aggressiveResize = true;
+    baseIndex = 1;
+    clock24 = true;
+    escapeTime = 0;
+    historyLimit = 50000;
+    mouse = false;
+    prefix = "C-t";
+    terminal = "tmux-256color";
+
+    extraConfig = (
+      let
+        commonConfig = builtins.readFile ./config/tmux/tmux.conf;
+        extraConfig = if isWayland then
+          ''
+            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
+          ''
+        else
+          ''
+            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+          '';
+      in
+      commonConfig + extraConfig
+    );
+  };
 }

@@ -60,7 +60,6 @@ for name in \
     git \
     newsboat \
     nvim \
-    tmux \
     ; \
 do
     if [ ! -L ~/.config/"$name" ]; then
