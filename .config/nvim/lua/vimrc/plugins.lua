@@ -684,4 +684,9 @@ return {
       end,
    },
    -- }}}
+   -- *Magic* {{{1
+   -- Integration with GitHub Copilot (https://docs.github.com/en/copilot)
+   {
+      'github/copilot.vim',
+   },
 }
