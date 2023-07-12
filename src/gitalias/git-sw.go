@@ -51,7 +51,23 @@ func requiresDetachFlag(argv []string) bool {
 		return false
 	}
 	firstArg := argv[1]
-	return strings.HasPrefix(firstArg, "origin/") || strings.HasPrefix(firstArg, "upstream/")
+
+	// Example: origin/main, upstream/develop
+	if strings.HasPrefix(firstArg, "origin/") || strings.HasPrefix(firstArg, "upstream/") {
+		return true
+	}
+
+	// Example: 1234, cafebabe
+	if len(firstArg) >= 4 {
+		for _, c := range firstArg {
+			if !unicode.Is(unicode.ASCII_Hex_Digit, c) {
+				return false
+			}
+		}
+		return true
+	}
+
+	return false
 }
 
 func isInt(s string) bool {
