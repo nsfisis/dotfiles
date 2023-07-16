@@ -31,6 +31,7 @@ in
     pkgs.python311
     pkgs.ripgrep
     pkgs.ruby_3_1
+    pkgs.sqlite
     # pkgs.tmux
     pkgs.tokei
     pkgs.tree
