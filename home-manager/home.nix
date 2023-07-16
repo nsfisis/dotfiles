@@ -22,6 +22,7 @@ in
     pkgs.gcc
     pkgs.git
     pkgs.go
+    pkgs.gopls
     pkgs.jq
     # pkgs.neovim
     pkgs.newsboat
@@ -35,6 +36,8 @@ in
     pkgs.tree
     pkgs.zig
     # pkgs.zsh
+
+    pkgs.nodePackages.typescript-language-server
   ] ++ pkgs.lib.optional isWayland pkgs.wl-clipboard;
 
   home.file = {
