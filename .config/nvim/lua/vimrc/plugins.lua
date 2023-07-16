@@ -683,10 +683,38 @@ return {
          vim.g.yankround_use_region_hl = true
       end,
    },
-   -- }}}
+   -- LSP {{{1
+   -- Collection of common LSP configurations.
+   {
+      'neovim/nvim-lspconfig',
+      config = function()
+         local lspconfig = require('lspconfig')
+
+         if vim.fn.executable('typescript-language-server') == 1 then
+            lspconfig.tsserver.setup({})
+         end
+         if vim.fn.executable('gopls') == 1 then
+            lspconfig.gopls.setup({})
+         end
+
+         vim.api.nvim_create_autocmd('LspAttach', {
+            group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+            callback = function(e)
+               vim.bo[e.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+               local opts = { buffer = e.buf }
+               vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+               vim.keymap.set('n', '<space>f', function()
+                  vim.lsp.buf.format({ async = true })
+               end, opts)
+            end,
+         })
+      end,
+   },
    -- *Magic* {{{1
    -- Integration with GitHub Copilot (https://docs.github.com/en/copilot)
    {
       'github/copilot.vim',
    },
+   -- }}}
 }
