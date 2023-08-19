@@ -128,9 +128,9 @@
     }; __fn"
     mc = "!GIT_EDITOR=true git merge --continue"
     mm = mergetool
-    pullu = "!git pull upstream $(git current-branch) --ff"
-    pullo = "!git pull origin $(git current-branch) --ff"
-    pusho = "!git push origin $(git current-branch)"
+    pullu = pull upstream HEAD --ff
+    pullo = pull origin HEAD --ff
+    pusho = push origin HEAD
     cpick = cherry-pick
     cpickc = "!GIT_EDITOR=true git cherry-pick --continue"
     empty = commit --allow-empty
