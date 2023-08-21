@@ -4,7 +4,6 @@
   "colorswatch.vim": { "branch": "main", "commit": "2e3f847fc0e493de8b119d3c8560e47ceeff595c" },
   "committia.vim": { "branch": "master", "commit": "0b4df1a7f48ffbc23b009bd14d58ee1be541917c" },
   "copilot.vim": { "branch": "release", "commit": "1358e8e45ecedc53daf971924a0541ddf6224faf" },
-  "editorconfig-vim": { "branch": "master", "commit": "7f4e4dfc58c480d154116614e616d90aac77204d" },
   "emmet-vim": { "branch": "master", "commit": "def5d57a1ae5afb1b96ebe83c4652d1c03640f4d" },
   "eskk.vim": { "branch": "master", "commit": "a2a722c1c020748249a1f04b788cecd4f509202b" },
   "fern-hijack.vim": { "branch": "master", "commit": "5989a1ac6ddffd0fe49631826b6743b129992b32" },

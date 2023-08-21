@@ -31,10 +31,18 @@ end
 
 
 local function set_indentation(style, width)
-   vim.bo.expandtab = style
-   vim.bo.tabstop = width
-   vim.bo.shiftwidth = width
-   vim.bo.softtabstop = width
+   local editorconfig = vim.b.editorconfig or {}
+
+   if not editorconfig.indent_style then
+      vim.bo.expandtab = style
+   end
+   if not editorconfig.tab_width then
+      vim.bo.tabstop = width
+   end
+   if not editorconfig.indent_size then
+      vim.bo.shiftwidth = width
+      vim.bo.softtabstop = width
+   end
 end
 
 

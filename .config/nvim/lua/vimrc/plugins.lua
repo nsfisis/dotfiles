@@ -532,10 +532,6 @@ return {
          vim.keymap.set('', '<Plug>(hop-k)',  function() hop_jk({ direction = BEFORE_CURSOR }) end, { silent = true })
       end,
    },
-   -- Integration with EditorConfig (https://editorconfig.org)
-   {
-      'editorconfig/editorconfig-vim',
-   },
    -- Extend J.
    {
       'osyo-manga/vim-jplus',
