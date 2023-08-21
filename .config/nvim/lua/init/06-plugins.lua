@@ -13,7 +13,24 @@ vim.g.loaded_zipPlugin        = 1
 local lazy_path = require('vimrc.my_env').data_dir .. '/lazy/lazy.nvim'
 if vim.loop.fs_stat(lazy_path) then
    vim.opt.rtp:prepend(lazy_path)
-   require('lazy').setup('vimrc.plugins')
+   require('lazy').setup('vimrc.plugins', {
+      ui = {
+         icons = {
+            cmd = "⌘",
+            config = "",
+            event = "",
+            ft = "",
+            init = "",
+            keys = "",
+            plugin = "",
+            runtime = "",
+            source = "",
+            start = "",
+            task = "",
+            lazy = " ",
+         },
+      },
+   })
 else
    vim.api.nvim_create_user_command(
       'LazySetup',
