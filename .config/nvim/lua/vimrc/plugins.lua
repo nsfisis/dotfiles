@@ -353,9 +353,6 @@ return {
             },
             --]]
             indent = {
-               enable = false,
-            },
-            yati = {
                enable = true,
             },
          }
@@ -387,11 +384,6 @@ return {
          vim.keymap.set('x', '"', '<Plug>(quickhl-manual-this)')
          vim.keymap.set('n', '<C-c>', ':<C-u>nohlsearch <Bar> QuickhlManualReset<CR>', { silent=true })
       end,
-   },
-   -- Yet another tree-sitter indentation.
-   -- TODO: uninstall it once the official nvim-treesitter provides sane indentation.
-   {
-      'yioneko/nvim-yati',
    },
    -- Filetypes {{{1
    -- Faster replacement for bundled filetype.vim
