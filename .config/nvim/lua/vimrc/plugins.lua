@@ -386,21 +386,6 @@ return {
       end,
    },
    -- Filetypes {{{1
-   -- Faster replacement for bundled filetype.vim
-   {
-      'nathom/filetype.nvim',
-      config = function()
-         require('filetype').setup({
-            overrides = {
-               extensions = {
-                  saty = 'satysfi',
-                  satyg = 'satysfi',
-                  satyh = 'satysfi',
-               },
-            },
-         })
-      end,
-   },
    -- C/C++
    {
       'rhysd/vim-clang-format',

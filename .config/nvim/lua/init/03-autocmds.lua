@@ -53,3 +53,12 @@ A('BufWritePre', {
 
 
 vimrc.register_filetype_autocmds_for_indentation()
+
+-- TODO: move it elsewhere
+vim.filetype.add({
+   extension = {
+      saty = 'satysfi',
+      satyg = 'satysfi',
+      satyh = 'satysfi',
+   },
+})
