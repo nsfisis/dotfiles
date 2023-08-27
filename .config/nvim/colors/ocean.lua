@@ -193,11 +193,9 @@ link('WarningMsg',     'Warning')
 
 -- Tree-sitter {{{2
 
-link('TSText',         'Normal')
-link('TSNamespace',    'SyntaxIdentifier')
-link('TSFuncBuiltin',  'SyntaxKeyword')
-link('TSVariable',     'SyntaxIdentifier')
-link('TSStringEscape', 'Special')
+link('@attribute',        'SyntaxKeyword')
+link('@function.builtin', 'SyntaxKeyword')
+link('@string.escape',    'Special')
 
 
 -- 'statusline' and 'tabline' {{{2
