@@ -32,7 +32,7 @@ in
     pkgs.ripgrep
     pkgs.ruby_3_1
     pkgs.sqlite
-    # pkgs.tmux
+    pkgs.tmux
     pkgs.tokei
     pkgs.tree
     pkgs.zig

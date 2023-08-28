@@ -6,7 +6,6 @@ $ brew install \
     neovim \
     python \
     ruby \
-    tmux \
     zsh \
     ;
 
@@ -41,7 +40,6 @@ $ sudo apt install \
     neovim \
     python-is-python3 \
     ruby \
-    tmux \
     zsh \
     ;
 
