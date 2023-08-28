@@ -2,7 +2,6 @@ macOS (homebrew)
 
 ```
 $ brew install \
-    gcc \
     ncurses \
     neovim \
     python \
@@ -39,16 +38,12 @@ Ubuntu (apt)
 
 ```
 $ sudo apt install \
-    gcc \
     neovim \
     python-is-python3 \
     ruby \
     tmux \
     zsh \
     ;
-
-$ which batcat >/dev/null 2>&1 && sudo ln -s "$(which batcat)" "$(dirname "$(which batcat)")/bat"
-$ which fdfind >/dev/null 2>&1 && sudo ln -s "$(which fdfind)" "$(dirname "$(which fdfind)")/fd"
 
 # Change login shell to zsh
 $ chsh

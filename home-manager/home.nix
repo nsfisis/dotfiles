@@ -15,7 +15,7 @@
     pkgs.deno
     pkgs.fd
     pkgs.fzf
-    # pkgs.gcc
+    pkgs.gcc
     pkgs.git
     pkgs.go
     pkgs.jq
