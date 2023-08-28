@@ -73,6 +73,7 @@ done
 
 # Golang: {{{2
 for name in \
+    gitalias/git-extract-issue \
     gitalias/git-sw \
     ; \
 do
@@ -99,6 +100,7 @@ fi
 # Make symlinks to utility scripts. {{{2
 for name in \
     tmux-pane-idx \
+    gitalias/git-extract-issue \
     gitalias/git-sw \
     ; \
 do

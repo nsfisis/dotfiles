@@ -125,12 +125,12 @@ if [[ -z ${gitbranch} ]]; then
 fi
 
 # Extract issue number from branch name.
-local issue_number="$(echo "${gitbranch}" | grep -o '[0-9][0-9]*' | head -1)"
+local issue_number="$(git extract-issue "${gitbranch}")"
 if [[ -z ${issue_number} ]]; then
     # Failed to extract. Leave the commit message as it is.
     return 0
 fi
 
-# Substitute '###' with '#NNNNN', where 'NNNNN' is the issue number.
+# Substitute '###'.
 # '$1' is passed by Git, the file name that holds commit message.
-sed -i '' -e "s|###|#${issue_number}|g" "${1}"
+sed -i '' -e "s|###|${issue_number}|g" "${1}"

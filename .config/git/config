@@ -144,3 +144,4 @@
             echo \"unknown user: $1\" >&2; \
         fi; \
     }; __fn"
+    extract-issue = "!~/bin/gitalias/git-extract-issue"
