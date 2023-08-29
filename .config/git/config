@@ -144,4 +144,5 @@
             echo \"unknown user: $1\" >&2; \
         fi; \
     }; __fn"
+    setup-hooks = "!cp ~/dotfiles/githooks/* \"$(git rev-parse --show-toplevel)/.git/hooks\""
     extract-issue = "!~/bin/gitalias/git-extract-issue"
