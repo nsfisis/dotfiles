@@ -432,7 +432,9 @@ fi
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 
 # To override system-provided Ruby with brewed Ruby
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+if [[ "$(uname)" == "Darwin" ]]; then
+    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+fi
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
