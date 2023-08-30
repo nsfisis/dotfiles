@@ -153,29 +153,32 @@ autocmd Vimrc BufRead *
     \     execute "normal g`\"" |
     \ endif
 
-autocmd Vimrc FileType c          set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType cmake      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType cpp        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType css        set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType docbk      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType go         set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType haskell    set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType html       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType javascript set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType json       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType leaf       set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType lisp       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType lua        set expandtab   tabstop=3 shiftwidth=3 softtabstop=3
-autocmd Vimrc FileType markdown   set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType php        set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType python     set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType ruby       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType satysfi    set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType toml       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType typescript set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType vim        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType xml        set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType yaml       set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType c               set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType cmake           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType cpp             set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType css             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType docbk           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType go              set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType haskell         set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType html            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType javascript      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType javascriptreact set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType json            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType leaf            set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType lisp            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType lua             set expandtab   tabstop=3 shiftwidth=3 softtabstop=3
+autocmd Vimrc FileType markdown        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType nix             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType php             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType python          set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType ruby            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType satysfi         set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType toml            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType typescript      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType typescriptreact set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType vim             set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Vimrc FileType xml             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType yaml            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 
 noremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
 noremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
