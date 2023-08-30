@@ -153,6 +153,12 @@ autocmd Vimrc BufRead *
     \     execute "normal g`\"" |
     \ endif
 
+if has('patch-9.0.1799')
+    packadd editorconfig
+endif
+
+" TODO: Check if editorconfig is enabled before setting options in order to
+"       avoid overriding options set by editorconfig.
 autocmd Vimrc FileType c               set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType cmake           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType cpp             set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
