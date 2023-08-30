@@ -1,6 +1,7 @@
 [core]
     editor = nvim
     commentchar = ";"
+    quotepath = false
 
 [advice]
     detachedhead = false
