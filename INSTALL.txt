@@ -54,3 +54,8 @@ $ cargo install cargo-compete
 
 $ go install github.com/rhysd/vim-startuptime@latest
 ```
+
+
+# nix flake update
+# nix store gc
+# home-manager switch --flake ".#ken"

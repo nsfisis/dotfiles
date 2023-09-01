@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   isWayland = builtins.getEnv "XDG_SESSION_TYPE" == "wayland";
 in
 {
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+  home.username = "ken";
+  home.homeDirectory = "/home/ken";
 
   home.stateVersion = "23.05";
 
