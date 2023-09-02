@@ -18,18 +18,33 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs: {
-    homeConfigurations.ken = home-manager.lib.homeManagerConfiguration {
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs:
+  let
+    mkHomeConfiguration = {
+      system,
+      env,
+      ...
+    }: home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
-        system = "x86_64-linux";
+        system = system;
         config.allowUnfree = true;
       };
       extraSpecialArgs = {
         inherit inputs;
+        inherit env;
       };
       modules = [
         ./home-manager/home.nix
       ];
+    };
+  in {
+    homeConfigurations.ken = mkHomeConfiguration {
+      system = "x86_64-linux";
+      env.gui.clipboard.copyCommand = null;
     };
   };
 }

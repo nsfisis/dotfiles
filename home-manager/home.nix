@@ -1,7 +1,7 @@
-{ pkgs, ... }:
-
+{ pkgs, specialArgs, ... }:
 let
-  isWayland = builtins.getEnv "XDG_SESSION_TYPE" == "wayland";
+  clipboardCopyCommand = specialArgs.env.gui.clipboard.copyCommand;
+  requiresWlClipboard = clipboardCopyCommand == "wl-copy";
 in
 {
   home.username = "ken";
@@ -39,7 +39,7 @@ in
     # pkgs.zsh
 
     pkgs.nodePackages.typescript-language-server
-  ] ++ pkgs.lib.optional isWayland pkgs.wl-clipboard;
+  ] ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
     # "hoge".source = dotfiles/piyo;
@@ -68,19 +68,16 @@ in
     prefix = "C-t";
     terminal = "tmux-256color";
 
-    extraConfig = (
+    extraConfig =
       let
         commonConfig = builtins.readFile ./config/tmux/tmux.conf;
-        extraConfig = if isWayland then
+        extraConfig = if clipboardCopyCommand != null then
           ''
-            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
+            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboardCopyCommand}"
           ''
         else
-          ''
-            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
-          '';
+          "";
       in
-      commonConfig + extraConfig
-    );
+      commonConfig + extraConfig;
   };
 }
