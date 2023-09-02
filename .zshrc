@@ -1,5 +1,3 @@
-export LANG=ja_JP.UTF-8
-
 export VISUAL=nvim
 export EDITOR=nvim
 
