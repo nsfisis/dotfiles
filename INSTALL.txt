@@ -1,11 +1,10 @@
 macOS (homebrew)
 
 ```
+$ brew update
 $ brew install \
     ncurses \
-    neovim \
     python \
-    ruby \
     zsh \
     ;
 
@@ -36,10 +35,10 @@ $ cargo install cargo-compete
 Ubuntu (apt)
 
 ```
+$ sudo apt update
+$ sudo apt upgrade
 $ sudo apt install \
-    neovim \
     python-is-python3 \
-    ruby \
     zsh \
     ;
 

@@ -24,7 +24,7 @@ in
     pkgs.go
     pkgs.gopls
     pkgs.jq
-    # pkgs.neovim
+    pkgs.neovim
     pkgs.newsboat
     pkgs.nodejs_18
     pkgs.pandoc
