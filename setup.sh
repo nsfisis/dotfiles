@@ -56,7 +56,6 @@ done
 # Make symlinks to dot directories. {{{2
 for name in \
     alacritty \
-    bat \
     git \
     newsboat \
     nvim \
