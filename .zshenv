@@ -13,7 +13,7 @@ export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 
 # Locale
 export LANG=en_US.UTF-8
-export LC_ALL=C
+export LC_ALL=
 
 # Locale: Less
 export LESSCHARSET=utf-8
