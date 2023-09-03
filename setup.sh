@@ -57,7 +57,6 @@ done
 for name in \
     alacritty \
     git \
-    newsboat \
     nvim \
     ; \
 do

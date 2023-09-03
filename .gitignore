@@ -1,5 +1,4 @@
 /.bootstrap
 /.config/alacritty/alacritty.local.yml
-/.config/newsboat/urls
 /bin/gitalias/git-*
 /nvim-startup.log
