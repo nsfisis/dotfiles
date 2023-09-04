@@ -7,6 +7,21 @@ if [ $# != 1 ]; then
     exit 1
 fi
 
+(
+    source .zshenv
+    for dir in \
+        "$XDG_CONFIG_HOME" \
+        "$XDG_CACHE_HOME" \
+        "$XDG_DATA_HOME" \
+        "$XDG_STATE_HOME" \
+        ; \
+    do
+        if [ ! -d "$dir" ]; then
+            mkdir -p "$dir"
+        fi
+    done
+)
+
 if [ ! -d .bootstrap ]; then
     mkdir .bootstrap
 fi
