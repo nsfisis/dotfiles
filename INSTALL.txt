@@ -3,7 +3,6 @@ macOS (homebrew)
 ```
 $ brew update
 $ brew install \
-    ncurses \
     python \
     zsh \
     ;

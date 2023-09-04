@@ -1,5 +1,12 @@
 #!/bin/sh
 
+if [ $# != 1 ]; then
+    echo "Usage: $0 <host>" >&2
+    echo "Availabel hosts:" >&2
+    grep '= mkHomeConfiguration' flake.nix | cut -d '=' -f 1 | sed -e 's/^ */ * /' >&2
+    exit 1
+fi
+
 if [ ! -d .bootstrap ]; then
     mkdir .bootstrap
 fi
@@ -20,5 +27,5 @@ fi
 if type home-manager > /dev/null 2>&1; then
     :
 else
-    nix run "nixpkgs#home-manager" -- switch --flake ".#ken"
+    nix run "nixpkgs#home-manager" -- switch --flake ".#$1"
 fi

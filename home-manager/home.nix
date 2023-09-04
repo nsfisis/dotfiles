@@ -1,11 +1,13 @@
 { pkgs, specialArgs, ... }:
 let
+  username = specialArgs.env.username;
+  homeDirectory = specialArgs.env.homeDirectory;
   clipboardCopyCommand = specialArgs.env.gui.clipboard.copyCommand;
   requiresWlClipboard = clipboardCopyCommand == "wl-copy";
 in
 {
-  home.username = "ken";
-  home.homeDirectory = "/home/ken";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.11";
 

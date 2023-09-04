@@ -42,9 +42,15 @@
       ];
     };
   in {
-    homeConfigurations.ken = mkHomeConfiguration {
-      system = "x86_64-linux";
-      env.gui.clipboard.copyCommand = null;
+    homeConfigurations = {
+      privateHotaru = mkHomeConfiguration {
+        system = "x86_64-linux";
+        env = {
+          username = "ken";
+          homeDirectory = "/home/ken";
+          gui.clipboard.copyCommand = null;
+        };
+      };
     };
   };
 }
