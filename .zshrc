@@ -1,5 +1,10 @@
-export VISUAL=nvim
-export EDITOR=nvim
+if type nvim >/dev/null 2>&1; then
+    export VISUAL=nvim
+    export EDITOR=nvim
+else
+    export VISUAL=vim
+    export EDITOR=vim
+fi
 
 if type open >/dev/null 2>&1; then
     export BROWSER=open
@@ -389,10 +394,22 @@ alias fd='noglob fd'
 alias g='git'
 alias gs='git s'
 
-alias vim='nvim'
-alias vimdiff='nvim -d'
-alias view='nvim -R'
-alias e='nvim'
+if type nvim >/dev/null 2>&1; then
+    alias vim='nvim'
+    alias vimdiff='nvim -d'
+    alias view='nvim -R'
+    alias e='nvim'
+else
+    alias e='vim'
+fi
+
+if type fzf >/dev/null 2>&1; then
+    if type nvim >/dev/null 2>&1; then
+        alias ee="fzf --reverse --bind 'enter:become(nvim {})'"
+    else
+        alias ee="fzf --reverse --bind 'enter:become(vim {})'"
+    fi
+fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
     alias o='open'
