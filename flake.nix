@@ -51,6 +51,14 @@
           gui.clipboard.copyCommand = null;
         };
       };
+      workPc168 = mkHomeConfiguration {
+        system = "aarch64-darwin";
+        env = {
+          username = "ken";
+          homeDirectory = "/Users/ken";
+          gui.clipboard.copyCommand = "pbcopy";
+        };
+      };
     };
   };
 }
