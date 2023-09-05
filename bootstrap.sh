@@ -32,16 +32,12 @@ if [ ! -d /nix ]; then
     sh .bootstrap/nix-install --daemon
     hash -r
 fi
-if grep -q "nix-command flakes" /etc/nix/nix.conf; then
-    :
-else
+if ! grep -q "nix-command flakes" /etc/nix/nix.conf; then
     echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf > /dev/null
 fi
 if [ ! -d "$HOME/.local/state/nix/profiles" ]; then
     mkdir -p "$HOME/.local/state/nix/profiles"
 fi
-if type home-manager > /dev/null 2>&1; then
-    :
-else
+if ! type home-manager > /dev/null 2>&1; then
     nix run "nixpkgs#home-manager" -- switch --flake ".#$1"
 fi
