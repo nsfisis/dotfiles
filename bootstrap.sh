@@ -30,6 +30,7 @@ if [ ! -f .bootstrap/nix-install ]; then
 fi
 if [ ! -d /nix ]; then
     sh .bootstrap/nix-install --daemon
+    hash -r
 fi
 if grep -q "nix-command flakes" /etc/nix/nix.conf; then
     :
