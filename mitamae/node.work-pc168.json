@@ -1,0 +1,17 @@
+{
+  "name": "work-pc168",
+  "use": "work",
+  "targetArch": "aarch64-darwin",
+  "flake": {
+    "system": "aarch64-darwin",
+    "env": {
+      "username": "ken",
+      "homeDirectory": "/Users/ken",
+      "gui": {
+        "clipboard": {
+          "copyCommand": "pbcopy"
+        }
+      }
+    }
+  }
+}

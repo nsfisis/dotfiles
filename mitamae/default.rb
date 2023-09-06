@@ -1,0 +1,87 @@
+http_request ".bootstrap/nix-install" do
+  url "https://nixos.org/nix/install"
+end
+
+execute "nix-install" do
+  command "sh .bootstrap/nix-install --daemon"
+  not_if "test -d /nix"
+end
+
+file "/etc/nix/nix.conf" do
+  action :edit
+  block do |content|
+    content + "experimental-features = nix-command flakes\n"
+  end
+  not_if "grep -q 'nix-command flakes' /etc/nix/nix.conf"
+end
+
+home = ENV['HOME']
+
+directory "#{home}/.local/state/nix/profiles"
+
+# XDG Base Directories
+directory "#{home}/.config"
+directory "#{home}/.cache"
+directory "#{home}/.local/share"
+directory "#{home}/.local/state"
+
+directory "#{home}/bin"
+
+execute "home-manager" do
+  command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
+  not_if "type home-manager"
+end
+
+# These dotfiles are not managed by home-manager for now.
+
+link "#{home}/.vimrc" do
+  to "#{home}/dotfiles/.vimrc"
+end
+link "#{home}/.config/alacritty" do
+  to "#{home}/dotfiles/.config/alacritty"
+end
+link "#{home}/.config/git" do
+  to "#{home}/dotfiles/.config/git"
+end
+link "#{home}/.config/nvim" do
+  to "#{home}/dotfiles/.config/nvim"
+end
+
+# Go
+execute "go" do
+  command "go build -o bin/gitalias/git-extract-issue src/gitalias/git-extract-issue.go"
+  not_if "test -f bin/gitalias/git-extract-issue"
+end
+execute "go" do
+  command "go build -o bin/gitalias/git-sw src/gitalias/git-sw.go"
+  not_if "test -f bin/gitalias/git-sw"
+end
+
+directory "#{home}/bin/gitalias"
+
+link "#{home}/bin/gitalias/git-extract-issue" do
+  to "#{home}/dotfiles/bin/gitalias/git-extract-issue"
+end
+link "#{home}/bin/gitalias/git-sw" do
+  to "#{home}/dotfiles/bin/gitalias/git-sw"
+end
+link "#{home}/bin/tmux-pane-idx" do
+  to "#{home}/dotfiles/bin/tmux-pane-idx"
+end
+
+directory "#{home}/.local/state/zsh"
+
+# SKK
+directory "#{home}/.config/skk"
+http_request "#{home}/.config/skk/SKK-JISYO.L.unannotated.gz" do
+  url "https://skk-dev.github.io/dict/SKK-JISYO.L.unannotated.gz"
+end
+execute "unzip skk" do
+  command "gunzip -cd #{home}/.config/skk/SKK-JISYO.L.unannotated.gz > #{home}/.config/skk/jisyo.L"
+  not_if "test -f #{home}/.config/skk/jisyo.L"
+end
+
+link "#{home}/.config/alacritty/alacritty.local.yml" do
+  is_macos = node[:targetArch].include?("darwin")
+  to "#{home}/.config/alacritty/alacritty.#{is_macos ? "macos" : "linux"}.yml"
+end

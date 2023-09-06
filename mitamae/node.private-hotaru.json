@@ -1,0 +1,17 @@
+{
+  "name": "private-hotaru",
+  "use": "private",
+  "targetArch": "x86_64-linux",
+  "flake": {
+    "system": "x86_64-linux",
+    "env": {
+      "username": "ken",
+      "homeDirectory": "/home/ken",
+      "gui": {
+        "clipboard": {
+          "copyCommand": null
+        }
+      }
+    }
+  }
+}

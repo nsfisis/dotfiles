@@ -42,23 +42,12 @@
       ];
     };
   in {
-    homeConfigurations = {
-      privateHotaru = mkHomeConfiguration {
-        system = "x86_64-linux";
-        env = {
-          username = "ken";
-          homeDirectory = "/home/ken";
-          gui.clipboard.copyCommand = null;
-        };
-      };
-      workPc168 = mkHomeConfiguration {
-        system = "aarch64-darwin";
-        env = {
-          username = "ken";
-          homeDirectory = "/Users/ken";
-          gui.clipboard.copyCommand = "pbcopy";
-        };
-      };
+    homeConfigurations = let
+      readJSON = p: builtins.fromJSON (builtins.readFile p);
+      mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
+    in {
+      private-hotaru = mkHomeConfigurationFromJSON ./mitamae/node.private-hotaru.json;
+      work-pc168 = mkHomeConfigurationFromJSON ./mitamae/node.work-pc168.json;
     };
   };
 }

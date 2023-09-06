@@ -4,7 +4,6 @@ macOS (homebrew)
 $ brew update
 $ brew install \
     python \
-    zsh \
     ;
 
 $ brew install --cask \
@@ -38,11 +37,7 @@ $ sudo apt update
 $ sudo apt upgrade
 $ sudo apt install \
     python-is-python3 \
-    zsh \
     ;
-
-# Change login shell to zsh
-$ chsh
 
 $ sudo adduser $(whoami) docker
 
@@ -54,6 +49,7 @@ $ go install github.com/rhysd/vim-startuptime@latest
 ```
 
 
+# ./bootstrap <host>
 # nix flake update
 # nix store gc
 # home-manager switch --flake ".#ken"
