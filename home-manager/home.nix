@@ -29,6 +29,7 @@ in
     pkgs.neovim
     pkgs.nodejs_18
     pkgs.pandoc
+    pkgs.php
     pkgs.python311
     pkgs.ripgrep
     pkgs.ruby_3_1
