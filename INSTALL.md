@@ -1,10 +1,29 @@
-macOS (homebrew)
+# Install
+
+## Hotaru
+
+```
+$ sudo apt update
+$ sudo apt upgrade
+
+$ ./bootstrap hotaru
+
+$ sudo adduser $(whoami) docker
+
+$ cargo install alacritty
+
+$ go install github.com/rhysd/vim-startuptime@latest
+```
+
+## PC 168
 
 ```
 $ brew update
-$ brew install \
-    python \
-    ;
+$ brew upgrade
+
+$ brew install libiconv
+
+$ ./bootstrap pc168
 
 $ brew install --cask \
     alacritty \
@@ -23,26 +42,8 @@ $ go install github.com/rhysd/vim-startuptime@latest
 # Restart your machine.
 ```
 
+# Update
 
-
-Ubuntu (apt)
-
-```
-$ sudo apt update
-$ sudo apt upgrade
-$ sudo apt install \
-    python-is-python3 \
-    ;
-
-$ sudo adduser $(whoami) docker
-
-$ cargo install alacritty
-
-$ go install github.com/rhysd/vim-startuptime@latest
-```
-
-
-# ./bootstrap <host>
-# nix flake update
-# nix store gc
-# home-manager switch --flake ".#ken"
+* `nix flake update`
+* `nix store gc`
+* `home-manager switch --flake ".#<host>"`
