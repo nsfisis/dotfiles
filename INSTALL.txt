@@ -20,8 +20,6 @@ $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 
 $ go install github.com/rhysd/vim-startuptime@latest
 
-$ cargo install cargo-compete
-
 # Restart your machine.
 ```
 
@@ -39,7 +37,6 @@ $ sudo apt install \
 $ sudo adduser $(whoami) docker
 
 $ cargo install alacritty
-$ cargo install cargo-compete
 
 $ go install github.com/rhysd/vim-startuptime@latest
 ```

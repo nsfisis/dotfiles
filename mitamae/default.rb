@@ -95,3 +95,18 @@ execute "cargo: install hgrep" do
   command "cargo install hgrep"
   not_if "type hgrep"
 end
+
+if node[:use] == "private"
+  package "pkg-config"
+  package "libssl-dev"
+
+  execute "cargo: install cargo-compete" do
+    envs = {
+      CFLAGS: "-I/usr/include",
+      OPENSSL_LIB_DIR: "/usr/lib/x86_64-linux-gnu",
+      OPENSSL_INCLUDE_DIR: "/usr/include/x86_64-linux-gnu",
+    }
+    command "#{envs.map{"#{_1}=#{_2}"}.join(" ")} cargo install cargo-compete"
+    not_if "type cargo-compete"
+  end
+end
