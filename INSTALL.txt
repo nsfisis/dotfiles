@@ -11,9 +11,6 @@ $ brew install --cask \
     keepassxc \
     ;
 
-$ brew tap "rhysd/hgrep" "https://github.com/rhysd/hgrep"
-$ brew install hgrep
-
 # Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
 $ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
 $ sudo atsutil databases -remove
@@ -41,7 +38,6 @@ $ sudo apt install \
 
 $ sudo adduser $(whoami) docker
 
-$ cargo install hgrep
 $ cargo install alacritty
 $ cargo install cargo-compete
 

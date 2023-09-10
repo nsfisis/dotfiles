@@ -85,3 +85,13 @@ link "#{home}/.config/alacritty/alacritty.local.yml" do
   is_macos = node[:targetArch].include?("darwin")
   to "#{home}/.config/alacritty/alacritty.#{is_macos ? "macos" : "linux"}.yml"
 end
+
+# Rust
+execute "rustup: install nightly toolchain" do
+  command "rustup toolchain install nightly"
+  not_if "rustup toolchain list | grep nightly"
+end
+execute "cargo: install hgrep" do
+  command "cargo install hgrep"
+  not_if "type hgrep"
+end

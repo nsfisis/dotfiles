@@ -33,6 +33,7 @@ in
     pkgs.python311
     pkgs.ripgrep
     pkgs.ruby_3_1
+    pkgs.rustup
     pkgs.sqlite
     pkgs.tokei
     pkgs.tree
