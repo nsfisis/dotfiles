@@ -96,7 +96,7 @@ execute "cargo: install hgrep" do
   not_if "type hgrep"
 end
 
-if node[:use] == "private"
+if node[:profile] == "private"
   package "pkg-config"
   package "libssl-dev"
 

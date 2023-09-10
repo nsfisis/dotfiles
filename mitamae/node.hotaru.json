@@ -1,6 +1,6 @@
 {
-  "name": "private-hotaru",
-  "use": "private",
+  "name": "hotaru",
+  "profile": "private",
   "targetArch": "x86_64-linux",
   "flake": {
     "system": "x86_64-linux",

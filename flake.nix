@@ -46,8 +46,8 @@
       readJSON = p: builtins.fromJSON (builtins.readFile p);
       mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
     in {
-      private-hotaru = mkHomeConfigurationFromJSON ./mitamae/node.private-hotaru.json;
-      work-pc168 = mkHomeConfigurationFromJSON ./mitamae/node.work-pc168.json;
+      hotaru = mkHomeConfigurationFromJSON ./mitamae/node.hotaru.json;
+      pc168 = mkHomeConfigurationFromJSON ./mitamae/node.pc168.json;
     };
   };
 }

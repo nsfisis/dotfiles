@@ -1,6 +1,6 @@
 {
-  "name": "work-pc168",
-  "use": "work",
+  "name": "pc168",
+  "profile": "work",
   "targetArch": "aarch64-darwin",
   "flake": {
     "system": "aarch64-darwin",
