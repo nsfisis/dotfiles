@@ -110,3 +110,7 @@ if node[:profile] == "private"
     not_if "type cargo-compete"
   end
 end
+
+execute "home-manager switch" do
+  command "home-manager switch --flake '.##{node[:name]}'"
+end
