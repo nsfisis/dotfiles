@@ -663,8 +663,25 @@ return {
       config = function()
          local lspconfig = require('lspconfig')
 
+         -- TODO
+         -- Enable denols xor tsserver.
+         local is_deno_repo
+         if vim.fn.executable('deno') == 1 then
+            local get_deno_root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+            is_deno_repo = get_deno_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
+         else
+            is_deno_repo = false
+         end
+
          if vim.fn.executable('typescript-language-server') == 1 then
-            lspconfig.tsserver.setup({})
+            if not is_deno_repo then
+               lspconfig.tsserver.setup({})
+            end
+         end
+         if vim.fn.executable('deno') == 1 then
+            if is_deno_repo then
+               lspconfig.denols.setup({})
+            end
          end
          if vim.fn.executable('gopls') == 1 then
             lspconfig.gopls.setup({})
