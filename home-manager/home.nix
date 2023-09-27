@@ -30,6 +30,7 @@ in
     pkgs.nodejs_18
     pkgs.pandoc
     pkgs.php
+    pkgs.pwgen
     pkgs.python311
     pkgs.ripgrep
     pkgs.ruby_3_1
