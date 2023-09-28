@@ -381,6 +381,19 @@ function mkcd() {
 }
 
 
+
+function pwgen() {
+    command pwgen -N 1 128
+    command pwgen -N 1 96
+    command pwgen -N 1 64
+    command pwgen -N 1 48
+    command pwgen -N 1 32
+    command pwgen -N 1 24
+    command pwgen -N 1 16
+}
+
+
+
 alias cp='cp -i'
 alias mkdir='mkdir -p'
 alias mv='mv -i'
