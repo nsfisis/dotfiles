@@ -107,4 +107,54 @@ in
 
     initExtra = builtins.readFile ../.zshrc;
   };
+
+  programs.starship = {
+    enable = true;
+
+    settings = {
+      add_newline = true;
+      format = "[$directory$git_branch$git_commit$git_status$git_state](bold fg:75)$fill$cmd_duration$time$line_break$character";
+      continuation_prompt = "[❯](fg:63)[❯](fg:62)[❯](fg:61) ";
+      character = {
+        success_symbol = "[❯](fg:150)[❯](fg:153)[❯](fg:159)";
+        error_symbol = "[❯](fg:172)[❯](fg:173)[❯](fg:174)";
+      };
+      directory = {
+        format = "$path ";
+        use_os_path_sep = false;
+        truncate_to_repo = false;
+        truncation_length = 99;
+      };
+      git_branch = {
+        format = "\\($branch\\)";
+      };
+      git_commit = {
+        format = "($hash$tag)";
+        tag_disabled = false;
+        tag_symbol = " @";
+      };
+      git_status = {
+        format = "$conflicted$modified$untracked$staged$stashed";
+        conflicted = "!";
+        modified = "~";
+        untracked = "?";
+        staged = "*";
+        stashed = " \\[$count\\]";
+      };
+      git_state = {
+        format = " - $state ($progress_current/$progress_total) ";
+      };
+      cmd_duration = {
+        format = "~$duration ";
+      };
+      time = {
+        disabled = false;
+        format = "\\[$time\\] ";
+        time_format = "%T";
+      };
+      fill = {
+        symbol = " ";
+      };
+    };
+  };
 }
