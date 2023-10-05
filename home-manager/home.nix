@@ -129,7 +129,7 @@ in
         format = "\\($branch\\)";
       };
       git_commit = {
-        format = "($hash$tag)";
+        format = "\\($hash$tag\\)";
         tag_disabled = false;
         tag_symbol = " @";
       };
