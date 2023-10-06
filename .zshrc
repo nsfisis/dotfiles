@@ -425,7 +425,3 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH=/usr/local/go/bin:$PATH
-
-if type direnv >/dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
-fi
