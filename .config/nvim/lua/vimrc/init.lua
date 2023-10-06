@@ -71,6 +71,8 @@ function M.register_filetype_autocmds_for_indentation()
       python          = { style = SPACE, width = 4 },
       ruby            = { style = SPACE, width = 2 },
       satysfi         = { style = SPACE, width = 2 },
+      sbt             = { style = SPACE, width = 2 },
+      scala           = { style = SPACE, width = 2 },
       toml            = { style = SPACE, width = 2 },
       typescript      = { style = SPACE, width = 2 },
       typescriptreact = { style = SPACE, width = 2 },

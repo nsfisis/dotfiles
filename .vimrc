@@ -179,6 +179,8 @@ autocmd Vimrc FileType php             set expandtab   tabstop=2 shiftwidth=2 so
 autocmd Vimrc FileType python          set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Vimrc FileType ruby            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType satysfi         set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType sbt             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Vimrc FileType scala           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType toml            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType typescript      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Vimrc FileType typescriptreact set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
