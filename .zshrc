@@ -414,6 +414,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 
 
+alias direnvnix='nix flake new -t github:nix-community/nix-direnv'
+
+
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 
 # To override system-provided Ruby with brewed Ruby
