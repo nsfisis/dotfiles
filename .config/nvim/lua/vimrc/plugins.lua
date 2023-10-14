@@ -318,10 +318,12 @@ return {
    -- Show indentation guide.
    {
       'lukas-reineke/indent-blankline.nvim',
+      main = 'ibl',
       config = function()
-         require("indent_blankline").setup {
-            char_blankline = ' ',
-            show_first_indent_level = false,
+         require('ibl').setup {
+            scope = {
+               enabled = false,
+            },
          }
       end,
    },
