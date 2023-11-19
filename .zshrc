@@ -268,6 +268,13 @@ function __cd_project_root_dir() {
 zle -N __cd_project_root_dir
 bindkey "^G" __cd_project_root_dir
 
+# C-z fg
+function __fg() {
+    fg
+}
+zle -N __fg
+bindkey "^Z" __fg
+
 
 zmodload zsh/complist
 
