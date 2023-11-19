@@ -206,6 +206,10 @@ zstyle ':completion:*' ignore-parents parent pwd ..
 autoload -U zcalc
 autoload zed
 
+
+bindkey -e
+
+
 # Enable history completion
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
@@ -286,9 +290,6 @@ HISTTIMEFORMAT="[%Y/%M/%D %H:%M:%S] "
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
-
-
-bindkey -e
 
 
 function 256colors() {

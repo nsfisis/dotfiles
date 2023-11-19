@@ -4,6 +4,8 @@ let
   homeDirectory = specialArgs.env.homeDirectory;
   clipboardCopyCommand = specialArgs.env.gui.clipboard.copyCommand;
   requiresWlClipboard = clipboardCopyCommand == "wl-copy";
+  terminalApp = specialArgs.env.gui.terminalApp;
+  useNixManagedZsh = specialArgs.env.useNixManagedZsh;
 in
 {
   home.username = username;
@@ -91,7 +93,7 @@ in
     aggressiveResize = true;
     baseIndex = 1;
     clock24 = true;
-    escapeTime = 0;
+    escapeTime = 5;
     historyLimit = 50000;
     mouse = false;
     prefix = "C-t";
@@ -100,14 +102,26 @@ in
     extraConfig =
       let
         commonConfig = builtins.readFile ./config/tmux/tmux.conf;
-        extraConfig = if clipboardCopyCommand != null then
-          ''
-            bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboardCopyCommand}"
-          ''
-        else
-          "";
+        clipboardConfig = if clipboardCopyCommand != null then
+                            ''
+                              bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboardCopyCommand}"
+                            ''
+                          else
+                            "";
+        terminalConfig = if terminalApp == "alacritty" then
+                           ''
+                             set-option -ga terminal-overrides ',alacritty:RGB'
+                           ''
+                         else
+                           "";
+        shellConfig = if useNixManagedZsh then
+                        ''
+                          set-option -g default-shell ${homeDirectory}/.nix-profile/bin/zsh
+                        ''
+                      else
+                        "";
       in
-      commonConfig + extraConfig;
+      commonConfig + clipboardConfig + terminalConfig + shellConfig;
   };
 
   programs.zsh = {

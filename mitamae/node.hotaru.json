@@ -10,8 +10,10 @@
       "gui": {
         "clipboard": {
           "copyCommand": null
-        }
-      }
+        },
+        "terminalApp": "windowsTerminal"
+      },
+      "useNixManagedZsh": true
     }
   }
 }

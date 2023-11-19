@@ -10,8 +10,10 @@
       "gui": {
         "clipboard": {
           "copyCommand": "pbcopy"
-        }
-      }
+        },
+        "terminalApp": "alacritty"
+      },
+      "useNixManagedZsh": false
     }
   }
 }
