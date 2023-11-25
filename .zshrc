@@ -379,9 +379,21 @@ fi
 
 if type fzf >/dev/null 2>&1; then
     if type nvim >/dev/null 2>&1; then
-        alias ee="fzf --reverse --bind 'enter:become(nvim {})'"
+        function ee() {
+            if [[ -z "$1" ]]; then
+                fzf --reverse --bind 'enter:become(nvim {})'
+            else
+                find "$1" -type f -print0 | fzf --read0 --reverse --bind 'enter:become(nvim {})'
+            fi
+        }
     else
-        alias ee="fzf --reverse --bind 'enter:become(vim {})'"
+        function ee() {
+            if [[ -z "$1" ]]; then
+                fzf --reverse --bind 'enter:become(vim {})'
+            else
+                find "$1" -type f -print0 | fzf --read0 --reverse --bind 'enter:become(vim {})'
+            fi
+        }
     fi
 fi
 
