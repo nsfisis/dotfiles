@@ -30,6 +30,19 @@ end
 
 
 
+function M.after_indent(ft, callback)
+   local var_name = 'did_indent_' .. ft .. '_after'
+   if vim.b[var_name] ~= nil then
+      return
+   end
+
+   callback(conf)
+
+   vim.b[var_name] = true
+end
+
+
+
 local function set_indentation(style, width)
    local editorconfig = vim.b.editorconfig or {}
 
