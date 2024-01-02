@@ -1,6 +1,7 @@
 local F = vim.fn
 local O = vim.o
 local vimrc = require('vimrc')
+local my_env = require('vimrc.my_env')
 local A = vimrc.autocmd
 
 
@@ -48,6 +49,18 @@ A('BufWritePre', {
          return
       end
       F.mkdir(dir, 'p')
+   end,
+})
+
+
+A('BufEnter', {
+   desc = 'Set up *scratch* buffer',
+   pattern = my_env.scratch_dir .. '/*/*.*',
+   callback = function()
+      vim.b._scratch_ = true
+      if F.exists(':AutosaveEnable') == 2 then
+         vim.cmd('AutosaveEnable')
+      end
    end,
 })
 
