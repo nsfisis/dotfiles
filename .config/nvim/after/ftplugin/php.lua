@@ -45,6 +45,16 @@ vimrc.after_ftplugin('php', function(conf)
          psr4_namespace = k
          psr4_dir = v
       end
+      if type(psr4_dir) == 'table' then
+         if #psr4_dir == 1 then
+            psr4_dir = psr4_dir[1]
+         else
+            return nil -- psr-4 section is ambiguous
+         end
+      end
+      if type(psr4_namespace) ~= 'string' or type(psr4_dir) ~= 'string' then
+         return nil -- psr-4 section is invalid
+      end
       if psr4_namespace:sub(-1, -1) == '\\' then
          psr4_namespace = psr4_namespace:sub(0, -2)
       end
