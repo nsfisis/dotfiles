@@ -40,6 +40,7 @@ in
     pkgs.sqlite
     pkgs.tokei
     pkgs.tree
+    pkgs.vim
     pkgs.zig
 
     pkgs.nodePackages.typescript-language-server
