@@ -155,38 +155,69 @@ autocmd Vimrc BufRead *
 
 if has('patch-9.0.1799')
     packadd editorconfig
+
+    function! SetIsEditorConfigApplied(config)
+        let b:__editorconfig__ = {}
+        if has_key(a:config, 'indent_style')
+            let b:__editorconfig__.expandtab = 1
+        endif
+        if has_key(a:config, 'tab_width')
+            let b:__editorconfig__.tabstop = 1
+        endif
+        if has_key(a:config, 'indent_size')
+            let b:__editorconfig__.shiftwidth = 1
+            let b:__editorconfig__.softtabstop = 1
+        endif
+        return 0
+    endfunction
+
+    call editorconfig#AddNewHook(function('SetIsEditorConfigApplied'))
 endif
 
-" TODO: Check if editorconfig is enabled before setting options in order to
-"       avoid overriding options set by editorconfig.
-autocmd Vimrc FileType c               set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType cmake           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType cpp             set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType css             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType docbk           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType go              set noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType haskell         set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType html            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType javascript      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType javascriptreact set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType json            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType leaf            set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType lisp            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType lua             set expandtab   tabstop=3 shiftwidth=3 softtabstop=3
-autocmd Vimrc FileType markdown        set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType nix             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType php             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType python          set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType ruby            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType satysfi         set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType sbt             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType scala           set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType toml            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType typescript      set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType typescriptreact set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType vim             set expandtab   tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Vimrc FileType xml             set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Vimrc FileType yaml            set expandtab   tabstop=2 shiftwidth=2 softtabstop=2
+function! SetIndentStyle(prefer_spaces, indent_size)
+    let editorconfig = get(b:, '__editorconfig__', {})
+    if !has_key(editorconfig, 'expandtab')
+        let &expandtab = a:prefer_spaces
+    endif
+    if !has_key(editorconfig, 'tabstop')
+        let &tabstop = a:indent_size
+    endif
+    if !has_key(editorconfig, 'shiftwidth')
+        let &shiftwidth = a:indent_size
+    endif
+    if !has_key(editorconfig, 'softtabstop')
+        let &softtabstop = a:indent_size
+    endif
+endfunction
+
+autocmd Vimrc FileType c               call SetIndentStyle(1, 4)
+autocmd Vimrc FileType cmake           call SetIndentStyle(1, 2)
+autocmd Vimrc FileType cpp             call SetIndentStyle(1, 4)
+autocmd Vimrc FileType css             call SetIndentStyle(1, 2)
+autocmd Vimrc FileType docbk           call SetIndentStyle(1, 2)
+autocmd Vimrc FileType go              call SetIndentStyle(1, 4)
+autocmd Vimrc FileType haskell         call SetIndentStyle(1, 4)
+autocmd Vimrc FileType html            call SetIndentStyle(1, 2)
+autocmd Vimrc FileType javascript      call SetIndentStyle(1, 2)
+autocmd Vimrc FileType javascriptreact call SetIndentStyle(1, 2)
+autocmd Vimrc FileType json            call SetIndentStyle(1, 2)
+autocmd Vimrc FileType leaf            call SetIndentStyle(1, 4)
+autocmd Vimrc FileType lisp            call SetIndentStyle(1, 2)
+autocmd Vimrc FileType lua             call SetIndentStyle(1, 3)
+autocmd Vimrc FileType markdown        call SetIndentStyle(1, 4)
+autocmd Vimrc FileType nix             call SetIndentStyle(1, 2)
+autocmd Vimrc FileType php             call SetIndentStyle(1, 2)
+autocmd Vimrc FileType python          call SetIndentStyle(1, 4)
+autocmd Vimrc FileType ruby            call SetIndentStyle(1, 2)
+autocmd Vimrc FileType satysfi         call SetIndentStyle(1, 2)
+autocmd Vimrc FileType sbt             call SetIndentStyle(1, 2)
+autocmd Vimrc FileType scala           call SetIndentStyle(1, 2)
+autocmd Vimrc FileType toml            call SetIndentStyle(1, 2)
+autocmd Vimrc FileType typescript      call SetIndentStyle(1, 2)
+autocmd Vimrc FileType typescriptreact call SetIndentStyle(1, 2)
+autocmd Vimrc FileType vim             call SetIndentStyle(1, 4)
+autocmd Vimrc FileType xml             call SetIndentStyle(1, 2)
+autocmd Vimrc FileType yaml            call SetIndentStyle(1, 2)
 
 noremap <expr>  gn  v:searchforward ? 'gn' : 'gN'
 noremap <expr>  gN  v:searchforward ? 'gN' : 'gn'
