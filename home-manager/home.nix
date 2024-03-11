@@ -27,6 +27,7 @@ in
     pkgs.git
     pkgs.go
     pkgs.gopls
+    pkgs.hyperfine
     pkgs.jq
     pkgs.neovim
     pkgs.nodejs_18
