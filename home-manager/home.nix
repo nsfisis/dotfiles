@@ -32,7 +32,6 @@ in
     pkgs.neovim
     pkgs.nodejs_18
     pkgs.pandoc
-    pkgs.php
     pkgs.pwgen
     pkgs.python311
     pkgs.ripgrep
@@ -43,6 +42,15 @@ in
     pkgs.tree
     pkgs.vim
     pkgs.zig
+
+    (pkgs.php83.buildEnv {
+      extensions = ({ enabled, all }: enabled ++ (with all; [
+        ffi
+      ]));
+      extraConfig = ''
+        ffi.enable=true
+      '';
+    })
 
     pkgs.nodePackages.typescript-language-server
   ] ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
