@@ -35,7 +35,7 @@ in
     pkgs.pwgen
     pkgs.python311
     pkgs.ripgrep
-    pkgs.ruby_3_1
+    pkgs.ruby_3_2
     pkgs.rustup
     pkgs.sqlite
     pkgs.tokei
