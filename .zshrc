@@ -379,6 +379,9 @@ else
 fi
 
 if type fzf >/dev/null 2>&1; then
+    if type fd >/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --exclude .git'
+    fi
     if type nvim >/dev/null 2>&1; then
         function ee() {
             if [[ -z "$1" ]]; then
