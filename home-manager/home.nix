@@ -30,6 +30,7 @@ in
     pkgs.go
     pkgs.gopls
     pkgs.hyperfine
+    pkgs.jnv
     pkgs.jq
     pkgs.neovim
     pkgs.nodejs_18
