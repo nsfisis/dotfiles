@@ -90,14 +90,15 @@ function vimrc.statusline.mode()
    local vim_mode = vim_mode_and_hl[1]
    local hl = vim_mode_and_hl[2]
 
-   -- Calling `eskk#statusline()` makes Vim autoload eskk. If you call it
-   -- without checking `g:loaded_autoload_eskk`, eskk is loaded on an early
-   -- stage of the initialization (probably the first rendering of status line),
-   -- which slows down Vim startup. Loading eskk can be delayed by checking both
-   -- of `g:loaded_eskk` and `g:loaded_autoload_eskk`.
    local skk_mode
-   if G.loaded_eskk and G.loaded_autoload_eskk then
-      skk_mode = F['eskk#statusline'](' (%s)', '')
+   if F.exists('*skkeleton#mode') == 1 then
+      skk_mode = ({
+         ['hira'] = ' (あ)',
+         ['kata'] = ' (ア)',
+         ['hankata'] = ' (半ア)',
+         ['zenkaku'] = ' (全角英数)',
+         ['abbrev'] = ' (abbrev)',
+      })[F['skkeleton#mode']()] or ''
    else
       skk_mode = ''
    end

@@ -4,92 +4,66 @@ return {
    {
       'nvim-lua/plenary.nvim',
    },
+   -- skkeleton depends on it.
+   {
+      'vim-denops/denops.vim',
+   },
    -- Text editing {{{1
    -- IME {{{2
    -- SKK (Simple Kana to Kanji conversion program) for Vim.
    {
-      'vim-skk/eskk.vim',
+      'vim-skk/skkeleton',
       config = function()
+         local vimrc = require('vimrc')
          local my_env = require('vimrc.my_env')
 
-         vim.g['eskk#dictionary'] = {
-            path = my_env.skk_dir .. '/jisyo',
-            sorted = false,
-            encoding = 'utf-8',
-         }
+         vimrc.autocmd('User', {
+            pattern = 'skkeleton-initialize-pre',
+            callback = function()
+               vim.fn['skkeleton#config']({
+                  -- Change default markers because they are EAW (East Asian Width) characters.
+                  markerHenkan = '[!]',
+                  markerHenkanSelect = '[#]',
+                  eggLikeNewline = true,
+                  userDictionary = my_env.skk_dir .. '/jisyo',
+                  globalDictionaries = {my_env.skk_dir .. '/jisyo.L'},
+               })
+               vim.fn['skkeleton#register_kanatable']('rom', {
+                     ['z '] = {'　'},
+                     ['0.'] = {'0.'},
+                     ['1.'] = {'1.'},
+                     ['2.'] = {'2.'},
+                     ['3.'] = {'3.'},
+                     ['4.'] = {'4.'},
+                     ['5.'] = {'5.'},
+                     ['6.'] = {'6.'},
+                     ['7.'] = {'7.'},
+                     ['8.'] = {'8.'},
+                     ['9.'] = {'9.'},
+                     [':'] = {':'},
+                     ['z:'] = {'：'},
+                     ['jk'] = 'escape',
+               })
+            end,
+         })
 
-         vim.g['eskk#large_dictionary'] = {
-            path = my_env.skk_dir .. '/jisyo.L',
-            sorted = true,
-            encoding = 'euc-jp',
-         }
+         vimrc.autocmd('User', {
+            pattern = 'skkeleton-initialize-post',
+            callback = function()
+               vim.fn['skkeleton#register_keymap']('input', '<C-q>', nil)
+               vim.fn['skkeleton#register_keymap']('input', '<C-m>', 'newline')
+               vim.fn['skkeleton#register_keymap']('henkan', '<C-m>', 'newline')
+               -- Custom highlight for henkan markers.
+               vim.cmd([=[syntax match skkMarker '\[[!#]\]']=])
+               vim.cmd([=[hi link skkMarker Special]=])
+            end,
+         })
 
-         vim.g['eskk#backup_dictionary'] = vim.g['eskk#dictionary'].path .. '.bak'
-
-         -- NOTE:
-         -- Boolean values are not accepted because eskk#utils#set_default() checks types.
-         vim.g['eskk#enable_completion'] = 0
-         vim.g['eskk#egg_like_newline'] = 1
-
-         -- Change default markers because they are EAW (East Asian Width) characters.
-         vim.g['eskk#marker_henkan'] = '[!]'
-         vim.g['eskk#marker_okuri'] = '-'
-         vim.g['eskk#marker_henkan_select'] = '[#]'
-         vim.g['eskk#marker_jisyo_touroku'] = '[?]'
-
-         vim.cmd([=[
-         function! My_eskk_initialize_pre()
-            for [orgtable, mode] in [['rom_to_hira', 'hira'], ['rom_to_kata', 'kata']]
-               let t = eskk#table#new(orgtable . '*', orgtable)
-               call t.add_map('z ', '　')
-               call t.add_map('0.', '0.')
-               call t.add_map('1.', '1.')
-               call t.add_map('2.', '2.')
-               call t.add_map('3.', '3.')
-               call t.add_map('4.', '4.')
-               call t.add_map('5.', '5.')
-               call t.add_map('6.', '6.')
-               call t.add_map('7.', '7.')
-               call t.add_map('8.', '8.')
-               call t.add_map('9.', '9.')
-               call t.add_map(':', ':')
-               call t.add_map('z:', '：')
-               " Workaround: 'zl' does not work as 'l' key leaves from SKK mode.
-               call t.add_map('zL', '→')
-               call eskk#register_mode_table(mode, t)
-            endfor
-         endfunction
-
-         autocmd Vimrc User eskk-initialize-pre call My_eskk_initialize_pre()
-
-         function! My_eskk_initialize_post()
-            " I don't use hankata mode for now.
-            EskkUnmap -type=mode:hira:toggle-hankata
-            EskkUnmap -type=mode:kata:toggle-hankata
-
-            " I don't use abbrev mode for now.
-            EskkUnmap -type=mode:hira:to-abbrev
-            EskkUnmap -type=mode:kata:to-abbrev
-
-            " I don't use ascii mode for now.
-            EskkUnmap -type=mode:hira:to-ascii
-            EskkUnmap -type=mode:kata:to-ascii
-
-            " Instead, l key disable SKK input.
-            EskkMap -type=disable l
-
-            " I type <C-m> for new line.
-            EskkMap -type=kakutei <C-m>
-
-            map!  jk  <Plug>(eskk:disable)<ESC>
-
-            " Custom highlight for henkan markers.
-            syntax match skkMarker '\[[!#?]\]'
-            hi link skkMarker Special
-         endfunction
-
-         autocmd Vimrc User eskk-initialize-post call My_eskk_initialize_post()
-         ]=])
+         vim.cmd([[
+         imap <C-j> <Plug>(skkeleton-enable)
+         cmap <C-j> <Plug>(skkeleton-enable)
+         tmap <C-j> <Plug>(skkeleton-enable)
+         ]])
       end,
    },
    -- Operators {{{2
