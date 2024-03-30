@@ -152,3 +152,5 @@ O.fileencodings = 'utf-8,cp932,euc-jp'
 
 
 -- Misc. {{{1
+
+O.exrc = true
