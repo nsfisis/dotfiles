@@ -55,6 +55,7 @@ in
       '';
     })
 
+    pkgs.nodePackages.pnpm
     pkgs.nodePackages.typescript-language-server
   ] ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
