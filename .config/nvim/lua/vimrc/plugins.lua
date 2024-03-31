@@ -252,27 +252,9 @@ return {
          vim.keymap.set('n', 'gfa', '<Plug>(altr-forward)')
       end,
    },
-   -- Full-featured filer.
+   -- Simple filer.
    {
-      'lambdalisue/fern.vim',
-      lazy = true,
-      cmd = {'Fern'},
-      config = function()
-         local vimrc = require('vimrc')
-
-         vimrc.autocmd('FileType', {
-            pattern = {'fern'},
-            callback = function()
-               if vim.fn.hasmapto('<Plug>(fern-action-open:tabedit)', 'n') == 1 then
-                  vim.keymap.del('n', 't', { buffer = true })
-               end
-            end,
-         })
-      end,
-   },
-   -- Fern plugin: hijack Netrw.
-   {
-      'lambdalisue/fern-hijack.vim',
+      'justinmk/vim-dirvish',
    },
    -- Appearance {{{1
    -- Show highlight.
