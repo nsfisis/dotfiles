@@ -4,7 +4,7 @@ MITAMAE_VERSION=v1.14.0
 
 usage() {
     echo "Usage: $0 <host>"
-    echo "Availabel hosts:"
+    echo "Available hosts:"
     find mitamae -name 'node.*.json' | sed -e 's#^mitamae/node[.]##' -e 's#.json##' | sort | sed -e 's/^/ * /'
 }
 
