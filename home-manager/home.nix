@@ -44,7 +44,7 @@ in
     pkgs.tokei
     pkgs.tree
     pkgs.vim
-    pkgs.zig
+    pkgs.zig_0_12
 
     (pkgs.php83.buildEnv {
       extensions = ({ enabled, all }: enabled ++ (with all; [
