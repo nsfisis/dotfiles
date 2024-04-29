@@ -437,6 +437,24 @@ fi
 alias direnvnix='nix flake new -t github:nix-community/nix-direnv'
 
 
+
+
+# fpath=(~/.config/zsh/completions $fpath)
+# autoload -Uz _my_composer
+compdef _my_composer composer composer.phar
+
+# TODO
+# Move these definitions to a separate file.
+autoload -Uz _composer
+
+# Fall back to the default file/dir completion if the existing completion
+# doesn't return anything.
+function _my_composer() {
+    _composer "$@" || _files "$@"
+}
+
+
+
 export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
 
 # To override system-provided Ruby with brewed Ruby
