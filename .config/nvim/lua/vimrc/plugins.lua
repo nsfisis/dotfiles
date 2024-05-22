@@ -663,6 +663,12 @@ return {
    -- Integration with GitHub Copilot (https://docs.github.com/en/copilot)
    {
       'github/copilot.vim',
+      init = function()
+         vim.g.copilot_filetypes = {
+            markdown = false,
+            text = false,
+         }
+      end,
    },
    -- }}}
 }
