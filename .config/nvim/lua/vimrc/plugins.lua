@@ -114,6 +114,7 @@ return {
    -- Non-operators {{{2
    -- Comment out.
    {
+      -- use bundled feature?
       'numToStr/Comment.nvim',
       config = function()
          require('Comment').setup {
@@ -625,8 +626,7 @@ return {
          -- Enable denols xor tsserver.
          local is_deno_repo
          if vim.fn.executable('deno') == 1 then
-            local get_deno_root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
-            is_deno_repo = get_deno_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
+            is_deno_repo = vim.fs.root(0, {"deno.json", "deno.jsonc"}) ~= nil
          else
             is_deno_repo = false
          end
@@ -651,7 +651,6 @@ return {
                vim.bo[e.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
                local opts = { buffer = e.buf }
-               vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
                vim.keymap.set('n', '<space>f', function()
                   vim.lsp.buf.format({ async = true })
                end, opts)

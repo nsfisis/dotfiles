@@ -61,7 +61,7 @@ end
 --   highlight group.
 --
 -- See also `:h :hi-normal-cterm`.
-vim.cmd(('hi! Normal ctermfg=0 ctermbg=0 guifg=%s guibg=%s'):format(palette.fg, palette.bg))
+vim.cmd(('hi! Normal ctermfg=15 ctermbg=0 guifg=%s guibg=%s'):format(palette.fg, palette.bg))
 
 
 -- Semantic highlight group {{{1
