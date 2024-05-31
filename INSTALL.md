@@ -11,8 +11,6 @@ $ ./bootstrap hotaru
 $ sudo adduser $(whoami) docker
 
 $ cargo install alacritty
-
-$ go install github.com/rhysd/vim-startuptime@latest
 ```
 
 ## PC 168
@@ -36,8 +34,6 @@ $ sudo atsutil databases -remove
 
 $ /usr/local/opt/ncurses/bin/infocmp tmux-256color > /var/tmp/tmux-256color.info
 $ tic -xe tmux-256color /var/tmp/tmux-256color.info
-
-$ go install github.com/rhysd/vim-startuptime@latest
 
 # Restart your machine.
 ```
