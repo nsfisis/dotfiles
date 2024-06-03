@@ -72,6 +72,8 @@ in
     XDG_STATE_HOME = "${homeDirectory}/.local/state";
     # XDG Base Directories: Node.js
     NODE_REPL_HISTORY = "${XDG_CACHE_HOME}/node_repl_history";
+    # XDG Base Directories: PHP
+    PHP_HISTFILE = "${XDG_CACHE_HOME}/php_history";
     # XDG Base Directories: SQLite
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
 
