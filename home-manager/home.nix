@@ -143,6 +143,7 @@ in
 
     settings = {
       add_newline = true;
+      command_timeout = 1000;
       format = "[$directory$git_branch$git_commit$git_status$git_state](bold fg:75)$fill$cmd_duration$time$line_break$character";
       continuation_prompt = "[❯](fg:63)[❯](fg:62)[❯](fg:61) ";
       character = {
