@@ -35,6 +35,7 @@ in
     pkgs.neovim
     pkgs.nodejs_18
     pkgs.pandoc
+    pkgs.phpactor
     pkgs.pwgen
     pkgs.python311
     pkgs.ripgrep

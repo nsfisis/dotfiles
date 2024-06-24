@@ -649,6 +649,9 @@ return {
          if vim.fn.executable('gopls') == 1 then
             lspconfig.gopls.setup({})
          end
+         if vim.fn.executable('phpactor') == 1 then
+            lspconfig.phpactor.setup({})
+         end
 
          vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
