@@ -466,3 +466,22 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH=/usr/local/go/bin:$PATH
+
+
+
+# Confirm before executing `terraform apply`.
+function terraform() {
+    local subcommand="$1"
+    if [[ $subcommand = "apply" ]]; then
+        echo "Are you sure to apply?"
+        echo -n "(y/n): "
+        read -r answer
+        if [[ $answer = "y" ]]; then
+            command terraform "$@"
+        else
+            echo "Cancelled."
+        fi
+    else
+        command terraform "$@"
+    fi
+}
