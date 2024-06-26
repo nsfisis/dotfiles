@@ -23,10 +23,7 @@ $ brew install libiconv
 
 $ ./bootstrap pc168
 
-$ brew install --cask \
-    alacritty \
-    keepassxc \
-    ;
+$ brew install --cask alacritty
 
 # Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
 $ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
