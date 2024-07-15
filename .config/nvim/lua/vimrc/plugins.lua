@@ -653,7 +653,20 @@ return {
             lspconfig.phpactor.setup({})
          end
          if vim.fn.executable('efm-langserver') == 1 then
-            lspconfig.efm.setup({})
+            lspconfig.efm.setup({
+               init_options = { documentFormatting = true },
+               settings = {
+                  rootMarkers = {".git/"},
+                  languages = {
+                     json = {
+                        {
+                           formatCommand = "reparojson -q",
+                           formatStdin = true,
+                        },
+                     },
+                  },
+               }
+            })
          end
 
          vim.api.nvim_create_autocmd('LspAttach', {
@@ -665,6 +678,13 @@ return {
                vim.keymap.set('n', '<space>f', function()
                   vim.lsp.buf.format({ async = true })
                end, opts)
+
+               vim.api.nvim_create_autocmd('BufWritePre', {
+                  buffer = e.buf,
+                  callback = function()
+                     vim.lsp.buf.format({ async = false })
+                  end
+               })
             end,
          })
       end,

@@ -11,6 +11,9 @@ $ ./bootstrap hotaru
 $ sudo adduser $(whoami) docker
 
 $ cargo install alacritty
+
+$ cd ~/src/reparojson
+$ cargo install --path .
 ```
 
 ## PC 168
