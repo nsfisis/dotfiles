@@ -23,6 +23,7 @@ in
     pkgs.cmake
     pkgs.curl
     pkgs.deno
+    pkgs.efm-langserver
     pkgs.fd
     pkgs.fzf
     pkgs.gcc

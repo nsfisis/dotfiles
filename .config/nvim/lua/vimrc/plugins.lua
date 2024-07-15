@@ -652,6 +652,9 @@ return {
          if vim.fn.executable('phpactor') == 1 then
             lspconfig.phpactor.setup({})
          end
+         if vim.fn.executable('efm-langserver') == 1 then
+            lspconfig.efm.setup({})
+         end
 
          vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
