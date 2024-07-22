@@ -59,6 +59,7 @@ in
 
     pkgs.nodePackages.pnpm
     pkgs.nodePackages.typescript-language-server
+    pkgs.nodePackages.yarn
   ] ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
