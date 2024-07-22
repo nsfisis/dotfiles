@@ -81,9 +81,9 @@ execute "unzip skk" do
   not_if "test -f #{home}/.config/skk/jisyo.L"
 end
 
-link "#{home}/.config/alacritty/alacritty.local.yml" do
+link "#{home}/.config/alacritty/alacritty.local.toml" do
   is_macos = node[:targetArch].include?("darwin")
-  to "#{home}/.config/alacritty/alacritty.#{is_macos ? "macos" : "linux"}.yml"
+  to "#{home}/.config/alacritty/alacritty.#{is_macos ? "macos" : "linux"}.toml"
 end
 
 # Rust

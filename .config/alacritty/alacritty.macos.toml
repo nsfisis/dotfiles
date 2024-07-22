@@ -1,0 +1,39 @@
+[hints]
+alphabet = "asdfghjkl;"
+
+[[hints.enabled]]
+command = "open"
+post_processing = true
+# The last 5 characters that are excluded from URL letters are my 'listchars' settings in Vim/Neovim.
+regex = "(https:|http:|file:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\u00AC\u25B8\u00B7\u00BB\u00AB]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Command"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Key2"
+mods = "Command"
+
+# Workaround:
+#   Alacritty v0.11.0-rc1 or later emits Yen symbol when you type Yen key
+#   even if you set "backslash" to "a character by Yen key".
+#   See also: https://github.com/rust-windowing/winit/issues/2577
+# [[keyboard.bindings]]
+# chars = "\\"
+# key = "Yen"

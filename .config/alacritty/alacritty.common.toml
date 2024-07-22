@@ -1,0 +1,80 @@
+[colors]
+transparent_background_colors = true
+
+[colors.bright]
+black = "#002833"
+blue = "#839495"
+cyan = "#93a0a1"
+green = "#586d74"
+magenta = "#6c6ec6"
+red = "#cb3a16"
+white = "#fdf6e3"
+yellow = "#657b82"
+
+[colors.cursor]
+cursor = "#b1b1c8"
+text = "#100f1f"
+
+[colors.normal]
+black = "#003440"
+blue = "#268ad2"
+cyan = "#2aa197"
+green = "#859901"
+magenta = "#d33582"
+red = "#dc321e"
+white = "#eee8d5"
+yellow = "#b58900"
+
+[colors.primary]
+background = "#101020"
+foreground = "#b1b1c8"
+
+[colors.selection]
+background = "#1f1f2f"
+text = "CellForeground"
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "Source Han Code JP"
+
+[scrolling]
+history = 0
+
+[shell]
+program = "/bin/bash"
+args = ["-c", '''
+export PATH="$PATH:$HOME/.nix-profile/bin";
+if command -v tmux >/dev/null; then
+  if command -v fzf >/dev/null; then
+    session="$(
+      { tmux ls -F "#{session_name}" 2>/dev/null; echo "New (n)"; } \
+      | fzf \
+          --no-sort \
+          --reverse \
+          --no-info \
+          --prompt="Select tmux session: " \
+          --select-1 \
+          --bind='n:last+accept' \
+          --no-mouse
+    )";
+    if [ "$session" = "New (n)" ]; then
+      tmux new -s "$(date '+%Y-%m-%d %H%M%S')";
+    else
+      tmux attach -t "$session";
+    fi
+  else
+    tmux new -s "$(date '+%Y-%m-%d %H%M%S')";
+  fi
+else
+  zsh;
+fi
+''']
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 4
+y = 3
