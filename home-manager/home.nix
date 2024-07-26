@@ -34,7 +34,7 @@ in
     pkgs.jnv
     pkgs.jq
     pkgs.neovim
-    pkgs.nodejs_18
+    pkgs.nodejs_20
     pkgs.pandoc
     pkgs.phpactor
     pkgs.pwgen
