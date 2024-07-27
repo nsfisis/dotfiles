@@ -155,6 +155,21 @@ K.set('n', 'gff', 'gF')
 
 
 
+-- Completions {{{1
+
+-- '/' works as '<C-x><C-f>' does during file completion.
+-- https://zenn.dev/kawarimidoll/articles/54e38aa7f55aff
+K.set('i', '/', function()
+   local complete_info = vim.fn.complete_info({'mode', 'selected'})
+   if complete_info.mode == 'files' and 0 <= complete_info.selected then
+      return '<C-x><C-f>'
+   else
+      return '/'
+   end
+end, { expr = true })
+
+
+
 -- Tabpages and windows. {{{1
 
 local function move_current_window_to_tabpage()
