@@ -41,5 +41,11 @@ $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 # Update
 
 * `nix flake update`
-* `nix store gc`
 * `home-manager switch --flake ".#<host>"`
+
+# Garbage Collection
+
+* `home-manager generations`
+* `home-manager expire-generations TIMESTAMP`
+* `nix profile wipe-history`
+* `nix store gc`
