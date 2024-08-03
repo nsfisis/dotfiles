@@ -30,6 +30,9 @@ if vim.loop.fs_stat(lazy_path) then
             lazy = " ",
          },
       },
+      change_detection = {
+         enabled = false,
+      },
    })
 else
    vim.api.nvim_create_user_command(
