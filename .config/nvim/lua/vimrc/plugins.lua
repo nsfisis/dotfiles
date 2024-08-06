@@ -406,8 +406,7 @@ return {
    },
    -- Neovim clone of EasyMotion
    {
-      'phaazon/hop.nvim',
-      branch = 'v2', -- Hop.nvim's README recommends this.
+      'smoka7/hop.nvim',
       lazy = true,
       keys = {
          {'f', '<Plug>(hop-f)', mode = {'n', 'o', 'x'}},
@@ -425,52 +424,26 @@ return {
          {'sk', '<Plug>(hop-k)', mode = {'n', 'o', 'x'}},
       },
       config = function()
-         require('hop').setup {
+         local hop = require('hop')
+         hop.setup {
             keys = 'asdfghweryuiocvbnmjkl;',
          }
-
-         -- Emulate `g:EasyMotion_startofline = 0` in hop.nvim.
-         local function hop_jk(opts)
-            local hop = require('hop')
-            local jump_target = require('hop.jump_target')
-
-            local column = vim.fn.col('.')
-            local match
-            if column == 1 then
-               match = function(_)
-                  return 0, 1, false
-               end
-            else
-               local pat = vim.regex('\\%' .. column .. 'c')
-               match = function(s)
-                  return pat:match_str(s)
-               end
-            end
-            setmetatable(opts, { __index = hop.opts })
-            hop.hint_with(
-               jump_target.jump_targets_by_scanning_lines({
-                  oneshot = true,
-                  match = match,
-               }),
-               opts
-            )
-         end
-
-         local hop = require('hop')
          local HintDirection = require('hop.hint').HintDirection
          local AFTER_CURSOR = HintDirection.AFTER_CURSOR
          local BEFORE_CURSOR = HintDirection.BEFORE_CURSOR
 
-         vim.keymap.set('', '<Plug>(hop-f)', function() hop.hint_char1({ direction = AFTER_CURSOR, current_line_only = true }) end, { silent = true })
+         vim.keymap.set('', '<Plug>(hop-f)', function() hop.hint_char1({ direction = AFTER_CURSOR,  current_line_only = true }) end, { silent = true })
          vim.keymap.set('', '<Plug>(hop-F)', function() hop.hint_char1({ direction = BEFORE_CURSOR, current_line_only = true }) end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-t)', function() hop.hint_char1({ direction = AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-T)', function() hop.hint_char1({ direction = BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }) end, { silent = true })
+         vim.keymap.set('', '<Plug>(hop-t)', function() hop.hint_char1({ direction = AFTER_CURSOR,  current_line_only = true, hint_offset = -1 }) end, { silent = true })
+         vim.keymap.set('', '<Plug>(hop-T)', function() hop.hint_char1({ direction = BEFORE_CURSOR, current_line_only = true, hint_offset =  1 }) end, { silent = true })
 
          vim.keymap.set('', '<Plug>(hop-s2)', function() hop.hint_char2() end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-n)',  function() hop.hint_patterns({ direction = AFTER_CURSOR }, vim.fn.getreg('/')) end, { silent = true })
+
+         vim.keymap.set('', '<Plug>(hop-n)',  function() hop.hint_patterns({ direction = AFTER_CURSOR  }, vim.fn.getreg('/')) end, { silent = true })
          vim.keymap.set('', '<Plug>(hop-N)',  function() hop.hint_patterns({ direction = BEFORE_CURSOR }, vim.fn.getreg('/')) end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-j)',  function() hop_jk({ direction = AFTER_CURSOR }) end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-k)',  function() hop_jk({ direction = BEFORE_CURSOR }) end, { silent = true })
+
+         vim.keymap.set('', '<Plug>(hop-j)',  function() hop.hint_vertical({ direction = AFTER_CURSOR  }) end, { silent = true })
+         vim.keymap.set('', '<Plug>(hop-k)',  function() hop.hint_vertical({ direction = BEFORE_CURSOR }) end, { silent = true })
       end,
    },
    -- Extend J.
