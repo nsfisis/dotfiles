@@ -419,7 +419,6 @@ return {
          --  * sr
          {'ss', '<Plug>(hop-s2)', mode = {'n', 'o', 'x'}},
          {'sn', '<Plug>(hop-n)', mode = {'n', 'o', 'x'}},
-         {'sN', '<Plug>(hop-N)', mode = {'n', 'o', 'x'}},
          {'sj', '<Plug>(hop-j)', mode = {'n', 'o', 'x'}},
          {'sk', '<Plug>(hop-k)', mode = {'n', 'o', 'x'}},
       },
@@ -439,8 +438,7 @@ return {
 
          vim.keymap.set('', '<Plug>(hop-s2)', function() hop.hint_char2() end, { silent = true })
 
-         vim.keymap.set('', '<Plug>(hop-n)',  function() hop.hint_patterns({ direction = AFTER_CURSOR  }, vim.fn.getreg('/')) end, { silent = true })
-         vim.keymap.set('', '<Plug>(hop-N)',  function() hop.hint_patterns({ direction = BEFORE_CURSOR }, vim.fn.getreg('/')) end, { silent = true })
+         vim.keymap.set('', '<Plug>(hop-n)',  function() hop.hint_patterns({}, vim.fn.getreg('/')) end, { silent = true })
 
          vim.keymap.set('', '<Plug>(hop-j)',  function() hop.hint_vertical({ direction = AFTER_CURSOR  }) end, { silent = true })
          vim.keymap.set('', '<Plug>(hop-k)',  function() hop.hint_vertical({ direction = BEFORE_CURSOR }) end, { silent = true })
