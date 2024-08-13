@@ -63,7 +63,6 @@ $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 
 # Garbage Collection
 
-1. `home-manager generations`
-2. `home-manager expire-generations TIMESTAMP`
+2. `home-manager expire-generations '-1 month'`
 3. `nix profile wipe-history`
 4. `nix store gc`
