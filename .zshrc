@@ -24,14 +24,8 @@ export BAT_THEME=base16
 ########################
 
 
-# If a command named "xxx" does not exist, try to execute "cd xxx".
-setopt AUTO_CD
-
 # Do "pushd ." after "cd".
 setopt AUTO_PUSHD
-
-# If "directory" is not found, regard "directory" as "$directory". (for named directory, e.g, $HOME)
-setopt CDABLE_VARS
 
 # If "/foo/bar" is a link to "/hoge/piyo", "/foo/bar/.." means "/foo", not "/hoge".
 setopt NO_CHASE_LINKS
@@ -42,9 +36,6 @@ setopt PUSHD_IGNORE_DUPS
 # Make "pushd" and 'popd' not to print the directory stack.
 setopt PUSHD_SILENT
 
-# Regard "pushd" without any arguments as "pushd $HOME" ("cd" compatible).
-setopt PUSHD_TO_HOME
-
 
 
 ##############
@@ -53,9 +44,6 @@ setopt PUSHD_TO_HOME
 
 # The completion has finished, the cursor is moved to the end of the word.
 setopt ALWAYS_TO_END
-
-# Expand "~xxx" to "$xxx". E.g., "cd ~HOME" is expanded to "cd $HOME".
-setopt AUTO_NAME_DIRS
 
 # Do not expand glob patterns, instead, complete matched words.
 setopt GLOB_COMPLETE
