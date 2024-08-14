@@ -141,6 +141,10 @@ in
     initExtra = builtins.readFile ../.zshrc;
   };
 
+  programs.fish = {
+    enable = true;
+  };
+
   programs.starship = {
     enable = true;
 
