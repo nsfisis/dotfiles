@@ -624,6 +624,11 @@ return {
             lspconfig.phpactor.setup({})
          end
          if vim.fn.executable('efm-langserver') == 1 then
+            local biome_conf = {
+               rootMarkers = {"biome.json"},
+               formatCommand = 'node_modules/.bin/biome format --stdin-file-path "${INPUT}"',
+               formatStdin = true,
+            }
             lspconfig.efm.setup({
                init_options = { documentFormatting = true },
                settings = {
@@ -635,6 +640,12 @@ return {
                            formatStdin = true,
                         },
                      },
+                     javascript = {biome_conf},
+                     javascriptreact = {biome_conf},
+                     ["javascript.jsx"] = {biome_conf},
+                     typescript = {biome_conf},
+                     typescriptreact = {biome_conf},
+                     ["typescript.jsx"] = {biome_conf},
                   },
                }
             })
@@ -647,7 +658,10 @@ return {
 
                local opts = { buffer = e.buf }
                vim.keymap.set('n', '<space>f', function()
-                  vim.lsp.buf.format({ async = true })
+                  vim.lsp.buf.format({
+                     async = true,
+                     filter = function(client) return client.name ~= "tsserver" end,
+                  })
                end, opts)
 
                vim.api.nvim_create_autocmd('BufWritePre', {
@@ -656,6 +670,7 @@ return {
                      vim.lsp.buf.format({
                         async = false,
                         timeout_ms = 5000,
+                        filter = function(client) return client.name ~= "tsserver" end,
                      })
                   end
                })
