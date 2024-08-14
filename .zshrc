@@ -333,8 +333,6 @@ function mkcd() {
 
 
 function pwgen() {
-    command pwgen -N 1 128
-    command pwgen -N 1 96
     command pwgen -N 1 64
     command pwgen -N 1 48
     command pwgen -N 1 32
