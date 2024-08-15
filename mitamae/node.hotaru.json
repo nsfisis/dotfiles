@@ -12,8 +12,7 @@
           "copyCommand": null
         },
         "terminalApp": "windowsTerminal"
-      },
-      "useNixManagedZsh": true
+      }
     }
   }
 }
