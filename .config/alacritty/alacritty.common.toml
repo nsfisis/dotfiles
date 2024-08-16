@@ -36,7 +36,7 @@ if command -v tmux >/dev/null; then
     tmux new -s "$(date '+%Y-%m-%d %H%M%S')";
   fi
 else
-  zsh;
+  fish;
 fi
 ''']
 

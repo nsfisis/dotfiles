@@ -131,16 +131,6 @@ in
       commonConfig + clipboardConfig + terminalConfig;
   };
 
-  programs.zsh = {
-    enable = true;
-
-    envExtra = ''
-      export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-    '';
-
-    initExtra = builtins.readFile ../.zshrc;
-  };
-
   programs.fish = {
     enable = true;
 
