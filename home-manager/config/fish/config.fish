@@ -22,10 +22,10 @@ alias grep 'rg'
 alias mkdir 'mkdir -p'
 alias mv 'mv -i'
 alias rm 'rm -i'
-alias ssh 'TERM=xterm-256color ssh'
+alias ssh 'TERM=xterm-256color command ssh'
 alias tree 'tree -N --gitignore'
 alias view 'nvim -R'
-alias vim nvim
+alias vim 'nvim'
 alias vimdiff 'nvim -d'
 
 if [ -n $on_darwin ]
@@ -93,17 +93,17 @@ if [ -n $has_nvim ]
     end
     function ee
         if [ (count $argv) -eq 0 ]
-            fzf --reverse --bind 'enter:execute(nvim {})'
+            fzf --reverse --bind 'enter:become(nvim {})'
         else
-            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:execute(nvim {})'
+            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:become(nvim {})'
         end
     end
 else
     function ee
         if [ (count $argv) -eq 0 ]
-            fzf --reverse --bind 'enter:execute(vim {})'
+            fzf --reverse --bind 'enter:become(vim {})'
         else
-            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:execute(vim {})'
+            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:become(vim {})'
         end
     end
 end

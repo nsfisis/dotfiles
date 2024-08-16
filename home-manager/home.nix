@@ -80,7 +80,7 @@ in
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
 
     # Local
-    LANG = "en_US.UTF-8";
+    LANG = "en_US.utf-8";
     LC_ALL = "";
     # Locale: Less
     LESSCHARSET = "utf-8";
