@@ -69,8 +69,6 @@ link "#{home}/bin/tmux-pane-idx" do
   to "#{home}/dotfiles/bin/tmux-pane-idx"
 end
 
-directory "#{home}/.local/state/zsh"
-
 # SKK
 directory "#{home}/.config/skk"
 http_request "#{home}/.config/skk/SKK-JISYO.L.unannotated.gz" do

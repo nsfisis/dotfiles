@@ -130,7 +130,7 @@ set wildignore+=*.o,*.obj,*.lib
 set wildignorecase
 set wildmenu
 
-set shell=zsh
+set shell=fish
 set keywordprg=
 
 set fileencodings=utf-8,cp932,euc-jp

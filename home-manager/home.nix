@@ -5,7 +5,6 @@ let
   clipboardCopyCommand = specialArgs.env.gui.clipboard.copyCommand;
   requiresWlClipboard = clipboardCopyCommand == "wl-copy";
   terminalApp = specialArgs.env.gui.terminalApp;
-  useNixManagedZsh = specialArgs.env.useNixManagedZsh;
 in
 {
   home.username = username;
@@ -85,6 +84,13 @@ in
     LC_ALL = "";
     # Locale: Less
     LESSCHARSET = "utf-8";
+
+    # Editor
+    VISUAL = "nvim";
+    EDITOR = "nvim";
+
+    # Bat
+    BAT_THEME = "base16";
   };
 
   programs.direnv = {
@@ -121,28 +127,15 @@ in
                            ''
                          else
                            "";
-        shellConfig = if useNixManagedZsh then
-                        ''
-                          set-option -g default-shell ${homeDirectory}/.nix-profile/bin/zsh
-                        ''
-                      else
-                        "";
       in
-      commonConfig + clipboardConfig + terminalConfig + shellConfig;
-  };
-
-  programs.zsh = {
-    enable = true;
-
-    envExtra = ''
-      export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-    '';
-
-    initExtra = builtins.readFile ../.zshrc;
+      commonConfig + clipboardConfig + terminalConfig;
   };
 
   programs.fish = {
     enable = true;
+
+    interactiveShellInit = builtins.readFile ./config/fish/config.fish;
+    shellInitLast = builtins.readFile ./config/fish/path.fish;
   };
 
   programs.starship = {

@@ -142,7 +142,7 @@ O.wildignorecase = true
 
 -- Executing external commands {{{1
 
-O.shell = 'zsh'
+O.shell = 'fish'
 O.keywordprg = ''
 
 
