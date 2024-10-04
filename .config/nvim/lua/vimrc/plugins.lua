@@ -599,7 +599,7 @@ return {
          local lspconfig = require('lspconfig')
 
          -- TODO
-         -- Enable denols xor tsserver.
+         -- Enable denols xor ts_ls.
          local is_deno_repo
          if vim.fn.executable('deno') == 1 then
             is_deno_repo = vim.fs.root(0, {"deno.json", "deno.jsonc"}) ~= nil
@@ -609,7 +609,7 @@ return {
 
          if vim.fn.executable('typescript-language-server') == 1 then
             if not is_deno_repo then
-               lspconfig.tsserver.setup({})
+               lspconfig.ts_ls.setup({})
             end
          end
          if vim.fn.executable('deno') == 1 then
@@ -660,7 +660,7 @@ return {
                vim.keymap.set('n', '<space>f', function()
                   vim.lsp.buf.format({
                      async = true,
-                     filter = function(client) return client.name ~= "tsserver" end,
+                     filter = function(client) return client.name ~= "ts_ls" end,
                   })
                end, opts)
 
@@ -670,7 +670,7 @@ return {
                      vim.lsp.buf.format({
                         async = false,
                         timeout_ms = 5000,
-                        filter = function(client) return client.name ~= "tsserver" end,
+                        filter = function(client) return client.name ~= "ts_ls" end,
                      })
                   end
                })
