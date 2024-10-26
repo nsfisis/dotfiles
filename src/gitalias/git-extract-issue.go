@@ -23,7 +23,7 @@ func main() {
 // * feature/prefix-123        => prefix-123
 // * feature/prefix-123-suffix => prefix-123
 func extractIssueNumberFromBranchName(branchName string) string {
-	pattern := regexp.MustCompile(`\A(?:\w+/)?(\w+-)?(\d+)(?:-\w+)?\z`)
+	pattern := regexp.MustCompile(`\A(?:\w+/)?(\w+-)?(\d+)(?:-\w+)*\z`)
 	matches := pattern.FindSubmatch([]byte(branchName))
 	if len(matches) != 3 {
 		return ""
