@@ -1,0 +1,18 @@
+{
+  "name": "akashi",
+  "profile": "private",
+  "targetArch": "x86_64-linux",
+  "flake": {
+    "system": "x86_64-linux",
+    "env": {
+      "username": "ken",
+      "homeDirectory": "/home/ken",
+      "gui": {
+        "clipboard": {
+          "copyCommand": "wl-copy"
+        },
+        "terminalApp": "alacritty"
+      }
+    }
+  }
+}

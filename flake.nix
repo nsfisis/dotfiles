@@ -46,6 +46,7 @@
       readJSON = p: builtins.fromJSON (builtins.readFile p);
       mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
     in {
+      akashi = mkHomeConfigurationFromJSON ./mitamae/node.akashi.json;
       hotaru = mkHomeConfigurationFromJSON ./mitamae/node.hotaru.json;
       pc168 = mkHomeConfigurationFromJSON ./mitamae/node.pc168.json;
     };
