@@ -10,7 +10,7 @@ family = "Source Han Code JP"
 [scrolling]
 history = 0
 
-[shell]
+[terminal.shell]
 program = "/bin/bash"
 args = ["-c", '''
 export PATH="$PATH:$HOME/.nix-profile/bin";
@@ -46,3 +46,5 @@ opacity = 0.9
 [window.padding]
 x = 4
 y = 3
+
+[terminal]
