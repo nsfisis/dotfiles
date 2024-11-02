@@ -27,6 +27,7 @@ in
     pkgs.fzf
     pkgs.gcc
     pkgs.git
+    pkgs.gnumake
     pkgs.go
     pkgs.gopls
     pkgs.hyperfine
