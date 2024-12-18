@@ -102,6 +102,7 @@
     ssa = stash apply
     ssd = stash drop
     ssp = stash pop
+    tags = tag
     last = log --pretty=fuller -1
     l = "!__fn() { \
         local last_merge_commit=\"$(git last-merge-commit)\"; \
