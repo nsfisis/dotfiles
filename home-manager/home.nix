@@ -48,7 +48,7 @@ in
     pkgs.vim
     pkgs.zig_0_13
 
-    (pkgs.php83.buildEnv {
+    (pkgs.php84.buildEnv {
       extensions = ({ enabled, all }: enabled ++ (with all; [
         ffi
       ]));
