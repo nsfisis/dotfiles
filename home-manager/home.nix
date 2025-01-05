@@ -40,7 +40,7 @@ in
     pkgs.pwgen
     pkgs.python314
     pkgs.ripgrep
-    pkgs.ruby_3_2
+    pkgs.ruby_3_4
     pkgs.rustup
     pkgs.sqlite
     pkgs.tokei
