@@ -38,7 +38,7 @@ in
     pkgs.pandoc
     pkgs.phpactor
     pkgs.pwgen
-    pkgs.python311
+    pkgs.python314
     pkgs.ripgrep
     pkgs.ruby_3_2
     pkgs.rustup
