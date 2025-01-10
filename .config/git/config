@@ -93,10 +93,10 @@
     g = grep
     gf = grep --name-only
     s = status --short
-    tmp = commit -a -m "TMP"
-    tmps = stash save "TMP"
-    ctmp = commit -m "TMP"
-    sst = stash save "TMP"
+    wip = commit -a -m "wip"
+    cwip = commit -m "wip"
+    swip = stash save "wip"
+    sswip = swip
     ss = stash save
     ssl = stash list
     ssa = stash apply
