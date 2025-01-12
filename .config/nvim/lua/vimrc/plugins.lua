@@ -685,6 +685,7 @@ return {
       init = function()
          vim.g.copilot_filetypes = {
             markdown = false,
+            qfreplace = false,
             text = false,
          }
       end,
