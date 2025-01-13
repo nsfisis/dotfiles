@@ -56,6 +56,7 @@ in
         ffi.enable=true
       '';
     })
+    pkgs.php84Packages.composer
 
     pkgs.nodePackages.pnpm
     pkgs.nodePackages.typescript-language-server
