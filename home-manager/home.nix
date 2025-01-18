@@ -81,10 +81,10 @@ in
     # XDG Base Directories: SQLite
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
 
-    # Local
+    # Locale settings
     LANG = "en_US.utf-8";
     LC_ALL = "";
-    # Locale: Less
+    # Locale: less
     LESSCHARSET = "utf-8";
 
     # Editor
