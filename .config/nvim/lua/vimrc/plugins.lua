@@ -5,71 +5,67 @@ return {
       'nvim-lua/plenary.nvim',
    },
    -- skkeleton depends on it.
-   -- TODO: disable it temporarily.
-   -- https://github.com/vim-denops/denops.vim/issues/433
-   -- {
-   --    'vim-denops/denops.vim',
-   -- },
+   {
+      'vim-denops/denops.vim',
+   },
    -- Text editing {{{1
    -- IME {{{2
    -- SKK (Simple Kana to Kanji conversion program) for Vim.
-   -- TODO: disable it temporarily.
-   -- https://github.com/vim-denops/denops.vim/issues/433
-   -- {
-   --    'vim-skk/skkeleton',
-   --    config = function()
-   --       local vimrc = require('vimrc')
-   --       local my_env = require('vimrc.my_env')
-   --
-   --       vimrc.autocmd('User', {
-   --          pattern = 'skkeleton-initialize-pre',
-   --          callback = function()
-   --             vim.fn['skkeleton#config']({
-   --                -- Change default markers because they are EAW (East Asian Width) characters.
-   --                markerHenkan = '[!]',
-   --                markerHenkanSelect = '[#]',
-   --                eggLikeNewline = true,
-   --                userDictionary = my_env.skk_dir .. '/jisyo',
-   --                globalDictionaries = {my_env.skk_dir .. '/jisyo.L'},
-   --             })
-   --             vim.fn['skkeleton#register_kanatable']('rom', {
-   --                   ['z '] = {'　'},
-   --                   ['0.'] = {'0.'},
-   --                   ['1.'] = {'1.'},
-   --                   ['2.'] = {'2.'},
-   --                   ['3.'] = {'3.'},
-   --                   ['4.'] = {'4.'},
-   --                   ['5.'] = {'5.'},
-   --                   ['6.'] = {'6.'},
-   --                   ['7.'] = {'7.'},
-   --                   ['8.'] = {'8.'},
-   --                   ['9.'] = {'9.'},
-   --                   [':'] = {':'},
-   --                   ['z:'] = {'：'},
-   --                   ['jk'] = 'escape',
-   --             })
-   --          end,
-   --       })
-   --
-   --       vimrc.autocmd('User', {
-   --          pattern = 'skkeleton-initialize-post',
-   --          callback = function()
-   --             vim.fn['skkeleton#register_keymap']('input', '<C-q>', nil)
-   --             vim.fn['skkeleton#register_keymap']('input', '<C-m>', 'newline')
-   --             vim.fn['skkeleton#register_keymap']('henkan', '<C-m>', 'newline')
-   --             -- Custom highlight for henkan markers.
-   --             vim.cmd([=[syntax match skkMarker '\[[!#]\]']=])
-   --             vim.cmd([=[hi link skkMarker Special]=])
-   --          end,
-   --       })
-   --
-   --       vim.cmd([[
-   --       imap <C-j> <Plug>(skkeleton-enable)
-   --       cmap <C-j> <Plug>(skkeleton-enable)
-   --       tmap <C-j> <Plug>(skkeleton-enable)
-   --       ]])
-   --    end,
-   -- },
+   {
+      'vim-skk/skkeleton',
+      config = function()
+         local vimrc = require('vimrc')
+         local my_env = require('vimrc.my_env')
+
+         vimrc.autocmd('User', {
+            pattern = 'skkeleton-initialize-pre',
+            callback = function()
+               vim.fn['skkeleton#config']({
+                  -- Change default markers because they are EAW (East Asian Width) characters.
+                  markerHenkan = '[!]',
+                  markerHenkanSelect = '[#]',
+                  eggLikeNewline = true,
+                  userDictionary = my_env.skk_dir .. '/jisyo',
+                  globalDictionaries = {my_env.skk_dir .. '/jisyo.L'},
+               })
+               vim.fn['skkeleton#register_kanatable']('rom', {
+                     ['z '] = {'　'},
+                     ['0.'] = {'0.'},
+                     ['1.'] = {'1.'},
+                     ['2.'] = {'2.'},
+                     ['3.'] = {'3.'},
+                     ['4.'] = {'4.'},
+                     ['5.'] = {'5.'},
+                     ['6.'] = {'6.'},
+                     ['7.'] = {'7.'},
+                     ['8.'] = {'8.'},
+                     ['9.'] = {'9.'},
+                     [':'] = {':'},
+                     ['z:'] = {'：'},
+                     ['jk'] = 'escape',
+               })
+            end,
+         })
+
+         vimrc.autocmd('User', {
+            pattern = 'skkeleton-initialize-post',
+            callback = function()
+               vim.fn['skkeleton#register_keymap']('input', '<C-q>', nil)
+               vim.fn['skkeleton#register_keymap']('input', '<C-m>', 'newline')
+               vim.fn['skkeleton#register_keymap']('henkan', '<C-m>', 'newline')
+               -- Custom highlight for henkan markers.
+               vim.cmd([=[syntax match skkMarker '\[[!#]\]']=])
+               vim.cmd([=[hi link skkMarker Special]=])
+            end,
+         })
+
+         vim.cmd([[
+         imap <C-j> <Plug>(skkeleton-enable)
+         cmap <C-j> <Plug>(skkeleton-enable)
+         tmap <C-j> <Plug>(skkeleton-enable)
+         ]])
+      end,
+   },
    -- Operators {{{2
    -- Support for user-defined operators.
    {
