@@ -20,42 +20,48 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    home-manager,
-    ...
-  }:
-  let
-    readJSON = p: builtins.fromJSON (builtins.readFile p);
-    machines = [
-      (readJSON ./mitamae/node.akashi.json)
-      (readJSON ./mitamae/node.hotaru.json)
-      (readJSON ./mitamae/node.pc168.json)
-    ];
-    mkHomeConfiguration = {
-      system,
-      env,
+  outputs =
+    {
+      nixpkgs,
+      flake-utils,
+      home-manager,
       ...
-    }: home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      extraSpecialArgs = { inherit env; };
-      modules = [
-        ./home-manager/home.nix
+    }:
+    let
+      readJSON = p: builtins.fromJSON (builtins.readFile p);
+      machines = [
+        (readJSON ./mitamae/node.akashi.json)
+        (readJSON ./mitamae/node.hotaru.json)
+        (readJSON ./mitamae/node.pc168.json)
       ];
+      mkHomeConfiguration =
+        {
+          system,
+          env,
+          ...
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = { inherit env; };
+          modules = [
+            ./home-manager/home.nix
+          ];
+        };
+    in
+    flake-utils.lib.eachDefaultSystem (system: {
+      formatter = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+    })
+    // {
+      homeConfigurations = (
+        builtins.listToAttrs (
+          builtins.map (machine: {
+            name = machine.name;
+            value = mkHomeConfiguration machine.flake;
+          }) machines
+        )
+      );
     };
-  in {
-    homeConfigurations = (
-      builtins.listToAttrs (
-        builtins.map (machine: {
-          name = machine.name;
-          value = mkHomeConfiguration machine.flake;
-        })
-        machines
-      )
-    );
-  };
 }

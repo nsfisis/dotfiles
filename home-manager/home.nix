@@ -49,9 +49,13 @@ in
     pkgs.zig_0_13
 
     (pkgs.php84.buildEnv {
-      extensions = ({ enabled, all }: enabled ++ (with all; [
-        ffi
-      ]));
+      extensions = (
+        { enabled, all }:
+        enabled
+        ++ (with all; [
+          ffi
+        ])
+      );
       extraConfig = ''
         ffi.enable=true
       '';
@@ -117,18 +121,20 @@ in
     extraConfig =
       let
         commonConfig = builtins.readFile ./config/tmux/tmux.conf;
-        clipboardConfig = if clipboardCopyCommand != null then
-                            ''
-                              bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboardCopyCommand}"
-                            ''
-                          else
-                            "";
-        terminalConfig = if terminalApp == "alacritty" then
-                           ''
-                             set-option -ga terminal-overrides ',alacritty:RGB'
-                           ''
-                         else
-                           "";
+        clipboardConfig =
+          if clipboardCopyCommand != null then
+            ''
+              bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboardCopyCommand}"
+            ''
+          else
+            "";
+        terminalConfig =
+          if terminalApp == "alacritty" then
+            ''
+              set-option -ga terminal-overrides ',alacritty:RGB'
+            ''
+          else
+            "";
       in
       commonConfig + clipboardConfig + terminalConfig;
   };
