@@ -27,19 +27,11 @@
       home-manager,
       ...
     }:
-    let
-      eachDefaultSystem =
-        f:
-        flake-utils.lib.eachDefaultSystem (
-          system:
-          f {
-            inherit system;
-            pkgs = import nixpkgs { inherit system; };
-          }
-        );
-    in
-    eachDefaultSystem (
-      { system, pkgs }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
       {
         formatter = pkgs.nixfmt-rfc-style;
       }
