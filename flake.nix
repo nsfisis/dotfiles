@@ -22,33 +22,37 @@
     nixpkgs,
     home-manager,
     ...
-  } @ inputs:
+  }:
   let
+    readJSON = p: builtins.fromJSON (builtins.readFile p);
+    machines = [
+      (readJSON ./mitamae/node.akashi.json)
+      (readJSON ./mitamae/node.hotaru.json)
+      (readJSON ./mitamae/node.pc168.json)
+    ];
     mkHomeConfiguration = {
       system,
       env,
       ...
     }: home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
-        system = system;
+        inherit system;
         config.allowUnfree = true;
       };
-      extraSpecialArgs = {
-        inherit inputs;
-        inherit env;
-      };
+      extraSpecialArgs = { inherit env; };
       modules = [
         ./home-manager/home.nix
       ];
     };
   in {
-    homeConfigurations = let
-      readJSON = p: builtins.fromJSON (builtins.readFile p);
-      mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
-    in {
-      akashi = mkHomeConfigurationFromJSON ./mitamae/node.akashi.json;
-      hotaru = mkHomeConfigurationFromJSON ./mitamae/node.hotaru.json;
-      pc168 = mkHomeConfigurationFromJSON ./mitamae/node.pc168.json;
-    };
+    homeConfigurations = (
+      builtins.listToAttrs (
+        builtins.map (machine: {
+          name = machine.name;
+          value = mkHomeConfiguration machine.flake;
+        })
+        machines
+      )
+    );
   };
 }
