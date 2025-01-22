@@ -33,6 +33,7 @@ in
     pkgs.hyperfine
     pkgs.jnv
     pkgs.jq
+    pkgs.mmv-go
     pkgs.neovim
     pkgs.nodejs_20
     pkgs.pandoc
