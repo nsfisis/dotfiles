@@ -28,40 +28,46 @@
       ...
     }:
     let
-      readJSON = p: builtins.fromJSON (builtins.readFile p);
-      machines = [
-        (readJSON ./mitamae/node.akashi.json)
-        (readJSON ./mitamae/node.hotaru.json)
-        (readJSON ./mitamae/node.pc168.json)
-      ];
-      mkHomeConfiguration =
-        {
-          system,
-          env,
-          ...
-        }:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
+      eachDefaultSystem =
+        f:
+        flake-utils.lib.eachDefaultSystem (
+          system:
+          f {
             inherit system;
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = { inherit env; };
-          modules = [
-            ./home-manager/home.nix
-          ];
-        };
+            pkgs = import nixpkgs { inherit system; };
+          }
+        );
     in
-    flake-utils.lib.eachDefaultSystem (system: {
-      formatter = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
-    })
+    eachDefaultSystem (
+      { system, pkgs }:
+      {
+        formatter = pkgs.nixfmt-rfc-style;
+      }
+    )
     // {
       homeConfigurations = (
-        builtins.listToAttrs (
-          builtins.map (machine: {
-            name = machine.name;
-            value = mkHomeConfiguration machine.flake;
-          }) machines
-        )
+        let
+          readJSON = p: builtins.fromJSON (builtins.readFile p);
+          mkHomeConfiguration =
+            {
+              system,
+              env,
+              ...
+            }:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs { inherit system; };
+              extraSpecialArgs = { inherit env; };
+              modules = [
+                ./home-manager/home.nix
+              ];
+            };
+          mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
+        in
+        {
+          akashi = mkHomeConfigurationFromJSON ./mitamae/node.akashi.json;
+          hotaru = mkHomeConfigurationFromJSON ./mitamae/node.hotaru.json;
+          pc168 = mkHomeConfigurationFromJSON ./mitamae/node.pc168.json;
+        }
       );
     };
 }
