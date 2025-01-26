@@ -63,6 +63,8 @@ $ tic -xe tmux-256color /var/tmp/tmux-256color.info
 
 # Garbage Collection
 
-2. `home-manager expire-generations '-1 month'`
-3. `nix profile wipe-history`
-4. `nix store gc`
+// 1. `home-manager remove-generations $({ home-manager generations | tail +4 && date -d '-1 month' '+%Y-%m-%d %H:%M : id DELETE ->'; } | sort -r | sed -n '/: id DELETE ->/,$p' | tail +2 | grep -o ': id [0-9]* ->' | awk '{ print $3; }')`
+
+1. `home-manager expire-generations '-1 month'`
+2. `nix profile wipe-history`
+3. `nix store gc`
