@@ -42,6 +42,7 @@ O.synmaxcol = 500
 O.hlsearch = true
 O.termguicolors = true
 O.colorcolumn = '+1'
+OPT.spelloptions:append('camel')
 
 
 -- Multiple windows {{{1

@@ -56,6 +56,9 @@ set synmaxcol=500
 set hlsearch
 set t_Co=256
 set colorcolumn=+1
+if has('patch-8.2.0953')
+    set spelloptions+=camel
+endif
 
 set laststatus=2
 set winminheight=0
