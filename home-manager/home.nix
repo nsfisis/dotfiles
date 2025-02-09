@@ -46,6 +46,7 @@ in
     pkgs.sqlite
     pkgs.tokei
     pkgs.tree
+    pkgs.universal-ctags
     pkgs.vim
     pkgs.zig_0_13
 
