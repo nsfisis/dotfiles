@@ -87,25 +87,18 @@ function pwgen --wraps pwgen
     end
 end
 
-if [ -n $has_nvim ]
-    if [ -n $has_fd ]
-        set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --exclude .git"
+if [ -n $has_fd ]
+    set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --exclude .git"
+end
+
+function ee
+    if [ (count $argv) -eq 0 ]
+        set selection (fzf --reverse)
+    else
+        set selection (find $argv[1] -type f -print0 | fzf --read0 --reverse)
     end
-    function ee
-        if [ (count $argv) -eq 0 ]
-            fzf --reverse --bind 'enter:become(nvim {})'
-        else
-            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:become(nvim {})'
-        end
-    end
-else
-    function ee
-        if [ (count $argv) -eq 0 ]
-            fzf --reverse --bind 'enter:become(vim {})'
-        else
-            find $argv[1] -type f -print0 | fzf --read0 --reverse --bind 'enter:become(vim {})'
-        end
-    end
+    commandline --replace "e $selection"
+    commandline --function execute
 end
 
 function terraform
