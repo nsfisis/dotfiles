@@ -31,6 +31,7 @@ in
     pkgs.go
     pkgs.gopls
     pkgs.hyperfine
+    pkgs.imagemagick
     pkgs.jnv
     pkgs.jq
     pkgs.mmv-go
