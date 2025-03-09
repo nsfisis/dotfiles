@@ -278,6 +278,11 @@ return {
       main = 'ibl',
       config = function()
          require('ibl').setup {
+            exclude = {
+               filetypes = {
+                  'markdown',
+               },
+            },
             scope = {
                enabled = false,
             },
@@ -378,6 +383,99 @@ return {
             command = 'EmmetInstall',
          })
       end,
+   },
+   -- Markdown
+   {
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = {
+         'nvim-treesitter/nvim-treesitter',
+      },
+      opts = {
+         heading = {
+            -- Example:
+            -- § 1.
+            -- § 1.1
+            -- § 1.1.1
+            -- § 1.2
+            -- § 2.
+            icons = function(ctx)
+               local section = ''
+               for l = 1, ctx.level do
+                  section = section .. ctx.sections[l] .. '.'
+               end
+               return '§ ' .. section .. ' '
+            end,
+            position = 'inline',
+            border = true,
+            border_virutal = true,
+         },
+         checkbox = {
+            unchecked = { icon = '✘ ' },
+            checked = { icon = '✔ ' },
+            custom = {
+               todo = { rendered = '◯ ' },
+            },
+         },
+         pipe_table = {
+            cell = 'trimmed',
+         },
+         callout = {
+            note      = { rendered = 'ⓘ Note' },
+            tip       = { rendered = 'ⓘ Tip' },
+            important = { rendered = 'ⓘ Important' },
+            warning   = { rendered = 'ⓘ Warning' },
+            caution   = { rendered = 'ⓘ Caution' },
+            abstract  = { rendered = 'ⓘ Abstract' },
+            summary   = { rendered = 'ⓘ Summary' },
+            tldr      = { rendered = 'ⓘ Tldr' },
+            info      = { rendered = 'ⓘ Info' },
+            todo      = { rendered = 'ⓘ Todo' },
+            hint      = { rendered = 'ⓘ Hint' },
+            success   = { rendered = 'ⓘ Success' },
+            check     = { rendered = 'ⓘ Check' },
+            done      = { rendered = 'ⓘ Done' },
+            question  = { rendered = 'ⓘ Question' },
+            help      = { rendered = 'ⓘ Help' },
+            faq       = { rendered = 'ⓘ Faq' },
+            attention = { rendered = 'ⓘ Attention' },
+            failure   = { rendered = 'ⓘ Failure' },
+            fail      = { rendered = 'ⓘ Fail' },
+            missing   = { rendered = 'ⓘ Missing' },
+            danger    = { rendered = 'ⓘ Danger' },
+            error     = { rendered = 'ⓘ Error' },
+            bug       = { rendered = 'ⓘ Bug' },
+            example   = { rendered = 'ⓘ Example' },
+            quote     = { rendered = 'ⓘ Quote' },
+            cite      = { rendered = 'ⓘ Cite' },
+         },
+         link = {
+            image = '',
+            email = '',
+            hyperlink = '',
+            custom = {
+               web           = { icon = '' },
+               discord       = { icon = '' },
+               github        = { icon = '' },
+               gitlab        = { icon = '' },
+               google        = { icon = '' },
+               neovim        = { icon = '' },
+               reddit        = { icon = '' },
+               stackoverflow = { icon = '' },
+               wikipedia     = { icon = '' },
+               youtube       = { icon = '' },
+            },
+         },
+         indent = {
+            enabled = true,
+            per_level = 1,
+            skip_level = 0,
+            skip_heading = true,
+            icon = '',
+         },
+         sign = {
+            enabled = false,
+         },
+      },
    },
    -- Rust
    {
