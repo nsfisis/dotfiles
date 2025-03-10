@@ -21,12 +21,12 @@ alias e 'nvim'
 alias grep 'rg'
 alias mkdir 'mkdir -p'
 alias mv 'mv -i'
-alias rm 'rm -i'
 alias ssh 'TERM=xterm-256color command ssh'
 alias tree 'tree -N --gitignore'
 alias view 'nvim -R'
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
+alias rm 'gomi'
 
 if [ -n $on_darwin ]
     alias tac 'tail -r'

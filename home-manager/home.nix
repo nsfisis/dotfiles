@@ -29,6 +29,7 @@ in
     pkgs.git
     pkgs.gnumake
     pkgs.go
+    pkgs.gomi
     pkgs.gopls
     pkgs.hyperfine
     pkgs.imagemagick
