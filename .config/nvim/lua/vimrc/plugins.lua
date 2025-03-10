@@ -401,7 +401,10 @@ return {
             icons = function(ctx)
                local section = ''
                for l = 1, ctx.level do
-                  section = section .. ctx.sections[l] .. '.'
+                  local section_number = ctx.sections[l]
+                  if section_number ~= 0 then
+                     section = section .. section_number .. '.'
+                  end
                end
                return '§ ' .. section .. ' '
             end,
