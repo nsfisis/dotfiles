@@ -369,21 +369,6 @@ return {
          })
       end,
    },
-   -- HTML/CSS
-   {
-      'mattn/emmet-vim',
-      lazy = true,
-      cmd = {'EmmetInstall'},
-      init = function()
-         local vimrc = require('vimrc')
-
-         vim.g.user_emmet_install_global = false
-         vimrc.autocmd('FileType', {
-            pattern = {'html', 'css'},
-            command = 'EmmetInstall',
-         })
-      end,
-   },
    -- Markdown
    {
       'MeanderingProgrammer/render-markdown.nvim',
