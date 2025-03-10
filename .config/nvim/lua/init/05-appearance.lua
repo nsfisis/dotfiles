@@ -5,15 +5,6 @@ local uniquify = require('uniquify')
 local vimrc = require('vimrc')
 
 
--- Color scheme {{{1
-
--- if not pcall(function() vim.cmd('colorscheme ocean') end) then
---    -- Load "desert", one of the built-in colorschemes, instead of mine
---    -- when nvim failed to load it.
---    vim.cmd('colorscheme desert')
--- end
-
-
 -- Statusline {{{1
 
 O.statusline = '%!v:lua.vimrc.statusline.build()'
