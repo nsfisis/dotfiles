@@ -6,15 +6,33 @@
 [advice]
     detachedhead = false
 
+[help]
+    autocorrect = prompt
+
 [color]
     ui = true
+
+[column]
+    ui = auto
+
+[tag]
+    sort = version:refname
 
 [commit]
     status = false
 
+[fetch]
+    prune = true
+    prunetags = true
+    all = true
+
+[pull]
+    rebase = true
+
 [merge]
     tool = vimdiff
     ff = false
+    conflictstyle = zdiff3
 
 [mergetool "vimdiff"]
     cmd = "__fn() { \
@@ -29,8 +47,17 @@
     abbreviatecommands = true
     autosquash = true
     autostash = true
+    updaterefs = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
 
 [diff]
+    algorithm = histogram
+    colormoved = plain
+    mnemonicprefix = true
+    renames = true
     tool = vimdiff
 
 [difftool "vimdiff"]
