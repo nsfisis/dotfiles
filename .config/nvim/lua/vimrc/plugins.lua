@@ -414,8 +414,6 @@ return {
                return '§ ' .. section .. ' '
             end,
             position = 'inline',
-            border = true,
-            border_virutal = true,
          },
          checkbox = {
             unchecked = { icon = '✘ ' },
