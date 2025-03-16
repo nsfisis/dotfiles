@@ -19,6 +19,7 @@ in
   home.packages = [
     # pkgs.alacritty
     pkgs.bat
+    pkgs.bed
     pkgs.cmake
     pkgs.curl
     pkgs.deno
