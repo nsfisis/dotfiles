@@ -18,6 +18,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "81374ffd26f9a9d5f44274a9e7e60547b5fd106f" },
   "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
   "skkeleton": { "branch": "main", "commit": "f1f0586c69d84c6ee5f3e5a4ca76cc188161b944" },
+  "telescope-fzf-native.nvim": { "branch": "main", "commit": "1f08ed60cafc8f6168b72b80be2b2ea149813e55" },
   "telescope.nvim": { "branch": "master", "commit": "415af52339215926d705cccc08145f3782c4d132" },
   "textobj-wiw": { "branch": "master", "commit": "8f89ed3797adb181332b8a9c80a9311c56184047" },
   "vim-altr": { "branch": "master", "commit": "fba055cf3b83a1ada5b05d694fbefd024aa93289" },

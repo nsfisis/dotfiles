@@ -1,10 +1,9 @@
 return {
    -- Libraries {{{1
-   -- telescope.nvim depends on it.
    {
       'nvim-lua/plenary.nvim',
+      lazy = true,
    },
-   -- skkeleton depends on it.
    {
       'vim-denops/denops.vim',
    },
@@ -675,6 +674,17 @@ return {
    -- Fuzzy finder.
    {
       'nvim-telescope/telescope.nvim',
+      config = function()
+         require('telescope').setup {
+         }
+         require('telescope').load_extension('fzf')
+      end,
+   },
+   -- Native fzf sorter for Telescope.
+   {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make',
+      lazy = true,
    },
    -- Adjust window size.
    {
