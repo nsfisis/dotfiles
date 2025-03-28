@@ -74,4 +74,7 @@ vim.filetype.add({
       satyg = 'satysfi',
       satyh = 'satysfi',
    },
+   filename = {
+      ['.clinerules'] = 'markdown',
+   },
 })
