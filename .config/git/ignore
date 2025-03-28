@@ -1,4 +1,6 @@
 .DS_Store
+.cline
+.clinerules
 .direnv
 .idea
 .phpactor.json
