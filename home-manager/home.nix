@@ -16,61 +16,65 @@ in
 
   news.display = "silent";
 
-  home.packages = [
-    # pkgs.alacritty
-    pkgs.bat
-    pkgs.bed
-    pkgs.cmake
-    pkgs.curl
-    pkgs.deno
-    pkgs.efm-langserver
-    pkgs.fd
-    pkgs.fzf
-    pkgs.gcc
-    pkgs.git
-    pkgs.gnumake
-    pkgs.go
-    pkgs.gomi
-    pkgs.gopls
-    pkgs.hyperfine
-    pkgs.imagemagick
-    pkgs.jnv
-    pkgs.jq
-    pkgs.mmv-go
-    pkgs.neovim
-    pkgs.nodejs_22
-    pkgs.pandoc
-    pkgs.phpactor
-    pkgs.pwgen
-    pkgs.python314
-    pkgs.ripgrep
-    pkgs.ruby_3_4
-    pkgs.rustup
-    pkgs.sqlite
-    pkgs.tokei
-    pkgs.tree
-    pkgs.universal-ctags
-    pkgs.vim
-    pkgs.zig_0_13
+  home.packages =
+    [
+      # pkgs.alacritty
+      pkgs.bat
+      pkgs.bed
+      pkgs.cmake
+      pkgs.curl
+      pkgs.deno
+      pkgs.efm-langserver
+      pkgs.fd
+      pkgs.fzf
+      pkgs.gcc
+      pkgs.git
+      pkgs.gnumake
+      pkgs.go
+      pkgs.gomi
+      pkgs.gopls
+      pkgs.hyperfine
+      pkgs.imagemagick
+      pkgs.jnv
+      pkgs.jq
+      pkgs.mmv-go
+      pkgs.neovim
+      pkgs.nodejs_22
+      pkgs.pandoc
+      pkgs.phpactor
+      pkgs.pwgen
+      pkgs.python314
+      pkgs.ripgrep
+      pkgs.ruby_3_4
+      pkgs.rustup
+      pkgs.sqlite
+      pkgs.tokei
+      pkgs.tree
+      pkgs.universal-ctags
+      pkgs.vim
+      pkgs.zig_0_13
 
-    (pkgs.php84.buildEnv {
-      extensions = (
-        { enabled, all }:
-        enabled
-        ++ (with all; [
-          ffi
-        ])
-      );
-      extraConfig = ''
-        ffi.enable=true
-      '';
-    })
-    pkgs.php84Packages.composer
-
-    pkgs.nodePackages.pnpm
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.yarn
-  ] ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
+      pkgs.nodePackages.pnpm
+      pkgs.nodePackages.typescript-language-server
+      pkgs.nodePackages.yarn
+    ]
+    ++ (
+      let
+        php = (
+          pkgs.php84.buildEnv {
+            extensions = { enabled, all }: enabled ++ [ all.ffi ];
+            extraConfig = ''
+              ffi.enable=true
+            '';
+          }
+        );
+      in
+      [
+        php
+        php.packages.composer
+      ]
+    )
+    ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
     # "hoge".source = dotfiles/piyo;
