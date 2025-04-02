@@ -7,6 +7,8 @@ let
   terminalApp = specialArgs.env.gui.terminalApp;
 in
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.username = username;
   home.homeDirectory = homeDirectory;
 
@@ -21,6 +23,7 @@ in
       # pkgs.alacritty
       pkgs.bat
       pkgs.bed
+      pkgs.claude-code
       pkgs.cmake
       pkgs.curl
       pkgs.deno
