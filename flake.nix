@@ -14,6 +14,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +29,7 @@
     {
       nixpkgs,
       flake-utils,
+      treefmt-nix,
       home-manager,
       ...
     }:
@@ -31,9 +37,10 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
+        treefmt = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {
-        formatter = pkgs.nixfmt-rfc-style;
+        formatter = treefmt.config.build.wrapper;
       }
     )
     // {
