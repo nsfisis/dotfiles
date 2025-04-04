@@ -220,5 +220,11 @@ in
     };
   };
 
-  programs.gh.enable = true;
+  programs.gh = {
+    enable = true;
+
+    settings.aliases = {
+      clone = "repo clone";
+    };
+  };
 }
