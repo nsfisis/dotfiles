@@ -67,7 +67,7 @@ A('BufEnter', {
 
 vimrc.register_filetype_autocmds_for_indentation()
 
--- TODO: move it elsewhere
+-- TODO: move this elsewhere
 vim.filetype.add({
    extension = {
       saty = 'satysfi',
@@ -77,4 +77,10 @@ vim.filetype.add({
    filename = {
       ['.clinerules'] = 'markdown',
    },
+})
+
+-- TODO: move this elsewhere
+vim.diagnostic.config({
+   virtual_text = true,
+   virtual_lines = true,
 })
