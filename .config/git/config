@@ -178,3 +178,10 @@
     }; __fn"
     setup-hooks = "!cp ~/dotfiles/githooks/* \"$(git rev-parse --show-toplevel)/.git/hooks\""
     extract-issue = "!~/bin/gitalias/git-extract-issue"
+    init-empty = "!__fn() { \
+        if [ \"$1\" = \"\" ]; then \
+            echo \"usage: git init-empty <user>\" >&2; \
+        else \
+            git init . && git config-user \"$1\" && git empty -m \"<empty>\"; \
+        fi; \
+    }; __fn"
