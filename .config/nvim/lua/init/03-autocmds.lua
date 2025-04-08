@@ -70,6 +70,7 @@ vimrc.register_filetype_autocmds_for_indentation()
 -- TODO: move this elsewhere
 vim.filetype.add({
    extension = {
+      dj = 'djot',
       saty = 'satysfi',
       satyg = 'satysfi',
       satyh = 'satysfi',
