@@ -40,6 +40,7 @@ in
       pkgs.imagemagick
       pkgs.jnv
       pkgs.jq
+      pkgs.just
       pkgs.mmv-go
       pkgs.neovim
       pkgs.nodejs_22
