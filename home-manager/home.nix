@@ -55,7 +55,7 @@ in
       pkgs.tree
       pkgs.universal-ctags
       pkgs.vim
-      pkgs.zig_0_13
+      pkgs.zig
       pkgs.zls
 
       pkgs.nodePackages.pnpm
