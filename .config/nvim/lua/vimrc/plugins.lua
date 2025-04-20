@@ -806,6 +806,7 @@ return {
       'github/copilot.vim',
       init = function()
          vim.g.copilot_filetypes = {
+            djot = false,
             markdown = false,
             qfreplace = false,
             text = false,
