@@ -742,6 +742,9 @@ return {
          if vim.fn.executable('phpactor') == 1 then
             lspconfig.phpactor.setup({})
          end
+         if vim.fn.executable('zls') == 1 then
+            lspconfig.zls.setup({})
+         end
          if vim.fn.executable('efm-langserver') == 1 then
             local biome_conf = {
                rootMarkers = {"biome.json"},

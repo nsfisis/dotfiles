@@ -56,6 +56,7 @@ in
       pkgs.universal-ctags
       pkgs.vim
       pkgs.zig_0_13
+      pkgs.zls
 
       pkgs.nodePackages.pnpm
       pkgs.nodePackages.typescript-language-server
