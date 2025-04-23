@@ -15,15 +15,12 @@ function vimrc.statusline.build()
    local winid = G.statusline_winid
    local bufnr = F.winbufnr(winid)
    local is_active = winid == F.win_getid()
-   local left
-   if is_active then
-      local mode, mode_hl = vimrc.statusline.mode()
-      left = string.format('%%#statusLineMode%s# %s %%#statusLine#', mode_hl, mode)
-   else
-      left = ''
-   end
-   local ro = vimrc.statusline.readonly(bufnr)
    local fname = vimrc.statusline.filename(bufnr)
+   if not is_active then
+      return ' ' .. fname
+   end
+   local mode, mode_hl = vimrc.statusline.mode()
+   local ro = vimrc.statusline.readonly(bufnr)
    local mod = vimrc.statusline.modified(bufnr)
    local extra_info = vimrc.statusline.extra_info(bufnr, winid)
    local linenum = vimrc.statusline.linenum(winid)
@@ -32,8 +29,9 @@ function vimrc.statusline.build()
    local ff = vimrc.statusline.ff(bufnr)
    local ft = vimrc.statusline.filetype(bufnr)
    return string.format(
-      '%s %s%s%s %%= %s%s %s%s%s %s ',
-      left,
+      '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s%s %s%s%s %s ',
+      mode_hl,
+      mode,
       ro and ro .. ' ' or '',
       fname,
       mod and ' ' .. mod or '',
