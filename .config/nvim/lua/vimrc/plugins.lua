@@ -394,7 +394,11 @@ return {
       ft = {
          'markdown',
       },
+      cmd = {
+         'RenderMarkdown',
+      },
       opts = {
+         enabled = false,
          heading = {
             -- Example:
             -- § 1.
