@@ -494,31 +494,9 @@ K.set('!', 'jk', '<ESC>', { remap=true })
 K.set('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent=true })
 
 
--- Lua function cannot be set to 'operatorfunc' for now.
-vim.cmd([[
-   function! Vimrc_insert_black_line_below(type = '') abort
-      if a:type ==# ''
-         set operatorfunc=Vimrc_insert_black_line_below
-         return 'g@ '
-      else
-         for i in range(v:count1)
-            call append(line('.'), '')
-         endfor
-      endif
-   endfunction
-   function! Vimrc_insert_black_line_above(type = '') abort
-      if a:type ==# ''
-         set operatorfunc=Vimrc_insert_black_line_above
-         return 'g@ '
-      else
-         for i in range(v:count1)
-            call append(line('.') - 1, '')
-         endfor
-      endif
-   endfunction
-]])
-K.set('n', 'go', F.Vimrc_insert_black_line_below, { expr = true })
-K.set('n', 'gO', F.Vimrc_insert_black_line_above, { expr = true })
+-- "remap" flag is needed because [<Space> and ]<Space> are implemented by Lua functions.
+K.set('n', 'go', ']<Space>', { remap = true })
+K.set('n', 'gO', '[<Space>', { remap = true })
 
 
 K.set('n', '<Space>w', '<Cmd>update<CR>')
