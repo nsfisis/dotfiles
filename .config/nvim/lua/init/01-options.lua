@@ -52,11 +52,6 @@ O.hidden = true
 O.switchbuf = 'usetab'
 
 
--- Multiple tabpages {{{1
-
-O.showtabline = 2
-
-
 -- Terminal {{{1
 
 O.title = false
