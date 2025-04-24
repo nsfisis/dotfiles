@@ -45,6 +45,11 @@ O.colorcolumn = '+1'
 OPT.spelloptions:append('camel')
 
 
+-- Statusline {{{1
+
+O.laststatus = 3
+
+
 -- Multiple windows {{{1
 
 O.winminheight = 0

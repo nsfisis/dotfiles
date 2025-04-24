@@ -19,7 +19,7 @@ function vimrc.statusline.build()
    if not is_active then
       return ' ' .. fname
    end
-   local mode, mode_hl = vimrc.statusline.mode()
+   local mode = vimrc.statusline.mode()
    local ro = vimrc.statusline.readonly(bufnr)
    local mod = vimrc.statusline.modified(bufnr)
    local extra_info = vimrc.statusline.extra_info(bufnr, winid)
@@ -29,8 +29,7 @@ function vimrc.statusline.build()
    local ff = vimrc.statusline.ff(bufnr)
    local ft = vimrc.statusline.filetype(bufnr)
    return string.format(
-      '%%#statusLineMode%s# %s %%#statusLine# %s%s%s %%= %s%s %s%s%s %s ',
-      mode_hl,
+      ' %s  %s%s%s %%= %s%s %s%s%s %s ',
       mode,
       ro and ro .. ' ' or '',
       fname,
@@ -45,39 +44,37 @@ end
 
 function vimrc.statusline.mode()
    local mode_map = {
-      n                       = { 'N',  'Normal'   },
-      no                      = { 'O',  'Operator' },
-      nov                     = { 'Oc', 'Operator' },
-      noV                     = { 'Ol', 'Operator' },
-      [vimrc.term('no<C-v>')] = { 'Ob', 'Operator' },
-      niI                     = { 'In', 'Insert'   },
-      niR                     = { 'Rn', 'Replace'  },
-      niV                     = { 'Rn', 'Replace'  },
-      v                       = { 'V',  'Visual'   },
-      V                       = { 'Vl', 'Visual'   },
-      [vimrc.term('<C-v>')]   = { 'Vb', 'Visual'   },
-      s                       = { 'S',  'Visual'   },
-      S                       = { 'Sl', 'Visual'   },
-      [vimrc.term('<C-s>')]   = { 'Sb', 'Visual'   },
-      i                       = { 'I',  'Insert'   },
-      ic                      = { 'I?', 'Insert'   },
-      ix                      = { 'I?', 'Insert'   },
-      R                       = { 'R',  'Replace'  },
-      Rc                      = { 'R?', 'Replace'  },
-      Rv                      = { 'R',  'Replace'  },
-      Rx                      = { 'R?', 'Replace'  },
-      c                       = { 'C',  'Command'  },
-      cv                      = { 'C',  'Command'  },
-      ce                      = { 'C',  'Command'  },
-      r                       = { '-',  'Other'    },
-      rm                      = { '-',  'Other'    },
-      ['r?']                  = { '-',  'Other'    },
-      ['!']                   = { '-',  'Other'    },
-      t                       = { 'T',  'Terminal' },
+      n                       = 'N',
+      no                      = 'O',
+      nov                     = 'Oc',
+      noV                     = 'Ol',
+      [vimrc.term('no<C-v>')] = 'Ob',
+      niI                     = 'In',
+      niR                     = 'Rn',
+      niV                     = 'Rn',
+      v                       = 'V',
+      V                       = 'Vl',
+      [vimrc.term('<C-v>')]   = 'Vb',
+      s                       = 'S',
+      S                       = 'Sl',
+      [vimrc.term('<C-s>')]   = 'Sb',
+      i                       = 'I',
+      ic                      = 'I?',
+      ix                      = 'I?',
+      R                       = 'R',
+      Rc                      = 'R?',
+      Rv                      = 'R',
+      Rx                      = 'R?',
+      c                       = 'C',
+      cv                      = 'C',
+      ce                      = 'C',
+      r                       = '-',
+      rm                      = '-',
+      ['r?']                  = '-',
+      ['!']                   = '-',
+      t                       = 'T',
    }
-   local vim_mode_and_hl = mode_map[F.mode(true)] or { '-', 'Other' }
-   local vim_mode = vim_mode_and_hl[1]
-   local hl = vim_mode_and_hl[2]
+   local vim_mode = mode_map[F.mode(true)] or '-'
 
    local skk_mode
    if F.exists('*skkeleton#mode') == 1 then
@@ -92,7 +89,7 @@ function vimrc.statusline.mode()
       skk_mode = ''
    end
 
-   return vim_mode .. skk_mode, hl
+   return vim_mode .. skk_mode
 end
 
 function vimrc.statusline.readonly(bufnr)
