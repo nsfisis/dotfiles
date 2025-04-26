@@ -32,6 +32,9 @@ $ cargo install alacritty
 
 $ cd ~/src/reparojson
 $ cargo install --path .
+
+$ cd ~/src/git-helpers
+$ go install ./cmd/...
 ```
 
 ## PC 168
