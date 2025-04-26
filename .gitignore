@@ -1,4 +1,3 @@
 /.bootstrap
 /.config/alacritty/alacritty.local.toml
-/bin/gitalias/git-*
 /nvim-startup.log

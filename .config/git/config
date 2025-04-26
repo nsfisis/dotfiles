@@ -94,7 +94,6 @@
     fixup = commit --fixup
     amend = commit --amend --no-edit
     clone1 = clone --depth=1
-    sw = "!~/bin/gitalias/git-sw"
     swc = switch -c
     swm = "!__fn() { \
         if git rev-parse --verify --quiet main > /dev/null 2>&1; then \
@@ -177,7 +176,6 @@
         fi; \
     }; __fn"
     setup-hooks = "!cp ~/dotfiles/githooks/* \"$(git rev-parse --show-toplevel)/.git/hooks\""
-    extract-issue = "!~/bin/gitalias/git-extract-issue"
     init-empty = "!__fn() { \
         if [ \"$1\" = \"\" ]; then \
             echo \"usage: git init-empty <user>\" >&2; \
