@@ -49,16 +49,6 @@ end
 
 directory "#{home}/bin"
 
-# Go
-execute "go" do
-  command "go build -o #{home}/bin/git-extract-issue src/gitalias/git-extract-issue.go"
-  not_if "test -f #{home}/bin/git-extract-issue"
-end
-execute "go" do
-  command "go build -o #{home}/bin/git-sw src/gitalias/git-sw.go"
-  not_if "test -f #{home}/bin/git-sw"
-end
-
 link "#{home}/bin/tmux-pane-idx" do
   to "#{home}/dotfiles/bin/tmux-pane-idx"
 end

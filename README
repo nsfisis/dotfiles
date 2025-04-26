@@ -18,13 +18,13 @@
 
 # Install
 
-## Hotaru
+## Akashi
 
 ```
 $ sudo apt update
 $ sudo apt upgrade
 
-$ ./bootstrap hotaru
+$ ./bootstrap akashi
 
 $ sudo adduser $(whoami) docker
 
