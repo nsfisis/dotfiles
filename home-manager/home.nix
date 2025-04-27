@@ -111,6 +111,9 @@ in
 
     # Bat
     BAT_THEME = "base16";
+
+    # Hgrep
+    HGREP_DEFAULT_OPTS = "--theme=Nord";
   };
 
   programs.direnv = {
