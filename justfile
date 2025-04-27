@@ -7,6 +7,9 @@ update HOST:
     git commit -m "nix: update flake"
     just switch "{{HOST}}"
 
+update-nur-packages:
+    nix flake update nur-packages
+
 sync HOST:
     git fetch --all
     git stash save

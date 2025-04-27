@@ -70,6 +70,8 @@ in
 
       nurpkgs.hgrep
       nurpkgs.reparojson
+      nurpkgs.term-banner
+      nurpkgs.term-clock
     ]
     ++ (
       let
