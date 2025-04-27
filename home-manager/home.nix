@@ -62,6 +62,9 @@ in
       pkgs.nodePackages.pnpm
       pkgs.nodePackages.typescript-language-server
       pkgs.nodePackages.yarn
+
+      specialArgs.nurpkgs.hgrep
+      specialArgs.nurpkgs.reparojson
     ]
     ++ (
       let

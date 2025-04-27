@@ -55,12 +55,34 @@
         "type": "github"
       }
     },
+    "nur-packages": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1745739267,
+        "narHash": "sha256-SPZuyHC7uEg+m//ofO9XqHQcGR90GL5xwTwn2P3wxOI=",
+        "owner": "nsfisis",
+        "repo": "nur-packages",
+        "rev": "939f02ceab3cecf66a399e50e72af46e4d277bd1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nsfisis",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "treefmt-nix": "treefmt-nix"
+        "nur-packages": "nur-packages",
+        "treefmt-nix": "treefmt-nix_2"
       }
     },
     "systems": {
@@ -79,6 +101,27 @@
       }
     },
     "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nur-packages",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1744961264,
+        "narHash": "sha256-aRmUh0AMwcbdjJHnytg1e5h5ECcaWtIFQa6d9gI85AI=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "8d404a69efe76146368885110f29a2ca3700bee6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"

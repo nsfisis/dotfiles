@@ -73,10 +73,6 @@ execute "rustup: install nightly toolchain" do
   command "rustup toolchain install nightly"
   not_if "rustup toolchain list | grep nightly"
 end
-execute "cargo: install hgrep" do
-  command "cargo install hgrep"
-  not_if "type hgrep"
-end
 
 if node[:profile] == "private"
   package "pkg-config"

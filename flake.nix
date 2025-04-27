@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur-packages = {
+      url = "github:nsfisis/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +35,7 @@
       nixpkgs,
       flake-utils,
       treefmt-nix,
+      nur-packages,
       home-manager,
       ...
     }:
@@ -55,7 +61,10 @@
             }:
             home-manager.lib.homeManagerConfiguration {
               pkgs = import nixpkgs { inherit system; };
-              extraSpecialArgs = { inherit env; };
+              extraSpecialArgs = {
+                inherit env;
+                nurpkgs = nur-packages.legacyPackages.${system};
+              };
               modules = [
                 ./home-manager/home.nix
               ];
