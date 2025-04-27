@@ -1,10 +1,15 @@
-{ pkgs, specialArgs, ... }:
+{
+  pkgs,
+  nurpkgs,
+  env,
+  ...
+}:
 let
-  username = specialArgs.env.username;
-  homeDirectory = specialArgs.env.homeDirectory;
-  clipboardCopyCommand = specialArgs.env.gui.clipboard.copyCommand;
+  username = env.username;
+  homeDirectory = env.homeDirectory;
+  clipboardCopyCommand = env.gui.clipboard.copyCommand;
   requiresWlClipboard = clipboardCopyCommand == "wl-copy";
-  terminalApp = specialArgs.env.gui.terminalApp;
+  terminalApp = env.gui.terminalApp;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -63,8 +68,8 @@ in
       pkgs.nodePackages.typescript-language-server
       pkgs.nodePackages.yarn
 
-      specialArgs.nurpkgs.hgrep
-      specialArgs.nurpkgs.reparojson
+      nurpkgs.hgrep
+      nurpkgs.reparojson
     ]
     ++ (
       let
