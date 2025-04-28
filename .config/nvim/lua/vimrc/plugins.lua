@@ -20,9 +20,9 @@ return {
             pattern = 'skkeleton-initialize-pre',
             callback = function()
                vim.fn['skkeleton#config']({
-                  -- Change default markers because they are EAW (East Asian Width) characters.
-                  markerHenkan = '[!]',
-                  markerHenkanSelect = '[#]',
+                  -- Change default markers because they are EAW (East Asian Ambiguous Width) characters.
+                  markerHenkan = '▿',
+                  markerHenkanSelect = '▾',
                   eggLikeNewline = true,
                   userDictionary = my_env.skk_dir .. '/jisyo',
                   globalDictionaries = {my_env.skk_dir .. '/jisyo.L'},
@@ -52,9 +52,6 @@ return {
                vim.fn['skkeleton#register_keymap']('input', '<C-q>', nil)
                vim.fn['skkeleton#register_keymap']('input', '<C-m>', 'newline')
                vim.fn['skkeleton#register_keymap']('henkan', '<C-m>', 'newline')
-               -- Custom highlight for henkan markers.
-               vim.cmd([=[syntax match skkMarker '\[[!#]\]']=])
-               vim.cmd([=[hi link skkMarker Special]=])
             end,
          })
 
