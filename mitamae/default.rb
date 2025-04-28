@@ -55,13 +55,6 @@ end
 
 # SKK
 directory "#{home}/.config/skk"
-http_request "#{home}/.config/skk/SKK-JISYO.L.unannotated.gz" do
-  url "https://skk-dev.github.io/dict/SKK-JISYO.L.unannotated.gz"
-end
-execute "unzip skk" do
-  command "gunzip -cd #{home}/.config/skk/SKK-JISYO.L.unannotated.gz > #{home}/.config/skk/jisyo.L"
-  not_if "test -f #{home}/.config/skk/jisyo.L"
-end
 
 link "#{home}/.config/alacritty/alacritty.local.toml" do
   is_macos = node[:targetArch].include?("darwin")

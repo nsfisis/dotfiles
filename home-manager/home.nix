@@ -94,7 +94,7 @@ in
     ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
-    # "hoge".source = dotfiles/piyo;
+    ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
   };
 
   home.sessionVariables = rec {
