@@ -29,9 +29,6 @@ $ ./bootstrap akashi
 $ sudo adduser $(whoami) docker
 
 $ cargo install alacritty
-
-$ cd ~/src/git-helpers
-$ go install ./cmd/...
 ```
 
 ## PC 168

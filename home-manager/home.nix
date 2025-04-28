@@ -69,6 +69,8 @@ in
       pkgs.nodePackages.yarn
 
       nurpkgs.hgrep
+
+      nurpkgs.git-helpers
       nurpkgs.reparojson
       nurpkgs.term-banner
       nurpkgs.term-clock
