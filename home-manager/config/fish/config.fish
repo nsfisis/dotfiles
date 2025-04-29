@@ -114,3 +114,18 @@ function terraform
         command terraform $argv
     end
 end
+
+# Conversion between unix time and human-readable datetime.
+# Use `jq` for its small footprint and portability.
+function unix2utc
+    echo $argv[1] | jq -Rr 'if . == "" then now else tonumber end | floor | strftime("%Y-%m-%dT%H:%M:%SZ")'
+end
+function unix2jst
+    echo $argv[1] | jq -Rr 'if . == "" then now else tonumber end | floor | . + 32400 | strftime("%Y-%m-%dT%H:%M:%S+09:00")'
+end
+function utc2unix
+    echo $argv[1] | jq -Rr 'strptime("%Y-%m-%dT%H:%M:%SZ") | mktime'
+end
+function jst2unix
+    echo $argv[1] | jq -Rr 'strptime("%Y-%m-%dT%H:%M:%S+09:00") | mktime | . - 32400'
+end
