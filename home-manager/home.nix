@@ -186,7 +186,7 @@ in
     settings = {
       add_newline = true;
       command_timeout = 1000;
-      format = "[$directory$git_branch$git_commit$git_status$git_state](bold fg:75)$fill$cmd_duration$time$line_break$shell$character";
+      format = "[$directory$git_branch$git_commit$git_status$git_state](bold fg:75)$fill$cmd_duration$time$line_break$jobs$shell$nix_shell$direnv$character";
       continuation_prompt = "[❯](fg:63)[❯](fg:62)[❯](fg:61) ";
       character = {
         success_symbol = "[❯](fg:150)[❯](fg:153)[❯](fg:159)";
@@ -228,12 +228,28 @@ in
       fill = {
         symbol = " ";
       };
+      jobs = {
+        style = "white";
+        symbol = "+";
+      };
       shell = {
         disabled = false;
         format = "[$indicator]($style)";
         fish_indicator = "";
         bash_indicator = "bash ";
         zsh_indicator = "zsh ";
+      };
+      nix_shell = {
+        format = "[nix]($style) ";
+        style = "white";
+        heuristic = true;
+      };
+      direnv = {
+        disabled = false;
+        format = "[$loaded]($style) ";
+        style = "white";
+        loaded_msg = "direnv";
+        unloaded_msg = "";
       };
     };
   };
