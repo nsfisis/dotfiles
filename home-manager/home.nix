@@ -28,7 +28,6 @@ in
       # pkgs.alacritty
       pkgs.bat
       pkgs.bed
-      pkgs.claude-code
       pkgs.cmake
       pkgs.curl
       pkgs.deno
