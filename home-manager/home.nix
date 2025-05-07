@@ -28,6 +28,7 @@ in
       # pkgs.alacritty
       pkgs.bat
       pkgs.bed
+      pkgs.clang-tools
       pkgs.cmake
       pkgs.curl
       pkgs.deno
