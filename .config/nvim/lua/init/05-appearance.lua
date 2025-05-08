@@ -5,6 +5,11 @@ local uniquify = require('uniquify')
 local vimrc = require('vimrc')
 
 
+-- TODO: nvim 0.11 workaround for highlight flickering
+-- https://github.com/neovim/neovim/issues/32660#issuecomment-2692738191
+vim.g._ts_force_sync_parsing = true
+
+
 -- Statusline {{{1
 
 O.statusline = '%!v:lua.vimrc.statusline.build()'
