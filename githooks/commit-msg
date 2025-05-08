@@ -133,4 +133,10 @@ fi
 
 # Substitute '###'.
 # '$1' is passed by Git, the file name that holds commit message.
-sed -i '' -e "s|###|${issue_number}|g" "${1}"
+if sed --version >/dev/null 2>&1; then
+  # GNU sed: -i takes no arguments.
+  sed -i -e "s|###|${issue_number}|g" "$1"
+else
+  # BSD sed: -i takes an extension of backup file.
+  sed -i '' -e "s|###|${issue_number}|g" "$1"
+fi
