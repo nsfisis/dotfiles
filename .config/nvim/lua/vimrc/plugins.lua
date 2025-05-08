@@ -211,30 +211,6 @@ return {
          {'g*', '<Plug>(asterisk-gz*)', mode = {'n', 'x'}},
       },
    },
-   -- NOTE: it is a fork version of jremmen/vim-ripgrep
-   -- Integration with ripgrep, fast alternative of grep command.
-   {
-      'nsfisis/vim-ripgrep',
-      lazy = true,
-      cmd = {'Rg', 'RG'},
-      config = function()
-         -- Workaround: do not open quickfix window.
-         -- exe g:rg_window_location 'copen'
-         vim.g.rg_window_location = 'silent! echo'
-         vim.g.rg_jump_to_first = true
-
-         vim.api.nvim_create_user_command(
-            'RG',
-            'Rg<bang> <args>',
-            {
-               bang = true,
-               bar = true,
-               nargs = '*',
-               complete = 'file',
-            }
-         )
-      end,
-   },
    -- Files {{{1
    -- Switch to related files.
    {
