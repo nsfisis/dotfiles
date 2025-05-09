@@ -4,4 +4,5 @@
 .direnv
 .idea
 .ken
+.nvim.lua
 .phpactor.json
