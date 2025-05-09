@@ -204,7 +204,7 @@ in
       git_commit = {
         format = "\\($hash$tag\\)";
         tag_disabled = false;
-        tag_symbol = " @";
+        tag_symbol = " @ ";
       };
       git_status = {
         format = "$conflicted$modified$untracked$staged$stashed";
