@@ -781,7 +781,6 @@ return {
    -- Integration with GitHub Copilot (https://docs.github.com/en/copilot)
    {
       'github/copilot.vim',
-      enabled = false,
       init = function()
          vim.g.copilot_filetypes = {
             djot = false,
