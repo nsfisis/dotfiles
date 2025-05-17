@@ -240,15 +240,15 @@ in
         zsh_indicator = "zsh ";
       };
       nix_shell = {
-        format = "[nix]($style) ";
+        format = "[N]($style) ";
         style = "white";
         heuristic = true;
       };
       direnv = {
         disabled = false;
-        format = "[$loaded]($style) ";
+        format = "[$loaded]($style)";
         style = "white";
-        loaded_msg = "direnv";
+        loaded_msg = "D ";
         unloaded_msg = "";
       };
     };
