@@ -26,6 +26,12 @@ C(
 C(
    'SmartOpen',
    function(opts)
+      local only_one_empty_window = F.winnr('$') == 1 and
+         F.bufname() == '' and
+         not F.getbufinfo().changed and
+         F.line('$') == 1 and
+         F.getline(1) == ''
+
       local modifiers
       if F.winwidth(F.winnr()) < 150 then
          modifiers = 'topleft'
@@ -46,6 +52,10 @@ C(
       ]]):format(modifiers, opts.args))
       if not G.__ok then
          return
+      end
+
+      if only_one_empty_window then
+         vim.cmd.wincmd('o')
       end
 
       if O.filetype == 'help' then
