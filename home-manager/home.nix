@@ -29,6 +29,7 @@ in
       pkgs.bat
       pkgs.bed
       pkgs.clang-tools
+      pkgs.claude-code
       pkgs.cmake
       pkgs.curl
       pkgs.deno
