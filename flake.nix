@@ -2,7 +2,10 @@
   description = "My flake configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # TODO
+    # nixpkgs#deno in nixpkgs-unstable branch is broken for now.
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/1b36b17a09686ff51e2944334da1cf308fa81e48";
 
     flake-utils.url = "github:numtide/flake-utils";
 
