@@ -3,7 +3,6 @@
   "capture.vim": { "branch": "master", "commit": "857ee11cfe1193948d3d45dcb8d511fded8533fb" },
   "colorswatch.vim": { "branch": "main", "commit": "2e3f847fc0e493de8b119d3c8560e47ceeff595c" },
   "committia.vim": { "branch": "master", "commit": "c8c0f255e8090ed90dd9d5dd2e8672994f8e3671" },
-  "copilot.vim": { "branch": "release", "commit": "a9228e015528c9307890c48083c925eb98a64a79" },
   "denops.vim": { "branch": "main", "commit": "4ff8f353ee54ee67288c1099242444ccb0ab5b69" },
   "foldCC.vim": { "branch": "master", "commit": "344335d27349b837d33dc7757de0cb7930ac33ae" },
   "hop.nvim": { "branch": "master", "commit": "9c6a1dd9afb53a112b128877ccd583a1faa0b8b6" },
