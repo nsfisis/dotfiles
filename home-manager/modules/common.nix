@@ -151,7 +151,7 @@ in
 
     extraConfig =
       let
-        commonConfig = builtins.readFile ./config/tmux/tmux.conf;
+        commonConfig = builtins.readFile ../config/tmux/tmux.conf;
         clipboardConfig =
           if clipboardCopyCommand != null then
             ''
@@ -177,8 +177,8 @@ in
   programs.fish = {
     enable = true;
 
-    interactiveShellInit = builtins.readFile ./config/fish/config.fish;
-    shellInitLast = builtins.readFile ./config/fish/path.fish;
+    interactiveShellInit = builtins.readFile ../config/fish/config.fish;
+    shellInitLast = builtins.readFile ../config/fish/path.fish;
   };
 
   programs.starship = {

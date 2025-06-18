@@ -50,21 +50,22 @@
           readJSON = p: builtins.fromJSON (builtins.readFile p);
           mkHomeConfiguration =
             {
-              system,
-              env,
+              profile,
+              flake,
               ...
             }:
             home-manager.lib.homeManagerConfiguration {
-              pkgs = import nixpkgs { inherit system; };
+              pkgs = import nixpkgs { system = flake.system; };
               extraSpecialArgs = {
-                inherit env;
-                nurpkgs = nur-packages.legacyPackages.${system};
+                env = flake.env;
+                nurpkgs = nur-packages.legacyPackages.${flake.system};
               };
               modules = [
-                ./home-manager/home.nix
+                ./home-manager/modules/common.nix
+                ./home-manager/modules/${profile}.nix
               ];
             };
-          mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p).flake;
+          mkHomeConfigurationFromJSON = p: mkHomeConfiguration (readJSON p);
         in
         {
           akashi = mkHomeConfigurationFromJSON ./mitamae/node.akashi.json;
