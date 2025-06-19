@@ -28,20 +28,16 @@ in
       # pkgs.alacritty
       pkgs.bat
       pkgs.bed
-      pkgs.clang-tools
       pkgs.claude-code
-      pkgs.cmake
       pkgs.curl
       pkgs.deno
       pkgs.efm-langserver
       pkgs.fd
       pkgs.fzf
-      pkgs.gcc
       pkgs.git
       pkgs.gnumake
       pkgs.go
       pkgs.gomi
-      pkgs.gopls
       pkgs.htop
       pkgs.hyperfine
       pkgs.imagemagick
@@ -57,14 +53,11 @@ in
       pkgs.python314
       pkgs.ripgrep
       pkgs.ruby_3_4
-      pkgs.rustup
       pkgs.sqlite
       pkgs.tokei
       pkgs.tree
       pkgs.universal-ctags
       pkgs.vim
-      pkgs.zig
-      pkgs.zls
 
       pkgs.nodePackages.pnpm
       pkgs.nodePackages.typescript-language-server
