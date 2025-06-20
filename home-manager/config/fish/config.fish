@@ -130,3 +130,12 @@ end
 function jst2unix
     echo $argv[1] | jq -Rr 'strptime("%Y-%m-%dT%H:%M:%S+09:00") | mktime | . - 32400'
 end
+
+# Usage: notify <title> <message>
+function notify
+    if [ -n $on_darwin ]
+        osascript -e "display notification \"$2\" with title \"$1\""
+    else
+        notify-send "$1" "$2"
+    end
+end
