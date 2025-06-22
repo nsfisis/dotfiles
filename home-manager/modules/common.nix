@@ -1,6 +1,5 @@
 {
   pkgs,
-  nixpkgs_deno,
   nurpkgs,
   env,
   ...
@@ -31,11 +30,7 @@ in
       pkgs.bed
       pkgs.claude-code
       pkgs.curl
-
-      # TODO
-      # pkgs.deno
-      nixpkgs_deno.deno
-
+      pkgs.deno
       pkgs.efm-langserver
       pkgs.fd
       pkgs.fzf

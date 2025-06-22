@@ -3,9 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # TODO
-    # nixpkgs#deno in nixpkgs-unstable branch is broken for now.
-    nixpkgs_deno.url = "github:NixOS/nixpkgs/1b36b17a09686ff51e2944334da1cf308fa81e48";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -28,7 +25,6 @@
   outputs =
     {
       nixpkgs,
-      nixpkgs_deno,
       flake-utils,
       treefmt-nix,
       nur-packages,
@@ -58,7 +54,6 @@
             home-manager.lib.homeManagerConfiguration {
               pkgs = import nixpkgs { system = flake.system; };
               extraSpecialArgs = {
-                nixpkgs_deno = import nixpkgs_deno { system = flake.system; };
                 env = flake.env;
                 nurpkgs = nur-packages.legacyPackages.${flake.system};
               };
