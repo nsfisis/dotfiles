@@ -1,7 +1,3 @@
-set -l has_nvim (type -q nvim)
-set -l has_fd (type -q fd)
-set -l on_darwin (test (uname) = "Darwin")
-
 function fish_greeting; end
 
 # Abbreviations
@@ -29,7 +25,7 @@ alias view 'nvim -R'
 alias vim 'nvim'
 alias vimdiff 'nvim -d'
 
-if [ -n $on_darwin ]
+if test (uname) = "Darwin"
     alias tac 'tail -r'
 end
 
@@ -88,10 +84,6 @@ function pwgen --wraps pwgen
     end
 end
 
-if [ -n $has_fd ]
-    set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --exclude .git"
-end
-
 function ee
     if [ (count $argv) -eq 0 ]
         set selection (fzf --reverse)
@@ -133,9 +125,9 @@ end
 
 # Usage: notify <title> <message>
 function notify
-    if [ -n $on_darwin ]
-        osascript -e "display notification \"$2\" with title \"$1\""
+    if test (uname) = "Darwin"
+        osascript -e "display notification \"$argv[2]\" with title \"$argv[1]\""
     else
-        notify-send "$1" "$2"
+        notify-send "$argv[1]" "$argv[2]"
     end
 end

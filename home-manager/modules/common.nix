@@ -119,6 +119,9 @@ in
     # Bat
     BAT_THEME = "base16";
 
+    # Fzf
+    FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --exclude .git";
+
     # Hgrep
     HGREP_DEFAULT_OPTS = "--theme=Nord";
   };
