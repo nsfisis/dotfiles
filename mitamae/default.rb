@@ -46,6 +46,10 @@ end
 link "#{home}/.config/nvim" do
   to "#{home}/dotfiles/.config/nvim"
 end
+directory "#{home}/.config/fish"
+link "#{home}/.config/fish/completions" do
+  to "#{home}/dotfiles/.config/fish/completions"
+end
 
 directory "#{home}/bin"
 
