@@ -90,6 +90,7 @@ return {
          do
             local rs = vim.fn['sandwich#get_recipes']()
 
+            -- Japanese parentheses
             rs[#rs+1] = {
                buns = {'「', '」'},
                input = {'j[', 'j]'},
@@ -101,6 +102,14 @@ return {
             rs[#rs+1] = {
                buns = {'【', '】'},
                input = {'j(', 'j)'},
+            }
+
+            -- Redmine macro
+            rs[#rs+1] = {
+               buns = {'{{collapse()\n', '\n}}'},
+               input = {'C'},
+               motionwise = {'line'},
+               autoindent = 0,
             }
 
             vim.g['sandwich#recipes'] = rs
