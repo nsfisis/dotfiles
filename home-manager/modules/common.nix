@@ -168,6 +168,8 @@ in
 
   programs.bash = {
     enable = true;
+
+    bashrcExtra = builtins.readFile ../config/bash/.bashrc;
   };
 
   programs.fish = {
