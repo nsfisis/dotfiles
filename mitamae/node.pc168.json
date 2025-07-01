@@ -1,5 +1,6 @@
 {
   "name": "pc168",
+  "hostname": "PC168.local",
   "profile": "work",
   "targetArch": "aarch64-darwin",
   "flake": {

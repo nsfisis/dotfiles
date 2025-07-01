@@ -1,5 +1,6 @@
 {
   "name": "akashi",
+  "hostname": "akashi",
   "profile": "private",
   "targetArch": "x86_64-linux",
   "flake": {

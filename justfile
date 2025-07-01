@@ -1,7 +1,9 @@
+default_host := trim_start_match(file_stem(shell('grep -R -l "$1" "$2"', '"hostname": "' + shell('uname -n') + '"', join(justfile_directory(), "mitamae"))), 'node.')
+
 help:
     @just --list
 
-update HOST:
+update HOST=default_host:
     nix flake update
     git add -- ./flake.lock
     git commit -m "nix: update flake"
@@ -10,14 +12,14 @@ update HOST:
 update-nur-packages:
     nix flake update nur-packages
 
-sync HOST:
+sync HOST=default_host:
     git fetch --all
     git stash save
     git switch -d origin/main
     git stash pop
     just switch "{{HOST}}"
 
-switch HOST:
+switch HOST=default_host:
     home-manager switch --flake ".#{{HOST}}"
 
 gc:
