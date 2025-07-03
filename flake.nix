@@ -51,11 +51,14 @@
               flake,
               ...
             }:
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = import nixpkgs { system = flake.system; };
+            home-manager.lib.homeManagerConfiguration rec {
+              pkgs = import nixpkgs {
+                system = flake.system;
+                config.allowUnfree = true;
+              };
               extraSpecialArgs = {
                 env = flake.env;
-                nurpkgs = nur-packages.legacyPackages.${flake.system};
+                nurpkgs = import nur-packages { inherit pkgs; };
               };
               modules = [
                 ./home-manager/modules/common.nix

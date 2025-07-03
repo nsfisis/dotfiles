@@ -28,7 +28,6 @@ in
       # pkgs.alacritty
       pkgs.bat
       pkgs.bed
-      pkgs.claude-code
       pkgs.curl
       pkgs.deno
       pkgs.efm-langserver
@@ -63,6 +62,7 @@ in
       pkgs.nodePackages.typescript-language-server
       pkgs.nodePackages.yarn
 
+      nurpkgs.claude-code
       nurpkgs.hgrep
 
       nurpkgs.git-helpers
