@@ -90,6 +90,8 @@ in
 
   home.file = {
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
+    ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
+    ".zshrc".source = ../config/zsh/.zshrc;
   };
 
   home.sessionVariables = rec {
