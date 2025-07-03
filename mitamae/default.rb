@@ -37,9 +37,6 @@ end
 link "#{home}/.vimrc" do
   to "#{home}/dotfiles/.vimrc"
 end
-link "#{home}/.config/alacritty" do
-  to "#{home}/dotfiles/.config/alacritty"
-end
 link "#{home}/.config/git" do
   to "#{home}/dotfiles/.config/git"
 end
@@ -62,11 +59,6 @@ end
 
 # SKK
 directory "#{home}/.config/skk"
-
-link "#{home}/.config/alacritty/alacritty.local.toml" do
-  is_macos = node[:targetArch].include?("darwin")
-  to "#{home}/.config/alacritty/alacritty.#{is_macos ? "macos" : "linux"}.toml"
-end
 
 # Rust
 execute "rustup: install nightly toolchain" do

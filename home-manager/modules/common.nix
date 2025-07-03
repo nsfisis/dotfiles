@@ -89,8 +89,11 @@ in
     ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
-    ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
+    ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
+    ".config/alacritty/alacritty.local.toml".source = ../../.config/alacritty/alacritty.${env.os}.toml;
+    ".config/alacritty/alacritty.toml".source = ../../.config/alacritty/alacritty.toml;
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
+    ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".zshrc".source = ../config/zsh/.zshrc;
   };
 

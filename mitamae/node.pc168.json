@@ -8,6 +8,7 @@
     "env": {
       "username": "ken",
       "homeDirectory": "/Users/ken",
+      "os": "macos",
       "gui": {
         "clipboard": {
           "copyCommand": "pbcopy"

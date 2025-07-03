@@ -8,6 +8,7 @@
     "env": {
       "username": "ken",
       "homeDirectory": "/home/ken",
+      "os": "linux",
       "gui": {
         "clipboard": {
           "copyCommand": "wl-copy"
