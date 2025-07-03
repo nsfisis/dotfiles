@@ -28,3 +28,7 @@ gc:
     home-manager expire-generations '-1 month'
     nix profile wipe-history
     nix store gc
+
+# TODO
+copy-claude-code-settings:
+    cp .config/claude-code/settings.json ~/.claude/

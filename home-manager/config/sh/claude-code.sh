@@ -1,4 +1,3 @@
-# Safe wrappers for Claude Code
 if [ -n "$CLAUDECODE" ]; then
     # Safe wrapper for find command
     find() {

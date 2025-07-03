@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ "$(uname)" = "Darwin" ]; then
+    if [ "$1" = "Stop" ]; then
+        message="Task completed"
+        sound=Glass
+    else
+        message="$(jq '.message')"
+        sound=Funk
+    fi
+    osascript -e "display notification $message with title \"Claude Code\" sound name \"$sound\""
+else
+    if [ "$1" = "Stop" ]; then
+        message="Task completed"
+    else
+        message="$(jq '.message')"
+    fi
+    notify-send "Claude Code" "$message"
+fi
