@@ -5,6 +5,7 @@
 
 [advice]
     detachedhead = false
+    skippedcherrypicks = false
 
 [help]
     autocorrect = prompt
