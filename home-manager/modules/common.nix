@@ -95,6 +95,8 @@ in
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".zshrc".source = ../config/zsh/.zshrc;
+    "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
+    "bin/tmux-pane-idx".source = ../../bin/tmux-pane-idx;
   };
 
   home.sessionVariables = rec {

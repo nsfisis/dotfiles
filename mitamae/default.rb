@@ -50,13 +50,6 @@ end
 
 directory "#{home}/bin"
 
-link "#{home}/bin/tmux-pane-idx" do
-  to "#{home}/dotfiles/bin/tmux-pane-idx"
-end
-link "#{home}/bin/__claude-code-notify" do
-  to "#{home}/dotfiles/bin/__claude-code-notify"
-end
-
 # SKK
 directory "#{home}/.config/skk"
 
