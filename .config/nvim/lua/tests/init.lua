@@ -1,4 +1,4 @@
--- lua require('tests').test(TEST_SUITE_NAME)
+-- :lua require('tests').test(TEST_SUITE_NAME)
 
 local M = {}
 

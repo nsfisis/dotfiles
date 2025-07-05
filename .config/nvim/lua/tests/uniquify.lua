@@ -9,15 +9,19 @@ function M.test(t)
       {'foo.txt',         'foo.txt',             {}},
       {'foo.txt',         'bar/foo.txt',         {}},
       {'foo.txt',         'foo.txt',             {'foo.txt'}},
+      {'foo.txt',         'bar/foo.txt',         {'bar/foo.txt'}},
+      {'foo.txt',         'bar/foo.txt',         {'bar/foo.txt', 'bar/foo.txt'}},
       {'bar/foo.txt',     'bar/foo.txt',         {'foo.txt'}},
       {'bar/foo.txt',     'bar/foo.txt',         {'baz/foo.txt'}},
+      {'bar/foo.txt',     'qux/bar/foo.txt',     {'baz/foo.txt'}},
       {'foo.txt',         'bar/foo.txt',         {'bar.txt', 'baz.txt'}},
       {'foo.txt',         'bar/foo.txt',         {'bar.txt', 'baz.txt'}},
       {'baz.txt',         'foo/bar/baz.txt',     {}},
-      {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'spam/bar/baz.txt'}},
-      {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'fiz/foo/bar/baz.txt', 'spam/bar/baz.txt'}},
+      {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'qux/bar/baz.txt'}},
+      {'foo/b/baz.txt',   'foo/bar/baz.txt',     {'fiz/foo/bar/baz.txt', 'qux/bar/baz.txt'}},
       {'fiz/f/b/baz.txt', 'fiz/foo/bar/baz.txt', {'foo/bar/baz.txt'}},
       {'foo.txt',         'bar/foo.txt',         {'bar/foo.txt'}},
+      {'bar/foo.txt',     'fiz/bar/foo.txt',     {'bar/baz.txt', 'qux/foo.txt'}},
    }
 
    for _, row in ipairs(test_cases) do

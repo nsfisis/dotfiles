@@ -8,11 +8,10 @@ local stricmp = vim.stricmp
 
 
 function M.uniquify(this_path, other_paths)
-   for i = 1, #other_paths do
-      if other_paths[i] == this_path then
-         table.remove(other_paths, i)
-      end
-   end
+   -- Filter out the same paths.
+   other_paths = vim.iter(other_paths)
+      :filter(function(p) return p ~= this_path end)
+      :totable()
 
    -- Split each path into slash-separated parts.
    for i = 1, #other_paths do
@@ -20,46 +19,39 @@ function M.uniquify(this_path, other_paths)
    end
    this_path = split(this_path, '[\\/]')
 
-   local i = 0
-   while true do
-      local this_path_part = this_path[#this_path+i] or ''
+   local depth = 0
+   while depth < #this_path-1 do
       local unique = true
-      local no_parts_remained = true
       for _, other_path in ipairs(other_paths) do
-         local other_path_part = other_path[#other_path+i] or ''
-         if stricmp(this_path_part, other_path_part) == 0 then
+         local same = true
+         for i = 0, depth do
+            local this_path_part = this_path[#this_path-i]
+            local other_path_part = other_path[#other_path-i] or ''
+            if stricmp(this_path_part, other_path_part) ~= 0 then
+               same = false
+               break
+            end
+         end
+         if same then
             unique = false
             break
-         end
-         if other_path_part ~= '' then
-            no_parts_remained = false
          end
       end
       if unique then
          break
       end
-      if this_path_part == '' and no_parts_remained then
-         break
-      end
-      i = i - 1
+      depth = depth+1
    end
 
-   if i <= -(#this_path) then
-      i = -(#this_path) + 1
-   end
-
-   local ret = ''
-   for k = i, 0 do
-      if #this_path < 1 - k then
-         break
-      end
-      if k == i or k == 0 then
-         ret = ret .. '/' .. this_path[#this_path+k]
+   local ret = {}
+   for i = depth, 0, -1 do
+      if i == depth or i == 0 then
+         ret[#ret+1] = this_path[#this_path-i]
       else
-         ret = ret .. '/' .. matchlist(this_path[#this_path+k], '.')[1]
+         ret[#ret+1] = matchlist(this_path[#this_path-i], '.')[1]
       end
    end
-   return ret:sub(2)
+   return table.concat(ret, '/')
 end
 
 

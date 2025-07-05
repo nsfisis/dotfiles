@@ -114,11 +114,11 @@ function vimrc.statusline.filename(bufnr)
       return '*scratch*'
    end
 
-   local this_path = F.expand(('#%s:p'):format(bufnr))
+   local this_path = F.expand(('#%d:p'):format(bufnr))
    local other_paths = {}
    for b = 1, F.bufnr('$') do
       if F.bufexists(b) and b ~= bufnr then
-         other_paths[#other_paths+1] = F.bufname(b)
+         other_paths[#other_paths+1] = F.expand(('#%d:p'):format(b))
       end
    end
 
