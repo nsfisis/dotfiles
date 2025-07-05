@@ -25,34 +25,22 @@ directory "#{home}/.cache"
 directory "#{home}/.local/share"
 directory "#{home}/.local/state"
 
-execute "home-manager" do
+execute "home-manager switch" do
   command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
   not_if "type home-manager"
 end
 
-# These dotfiles are not managed by home-manager for now.
-
-link "#{home}/.config/git" do
-  to "#{home}/dotfiles/.config/git"
-end
 link "#{home}/.config/nvim" do
   to "#{home}/dotfiles/.config/nvim"
 end
-directory "#{home}/.config/fish"
-link "#{home}/.config/fish/completions" do
-  to "#{home}/dotfiles/.config/fish/completions"
-end
-
-# SKK
 directory "#{home}/.config/skk"
 
-# Rust
-execute "rustup: install nightly toolchain" do
-  command "rustup toolchain install nightly"
-  not_if "rustup toolchain list | grep nightly"
-end
-
 if node[:profile] == "private"
+  execute "rustup: install nightly toolchain" do
+    command "rustup toolchain install nightly"
+    not_if "rustup toolchain list | grep nightly"
+  end
+
   package "pkg-config"
   package "libssl-dev"
 
@@ -68,5 +56,5 @@ if node[:profile] == "private"
 end
 
 execute "home-manager switch" do
-  command "home-manager switch --flake '.##{node[:name]}'"
+  command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
 end

@@ -92,6 +92,9 @@ in
     ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
     ".config/alacritty/alacritty.local.toml".source = ../../.config/alacritty/alacritty.${env.os}.toml;
     ".config/alacritty/alacritty.toml".source = ../../.config/alacritty/alacritty.toml;
+    ".config/fish/completions/git-sw.fish".source = ../../.config/fish/completions/git-sw.fish;
+    ".config/git/config".source = ../../.config/git/config;
+    ".config/git/ignore".source = ../../.config/git/ignore;
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
