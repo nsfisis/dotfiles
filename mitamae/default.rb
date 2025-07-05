@@ -25,8 +25,6 @@ directory "#{home}/.cache"
 directory "#{home}/.local/share"
 directory "#{home}/.local/state"
 
-directory "#{home}/bin"
-
 execute "home-manager" do
   command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
   not_if "type home-manager"
@@ -34,9 +32,6 @@ end
 
 # These dotfiles are not managed by home-manager for now.
 
-link "#{home}/.vimrc" do
-  to "#{home}/dotfiles/.vimrc"
-end
 link "#{home}/.config/git" do
   to "#{home}/dotfiles/.config/git"
 end
@@ -47,8 +42,6 @@ directory "#{home}/.config/fish"
 link "#{home}/.config/fish/completions" do
   to "#{home}/dotfiles/.config/fish/completions"
 end
-
-directory "#{home}/bin"
 
 # SKK
 directory "#{home}/.config/skk"
