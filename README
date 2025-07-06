@@ -29,6 +29,9 @@ $ ./bootstrap akashi
 $ sudo adduser $(whoami) docker
 
 $ cargo install alacritty
+
+$ curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share/fonts}"/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/latest/download/SourceHanCodeJP.ttc
+$ fc-cache -fv
 ```
 
 ## PC 168
@@ -43,8 +46,7 @@ $ ./bootstrap pc168
 
 $ brew install --cask alacritty
 
-# Latest version: https://github.com/adobe-fonts/source-han-code-jp/releases/latest
-$ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/download/2.012R/SourceHanCodeJP.ttc
+$ curl -fLo ~/Library/Fonts/SourceHanCodeJP.ttc --create-dirs https://github.com/adobe-fonts/source-han-code-jp/releases/latest/download/SourceHanCodeJP.ttc
 $ sudo atsutil databases -remove
 
 $ /usr/local/opt/ncurses/bin/infocmp tmux-256color > /var/tmp/tmux-256color.info

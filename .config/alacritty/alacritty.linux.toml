@@ -29,6 +29,3 @@ mods = "Control"
 action = "DecreaseFontSize"
 key = "Key2"
 mods = "Control"
-
-[font.normal]
-family = "monospace"
