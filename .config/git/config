@@ -191,3 +191,14 @@
             echo \"$1\" >> \"$(git rev-parse --git-dir)/info/exclude\"; \
         fi; \
     }; __fn"
+    sync-upstream = "!__fn() { \
+        local branch=\"$(git current-branch)\"; \
+        if git rev-parse --verify --quiet \"origin/$branch\" > /dev/null 2>&1 && \
+           git rev-parse --verify --quiet \"upstream/$branch\" > /dev/null 2>&1; then \
+            git reset --hard \"upstream/$branch\" && \
+            git push --force-with-lease origin \"$branch\"; \
+        else \
+            echo \"error: branch '$branch' not found on both origin and upstream\" >&2; \
+            exit 1; \
+        fi; \
+    }; __fn"
