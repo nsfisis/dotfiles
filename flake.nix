@@ -47,6 +47,7 @@
           readJSON = p: builtins.fromJSON (builtins.readFile p);
           mkHomeConfiguration =
             {
+              name,
               profile,
               flake,
               ...
@@ -57,6 +58,7 @@
                 config.allowUnfree = true;
               };
               extraSpecialArgs = {
+                nodeName = name;
                 env = flake.env;
                 nurpkgs = import nur-packages { inherit pkgs; };
               };
