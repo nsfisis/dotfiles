@@ -102,6 +102,10 @@ in
     ".zshrc".source = ../config/zsh/.zshrc;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
     "bin/tmux-pane-idx".source = ../../bin/tmux-pane-idx;
+
+    "${if env.os == "macos" then "Library/Fonts/" else ".local/share/fonts/"}/SourceHanCodeJP.ttc" = {
+      source = "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
+    };
   };
 
   home.sessionVariables = rec {
