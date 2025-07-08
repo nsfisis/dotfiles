@@ -25,23 +25,15 @@ directory "#{home}/.cache"
 directory "#{home}/.local/share"
 directory "#{home}/.local/state"
 
+directory "#{home}/.config/skk"
+
 execute "home-manager switch" do
   command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
-  not_if "type home-manager"
 end
-
-link "#{home}/.config/nvim" do
-  to "#{home}/dotfiles/.config/nvim"
-end
-directory "#{home}/.config/skk"
 
 if node[:profile] == "private"
   execute "rustup: install nightly toolchain" do
     command "rustup toolchain install nightly"
     not_if "rustup toolchain list | grep nightly"
   end
-end
-
-execute "home-manager switch" do
-  command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
 end

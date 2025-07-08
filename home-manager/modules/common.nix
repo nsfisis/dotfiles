@@ -95,6 +95,7 @@ in
     ".config/fish/completions/git-sw.fish".source = ../../.config/fish/completions/git-sw.fish;
     ".config/git/config".source = ../../.config/git/config;
     ".config/git/ignore".source = ../../.config/git/ignore;
+    ".config/nvim".source = ../../.config/nvim;
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
