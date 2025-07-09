@@ -1,5 +1,5 @@
-**/.claude/settings.local.json
 .DS_Store
+.claude
 .direnv
 .idea
 .ken
