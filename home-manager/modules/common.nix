@@ -201,7 +201,14 @@ in
     enable = true;
 
     interactiveShellInit = builtins.readFile ../config/fish/config.fish;
-    shellInitLast = builtins.readFile ../config/fish/path.fish;
+    shellInitLast =
+      builtins.readFile ../config/fish/path.fish
+      + (
+        if builtins.pathExists ../config/fish/local.${nodeName}.path.fish then
+          builtins.readFile ../config/fish/local.${nodeName}.path.fish
+        else
+          ""
+      );
   };
 
   programs.starship = {
