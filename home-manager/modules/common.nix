@@ -99,6 +99,7 @@ in
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
+    ".local/share/fonts/SourceHanCodeJP.ttc".source = "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
     ".zshrc".source = ../config/zsh/.zshrc;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
     "bin/tmux-pane-idx".source = ../../bin/tmux-pane-idx;
@@ -111,10 +112,6 @@ in
         else
           ""
       );
-
-    "${if env.os == "macos" then "Library/Fonts/" else ".local/share/fonts/"}/SourceHanCodeJP.ttc" = {
-      source = "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
-    };
   };
 
   home.sessionVariables = rec {

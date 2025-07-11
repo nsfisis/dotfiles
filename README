@@ -43,7 +43,7 @@ $ brew install libiconv
 
 $ ./bootstrap pc168
 
-$ sudo atsutil databases -remove
+$ fc-cache -fv
 
 $ brew install --cask alacritty
 
