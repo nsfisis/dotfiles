@@ -53,6 +53,7 @@ in
       pkgs.python314
       pkgs.ripgrep
       pkgs.ruby_3_4
+      pkgs.similarity
       pkgs.sqlite
       pkgs.tokei
       pkgs.tree
