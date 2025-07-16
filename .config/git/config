@@ -206,3 +206,15 @@
             exit 1; \
         fi; \
     }; __fn"
+    backup-branch = "!__fn() { \
+        if [ \"$1\" = \"\" ]; then \
+            local branch=\"$(git current-branch)\"; \
+        else \
+            local branch=\"$1\"; \
+        fi; \
+        local sha=$(git rev-parse --short \"$branch\"); \
+        local backup_branch=\"bak/$branch/$sha\"; \
+        if ! git rev-parse --verify --quiet \"$backup_branch\" > /dev/null 2>&1; then \
+            git branch \"$backup_branch\" \"$branch\"; \
+        fi; \
+    }; __fn"
