@@ -192,10 +192,14 @@
         fi; \
     }; __fn"
     sync-upstream = "!__fn() { \
-        local branch=\"$(git current-branch)\"; \
+        if [ \"$1\" = \"\" ]; then \
+            local branch=\"$(git current-branch)\"; \
+        else \
+            local branch=\"$1\"; \
+        fi; \
         if git rev-parse --verify --quiet \"origin/$branch\" > /dev/null 2>&1 && \
            git rev-parse --verify --quiet \"upstream/$branch\" > /dev/null 2>&1; then \
-            git reset --hard \"upstream/$branch\" && \
+            git branch --force \"$branch\" \"upstream/$branch\" && \
             git push --force-with-lease origin \"$branch\"; \
         else \
             echo \"error: branch '$branch' not found on both origin and upstream\" >&2; \
