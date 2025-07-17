@@ -123,11 +123,23 @@ function jst2unix
     echo $argv[1] | jq -Rr 'strptime("%Y-%m-%dT%H:%M:%S+09:00") | mktime | . - 32400'
 end
 
-# Usage: notify <title> <message>
+# Usage: notify <title> <message> [<sound>]
 function notify
     if test (uname) = "Darwin"
-        osascript -e "display notification \"$argv[2]\" with title \"$argv[1]\""
+        if test -n "$argv[3]"
+            osascript \
+                -e 'on run argv' \
+                -e 'display notification (item 1 of argv) with title (item 2 of argv) sound name (item 3 of argv)' \
+                -e 'end run' \
+                -- "$argv[2]" "$argv[1]" "$argv[3]"
+        else
+            osascript \
+                -e 'on run argv' \
+                -e 'display notification (item 1 of argv) with title (item 2 of argv)' \
+                -e 'end run' \
+                -- "$argv[2]" "$argv[1]"
+        end
     else
-        notify-send "$argv[1]" "$argv[2]"
+        notify-send "$argv[1]" "$argv[2]" --hint "string:sound-name:$argv[3]"
     end
 end
