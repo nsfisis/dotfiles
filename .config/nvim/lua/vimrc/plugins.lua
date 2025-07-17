@@ -104,6 +104,14 @@ return {
                input = {'j(', 'j)'},
             }
 
+            -- Markdown code block
+            rs[#rs+1] = {
+               buns = {'```', '```'},
+               input = {'`'},
+               motionwise = {'line'},
+               autoindent = 0,
+            }
+
             -- Redmine macro
             rs[#rs+1] = {
                buns = {'{{collapse()\n', '\n}}'},
