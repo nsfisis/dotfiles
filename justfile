@@ -15,11 +15,11 @@ update-nur-packages:
 sync HOST=default_host:
     git fetch --all
     if git diff --quiet; then \
+        git switch -d origin/main; \
+    else \
         git stash save; \
         git switch -d origin/main; \
         git stash pop; \
-    else \
-        git switch -d origin/main; \
     fi
     just switch "{{HOST}}"
 
