@@ -13,5 +13,10 @@ if [ "$(uname)" = "Darwin" ]; then
         -e 'end run' \
         -- "$message" "Claude Code" "$sound"
 else
-    notify-send "Claude Code" "$message"
+    if [ "$1" = "Stop" ]; then
+        sound=complete
+    else
+        sound=bell
+    fi
+    notify-send "Claude Code" "$message" --hint "string:sound-name:$sound"
 fi
