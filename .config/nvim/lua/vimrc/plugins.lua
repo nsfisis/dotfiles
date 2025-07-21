@@ -245,6 +245,14 @@ return {
    -- Simple filer.
    {
       'justinmk/vim-dirvish',
+      config = function()
+         vimrc.autocmd('FileType', {
+            pattern = 'dirvish',
+            callback = function()
+               vim.cmd[[hi link DirvishSuffix Normal]]
+            end,
+         })
+      end,
    },
    -- Appearance {{{1
    -- Colorscheme
