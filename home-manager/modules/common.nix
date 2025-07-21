@@ -35,6 +35,7 @@ in
       pkgs.fd
       pkgs.fzf
       pkgs.git
+      pkgs.glab
       pkgs.gnumake
       pkgs.go
       pkgs.gomi
