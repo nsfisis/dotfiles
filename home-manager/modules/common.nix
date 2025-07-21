@@ -95,6 +95,7 @@ in
     ".config/alacritty/alacritty.local.toml".source = ../../.config/alacritty/alacritty.${env.os}.toml;
     ".config/alacritty/alacritty.toml".source = ../../.config/alacritty/alacritty.toml;
     ".config/fish/completions/git-sw.fish".source = ../../.config/fish/completions/git-sw.fish;
+    ".config/gdb/gdbinit".source = ../../.config/gdb/gdbinit;
     ".config/git/ignore".source = ../../.config/git/ignore;
     ".config/nvim".source = ../../.config/nvim;
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
