@@ -61,6 +61,8 @@ bind \cg __cd_project_root_dir
 
 bind \cz fg
 
+bind ctrl-x,ctrl-e edit_command_buffer
+
 function 256colors
     for code in (seq 0 255)
         printf '\e[38;05;%dm%3d: Test\n' $code $code
