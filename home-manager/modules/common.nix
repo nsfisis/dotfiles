@@ -66,7 +66,6 @@ in
       pkgs.nodePackages.yarn
 
       nurpkgs.claude-code
-      nurpkgs.deck
       nurpkgs.hgrep
 
       nurpkgs.git-helpers
