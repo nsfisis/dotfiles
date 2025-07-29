@@ -1,19 +1,21 @@
 {
+  "model": "sonnet",
   "permissions": {
+    "defaultMode": "acceptEdits",
+    "disableBypassPermissionsMode": "disable",
     "allow": [
       "Bash(fd:*)",
       "Bash(find:*)",
+      "Bash(git diff:*)",
+      "Bash(git fetch:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
       "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
       "Bash(rg:*)",
       "Bash(touch:*)",
-      "Bash(tree:*)",
-
-      "Bash(git diff:*)",
-      "Bash(git fetch:*)",
-      "Bash(git log:*)",
-      "Bash(git status:*)"
+      "Bash(tree:*)"
     ],
     "deny": [
       "Bash(git push:*)"
