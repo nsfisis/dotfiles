@@ -21,6 +21,11 @@
       "Bash(git push:*)"
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "__claude-code-statusline",
+    "padding": 0
+  },
   "hooks": {
     "Notification": [
       {

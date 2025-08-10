@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 message="$(jq -r '.message // "Task completed"')"
 if [ "$(uname)" = "Darwin" ]; then

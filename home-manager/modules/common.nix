@@ -106,6 +106,7 @@ in
       "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
     ".zshrc".source = ../config/zsh/.zshrc;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
+    "bin/__claude-code-statusline".source = ../../bin/__claude-code-statusline;
     "bin/tmux-pane-idx".source = ../../bin/tmux-pane-idx;
 
     ".config/git/config".text =
