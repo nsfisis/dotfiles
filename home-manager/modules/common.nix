@@ -49,6 +49,7 @@ in
       pkgs.neovim
       pkgs.nodejs_22
       pkgs.pandoc
+      pkgs.pdftk
       pkgs.phpactor
       pkgs.pwgen
       pkgs.python314
