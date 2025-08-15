@@ -78,6 +78,10 @@ O.confirm = true
 -- Selecting text {{{1
 
 O.clipboard = 'unnamed'
+-- Prefer 'tmux' to 'wl-copy' or 'pbcopy' if in tmux.
+if vim.env.tmux then
+   vim.g.clipboard = 'tmux'
+end
 
 
 -- Editing text {{{1
