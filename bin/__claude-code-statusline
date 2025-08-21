@@ -6,6 +6,7 @@ input="$(cat)"
 transcript_path="$(echo "$input" | jq -r '.transcript_path')"
 cwd="$(echo "$input" | jq -r '.cwd')"
 model="$(echo "$input" | jq -r '.model.display_name')"
+cost="$(echo "$input" | jq -r '.cost.total_cost_usd // 0 | . * 100 | floor / 100 | " ($\(.))"')"
 
 if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
     # Sum consumed token counts and format it like "12.3k".
@@ -13,8 +14,8 @@ if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
         map(.message.usage // empty) |
         last |
         (.input_tokens // 0) + (.output_tokens // 0) + (.cache_creation_input_tokens // 0) + (.cache_read_input_tokens // 0) |
-        [. * 10 / 1000, 1] | max | floor / 10 | " (\(.)k)"
+        [. * 10 / 1000, 1] | max | floor / 10 | " \(.)k"
     ' < "$transcript_path")"
 fi
 
-echo "[$model]$consumed_tokens ${cwd/#$HOME/\~}"
+echo "[$model]$consumed_tokens$cost ${cwd/#$HOME/\~}"
