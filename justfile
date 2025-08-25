@@ -35,4 +35,4 @@ gc:
 
 # TODO
 copy-claude-code-settings:
-    cp .config/claude-code/settings.json ~/.claude/
+    cp .config/claude/settings.json ~/.claude/
