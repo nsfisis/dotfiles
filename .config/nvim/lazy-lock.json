@@ -1,7 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "capture.vim": { "branch": "master", "commit": "857ee11cfe1193948d3d45dcb8d511fded8533fb" },
-  "claudecode.nvim": { "branch": "main", "commit": "da78309eaa2ca29fd38b22ed6155697ae1e65dc4" },
   "colorswatch.vim": { "branch": "main", "commit": "2e3f847fc0e493de8b119d3c8560e47ceeff595c" },
   "committia.vim": { "branch": "master", "commit": "c8c0f255e8090ed90dd9d5dd2e8672994f8e3671" },
   "denops.vim": { "branch": "main", "commit": "387fe5771a51b613e21212719414570b96ea8c8e" },
