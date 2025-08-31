@@ -79,7 +79,7 @@ O.confirm = true
 
 O.clipboard = 'unnamed'
 -- Prefer 'tmux' to 'wl-copy' or 'pbcopy' if in tmux.
-if vim.env.tmux then
+if vim.env.TMUX then
    vim.g.clipboard = 'tmux'
 end
 
