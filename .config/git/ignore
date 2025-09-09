@@ -5,5 +5,6 @@
 .ken
 .nvim.lua
 .phpactor.json
+AGENTS.md
 CLAUDE.local.md
 CLAUDE.md
