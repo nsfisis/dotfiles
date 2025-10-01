@@ -13,7 +13,5 @@
     pkgs.rustup
     pkgs.zig
     pkgs.zls
-
-    nurpkgs.deck
   ];
 }
