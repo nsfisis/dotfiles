@@ -14,6 +14,9 @@ local lazy_path = require('vimrc.my_env').data_dir .. '/lazy/lazy.nvim'
 if vim.loop.fs_stat(lazy_path) then
    vim.opt.rtp:prepend(lazy_path)
    require('lazy').setup('vimrc.plugins', {
+      -- This file is copied to under home directory by Home Manager.
+      -- Because Home Manager will make it read-only, I directly modify a file under the "dotfiles" repository.
+      lockfile = require('vimrc.my_env').home .. "/dotfiles/.config/nvim/lazy-lock.json",
       -- Overrides ui.icons to avoid using Nerd Font.
       ui = {
          icons = {
