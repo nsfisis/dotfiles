@@ -39,6 +39,13 @@ A('BufRead', {
 -- License: NYSL
 A('BufWritePre', {
    callback = function()
+      -- Don't create directory for ephemeral buffers.
+      -- See :help 'bufhidden'
+      local bufhidden = vim.bo.bufhidden
+      if bufhidden == 'unload' or bufhidden == 'delete' or bufhidden == 'wipe' then
+         return
+      end
+
       local dir = F.expand('<afile>:p:h')
       if F.isdirectory(dir) ~= 0 then
          return
