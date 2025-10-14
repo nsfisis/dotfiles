@@ -507,9 +507,14 @@ return {
    {
       'rhysd/committia.vim',
       config = function()
+         -- Disable 'spell' option, which is inherited from gitcommit buffer.
+         -- See also: ../../after/ftplugin/gitcommit.lua
          vim.g.committia_hooks = {
-            edit_open = function(_info)
-               vim.wo.spell = true
+            diff_open = function(_info)
+               vim.o.spell = false
+            end,
+            status_open = function(_info)
+               vim.o.spell = false
             end,
          }
       end,
