@@ -509,3 +509,17 @@ K.set('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
 -- `s` is used as a prefix key of plugin sandwich and hop.
 K.set('n', 's', '<Nop>')
 K.set('x', 's', '<Nop>')
+
+
+
+local redmine_host = vim.env.REDMINE_HOST
+if redmine_host then
+   local original_ui_open = vim.ui.open
+   vim.ui.open = function(path, opt)
+      if path:match('^#%d+$') then
+         original_ui_open(('%s/issues/%s'):format(redmine_host, path:sub(2, -1)), opt)
+      else
+         original_ui_open(path, opt)
+      end
+   end
+end
