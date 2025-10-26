@@ -17,7 +17,10 @@
       "Bash(tree:*)"
     ],
     "deny": [
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "Bash(su:*)",
+      "Bash(sudo:*)"
     ]
   },
   "statusLine": {
