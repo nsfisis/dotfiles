@@ -11,6 +11,7 @@
     pkgs.gcc
     pkgs.gopls
     pkgs.rustup
+    pkgs.typst
     pkgs.zig
     pkgs.zls
   ];
