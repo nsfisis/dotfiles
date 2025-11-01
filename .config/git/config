@@ -219,3 +219,12 @@
             git branch \"$backup_branch\" \"$branch\"; \
         fi; \
     }; __fn"
+    squash-onto = "!__fn() { \
+        if [ \"$1\" = \"\" ]; then \
+            echo \"usage: git squash-onto <base-ref>\" >&2; \
+            exit 1; \
+        fi; \
+        local base_ref=\"$1\"; \
+        git reset --soft \"$base_ref\" && \
+        git commit --edit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; \
+    }; __fn"
