@@ -24,72 +24,71 @@ in
 
   news.display = "silent";
 
-  home.packages =
+  home.packages = [
+    # pkgs.alacritty
+    pkgs.bat
+    pkgs.bed
+    pkgs.curl
+    pkgs.deno
+    pkgs.efm-langserver
+    pkgs.fd
+    pkgs.fzf
+    pkgs.git
+    pkgs.glab
+    pkgs.gnumake
+    pkgs.go
+    pkgs.gomi
+    pkgs.htop
+    pkgs.hyperfine
+    pkgs.imagemagick
+    pkgs.jnv
+    pkgs.jq
+    pkgs.just
+    pkgs.mmv-go
+    pkgs.neovim
+    pkgs.nodejs_22
+    pkgs.pandoc
+    pkgs.phpactor
+    pkgs.pwgen
+    pkgs.python314
+    pkgs.qpdf
+    pkgs.ripgrep
+    pkgs.ruby_3_4
+    pkgs.sqlite
+    pkgs.tokei
+    pkgs.tree
+    pkgs.universal-ctags
+    pkgs.vim
+
+    pkgs.nodePackages.pnpm
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nodePackages.yarn
+
+    nurpkgs.claude-code
+    nurpkgs.hgrep
+
+    nurpkgs.git-helpers
+    nurpkgs.reparojson
+    nurpkgs.term-banner
+    nurpkgs.term-clock
+  ]
+  ++ (
+    let
+      php = (
+        pkgs.php84.buildEnv {
+          extensions = { enabled, all }: enabled ++ [ all.ffi ];
+          extraConfig = ''
+            ffi.enable=true
+          '';
+        }
+      );
+    in
     [
-      # pkgs.alacritty
-      pkgs.bat
-      pkgs.bed
-      pkgs.curl
-      pkgs.deno
-      pkgs.efm-langserver
-      pkgs.fd
-      pkgs.fzf
-      pkgs.git
-      pkgs.glab
-      pkgs.gnumake
-      pkgs.go
-      pkgs.gomi
-      pkgs.htop
-      pkgs.hyperfine
-      pkgs.imagemagick
-      pkgs.jnv
-      pkgs.jq
-      pkgs.just
-      pkgs.mmv-go
-      pkgs.neovim
-      pkgs.nodejs_22
-      pkgs.pandoc
-      pkgs.phpactor
-      pkgs.pwgen
-      pkgs.python314
-      pkgs.qpdf
-      pkgs.ripgrep
-      pkgs.ruby_3_4
-      pkgs.sqlite
-      pkgs.tokei
-      pkgs.tree
-      pkgs.universal-ctags
-      pkgs.vim
-
-      pkgs.nodePackages.pnpm
-      pkgs.nodePackages.typescript-language-server
-      pkgs.nodePackages.yarn
-
-      nurpkgs.claude-code
-      nurpkgs.hgrep
-
-      nurpkgs.git-helpers
-      nurpkgs.reparojson
-      nurpkgs.term-banner
-      nurpkgs.term-clock
+      php
+      php.packages.composer
     ]
-    ++ (
-      let
-        php = (
-          pkgs.php84.buildEnv {
-            extensions = { enabled, all }: enabled ++ [ all.ffi ];
-            extraConfig = ''
-              ffi.enable=true
-            '';
-          }
-        );
-      in
-      [
-        php
-        php.packages.composer
-      ]
-    )
-    ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
+  )
+  ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
     ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
