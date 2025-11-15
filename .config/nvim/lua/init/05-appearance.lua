@@ -24,7 +24,7 @@ function vimrc.statusline.build()
    if not is_active then
       return ' ' .. fname
    end
-   local mode = vimrc.statusline.mode()
+   local skk_mode = vimrc.statusline.skk_mode()
    local ro = vimrc.statusline.readonly(bufnr)
    local mod = vimrc.statusline.modified(bufnr)
    local extra_info = vimrc.statusline.extra_info(bufnr, winid)
@@ -34,8 +34,8 @@ function vimrc.statusline.build()
    local ff = vimrc.statusline.ff(bufnr)
    local ft = vimrc.statusline.filetype(bufnr)
    return string.format(
-      ' %s  %s%s%s %%= %s%s %s%s%s %s ',
-      mode,
+      ' %s%s%s%s %%= %s%s %s%s%s %s ',
+      skk_mode,
       ro and ro .. ' ' or '',
       fname,
       mod and ' ' .. mod or '',
@@ -47,54 +47,17 @@ function vimrc.statusline.build()
       ft)
 end
 
-function vimrc.statusline.mode()
-   local mode_map = {
-      n                       = 'N',
-      no                      = 'O',
-      nov                     = 'Oc',
-      noV                     = 'Ol',
-      [vimrc.term('no<C-v>')] = 'Ob',
-      niI                     = 'In',
-      niR                     = 'Rn',
-      niV                     = 'Rn',
-      v                       = 'V',
-      V                       = 'Vl',
-      [vimrc.term('<C-v>')]   = 'Vb',
-      s                       = 'S',
-      S                       = 'Sl',
-      [vimrc.term('<C-s>')]   = 'Sb',
-      i                       = 'I',
-      ic                      = 'I?',
-      ix                      = 'I?',
-      R                       = 'R',
-      Rc                      = 'R?',
-      Rv                      = 'R',
-      Rx                      = 'R?',
-      c                       = 'C',
-      cv                      = 'C',
-      ce                      = 'C',
-      r                       = '-',
-      rm                      = '-',
-      ['r?']                  = '-',
-      ['!']                   = '-',
-      t                       = 'T',
-   }
-   local vim_mode = mode_map[F.mode(true)] or '-'
-
-   local skk_mode
-   if F.exists('*skkeleton#mode') == 1 then
-      skk_mode = ({
-         ['hira'] = ' (あ)',
-         ['kata'] = ' (ア)',
-         ['hankata'] = ' (半ア)',
-         ['zenkaku'] = ' (全角英数)',
-         ['abbrev'] = ' (abbrev)',
-      })[F['skkeleton#mode']()] or ''
-   else
-      skk_mode = ''
+function vimrc.statusline.skk_mode()
+   if F.exists('*skkeleton#mode') ~= 1 then
+      return ''
    end
-
-   return vim_mode .. skk_mode
+   return ({
+      ['hira'] = 'あ ',
+      ['kata'] = 'ア ',
+      ['hankata'] = '半ア ',
+      ['zenkaku'] = '全角英数 ',
+      ['abbrev'] = 'abbrev ',
+   })[F['skkeleton#mode']()] or ''
 end
 
 function vimrc.statusline.readonly(bufnr)
