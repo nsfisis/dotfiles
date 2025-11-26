@@ -201,11 +201,6 @@ in
   programs.fish = {
     enable = true;
 
-    # Disable test execution temporarily because of test failure on macOS.
-    package = pkgs.fish.overrideAttrs (old: {
-      doCheck = false;
-    });
-
     interactiveShellInit = builtins.readFile ../config/fish/config.fish;
     shellInitLast =
       builtins.readFile ../config/fish/path.fish
