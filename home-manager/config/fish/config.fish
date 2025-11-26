@@ -145,3 +145,12 @@ function notify
         notify-send "$argv[1]" "$argv[2]" --hint "string:sound-name:$argv[3]"
     end
 end
+
+function ring
+    if test (uname) = "Darwin"
+        set sound Funk
+    else
+        set sound bell
+    end
+    notify Ring "!!!" $sound
+end
