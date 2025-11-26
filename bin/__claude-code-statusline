@@ -3,6 +3,7 @@
 # https://docs.anthropic.com/en/docs/claude-code/statusline
 
 input="$(cat)"
+
 transcript_path="$(echo "$input" | jq -r '.transcript_path')"
 cwd="$(echo "$input" | jq -r '.cwd')"
 model="$(echo "$input" | jq -r '.model.display_name')"
