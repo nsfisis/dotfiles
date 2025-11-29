@@ -88,9 +88,5 @@ vim.filetype.add({
 })
 
 -- TODO: move this elsewhere
-vim.diagnostic.config({
-   virtual_text = true,
-   virtual_lines = {
-      current_line = true,
-   },
-})
+vim.diagnostic.config({ virtual_text = true })
+vim.keymap.set('n', '<Space>d', vim.diagnostic.open_float)
