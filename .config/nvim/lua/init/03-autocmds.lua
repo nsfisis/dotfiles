@@ -50,12 +50,9 @@ A('BufWritePre', {
       if F.isdirectory(dir) ~= 0 then
          return
       end
-      vimrc.echo(('"%s" does not exist. Create? [y/N] '):format(dir), 'Question')
-      local answer = vimrc.getchar()
-      if answer ~= 'y' and answer ~= 'Y' then
-         return
+      if F.confirm(('"%s" does not exist. Create?'):format(dir), "&Yes\n&No") == 1 then
+         F.mkdir(dir, 'p')
       end
-      F.mkdir(dir, 'p')
    end,
 })
 
