@@ -74,6 +74,14 @@
 [mergetool]
     keepbackup = false
 
+# https://git-scm.com/docs/gitcredentials
+# > If credential.helper is configured to the empty string, this resets the
+# > helper list to empty (so you may override a helper set by a lower-priority
+# > config file by configuring the empty-string helper, followed by whatever set
+# > of helpers you would like).
+[credential]
+    helper =
+
 [credential "https://github.com"]
     helper = !gh auth git-credential
 
