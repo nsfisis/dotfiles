@@ -39,6 +39,13 @@
       in
       {
         formatter = treefmt.config.build.wrapper;
+
+        devShells.default = pkgs.mkShell {
+          packages = [
+            # For generating nvim-treesitter parsers.
+            pkgs.tree-sitter
+          ];
+        };
       }
     )
     // {

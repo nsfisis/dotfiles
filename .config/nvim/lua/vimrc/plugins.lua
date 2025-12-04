@@ -307,35 +307,24 @@ return {
    -- Tree-sitter integration.
    {
       'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdateSync',
+      branch = 'main',
+      build = ':TSUpdate',
       config = function()
-         require('nvim-treesitter.configs').setup {
-            ensure_installed = 'all',
-            sync_install = false,
-            highlight = {
-               enable = true,
-               additional_vim_regex_highlighting = false,
-            },
-            --[[
-            incremental_selection = {
-               enable = true,
-               keymaps = {
-                  init_selection = 'TODO',
-                  node_incremental = 'TODO',
-                  scope_incremental = 'TODO',
-                  node_decremental = 'TODO',
-               },
-            },
-            --]]
-            indent = {
-               enable = true,
-            },
-         }
+         require('nvim-treesitter').setup({})
+         vimrc.autocmd('FileType', {
+            callback = function(ctx)
+               local ok = pcall(vim.treesitter.start)
+               if not ok then
+                  return
+               end
+               vim.o.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
+               if vim.o.foldmethod == 'manual' then
+                  vim.o.foldmethod = 'expr'
+                  vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+               end
+            end,
+         })
       end,
-   },
-   -- Tree-sitter debugging.
-   {
-      'nvim-treesitter/playground',
    },
    -- Highlight specified words.
    {
