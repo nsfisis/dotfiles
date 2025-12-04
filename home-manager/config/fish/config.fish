@@ -154,3 +154,11 @@ function ring
     end
     notify Ring "!!!" $sound
 end
+
+# Usage: wait4p <pid>
+function wait4p
+    while kill -0 $argv[1] 2>/dev/null
+        sleep 5
+    end
+    ring
+end
