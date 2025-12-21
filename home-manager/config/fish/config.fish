@@ -9,6 +9,7 @@ abbr -a lla 'ls -la'
 abbr -a lsa 'ls -a'
 abbr -a lsal 'ls -la'
 abbr -a lsl 'ls -l'
+abbr -a j 'just'
 
 # Aliases
 alias cat 'bat'
