@@ -149,6 +149,7 @@ O.wildignorecase = true
 
 O.shell = 'fish'
 O.keywordprg = ''
+O.grepprg = 'rg --vimgrep --smart-case'
 
 
 -- Encoding {{{1

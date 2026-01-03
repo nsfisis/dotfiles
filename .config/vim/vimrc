@@ -135,6 +135,7 @@ set wildmenu
 
 set shell=fish
 set keywordprg=
+let &grepprg = 'rg --vimgrep --smart-case'
 
 set fileencodings=utf-8,cp932,euc-jp
 
