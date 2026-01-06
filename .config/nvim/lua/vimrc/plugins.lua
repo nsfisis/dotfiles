@@ -20,9 +20,12 @@ return {
             pattern = 'skkeleton-initialize-pre',
             callback = function()
                vim.fn['skkeleton#config']({
+                  -- Uncomment out this if I change coding font again.
+                  --[[
                   -- Change default markers, which are classified as EAW Ambigious.
                   markerHenkan = '▿',
                   markerHenkanSelect = '▾',
+                  --]]
                   eggLikeNewline = true,
                   userDictionary = my_env.skk_dir .. '/jisyo',
                   globalDictionaries = {my_env.skk_dir .. '/jisyo.L'},
