@@ -103,6 +103,14 @@ in
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
     ".local/share/fonts/SourceHanCodeJP.ttc".source =
       "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
+    ".local/share/fonts/UDEVGothic35-Regular.ttf".source =
+      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Regular.ttf";
+    ".local/share/fonts/UDEVGothic35-Bold.ttf".source =
+      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Bold.ttf";
+    ".local/share/fonts/UDEVGothic35-Italic.ttf".source =
+      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Italic.ttf";
+    ".local/share/fonts/UDEVGothic35-BoldItalic.ttf".source =
+      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-BoldItalic.ttf";
     ".zshrc".source = ../config/zsh/.zshrc;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
     "bin/__claude-code-statusline".source = ../../bin/__claude-code-statusline;

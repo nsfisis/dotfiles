@@ -20,7 +20,7 @@ return {
             pattern = 'skkeleton-initialize-pre',
             callback = function()
                vim.fn['skkeleton#config']({
-                  -- Change default markers because they are EAW (East Asian Ambiguous Width) characters.
+                  -- Change default markers, which are classified as EAW Ambigious.
                   markerHenkan = '▿',
                   markerHenkanSelect = '▾',
                   eggLikeNewline = true,

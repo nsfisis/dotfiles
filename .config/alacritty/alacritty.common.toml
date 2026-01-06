@@ -5,7 +5,7 @@ transparent_background_colors = true
 size = 16.0
 
 [font.normal]
-family = "Source Han Code JP"
+family = "UDEV Gothic 35"
 
 [scrolling]
 history = 0
