@@ -5,7 +5,10 @@
     "autoAllowBashIfSandboxed": false,
     "excludedCommands": [
       "docker"
-    ]
+    ],
+    "network": {
+      "allowLocalBinding": true
+    }
   },
   "permissions": {
     "defaultMode": "acceptEdits",
