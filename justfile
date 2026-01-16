@@ -5,9 +5,10 @@ help:
 
 update HOST=default_host:
     nix flake update
-    git add -- ./flake.lock
-    git commit -m "nix: update flake"
     just switch "{{HOST}}"
+    just generate-package-versions
+    git add -- flake.lock home-manager/package-versions.txt
+    git commit -m "nix: update flake"
 
 update-nur-packages:
     nix flake update nur-packages
@@ -26,9 +27,10 @@ sync HOST=default_host:
 switch HOST=default_host:
     home-manager switch --flake ".#{{HOST}}"
 
+generate-package-versions:
+    home-manager packages | grep -v '\bman$' > home-manager/package-versions.txt
+
 gc:
-    # TODO: leave the last 3 generations?
-    # home-manager remove-generations $({ home-manager generations | tail +4 && date -d '-1 month' '+%Y-%m-%d %H:%M : id DELETE ->'; } | sort -r | sed -n '/: id DELETE ->/,$p' | tail +2 | grep -o ': id [0-9]* ->' | awk '{ print $3; }')
     home-manager expire-generations '-1 month'
     nix profile wipe-history
     nix store gc
