@@ -2,7 +2,7 @@ bash-interactive-5.3p3
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.7
-claude-code-2.1.9
+claude-code-2.1.12
 cmake-4.1.2
 composer-2.9.2
 curl-8.17.0-bin
@@ -13,7 +13,7 @@ fd-10.3.0
 fish-4.3.3
 fzf-0.67.0
 gcc-wrapper-15.2.0
-gh-2.83.2
+gh-2.85.0
 git-2.52.0
 git-helpers-0.1.1
 glab-1.80.4
@@ -39,7 +39,7 @@ nodejs-22.22.0
 pandoc-cli-3.7.0.2
 php-with-extensions-8.4.16
 phpactor-2025.12.21.1
-pnpm-10.26.1
+pnpm-10.28.0
 pwgen-2.08
 python3-3.14.2
 qpdf-12.2.0-bin
