@@ -2,7 +2,7 @@ bash-interactive-5.3p3
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.7
-claude-code-2.1.12
+claude-code-2.1.14
 cmake-4.1.2
 composer-2.9.2
 curl-8.17.0-bin
