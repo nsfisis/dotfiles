@@ -30,10 +30,3 @@ directory "#{home}/.config/skk"
 execute "home-manager switch" do
   command "nix run 'nixpkgs#home-manager' -- switch --flake '.##{node[:name]}'"
 end
-
-if node[:profile] == "private"
-  execute "rustup: install nightly toolchain" do
-    command "rustup toolchain install nightly"
-    not_if "rustup toolchain list | grep nightly"
-  end
-end
