@@ -101,6 +101,9 @@ in
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
+    # TODO: Place this file under .config/nvim/lua/vimrc.
+    # Home Manager currently does not support merge a directory and files inside it.
+    ".config/vim/setcellwidths.lua".source = "${nurpkgs.nvim-setcellwidths-table-for-udev-gothic}/setcellwidths.lua";
     ".local/share/fonts/SourceHanCodeJP-Bold.otf".source =
       "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Bold.otf";
     ".local/share/fonts/SourceHanCodeJP-BoldIt.otf".source =

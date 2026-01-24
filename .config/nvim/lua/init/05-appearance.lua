@@ -10,6 +10,15 @@ local vimrc = require('vimrc')
 vim.g._ts_force_sync_parsing = true
 
 
+-- EAW {{{1
+
+-- See ../../../../home-manager/modules/common.nix for setcellwidths.lua
+pcall(function()
+   local config_home = require('vimrc.my_env').config_home
+   loadfile(config_home .. '/vim/setcellwidths.lua')().setcellwidths()
+end)
+
+
 -- Statusline {{{1
 
 O.statusline = '%!v:lua.vimrc.statusline.build()'
