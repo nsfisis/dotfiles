@@ -101,16 +101,50 @@ in
     ".config/sh/claude-code.sh".source = ../config/sh/claude-code.sh;
     ".config/skk/jisyo.L".source = "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L";
     ".config/vim/vimrc".source = ../../.config/vim/vimrc;
-    ".local/share/fonts/SourceHanCodeJP.ttc".source =
-      "${nurpkgs.source-han-code-jp}/share/fonts/SourceHanCodeJP.ttc";
+    ".local/share/fonts/SourceHanCodeJP-Bold.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Bold.otf";
+    ".local/share/fonts/SourceHanCodeJP-BoldIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-BoldIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-ExtraLight.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-ExtraLight.otf";
+    ".local/share/fonts/SourceHanCodeJP-ExtraLightIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-ExtraLightIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-Heavy.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Heavy.otf";
+    ".local/share/fonts/SourceHanCodeJP-HeavyIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-HeavyIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-Light.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Light.otf";
+    ".local/share/fonts/SourceHanCodeJP-LightIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-LightIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-Medium.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Medium.otf";
+    ".local/share/fonts/SourceHanCodeJP-MediumIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-MediumIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-Normal.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Normal.otf";
+    ".local/share/fonts/SourceHanCodeJP-NormalIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-NormalIt.otf";
+    ".local/share/fonts/SourceHanCodeJP-Regular.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-Regular.otf";
+    ".local/share/fonts/SourceHanCodeJP-RegularIt.otf".source =
+      "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-RegularIt.otf";
     ".local/share/fonts/UDEVGothic35-Regular.ttf".source =
-      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Regular.ttf";
+      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Regular.ttf";
     ".local/share/fonts/UDEVGothic35-Bold.ttf".source =
-      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Bold.ttf";
+      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Bold.ttf";
     ".local/share/fonts/UDEVGothic35-Italic.ttf".source =
-      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-Italic.ttf";
+      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Italic.ttf";
     ".local/share/fonts/UDEVGothic35-BoldItalic.ttf".source =
-      "${nurpkgs.udev-gothic}/share/fonts/UDEVGothic35-BoldItalic.ttf";
+      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-BoldItalic.ttf";
+    ".local/share/fonts/BIZUDGothic-Bold.ttf".source =
+      "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDGothic-Bold.ttf";
+    ".local/share/fonts/BIZUDGothic-Regular.ttf".source =
+      "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDGothic-Regular.ttf";
+    ".local/share/fonts/BIZUDPGothic-Bold.ttf".source =
+      "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDPGothic-Bold.ttf";
+    ".local/share/fonts/BIZUDPGothic-Regular.ttf".source =
+      "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDPGothic-Regular.ttf";
     ".zshrc".source = ../config/zsh/.zshrc;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
     "bin/__claude-code-statusline".source = ../../bin/__claude-code-statusline;
