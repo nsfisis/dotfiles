@@ -10,8 +10,12 @@ update HOST=default_host:
     git add -- flake.lock home-manager/package-versions.txt
     git commit -m "nix: update flake"
 
-update-nur-packages:
+update-nur-packages HOST=default_host:
     nix flake update nur-packages
+    just switch "{{HOST}}"
+    just generate-package-versions
+    git add -- flake.lock home-manager/package-versions.txt
+    git commit -m "nix: update flake"
 
 sync HOST=default_host:
     git fetch --all
