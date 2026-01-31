@@ -234,5 +234,5 @@
         fi; \
         local base_ref=\"$1\"; \
         git reset --soft \"$base_ref\" && \
-        git commit --edit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; \
+        git commit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; \
     }; __fn"
