@@ -189,7 +189,7 @@ in
     EDITOR = "nvim";
 
     # Bat
-    BAT_THEME = "base16";
+    BAT_THEME = "Nord";
 
     # Fzf
     FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --exclude .git";
