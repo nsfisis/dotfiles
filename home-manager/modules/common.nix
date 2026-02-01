@@ -91,6 +91,7 @@ in
   ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
+    ".claude/skills/conventional-commit".source = ../../.config/claude/skills/conventional-commit;
     ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
     ".config/alacritty/alacritty.local.toml".source = ../../.config/alacritty/alacritty.${env.os}.toml;
     ".config/alacritty/alacritty.toml".source = ../../.config/alacritty/alacritty.toml;
