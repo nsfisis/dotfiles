@@ -2,7 +2,7 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.37
+claude-code-2.1.39
 cmake-4.1.2
 composer-2.9.5
 curl-8.17.0-bin
@@ -16,7 +16,7 @@ gcc-wrapper-15.2.0
 gh-2.86.0
 git-2.52.0
 git-helpers-0.1.1
-glab-1.80.4
+glab-1.82.0
 gnumake-4.4.1
 go-1.25.5
 gomi-1.6.1
@@ -37,7 +37,7 @@ mmv-go-0.1.6
 neovim-0.11.6
 nodejs-22.22.0
 pandoc-cli-3.7.0.2
-php-with-extensions-8.4.16
+php-with-extensions-8.4.17
 phpactor-2025.12.21.1
 pnpm-10.28.0
 pwgen-2.08
