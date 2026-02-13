@@ -2,7 +2,7 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.39
+claude-code-2.1.41
 cmake-4.1.2
 composer-2.9.5
 curl-8.17.0-bin
@@ -54,7 +54,7 @@ term-banner-1.2.0
 term-clock-1.1.0
 tmux-3.6a
 tokei-14.0.0
-tree-2.2.1
+tree-2.3.1
 typescript-language-server-5.1.3
 typst-0.14.2
 universal-ctags-6.2.1
