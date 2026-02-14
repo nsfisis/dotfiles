@@ -7,7 +7,7 @@ allowed-tools: Bash(git add:*), Bash(git diff:*), Bash(git status:*), Bash(git c
 ## Context
 
 - Current git status: !`git status`
-- Current git diff (staged and unstaged changes): !`git diff HEAD`
+- Current git diff (staged and unstaged changes): !`git diff HEAD --`
 - Recent commits: !`git log --oneline -5`
 
 ## Instructions
