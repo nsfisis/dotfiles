@@ -1,18 +1,5 @@
 {
-  "language": "日本語",
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": false,
-    "excludedCommands": [
-      "docker"
-    ],
-    "network": {
-      "allowLocalBinding": true
-    }
-  },
   "permissions": {
-    "defaultMode": "acceptEdits",
-    "disableBypassPermissionsMode": "disable",
     "allow": [
       "Bash(fd:*)",
       "Bash(find:*)",
@@ -32,12 +19,9 @@
       "Bash(rm:*)",
       "Bash(su:*)",
       "Bash(sudo:*)"
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "__claude-code-statusline",
-    "padding": 0
+    ],
+    "defaultMode": "acceptEdits",
+    "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
     "Notification": [
@@ -60,5 +44,22 @@
         ]
       }
     ]
-  }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "__claude-code-statusline",
+    "padding": 0
+  },
+  "language": "日本語",
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false,
+    "network": {
+      "allowLocalBinding": true
+    },
+    "excludedCommands": [
+      "docker"
+    ]
+  },
+  "effortLevel": "medium"
 }
