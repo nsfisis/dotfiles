@@ -75,7 +75,7 @@ in
   ++ (
     let
       php = (
-        pkgs.php84.buildEnv {
+        pkgs.php85.buildEnv {
           extensions = { enabled, all }: enabled ++ [ all.ffi ];
           extraConfig = ''
             ffi.enable=true

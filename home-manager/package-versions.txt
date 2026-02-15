@@ -37,7 +37,7 @@ mmv-go-0.1.6
 neovim-0.11.6
 nodejs-22.22.0
 pandoc-cli-3.7.0.2
-php-with-extensions-8.4.17
+php-with-extensions-8.5.2
 phpactor-2025.12.21.1
 pnpm-10.28.0
 pwgen-2.08
