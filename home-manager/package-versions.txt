@@ -2,11 +2,11 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.42
+claude-code-2.1.44
 cmake-4.1.2
 composer-2.9.5
 curl-8.17.0-bin
-deno-2.6.6
+deno-2.6.8
 direnv-2.37.1
 efm-langserver-0.0.55
 fd-10.3.0
@@ -19,7 +19,7 @@ git-helpers-0.1.1
 glab-1.82.0
 gnumake-4.4.1
 go-1.25.5
-gomi-1.6.1
+gomi-1.6.2
 gopls-0.21.0
 hgrep-0.3.9
 hm-session-vars.fish
@@ -37,7 +37,7 @@ mmv-go-0.1.6
 neovim-0.11.6
 nodejs-22.22.0
 pandoc-cli-3.7.0.2
-php-with-extensions-8.5.2
+php-with-extensions-8.5.3
 phpactor-2025.12.21.1
 pnpm-10.28.0
 pwgen-2.08
