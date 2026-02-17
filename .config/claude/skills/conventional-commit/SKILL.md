@@ -15,6 +15,7 @@ allowed-tools: Bash(git add:*), Bash(git diff:*), Bash(git status:*), Bash(git c
 1. Check the git status and changes.
 2. Analyze the changes and draft a commit message following Conventional Commits format:
    - Types: feat, fix, refactor, test, docs, chore, style, perf, ci, build
+       - **refactor**: Only for internal code improvements that do NOT change externally observable behavior. If the change alters config, adds functionality, fixes a bug, or changes any visible output, it is NOT a refactor. When in doubt, prefer feat, fix, chore, or another more accurate type.
    - Format: `<type>(<scope>): <description>`
    - Keep the first line under 72 characters
    - Add a blank line and body if more context is needed
