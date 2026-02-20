@@ -3,6 +3,8 @@
     "allow": [
       "Bash(fd:*)",
       "Bash(find:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
       "Bash(git diff:*)",
       "Bash(git fetch:*)",
       "Bash(git log:*)",
@@ -12,7 +14,8 @@
       "Bash(mkdir:*)",
       "Bash(rg:*)",
       "Bash(touch:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(wc:*)"
     ],
     "deny": [
       "Bash(git push:*)",
