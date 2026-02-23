@@ -12,6 +12,8 @@ allowed-tools: Bash(git add:*), Bash(git diff:*), Bash(git status:*), Bash(git c
 
 ## Instructions
 
+- Do NOT use `git -C` flag. Always run git commands from the current working directory.
+
 1. Check the git status and changes.
 2. Analyze the changes and draft a commit message following Conventional Commits format:
    - Types: feat, fix, refactor, test, docs, chore, style, perf, ci, build
