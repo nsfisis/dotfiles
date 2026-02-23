@@ -88,7 +88,7 @@ end
 
 O.undofile = true
 O.textwidth = 0
-OPT.completeopt:remove('preview')
+OPT.completeopt:append('fuzzy')
 O.pumheight = 10
 OPT.matchpairs:append('<:>')
 O.joinspaces = false

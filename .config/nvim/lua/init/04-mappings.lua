@@ -496,11 +496,6 @@ K.set('!', 'jk', '<ESC>', { remap=true })
 K.set('n', '<C-c>', ':<C-u>nohlsearch<CR>', { silent=true })
 
 
--- "remap" flag is needed because [<Space> and ]<Space> are implemented by Lua functions.
-K.set('n', 'go', ']<Space>', { remap = true })
-K.set('n', 'gO', '[<Space>', { remap = true })
-
-
 K.set('n', '<Space>w', '<Cmd>update<CR>')
 
 K.set('n', 'Z', '<Cmd>wqall<CR>', { nowait = true })
