@@ -38,7 +38,7 @@ function __cd_parent_dir
     cd ..
     commandline -f repaint
 end
-bind \cj __cd_parent_dir
+bind ctrl-j __cd_parent_dir
 
 function __cd_prev_dir
     if [ -n (commandline) ]
@@ -47,20 +47,20 @@ function __cd_prev_dir
     cd -
     commandline -f repaint
 end
-bind \co __cd_prev_dir
+bind ctrl-o __cd_prev_dir
 
 function __cd_project_root_dir
     if [ -n (commandline) ]
         return
     end
-    if [ (git rev-parse --is-inside-work-tree 2>/dev/null) = 'true' ]
+    if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = 'true' ]
         cd (git rev-parse --show-toplevel)
         commandline -f repaint
     end
 end
-bind \cg __cd_project_root_dir
+bind ctrl-g __cd_project_root_dir
 
-bind \cz fg
+bind ctrl-z fg
 
 bind ctrl-x,ctrl-e edit_command_buffer
 
