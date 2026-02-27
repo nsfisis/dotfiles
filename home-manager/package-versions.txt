@@ -2,7 +2,7 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.59
+claude-code-2.1.62
 cmake-4.1.2
 composer-2.9.5
 curl-8.18.0-bin
@@ -13,7 +13,7 @@ fd-10.3.0
 fish-4.5.0
 fzf-0.68.0
 gcc-wrapper-15.2.0
-gh-2.87.2
+gh-2.87.3
 git-2.53.0
 git-helpers-0.1.1
 glab-1.86.0
