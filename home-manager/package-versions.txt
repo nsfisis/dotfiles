@@ -2,7 +2,7 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.62
+claude-code-2.1.63
 cmake-4.1.2
 composer-2.9.5
 curl-8.18.0-bin
@@ -29,7 +29,7 @@ home-manager
 htop-3.4.1
 hyperfine-1.20.0
 imagemagick-7.1.2-13
-jnv-0.6.1
+jnv-0.6.2
 jq-1.8.1-bin
 just-1.46.0
 man-db-2.13.1
@@ -58,8 +58,8 @@ tree-2.3.1
 typescript-language-server-5.1.3
 typst-0.14.2
 universal-ctags-6.2.1
-vim-9.1.2109
-vim-9.1.2109-xxd
+vim-9.1.2148
+vim-9.1.2148-xxd
 wl-clipboard-2.2.1
 yarn-1.22.22
 zig-0.15.2
