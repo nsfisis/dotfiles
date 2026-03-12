@@ -36,6 +36,7 @@ generate-package-versions:
     home-manager packages | grep -v '\bman$' > home-manager/package-versions.txt
 
 gc:
+    bash scripts/rotate-nvim-lsp-log.sh
     home-manager expire-generations '-1 month'
     nix profile wipe-history
     nix store gc
