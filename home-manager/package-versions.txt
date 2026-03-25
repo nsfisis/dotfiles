@@ -2,7 +2,7 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.81
+claude-code-2.1.83
 cmake-4.1.2
 composer-2.9.5
 curl-8.18.0-bin
@@ -18,7 +18,7 @@ git-2.53.0
 git-helpers-0.1.1
 glab-1.89.0
 gnumake-4.4.1
-go-1.25.7
+go-1.26.1
 gomi-1.6.2
 gopls-0.21.1
 hgrep-0.3.9
@@ -28,10 +28,10 @@ home-configuration-reference-manpage
 home-manager
 htop-3.4.1
 hyperfine-1.20.0
-imagemagick-7.1.2-13
+imagemagick-7.1.2-17
 jnv-0.6.2
 jq-1.8.1-bin
-just-1.46.0
+just-1.47.1
 man-db-2.13.1
 mmv-go-0.1.6
 neovim-0.11.6
@@ -42,7 +42,7 @@ phpactor-2025.12.21.1
 pnpm-10.32.1
 pwgen-2.08
 python3-3.14.3
-qpdf-12.2.0-bin
+qpdf-12.3.2-bin
 reparojson-0.2.0
 ripgrep-15.1.0
 ruby-3.4.8
@@ -60,7 +60,7 @@ typst-0.14.2
 universal-ctags-6.2.1
 vim-9.2.0106
 vim-9.2.0106-xxd
-wl-clipboard-2.2.1
+wl-clipboard-2.3.0
 yarn-1.22.22
 zig-0.15.2
 zls-0.15.1
