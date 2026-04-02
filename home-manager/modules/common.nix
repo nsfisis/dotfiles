@@ -49,6 +49,7 @@ in
     pkgs.nodejs_22
     pkgs.pandoc
     pkgs.phpactor
+    pkgs.pnpm
     pkgs.pwgen
     pkgs.python314
     pkgs.qpdf
@@ -57,12 +58,10 @@ in
     pkgs.sqlite
     pkgs.tokei
     pkgs.tree
+    pkgs.typescript-language-server
     pkgs.universal-ctags
     pkgs.vim
-
-    pkgs.nodePackages.pnpm
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.yarn
+    pkgs.yarn
 
     nurpkgs.claude-code
     nurpkgs.hgrep
