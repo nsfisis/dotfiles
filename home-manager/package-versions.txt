@@ -2,11 +2,11 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.107
+claude-code-2.1.114
 cmake-4.1.2
 composer-2.9.5
 curl-8.18.0-bin
-deno-2.7.9
+deno-2.7.12
 direnv-2.37.1
 efm-langserver-0.0.56
 fd-10.4.2
@@ -26,7 +26,7 @@ hm-session-vars.fish
 hm-session-vars.sh
 home-configuration-reference-manpage
 home-manager
-htop-3.4.1
+htop-3.5.0
 hyperfine-1.20.0
 imagemagick-7.1.2-17
 jnv-0.7.1
@@ -37,7 +37,7 @@ mmv-go-0.1.6
 neovim-0.12.1
 nodejs-22.22.2
 pandoc-cli-3.7.0.2
-php-with-extensions-8.5.4
+php-with-extensions-8.5.5
 phpactor-2025.12.21.1
 pnpm-10.33.0
 pwgen-2.08
@@ -58,8 +58,8 @@ tree-2.3.1
 typescript-language-server-5.1.3
 typst-0.14.2
 universal-ctags-6.2.1
-vim-9.2.0106
-vim-9.2.0106-xxd
+vim-9.2.0340
+vim-9.2.0340-xxd
 wl-clipboard-2.3.0
 yarn-1.22.22
 zig-0.15.2
