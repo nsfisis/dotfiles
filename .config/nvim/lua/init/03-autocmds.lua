@@ -85,5 +85,16 @@ vim.filetype.add({
 })
 
 -- TODO: move this elsewhere
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+   virtual_text = true,
+   jump = {
+      on_jump = function(_, bufnr)
+         vim.diagnostic.open_float({
+            bufnr = bufnr,
+            scope = 'cursor',
+            focus = false,
+         })
+      end,
+   },
+})
 vim.keymap.set('n', '<Space>d', vim.diagnostic.open_float)
