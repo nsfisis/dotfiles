@@ -63,6 +63,5 @@
     "excludedCommands": [
       "docker"
     ]
-  },
-  "effortLevel": "medium"
+  }
 }
