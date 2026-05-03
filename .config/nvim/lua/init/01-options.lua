@@ -88,11 +88,17 @@ end
 
 O.undofile = true
 O.textwidth = 0
-OPT.completeopt:append('fuzzy')
-O.pumheight = 10
 OPT.matchpairs:append('<:>')
 O.joinspaces = false
 OPT.nrformats:append('unsigned')
+
+
+-- Completion {{{1
+
+OPT.completeopt:append('noselect')
+OPT.completeopt:append('fuzzy')
+O.pumheight = 10
+O.pumborder = 'rounded'
 
 
 -- Tabs and indenting {{{1
