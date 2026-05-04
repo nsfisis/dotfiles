@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+case "$1" in
+    rm)
+        echo "The command 'rm' is denied. Use 'git rm' if the file or the directory is tracked by git. If not, request deletion to user.";;
+esac
+
+exit 2

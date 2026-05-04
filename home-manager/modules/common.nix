@@ -150,6 +150,7 @@ in
     ".local/share/fonts/BIZUDPGothic-Regular.ttf".source =
       "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDPGothic-Regular.ttf";
     ".zshrc".source = ../config/zsh/.zshrc;
+    "bin/__claude-code-block-bash-tool".source = ../../bin/__claude-code-block-bash-tool;
     "bin/__claude-code-notify".source = ../../bin/__claude-code-notify;
     "bin/__claude-code-statusline".source = ../../bin/__claude-code-statusline;
     "bin/tmux-pane-idx".source = ../../bin/tmux-pane-idx;

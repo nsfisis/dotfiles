@@ -15,7 +15,8 @@
       "Bash(rg:*)",
       "Bash(touch:*)",
       "Bash(tree:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Skill(conventional-commit)"
     ],
     "deny": [
       "Bash(git push:*)",
@@ -27,6 +28,18 @@
     "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "__claude-code-block-bash-tool rm",
+            "if": "Bash(rm *)"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
