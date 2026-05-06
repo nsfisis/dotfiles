@@ -2,11 +2,11 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.126
+claude-code-2.1.131
 cmake-4.1.2
 composer-2.9.7
 curl-8.19.0-bin
-deno-2.7.13
+deno-2.7.14
 direnv-2.37.1
 efm-langserver-0.0.56
 fd-10.4.2
