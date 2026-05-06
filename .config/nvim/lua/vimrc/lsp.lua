@@ -1,6 +1,12 @@
 local is_deno_repo = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }) ~= nil
 
-local servers = { 'gopls', 'phpactor', 'zls', 'efm' }
+local servers = {
+   'efm',
+   'gopls',
+   'phpactor',
+   'rust_analyzer',
+   'zls',
+}
 if is_deno_repo then
    table.insert(servers, 'denols')
 else
