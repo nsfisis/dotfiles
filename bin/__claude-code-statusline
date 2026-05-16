@@ -13,6 +13,5 @@ consumed_tokens="$(echo "$input" | jq -r '
     [. * 10 / 1000, 0] | max | floor / 10 | " \(.)k"
 ')"
 used_percentage="$(echo "$input" | jq -r '.context_window.used_percentage // 0 | " @ \(.)%"')"
-cost="$(echo "$input" | jq -r '.cost.total_cost_usd // 0 | . * 100 | floor / 100 | " ($\(.))"')"
 
-echo "[$model]$consumed_tokens$used_percentage$cost ${cwd/#$HOME/\~}"
+echo "[$model]$consumed_tokens$used_percentage ${cwd/#$HOME/\~}"
