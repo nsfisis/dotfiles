@@ -26,6 +26,7 @@ in
 
   home.packages = [
     # pkgs.alacritty
+    pkgs.ast-grep
     pkgs.bat
     pkgs.bed
     pkgs.curl
