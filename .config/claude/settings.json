@@ -35,7 +35,7 @@
           {
             "type": "command",
             "command": "__claude-code-block-bash-tool rm",
-            "if": "Bash(rm *)"
+            "if": "Bash(rm:*)"
           }
         ]
       }
