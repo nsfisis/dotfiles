@@ -135,13 +135,13 @@ in
     ".local/share/fonts/SourceHanCodeJP-RegularIt.otf".source =
       "${pkgs.source-han-code-jp}/share/fonts/opentype/SourceHanCodeJP-RegularIt.otf";
     ".local/share/fonts/UDEVGothic35-Regular.ttf".source =
-      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Regular.ttf";
+      "${pkgs.udev-gothic}/share/fonts/truetype/UDEVGothic35-Regular.ttf";
     ".local/share/fonts/UDEVGothic35-Bold.ttf".source =
-      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Bold.ttf";
+      "${pkgs.udev-gothic}/share/fonts/truetype/UDEVGothic35-Bold.ttf";
     ".local/share/fonts/UDEVGothic35-Italic.ttf".source =
-      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-Italic.ttf";
+      "${pkgs.udev-gothic}/share/fonts/truetype/UDEVGothic35-Italic.ttf";
     ".local/share/fonts/UDEVGothic35-BoldItalic.ttf".source =
-      "${pkgs.udev-gothic}/share/fonts/udev-gothic/UDEVGothic35-BoldItalic.ttf";
+      "${pkgs.udev-gothic}/share/fonts/truetype/UDEVGothic35-BoldItalic.ttf";
     ".local/share/fonts/BIZUDGothic-Bold.ttf".source =
       "${pkgs.biz-ud-gothic}/share/fonts/truetype/BIZUDGothic-Bold.ttf";
     ".local/share/fonts/BIZUDGothic-Regular.ttf".source =
