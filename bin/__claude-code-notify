@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 message="$(jq -r '.message // "Task completed"')"
+
+if [ "$message" = "Claude is waiting for your input" ]; then
+    exit # it's annoying
+fi
+
 if [ "$(uname)" = "Darwin" ]; then
     if [ "$1" = "Stop" ]; then
         sound=Glass
