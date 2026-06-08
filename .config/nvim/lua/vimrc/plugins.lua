@@ -385,6 +385,11 @@ return {
          vim.g.rustfmt_autosave = true
       end,
    },
+   -- Git {{{1
+   -- Git integration
+   {
+      'lewis6991/gitsigns.nvim',
+   },
    -- QoL {{{1
    -- Capture the output of a command.
    {
