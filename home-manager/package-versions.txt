@@ -3,11 +3,11 @@ bash-interactive-5.3p9
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.177
+claude-code-2.1.179
 cmake-4.1.2
 composer-2.10.1
 curl-8.20.0-bin
-deno-2.8.2
+deno-2.8.3
 direnv-2.37.1
 efm-langserver-0.0.56
 fd-10.4.2
@@ -39,7 +39,7 @@ neovim-0.12.3
 nodejs-22.22.3
 pandoc-cli-3.7.0.2
 php-with-extensions-8.5.7
-phpactor-2026.05.30.1
+phpactor-2026.05.30.2
 pnpm-11.5.3
 pwgen-2.08
 python3-3.14.4
@@ -57,7 +57,7 @@ tmux-3.6a
 tokei-14.0.0
 tree-2.3.2
 typescript-language-server-5.3.0
-typst-0.14.2
+typst-0.15.0
 universal-ctags-6.2.1
 vim-9.2.0389
 vim-9.2.0389-xxd
