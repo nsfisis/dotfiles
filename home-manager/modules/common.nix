@@ -66,6 +66,7 @@ in
 
     nurpkgs.claude-code
     nurpkgs.hgrep
+    nurpkgs.mo
 
     nurpkgs.git-helpers
     nurpkgs.reparojson
