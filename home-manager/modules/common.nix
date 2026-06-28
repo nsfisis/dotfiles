@@ -93,6 +93,7 @@ in
 
   home.file = {
     ".claude/skills/conventional-commit".source = ../../.config/claude/skills/conventional-commit;
+    ".claude/skills/q".source = ../../.config/claude/skills/q;
     ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
     ".config/alacritty/alacritty.local.toml".source = ../../.config/alacritty/alacritty.${env.os}.toml;
     ".config/alacritty/alacritty.toml".source = ../../.config/alacritty/alacritty.toml;
