@@ -17,6 +17,17 @@ update-and-commit HOST:
     git add -- flake.lock home-manager/package-versions.txt
     git commit -m "nix: update flake"
     git diff --color=always HEAD~ -- home-manager/package-versions.txt
+    just check-tmux-version
+
+# tmux 3.7 has a crash bug in break-pane (fixed in 3.7a); tmux.conf works around it.
+check-tmux-version:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    version=$(grep -oP '^tmux-\K.*' home-manager/package-versions.txt)
+    if [ "$version" != "3.7" ]; then
+        echo "WARNING: tmux version changed: 3.7 -> $version"
+        echo "         See home-manager/config/tmux/tmux.conf"
+    fi
 
 sync HOST=default_host:
     git fetch --all
