@@ -237,3 +237,9 @@
         git reset --soft \"$base_ref\" -- && \
         git commit -m \"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; \
     }; __fn"
+    prune-merged-branches = "!__fn() { \
+        git branch --merged \
+            | grep -v '^\\*' \
+            | sed -e 's/^[[:space:]]*//' \
+            | xargs -r git branch --delete; \
+    }; __fn"
