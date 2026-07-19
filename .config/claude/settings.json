@@ -66,6 +66,11 @@
     "command": "__claude-code-statusline",
     "padding": 0
   },
+  "spinnerTipsEnabled": false,
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": ["Thinking"]
+  },
   "language": "日本語",
   "sandbox": {
     "enabled": true,
