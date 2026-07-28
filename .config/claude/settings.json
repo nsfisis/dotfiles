@@ -71,7 +71,9 @@
     "mode": "replace",
     "verbs": ["Thinking"]
   },
+  "emojiCompletionEnabled": false,
   "language": "日本語",
+  "awaySummaryEnabled": false,
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
