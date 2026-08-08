@@ -24,7 +24,7 @@
       "Bash(su:*)",
       "Bash(sudo:*)"
     ],
-    "defaultMode": "acceptEdits",
+    "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
@@ -66,6 +66,7 @@
     "command": "__claude-code-statusline",
     "padding": 0
   },
+  "tui": "fullscreen",
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "replace",
@@ -74,6 +75,7 @@
   "emojiCompletionEnabled": false,
   "language": "日本語",
   "awaySummaryEnabled": false,
+  "promptSuggestionEnabled": false,
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
