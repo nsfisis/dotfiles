@@ -29,3 +29,8 @@ mods = "Control"
 action = "DecreaseFontSize"
 key = "Key2"
 mods = "Control"
+
+[[keyboard.bindings]]
+command = { program = "sh", args = ["-c", 'exec "$HOME/bin/__alacritty-toggle-opacity"'] }
+key = "Key9"
+mods = "Control"

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+case "$(alacritty msg get-config --window-id -1 | jq .window.opacity)" in
+  1.0)
+    exec alacritty msg config --window-id -1 --reset
+    ;;
+  *)
+    exec alacritty msg config --window-id -1 'window.opacity=1.0'
+    ;;
+esac
