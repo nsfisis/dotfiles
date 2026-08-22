@@ -1,9 +1,9 @@
-ast-grep-0.45.0
+ast-grep-0.45.1
 bash-interactive-5.3p15
 bat-0.26.1
 bed-0.2.8
 clang-tools-21.1.8
-claude-code-2.1.232
+claude-code-2.1.239
 cmake-4.3.4
 composer-2.10.2
 curl-8.21.0-bin
@@ -12,7 +12,7 @@ direnv-2.37.1
 efm-langserver-0.0.57
 fd-10.4.2
 fish-4.8.1
-fzf-0.74.2
+fzf-0.74.3
 gcc-wrapper-15.3.0
 gh-2.97.0
 git-2.55.0
@@ -20,14 +20,14 @@ git-helpers-0.1.1
 glab-1.111.0
 gnumake-4.4.1
 go-1.26.5
-gomi-1.6.2
+gomi-1.6.4
 gopls-0.23.0
 hgrep-0.3.9
 hm-session-vars.fish
 hm-session-vars.sh
 home-configuration-reference-manpage
 home-manager
-htop-3.5.2
+htop-3.5.3
 hyperfine-1.20.0
 imagemagick-7.1.2-29
 jnv-0.7.1
@@ -41,7 +41,7 @@ nodejs-22.23.2
 pandoc-cli-3.7.0.2
 php-with-extensions-8.5.9
 phpactor-2026.07.22.0
-pnpm-11.20.0
+pnpm-11.21.0
 pwgen-2.08
 python3-3.14.7
 qpdf-12.3.2-bin
