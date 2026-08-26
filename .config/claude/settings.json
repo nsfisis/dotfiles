@@ -76,6 +76,7 @@
   "language": "日本語",
   "awaySummaryEnabled": false,
   "promptSuggestionEnabled": false,
+  "autoMemoryEnabled": false,
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
