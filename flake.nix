@@ -16,6 +16,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    reparojson = {
+      # "github:nsfisis/reparojson" does not work.
+      # See: https://github.com/NixOS/nix/issues/13571
+      url = "git+https://github.com/nsfisis/reparojson?submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +37,7 @@
       flake-utils,
       treefmt-nix,
       nur-packages,
+      reparojson,
       home-manager,
       ...
     }:
@@ -68,6 +78,7 @@
                 nodeName = name;
                 env = flake.env;
                 nurpkgs = import nur-packages { inherit pkgs; };
+                reparojson = reparojson.packages.${flake.system}.default;
               };
               modules = [
                 ./home-manager/modules/common.nix

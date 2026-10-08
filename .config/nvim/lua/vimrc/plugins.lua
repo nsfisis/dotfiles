@@ -360,11 +360,7 @@ return {
          local vimrc = require('vimrc')
 
          vim.g['clang_format#auto_format'] = true
-
-         vimrc.autocmd('FileType', {
-            pattern = {'javascript', 'typescript'},
-            command = 'ClangFormatAutoDisable',
-         })
+         vim.g['clang_format#auto_filetypes'] = {'c', 'cpp'}
       end,
    },
    -- HTML

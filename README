@@ -64,3 +64,11 @@ $ just update
 ```
 $ just gc
 ```
+
+# Update Nix
+
+```
+$ sudo -i nix upgrade-nix
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart nix-daemon
+```

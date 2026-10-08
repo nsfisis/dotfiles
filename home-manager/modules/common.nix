@@ -1,6 +1,7 @@
 {
   pkgs,
   nurpkgs,
+  reparojson,
   nodeName,
   env,
   ...
@@ -69,9 +70,10 @@ in
     nurpkgs.mo
 
     nurpkgs.git-helpers
-    nurpkgs.reparojson
     nurpkgs.term-banner
     nurpkgs.term-clock
+
+    reparojson
   ]
   ++ (
     let
