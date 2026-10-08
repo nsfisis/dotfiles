@@ -17,7 +17,7 @@ return {
       languages = {
          json = {
             {
-               formatCommand = 'reparojson -q',
+               formatCommand = 'reparojson',
                formatStdin = true,
             },
          },

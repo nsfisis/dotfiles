@@ -45,7 +45,7 @@ pnpm-12.9.0
 pwgen-2.08
 python3-3.14.7
 qpdf-12.3.2-bin
-reparojson-0.3.0
+reparojson-1.0.0
 ripgrep-15.2.0
 ruby-3.4.9
 rustup-1.29.1
