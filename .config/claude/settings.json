@@ -1,26 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(fd:*)",
-      "Bash(find:*)",
       "Bash(gh issue list:*)",
       "Bash(gh issue view:*)",
-      "Bash(git diff:*)",
-      "Bash(git fetch:*)",
-      "Bash(git log:*)",
-      "Bash(git status:*)",
-      "Bash(grep:*)",
-      "Bash(ls:*)",
-      "Bash(mkdir:*)",
-      "Bash(rg:*)",
-      "Bash(touch:*)",
-      "Bash(tree:*)",
-      "Bash(wc:*)",
       "Skill(conventional-commit)"
     ],
     "deny": [
       "Bash(git push:*)",
-      "Bash(rm:*)",
       "Bash(su:*)",
       "Bash(sudo:*)"
     ],
@@ -28,18 +14,6 @@
     "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "__claude-code-block-bash-tool rm",
-            "if": "Bash(rm:*)"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "hooks": [
@@ -84,7 +58,9 @@
       "allowLocalBinding": true
     },
     "excludedCommands": [
-      "docker"
+      "docker",
+      "gh issue list",
+      "gh issue view"
     ]
   },
   "attribution": {

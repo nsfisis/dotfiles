@@ -1,4 +1,6 @@
 if [ -n "$CLAUDECODE" ]; then
+    alias rm=gomi
+
     # Safe wrapper for fd command
     fd() {
         has_dangerous=0
