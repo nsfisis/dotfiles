@@ -363,14 +363,12 @@ return {
          vim.g['clang_format#auto_filetypes'] = {'c', 'cpp'}
       end,
    },
-   -- HTML
+   -- HTML, XML, etc.
    {
-      'windwp/nvim-ts-autotag',
+      'tronikelis/ts-autotag.nvim',
       opts = {
-         opts = {
-            enable_close = true,
-            enable_rename = true,
-            enable_close_on_slash = true,
+         auto_rename = {
+            enabled = true,
          },
       },
    },
