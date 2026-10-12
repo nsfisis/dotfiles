@@ -58,9 +58,9 @@
       "allowLocalBinding": true
     },
     "excludedCommands": [
-      "docker",
-      "gh issue list",
-      "gh issue view"
+      "docker *",
+      "gh issue list *",
+      "gh issue view *"
     ]
   },
   "attribution": {
