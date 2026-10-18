@@ -100,15 +100,15 @@ end
 
 function terraform
     set -l subcommand $argv[1]
-    if [ $subcommand = "apply" ]
-        read --prompt-str "Are you sure to apply? (y/n): " answer
+    if [ (count $argv) -eq 0 -o "$subcommand" = "fmt" ]
+        command terraform $argv
+    else
+        read --prompt-str "Are you sure to run 'terraform $argv'? (y/n): " answer
         if [ $status -eq 0 -a "$answer" = "y" ]
             command terraform $argv
         else
             echo "Cancelled."
         end
-    else
-        command terraform $argv
     end
 end
 
