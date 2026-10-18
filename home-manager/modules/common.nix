@@ -47,6 +47,7 @@ in
     pkgs.jq
     pkgs.just
     pkgs.mmv-go
+    pkgs.mo-viewer
     pkgs.neovim
     pkgs.nodejs_22
     pkgs.pandoc
@@ -67,7 +68,6 @@ in
 
     nurpkgs.claude-code
     nurpkgs.hgrep
-    nurpkgs.mo
 
     nurpkgs.git-helpers
     nurpkgs.term-banner
