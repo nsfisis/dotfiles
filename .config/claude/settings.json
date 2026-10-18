@@ -57,6 +57,11 @@
     "network": {
       "allowLocalBinding": true
     },
+    "filesystem": {
+      "allowWrite": [
+        "~/.gomi"
+      ]
+    },
     "excludedCommands": [
       "docker *",
       "gh issue list *",
