@@ -94,6 +94,9 @@ in
   ++ pkgs.lib.optional requiresWlClipboard pkgs.wl-clipboard;
 
   home.file = {
+    ".claude/CLAUDE.md" = pkgs.lib.mkIf (env.os == "linux") {
+      source = ../../.config/claude/CLAUDE.md;
+    };
     ".claude/skills/conventional-commit".source = ../../.config/claude/skills/conventional-commit;
     ".claude/skills/q".source = ../../.config/claude/skills/q;
     ".config/alacritty/alacritty.common.toml".source = ../../.config/alacritty/alacritty.common.toml;
