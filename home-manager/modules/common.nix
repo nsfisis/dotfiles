@@ -347,5 +347,9 @@ in
     settings.aliases = {
       clone = "repo clone";
     };
+
+    extensions = [
+      pkgs.gh-actions-lock
+    ];
   };
 }
