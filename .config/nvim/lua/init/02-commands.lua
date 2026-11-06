@@ -21,6 +21,21 @@ C(
 )
 
 
+-- :DeleteEmptyLines {{{1
+
+-- Delete empty lines in a range.
+-- See :Reverse for why :keeppatterns is used.
+C(
+   'DeleteEmptyLines',
+   'keeppatterns <line1>,<line2>g/^$/d _',
+   {
+      desc = 'Delete empty lines',
+      bar = true,
+      range = '%',
+   }
+)
+
+
 -- :SmartOpen {{{1
 
 C(
