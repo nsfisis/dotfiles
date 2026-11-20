@@ -1,4 +1,4 @@
-fish_add_path $HOME/go/bin $HOME/.cargo/bin $HOME/.deno/bin $HOME/.local/bin $HOME/bin
+fish_add_path --path $HOME/go/bin $HOME/.cargo/bin $HOME/.deno/bin $HOME/.local/bin $HOME/bin
 
 # For macOS
 if test (uname) = "Darwin"
@@ -10,5 +10,5 @@ if test (uname) = "Darwin"
         source $nix_profile_dir/share/fish/vendor_completions.d/nix.fish
     end
     # https://github.com/LnL7/nix-darwin/issues/122
-    fish_add_path --move $HOME/.nix-profile/bin
+    fish_add_path --path --move $HOME/.nix-profile/bin
 end
